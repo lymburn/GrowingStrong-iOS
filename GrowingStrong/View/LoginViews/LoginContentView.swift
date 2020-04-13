@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol LoginContentViewDelegate: class {
+    func forgetPasswordButtonPressed()
+}
+
 class LoginContentView: UIView {
     override init (frame: CGRect) {
         super.init(frame: frame)
         setupViews()
     }
+    
+    weak var delegate: LoginContentViewDelegate?
     
     let emailTextField: UITextField = {
         var textField = UITextField()
@@ -30,11 +36,12 @@ class LoginContentView: UIView {
         return textField
     }()
     
-    let forgetPasswordButton: UIButton = {
+    lazy var forgetPasswordButton: UIButton = {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Forget password?", for: .normal)
         button.setTitleColor(.gray, for: .normal)
+        button.addTarget(self, action: #selector(forgetButtonPressed), for: .touchDown)
         return button
     }()
     
@@ -67,5 +74,12 @@ extension LoginContentView {
         forgetPasswordButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16).isActive = true
         forgetPasswordButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
         forgetPasswordButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    }
+}
+
+//MARK: Events
+extension LoginContentView {
+    @objc func forgetButtonPressed() {
+        delegate?.forgetPasswordButtonPressed()
     }
 }

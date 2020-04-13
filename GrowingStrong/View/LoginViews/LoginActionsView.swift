@@ -21,7 +21,7 @@ class LoginActionsView: UIView {
     
     weak var delegate : LoginActionsViewDelegate?
     
-    let loginButton: UIButton = {
+    lazy var loginButton: UIButton = {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .green
@@ -33,7 +33,7 @@ class LoginActionsView: UIView {
         return button
     }()
     
-    let registerButton: UIButton = {
+    lazy var registerButton: UIButton = {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .red

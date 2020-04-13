@@ -14,6 +14,7 @@ class LoginController: UIViewController {
         super.viewDidLoad()
         
         loginView.loginActionsView.delegate = self
+        loginView.loginContentView.delegate =  self
         setupViews()
     }
     
@@ -50,6 +51,13 @@ extension LoginController {
     }
 }
 
+//MARK: Login content view delegate
+extension LoginController: LoginContentViewDelegate {
+    func forgetPasswordButtonPressed() {
+        //TODO
+        print("Forget password pressed")
+    }
+}
 
 //MARK: Login actions view delegate
 extension LoginController: LoginActionsViewDelegate {
