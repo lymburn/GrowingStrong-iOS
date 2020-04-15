@@ -12,3 +12,14 @@ enum MeasurementUnit: String {
     case imperial = "Imperial"
     case metric = "Metric"
 }
+
+enum Gender: String {
+    case male = "Male"
+    case female = "Female"
+}
+
+enum WeightGoal: String {
+    case gain = "Gain"
+    case maintain = "Maintain"
+    case lose = "Lose"
+}

@@ -9,18 +9,22 @@
 import UIKit
 
 protocol RegisterDataControllerDelegate: class {
-    func ageValueDidChange(to age: Int)
     func heightValueDidChange(to heightInCm: Double, unit: MeasurementUnit)
     func weightValueDidChange(to weightInKg: Double, unit: MeasurementUnit)
     func measurementUnitDidChange(to unit: MeasurementUnit)
+    func weightGoalDidChange(to goal: WeightGoal)
+    func birthdayFieldSelected()
 }
 
 class RegisterDataController: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private let registerStatsCellId: String
+    private var dateFormatter: DateFormatter
+    
     weak var delegate: RegisterDataControllerDelegate?
     
-    init(registerStatsCellId: String) {
+    init(registerStatsCellId: String, dateFormatter: DateFormatter) {
         self.registerStatsCellId = registerStatsCellId
+        self.dateFormatter = dateFormatter
         super.init()
     }
     
@@ -31,6 +35,7 @@ class RegisterDataController: NSObject, UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 0 {
             let registerStatsCell = collectionView.dequeueReusableCell(withReuseIdentifier: registerStatsCellId, for: indexPath) as! RegisterStatsCell
+            registerStatsCell.birthdayTextField.text = dateFormatter.string(from: Date())
             registerStatsCell.delegate = self
             return registerStatsCell
         } else {
@@ -49,15 +54,19 @@ extension RegisterDataController: RegisterStatsCellDelegate {
         delegate?.measurementUnitDidChange(to: unit)
     }
     
-    func ageValueDidChange(to age: Int) {
-        delegate?.ageValueDidChange(to: age)
-    }
-    
     func heightValueDidChange(to heightInCm: Double, unit: MeasurementUnit) {
         delegate?.heightValueDidChange(to: heightInCm, unit: unit)
     }
     
     func weightValueDidChange(to weightInKg: Double, unit: MeasurementUnit) {
         delegate?.weightValueDidChange(to: weightInKg, unit: unit)
+    }
+    
+    func weightGoalDidChange(to goal: WeightGoal) {
+        delegate?.weightGoalDidChange(to: goal)
+    }
+    
+    func birthdayFieldSelected() {
+        delegate?.birthdayFieldSelected()
     }
 }

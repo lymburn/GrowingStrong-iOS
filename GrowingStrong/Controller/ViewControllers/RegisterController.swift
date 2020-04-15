@@ -20,7 +20,7 @@ class RegisterController: UIViewController {
     let registerStatsCellId = "registerStatsCell"
     
     lazy var dataController: RegisterDataController = {
-        let dataController = RegisterDataController(registerStatsCellId: registerStatsCellId)
+        let dataController = RegisterDataController(registerStatsCellId: registerStatsCellId, dateFormatter: dateFormatter)
         dataController.delegate = self
         return dataController
     }()
@@ -37,14 +37,29 @@ class RegisterController: UIViewController {
         cv.backgroundColor = .white
         return cv
     }()
+    
+    lazy var datePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.date = Date()
+        picker.datePickerMode = .date
+        picker.addTarget(self, action: #selector(dateValueChanged), for: .valueChanged)
+        return picker
+    }()
+    
+    lazy var dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "MMM dd, yyyy"
+        return df
+    }()
 }
 
 //MARK: Setup
 extension RegisterController {
     fileprivate func setupViews() {
         view.backgroundColor = .white
-        
         view.addSubview(collectionView)
+        
         setupConstraints()
     }
     
@@ -58,6 +73,16 @@ extension RegisterController {
 
 //MARK: Helpers
 extension RegisterController {
+    fileprivate func changeMeasurementUnit(to unit: MeasurementUnit) {
+        let indexPath = IndexPath(item: 0, section: 0)
+        let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
+        let heightInCm: Double = Double(cell.heightSlider.value)
+        let weightInKg: Double = Double(cell.weightSlider.value)
+        
+        setRegisterStatsHeightLabel(heightInCm: heightInCm, unit: unit)
+        setRegisterStatsWeightLabel(weightInKg: weightInKg, unit: unit)
+    }
+    
     fileprivate func setRegisterStatsHeightLabel(heightInCm: Double, unit: MeasurementUnit) {
         let indexPath = IndexPath(item: 0, section: 0)
         let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
@@ -88,30 +113,30 @@ extension RegisterController {
             cell.weightLabel.colorString(text: metricWeightString, coloredText: "\(metricWeight) kg", color: .green)
         }
     }
+    
+    fileprivate func setRegisterStatsWeightGoalLabel(for goal: WeightGoal) {
+        let indexPath = IndexPath(item: 0, section: 0)
+        let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
+        
+        cell.goalLabel.colorString(text: "I want to \(goal.rawValue.lowercased()) weight", coloredText: goal.rawValue.lowercased(), color: .green)
+    }
+}
+
+//MARK: Events
+extension RegisterController {
+    @objc func dateValueChanged() {
+        let indexPath = IndexPath(item: 0, section: 0)
+        let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
+        
+        cell.birthdayTextField.text = dateFormatter.string(from: datePicker.date)
+    }
 }
 
 //MARK: Register data controller delegate
 extension RegisterController : RegisterDataControllerDelegate {
     func measurementUnitDidChange(to unit: MeasurementUnit) {
-        let indexPath = IndexPath(item: 0, section: 0)
-        let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
-        
-        let heightInCm: Double = Double(cell.heightSlider.value)
-        let weightInKg: Double = Double(cell.weightSlider.value)
-        
-        setRegisterStatsHeightLabel(heightInCm: heightInCm, unit: unit)
-        setRegisterStatsWeightLabel(weightInKg: weightInKg, unit: unit)
+        changeMeasurementUnit(to: unit)
     }
-    
-    func ageValueDidChange(to age: Int) {
-        let ageString: String = String(age)
-        let indexPath = IndexPath(item: 0, section: 0)
-        let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
-        
-        let ageLabelString = "I am \(ageString) years old"
-        cell.ageLabel.colorString(text: ageLabelString, coloredText: ageString, color: .green)
-    }
-    
     
     func heightValueDidChange(to heightInCm: Double, unit: MeasurementUnit) {
         setRegisterStatsHeightLabel(heightInCm: heightInCm, unit: unit)
@@ -119,5 +144,18 @@ extension RegisterController : RegisterDataControllerDelegate {
     
     func weightValueDidChange(to weightInKg: Double, unit: MeasurementUnit) {
         setRegisterStatsWeightLabel(weightInKg: weightInKg, unit: unit)
+    }
+    
+    func weightGoalDidChange(to goal: WeightGoal) {
+        setRegisterStatsWeightGoalLabel(for: goal)
+    }
+    
+    func birthdayFieldSelected() {
+        let indexPath = IndexPath(item: 0, section: 0)
+        let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
+        
+        cell.birthdayTextField.inputView = UIView()
+        cell.birthdayTextField.inputAccessoryView = datePicker
+        cell.birthdayTextField.text = dateFormatter.string(from: datePicker.date)
     }
 }

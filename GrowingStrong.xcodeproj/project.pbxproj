@@ -20,7 +20,7 @@
 		269E379B242D05EB0070B110 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E379A242D05EB0070B110 /* LoginController.swift */; };
 		269E37A0242D05F00070B110 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 269E379F242D05F00070B110 /* Assets.xcassets */; };
 		269E37A3242D05F00070B110 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 269E37A1242D05F00070B110 /* LaunchScreen.storyboard */; };
-		26F2E6F2244757A0000294D3 /* MeasurementUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2E6F1244757A0000294D3 /* MeasurementUnit.swift */; };
+		26F2E6F2244757A0000294D3 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2E6F1244757A0000294D3 /* Enums.swift */; };
 		26F2E6F4244769B9000294D3 /* MeasurementUnitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +40,7 @@
 		269E379F242D05F00070B110 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		269E37A2242D05F00070B110 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		269E37A4242D05F00070B110 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		26F2E6F1244757A0000294D3 /* MeasurementUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementUnit.swift; sourceTree = "<group>"; };
+		26F2E6F1244757A0000294D3 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementUnitHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,7 +120,7 @@
 		26475C972442CFF2004A5C71 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				26F2E6F024475758000294D3 /* Enums */,
+				26F2E6F1244757A0000294D3 /* Enums.swift */,
 				26475C982442D00B004A5C71 /* Constants.swift */,
 				266BFA0A2443DB0E006E588D /* Extensions.swift */,
 				26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */,
@@ -156,14 +156,6 @@
 				269E37A4242D05F00070B110 /* Info.plist */,
 			);
 			path = GrowingStrong;
-			sourceTree = "<group>";
-		};
-		26F2E6F024475758000294D3 /* Enums */ = {
-			isa = PBXGroup;
-			children = (
-				26F2E6F1244757A0000294D3 /* MeasurementUnit.swift */,
-			);
-			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,7 +239,7 @@
 				2605A8AD24429B9C001CF085 /* LoginView.swift in Sources */,
 				2605A8AF2442B626001CF085 /* LoginContentView.swift in Sources */,
 				26475C992442D00B004A5C71 /* Constants.swift in Sources */,
-				26F2E6F2244757A0000294D3 /* MeasurementUnit.swift in Sources */,
+				26F2E6F2244757A0000294D3 /* Enums.swift in Sources */,
 				269E3799242D05EB0070B110 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
