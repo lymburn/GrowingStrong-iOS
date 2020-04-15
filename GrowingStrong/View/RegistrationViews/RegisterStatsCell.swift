@@ -11,6 +11,7 @@ import UIKit
 protocol RegisterStatsCellDelegate : class {
     func ageValueDidChange(to age: Int)
     func heightValueDidChange(to heightInCm: Double, unit: MeasurementUnit)
+    func weightValueDidChange(to weightInKg: Double, unit: MeasurementUnit)
     func measurementUnitDidChange(to unit: MeasurementUnit)
 }
 
@@ -24,6 +25,7 @@ class RegisterStatsCell: UICollectionViewCell {
         ageSlider.addTarget(self, action: #selector(ageSliderValueChanged), for: .valueChanged)
         measurementUnitSelector.addTarget(self, action: #selector(measurementUnitChanged), for: .valueChanged)
         heightSlider.addTarget(self, action: #selector(heightSliderValueChanged), for: .valueChanged)
+        weightSlider.addTarget(self, action: #selector(weightSliderValueChanged), for: .valueChanged)
     }
     
     weak var delegate: RegisterStatsCellDelegate?
@@ -96,6 +98,23 @@ class RegisterStatsCell: UICollectionViewCell {
         return slider
     }()
     
+    let weightLabel: UILabel = {
+        let label = UILabel()
+        label.colorString(text: "Weight: 105 kg", coloredText: "105 kg", color: .green)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let weightSlider: UISlider = {
+        let slider = UISlider()
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        slider.maximumValue = 180
+        slider.minimumValue = 30
+        slider.value = 105
+        return slider
+    }()
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -112,7 +131,8 @@ extension RegisterStatsCell {
         addSubview(ageSlider)
         addSubview(heightLabel)
         addSubview(heightSlider)
-        
+        addSubview(weightLabel)
+        addSubview(weightSlider)
         setupConstraints()
     }
     
@@ -155,6 +175,15 @@ extension RegisterStatsCell {
         heightSlider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.ScreenSize.width * 0.1).isActive = true
         heightSlider.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
+        weightLabel.topAnchor.constraint(equalTo: heightSlider.bottomAnchor, constant: 16).isActive = true
+        weightLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
+        weightLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
+        weightLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+
+        weightSlider.topAnchor.constraint(equalTo: weightLabel.bottomAnchor, constant: 4).isActive = true
+        weightSlider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.ScreenSize.width * 0.1).isActive = true
+        weightSlider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.ScreenSize.width * 0.1).isActive = true
+        weightSlider.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
 }
 
@@ -175,6 +204,18 @@ extension RegisterStatsCell {
         }
         
         delegate?.heightValueDidChange(to: heightInCm, unit: unit)
+    }
+    
+    @objc func weightSliderValueChanged() {
+        let weightInKg: Double = Double(weightSlider.value)
+        var unit: MeasurementUnit
+        if measurementUnitSelector.selectedSegmentIndex == 0 {
+            unit = .metric
+        } else {
+            unit = .imperial
+        }
+        
+        delegate?.weightValueDidChange(to: weightInKg, unit: unit)
     }
     
     @objc func measurementUnitChanged() {

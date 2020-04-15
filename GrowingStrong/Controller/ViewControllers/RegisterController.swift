@@ -56,34 +56,9 @@ extension RegisterController {
     }
 }
 
-extension RegisterController : RegisterDataControllerDelegate {
-    func measurementUnitDidChange(to unit: MeasurementUnit) {
-        let indexPath = IndexPath(item: 0, section: 0)
-        let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
-        let heightCentimeters: Double = Double(cell.heightSlider.value)
-        
-        if unit == .imperial {
-            let feetInches: String = MeasurementUnitHelper.centimetersToFeetInches(heightCentimeters)
-            let imperialHeightString = "Height: \(feetInches)"
-            cell.heightLabel.colorString(text: imperialHeightString, coloredText: feetInches, color: .green)
-        } else {
-            let metricHeight = Int(heightCentimeters.rounded())
-            let metricHeightString = "Height: \(metricHeight) cm"
-            
-            cell.heightLabel.colorString(text: metricHeightString, coloredText: "\(metricHeight) cm", color: .green)
-        }
-    }
-    
-    func ageValueDidChange(to age: Int) {
-        let ageString: String = String(age)
-        let indexPath = IndexPath(item: 0, section: 0)
-        let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
-        
-        let ageLabelString = "I am \(ageString) years old"
-        cell.ageLabel.colorString(text: ageLabelString, coloredText: ageString, color: .green)
-    }
-    
-    func heightValueDidChange(to heightInCm: Double, unit: MeasurementUnit) {
+//MARK: Helpers
+extension RegisterController {
+    fileprivate func setRegisterStatsHeightLabel(heightInCm: Double, unit: MeasurementUnit) {
         let indexPath = IndexPath(item: 0, section: 0)
         let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
         
@@ -96,5 +71,53 @@ extension RegisterController : RegisterDataControllerDelegate {
             let metricHeightString = "Height: \(heightRounded) cm"
             cell.heightLabel.colorString(text: metricHeightString, coloredText: "\(heightRounded) cm", color: .green)
         }
+    }
+    
+    fileprivate func setRegisterStatsWeightLabel(weightInKg: Double, unit: MeasurementUnit) {
+        let indexPath = IndexPath(item: 0, section: 0)
+        let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
+        
+        if unit == .imperial {
+            let imperialWeight: Double = MeasurementUnitHelper.kilogramsToPounds(weightInKg)
+            let weightRounded = Int(imperialWeight.rounded())
+            let imperialWeightString = "Weight: \(weightRounded) lbs"
+            cell.weightLabel.colorString(text: imperialWeightString, coloredText: "\(weightRounded) lbs", color: .green)
+        } else {
+            let metricWeight = Int(weightInKg.rounded())
+            let metricWeightString = "Weight: \(metricWeight) kg"
+            cell.weightLabel.colorString(text: metricWeightString, coloredText: "\(metricWeight) kg", color: .green)
+        }
+    }
+}
+
+//MARK: Register data controller delegate
+extension RegisterController : RegisterDataControllerDelegate {
+    func measurementUnitDidChange(to unit: MeasurementUnit) {
+        let indexPath = IndexPath(item: 0, section: 0)
+        let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
+        
+        let heightInCm: Double = Double(cell.heightSlider.value)
+        let weightInKg: Double = Double(cell.weightSlider.value)
+        
+        setRegisterStatsHeightLabel(heightInCm: heightInCm, unit: unit)
+        setRegisterStatsWeightLabel(weightInKg: weightInKg, unit: unit)
+    }
+    
+    func ageValueDidChange(to age: Int) {
+        let ageString: String = String(age)
+        let indexPath = IndexPath(item: 0, section: 0)
+        let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
+        
+        let ageLabelString = "I am \(ageString) years old"
+        cell.ageLabel.colorString(text: ageLabelString, coloredText: ageString, color: .green)
+    }
+    
+    
+    func heightValueDidChange(to heightInCm: Double, unit: MeasurementUnit) {
+        setRegisterStatsHeightLabel(heightInCm: heightInCm, unit: unit)
+    }
+    
+    func weightValueDidChange(to weightInKg: Double, unit: MeasurementUnit) {
+        setRegisterStatsWeightLabel(weightInKg: weightInKg, unit: unit)
     }
 }

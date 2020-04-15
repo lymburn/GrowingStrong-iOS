@@ -11,6 +11,7 @@ import UIKit
 protocol RegisterDataControllerDelegate: class {
     func ageValueDidChange(to age: Int)
     func heightValueDidChange(to heightInCm: Double, unit: MeasurementUnit)
+    func weightValueDidChange(to weightInKg: Double, unit: MeasurementUnit)
     func measurementUnitDidChange(to unit: MeasurementUnit)
 }
 
@@ -54,5 +55,9 @@ extension RegisterDataController: RegisterStatsCellDelegate {
     
     func heightValueDidChange(to heightInCm: Double, unit: MeasurementUnit) {
         delegate?.heightValueDidChange(to: heightInCm, unit: unit)
+    }
+    
+    func weightValueDidChange(to weightInKg: Double, unit: MeasurementUnit) {
+        delegate?.weightValueDidChange(to: weightInKg, unit: unit)
     }
 }

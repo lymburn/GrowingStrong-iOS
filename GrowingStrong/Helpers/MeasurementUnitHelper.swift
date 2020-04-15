@@ -27,5 +27,10 @@ class MeasurementUnitHelper {
         
         return ("\(measureFormatter.string(from: feetRounded)) \(measureFormatter.string(from: inchesRounded))")
     }
+    
+    static func kilogramsToPounds(_ value: Double) -> Double {
+        let pounds = Measurement(value: value, unit: UnitMass.kilograms).converted(to: .pounds)
+        return pounds.value
+    }
 }
 
