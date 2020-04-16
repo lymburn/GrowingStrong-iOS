@@ -12,7 +12,7 @@
 		2605A8B12442B663001CF085 /* LoginActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2605A8B02442B663001CF085 /* LoginActionsView.swift */; };
 		2605A8B32442BC1D001CF085 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2605A8B22442BC1D001CF085 /* RegisterController.swift */; };
 		261C8BCA2448A9F3009A1B79 /* CreateAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C8BC92448A9F3009A1B79 /* CreateAccountCell.swift */; };
-		261C8BD22448CD11009A1B79 /* GrowingStrongTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C8BD12448CD11009A1B79 /* GrowingStrongTests.swift */; };
+		261C8BD22448CD11009A1B79 /* MeasurementUnitHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C8BD12448CD11009A1B79 /* MeasurementUnitHelperTests.swift */; };
 		2640FF8C2443EC870051A2BF /* RegisterDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2640FF8B2443EC870051A2BF /* RegisterDataController.swift */; };
 		26475C952442CB2E004A5C71 /* RegisterStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C942442CB2E004A5C71 /* RegisterStatsCell.swift */; };
 		26475C992442D00B004A5C71 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C982442D00B004A5C71 /* Constants.swift */; };
@@ -43,7 +43,7 @@
 		2605A8B22442BC1D001CF085 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		261C8BC92448A9F3009A1B79 /* CreateAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountCell.swift; sourceTree = "<group>"; };
 		261C8BCF2448CD11009A1B79 /* GrowingStrongTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrowingStrongTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		261C8BD12448CD11009A1B79 /* GrowingStrongTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingStrongTests.swift; sourceTree = "<group>"; };
+		261C8BD12448CD11009A1B79 /* MeasurementUnitHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementUnitHelperTests.swift; sourceTree = "<group>"; };
 		261C8BD32448CD11009A1B79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2640FF8B2443EC870051A2BF /* RegisterDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataController.swift; sourceTree = "<group>"; };
 		26475C942442CB2E004A5C71 /* RegisterStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterStatsCell.swift; sourceTree = "<group>"; };
@@ -118,10 +118,18 @@
 		261C8BD02448CD11009A1B79 /* GrowingStrongTests */ = {
 			isa = PBXGroup;
 			children = (
-				261C8BD12448CD11009A1B79 /* GrowingStrongTests.swift */,
+				261C8BD92448D2B8009A1B79 /* Helpers */,
 				261C8BD32448CD11009A1B79 /* Info.plist */,
 			);
 			path = GrowingStrongTests;
+			sourceTree = "<group>";
+		};
+		261C8BD92448D2B8009A1B79 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				261C8BD12448CD11009A1B79 /* MeasurementUnitHelperTests.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		2640FF8A2443EBE40051A2BF /* DataControllers */ = {
@@ -293,7 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				261C8BD22448CD11009A1B79 /* GrowingStrongTests.swift in Sources */,
+				261C8BD22448CD11009A1B79 /* MeasurementUnitHelperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
