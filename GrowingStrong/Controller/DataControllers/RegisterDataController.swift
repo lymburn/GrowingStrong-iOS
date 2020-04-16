@@ -14,6 +14,7 @@ protocol RegisterDataControllerDelegate: class {
     func measurementUnitDidChange(to unit: MeasurementUnit)
     func weightGoalDidChange(to goal: WeightGoal)
     func birthdayFieldSelected()
+    func activityLevelDidChange(to level: ActivityLevel)
 }
 
 class RegisterDataController: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -68,5 +69,9 @@ extension RegisterDataController: RegisterStatsCellDelegate {
     
     func birthdayFieldSelected() {
         delegate?.birthdayFieldSelected()
+    }
+    
+    func activityLevelDidChange(to level: ActivityLevel) {
+        delegate?.activityLevelDidChange(to: level)
     }
 }

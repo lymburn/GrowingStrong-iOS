@@ -120,6 +120,13 @@ extension RegisterController {
         
         cell.goalLabel.colorString(text: "I want to \(goal.rawValue.lowercased()) weight", coloredText: goal.rawValue.lowercased(), color: .green)
     }
+    
+    fileprivate func setRegisterStatsActivityLevelLabel(for level: ActivityLevel) {
+        let indexPath = IndexPath(item: 0, section: 0)
+        let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
+        
+        cell.activityLevelLabel.colorString(text: "My activity level is \(level.rawValue.lowercased())", coloredText: level.rawValue.lowercased(), color: .green)
+    }
 }
 
 //MARK: Events
@@ -157,5 +164,9 @@ extension RegisterController : RegisterDataControllerDelegate {
         cell.birthdayTextField.inputView = UIView()
         cell.birthdayTextField.inputAccessoryView = datePicker
         cell.birthdayTextField.text = dateFormatter.string(from: datePicker.date)
+    }
+    
+    func activityLevelDidChange(to level: ActivityLevel) {
+        setRegisterStatsActivityLevelLabel(for: level)
     }
 }

@@ -14,6 +14,7 @@ protocol RegisterStatsCellDelegate : class {
     func measurementUnitDidChange(to unit: MeasurementUnit)
     func weightGoalDidChange(to goal: WeightGoal)
     func birthdayFieldSelected()
+    func activityLevelDidChange(to level: ActivityLevel)
 }
 
 class RegisterStatsCell: UICollectionViewCell {
@@ -28,6 +29,7 @@ class RegisterStatsCell: UICollectionViewCell {
         weightSlider.addTarget(self, action: #selector(weightSliderValueChanged), for: .valueChanged)
         goalSelector.addTarget(self, action: #selector(goalSelectorValueChanged), for: .valueChanged)
         birthdayTextField.addTarget(self, action: #selector(birthdayFieldSelected), for: .touchDown)
+        activityLevelSelector.addTarget(self, action: #selector(activityLevelSelectorValueChanged), for: .valueChanged)
     }
     
     weak var delegate: RegisterStatsCellDelegate?
@@ -133,6 +135,23 @@ class RegisterStatsCell: UICollectionViewCell {
         return sc
     }()
     
+    let activityLevelLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.colorString(text: "My activity level is sedentary", coloredText: "sedentary", color: .green)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let activityLevelSelector: UISegmentedControl = {
+        let items = [ActivityLevel.sedentary.rawValue, ActivityLevel.light.rawValue, ActivityLevel.moderate.rawValue,              ActivityLevel.extreme.rawValue]
+        let sc = UISegmentedControl(items: items)
+        sc.translatesAutoresizingMaskIntoConstraints = false
+        sc.selectedSegmentIndex = 0
+        sc.layer.cornerRadius = 5
+        return sc
+    }()
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -153,6 +172,8 @@ extension RegisterStatsCell {
         addSubview(weightSlider)
         addSubview(goalLabel)
         addSubview(goalSelector)
+        addSubview(activityLevelLabel)
+        addSubview(activityLevelSelector)
         
         setupConstraints()
     }
@@ -213,6 +234,15 @@ extension RegisterStatsCell {
         goalSelector.topAnchor.constraint(equalTo: goalLabel.bottomAnchor, constant: 4).isActive = true
         goalSelector.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         goalSelector.widthAnchor.constraint(equalToConstant: Constants.ScreenSize.width * 0.7).isActive = true
+        
+        activityLevelLabel.topAnchor.constraint(equalTo: goalSelector.bottomAnchor, constant: 24).isActive = true
+        activityLevelLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
+        activityLevelLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
+        activityLevelLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+
+        activityLevelSelector.topAnchor.constraint(equalTo: activityLevelLabel.bottomAnchor, constant: 4).isActive = true
+        activityLevelSelector.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        activityLevelSelector.widthAnchor.constraint(equalToConstant: Constants.ScreenSize.width * 0.8).isActive = true
     }
 }
 
@@ -250,5 +280,20 @@ extension RegisterStatsCell {
     
     @objc func birthdayFieldSelected() {
         delegate?.birthdayFieldSelected()
+    }
+    
+    @objc func activityLevelSelectorValueChanged() {
+        var selectedLevel: ActivityLevel
+        if activityLevelSelector.selectedSegmentIndex == 0 {
+            selectedLevel = ActivityLevel.sedentary
+        } else if activityLevelSelector.selectedSegmentIndex == 1 {
+            selectedLevel = ActivityLevel.light
+        } else if activityLevelSelector.selectedSegmentIndex == 2 {
+            selectedLevel = ActivityLevel.moderate
+        } else {
+            selectedLevel = ActivityLevel.extreme
+        }
+        
+        delegate?.activityLevelDidChange(to: selectedLevel)
     }
 }
