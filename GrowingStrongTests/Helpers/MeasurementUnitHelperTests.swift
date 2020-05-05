@@ -31,11 +31,16 @@ class MeasurementUnitHelperTests: XCTestCase {
         feetInchesString = MeasurementUnitHelper.centimetersToFeetInches(metricLength)
         
         XCTAssertEqual(feetInchesString, expectedFeetInchesString)
+        
+        metricLength = -5.0
+        feetInchesString = MeasurementUnitHelper.centimetersToFeetInches(metricLength)
+        
+        XCTAssertEqual(feetInchesString, "")
     }
     
     func testKilogramsToPounds() throws {
         let kilogram: Double = 50.0
-        let expectedPounds: Double = Measurement(value: 50.0, unit: UnitMass.kilograms).converted(to: .pounds).value
+        let expectedPounds: Double = Measurement(value: kilogram, unit: UnitMass.kilograms).converted(to: .pounds).value
         let pounds: Double = MeasurementUnitHelper.kilogramsToPounds(kilogram)
         
         XCTAssertEqual(expectedPounds, pounds)

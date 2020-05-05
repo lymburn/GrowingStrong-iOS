@@ -19,12 +19,14 @@ protocol RegisterDataControllerDelegate: class {
 
 class RegisterDataController: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private let registerStatsCellId: String
+    private let createAccountCellId: String
     private var dateFormatter: DateFormatter
     
     weak var delegate: RegisterDataControllerDelegate?
     
-    init(registerStatsCellId: String, dateFormatter: DateFormatter) {
+    init(registerStatsCellId: String, createAccountCellId: String, dateFormatter: DateFormatter) {
         self.registerStatsCellId = registerStatsCellId
+        self.createAccountCellId = createAccountCellId
         self.dateFormatter = dateFormatter
         super.init()
     }
@@ -40,8 +42,8 @@ class RegisterDataController: NSObject, UICollectionViewDataSource, UICollection
             registerStatsCell.delegate = self
             return registerStatsCell
         } else {
-            let registerStatsCell = collectionView.dequeueReusableCell(withReuseIdentifier: registerStatsCellId, for: indexPath) as! RegisterStatsCell
-            return registerStatsCell
+            let createAccountCell = collectionView.dequeueReusableCell(withReuseIdentifier: createAccountCellId, for: indexPath) as! CreateAccountCell
+            return createAccountCell
         }
     }
     
