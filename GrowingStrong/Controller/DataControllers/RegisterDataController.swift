@@ -38,7 +38,7 @@ class RegisterDataController: NSObject, UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 0 {
             let registerStatsCell = collectionView.dequeueReusableCell(withReuseIdentifier: registerStatsCellId, for: indexPath) as! RegisterStatsCell
-            registerStatsCell.birthdayTextField.text = dateFormatter.string(from: Date())
+            registerStatsCell.birthdayTextField.text = dateFormatter.getCurrentDateString()
             registerStatsCell.delegate = self
             return registerStatsCell
         } else {

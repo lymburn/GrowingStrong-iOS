@@ -18,3 +18,30 @@ extension UILabel {
     }
 }
 
+extension DateFormatter {
+    func getCurrentDateString() -> String {
+        return self.string(from: Date())
+    }
+    
+    func getPreviousDateString(from dateText: String) -> String? {
+        if let date = self.date(from: dateText) {
+            if let previousDate = Calendar.current.date(byAdding: .day, value: -1, to: date) {
+                let previousDateString = self.string(from: previousDate)
+                return previousDateString
+            }
+        }
+        
+        return nil
+    }
+    
+    func getNextDateString(from dateText: String) -> String? {
+        if let date = self.date(from: dateText) {
+            if let nextDate = Calendar.current.date(byAdding: .day, value: 1, to: date) {
+                let nextDateString = self.string(from: nextDate)
+                return nextDateString
+            }
+        }
+        
+        return nil
+    }
+}

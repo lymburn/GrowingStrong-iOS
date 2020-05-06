@@ -9,7 +9,6 @@
 import UIKit
 
 protocol DateBarDelegate: class {
-    func slideMenuPressed()
     func previousMonthPressed()
     func nextMonthPressed()
 }
@@ -24,7 +23,6 @@ class DateBar: UIView {
     
     let dateLabel: UILabel = {
         let label = UILabel()
-        label.text = "Today"
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
@@ -88,9 +86,5 @@ extension DateBar {
     
     @objc func nextMonthPressed() {
         delegate?.nextMonthPressed()
-    }
-    
-    @objc func slideMenuPressed() {
-        delegate?.slideMenuPressed()
     }
 }

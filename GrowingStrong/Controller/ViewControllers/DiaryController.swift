@@ -24,9 +24,10 @@ class DiaryController: UIViewController {
         return navBar
     }()
     
-    let dateBar: DateBar = {
+    lazy var dateBar: DateBar = {
         let bar = DateBar()
         bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.delegate = self
         return bar
     }()
     
@@ -34,6 +35,12 @@ class DiaryController: UIViewController {
         let diaryView = DiaryView()
         diaryView.translatesAutoresizingMaskIntoConstraints = false
         return diaryView
+    }()
+    
+    lazy var dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "MMMM dd, yyyy"
+        return df
     }()
 }
 
@@ -46,13 +53,32 @@ extension DiaryController {
         view.addSubview(dateBar)
         view.addSubview(diaryView)
         
+        dateBar.dateLabel.text = dateFormatter.getCurrentDateString()
+        
         setupConstraints()
     }
     
     fileprivate func setupConstraints() {
         dateBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        dateBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8).isActive = true
-        dateBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8).isActive = true
+        dateBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        dateBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         dateBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+}
+
+//MARK: Date bar delegate
+extension DiaryController: DateBarDelegate {
+    func previousMonthPressed() {
+        if let currentDateText = dateBar.dateLabel.text {
+            let previousDateText = dateFormatter.getPreviousDateString(from: currentDateText)
+            dateBar.dateLabel.text = previousDateText
+        }
+    }
+    
+    func nextMonthPressed() {
+        if let currentDateText = dateBar.dateLabel.text {
+            let nextDateText = dateFormatter.getNextDateString(from: currentDateText)
+            dateBar.dateLabel.text = nextDateText
+        }
     }
 }
