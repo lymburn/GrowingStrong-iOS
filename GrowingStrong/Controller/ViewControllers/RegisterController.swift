@@ -174,7 +174,9 @@ extension RegisterController {
         //TODO: Submit registration stats & account info to server
         print ("Creating new account")
         
-        
+        let mainController = MainTabBarController()
+        mainController.modalPresentationStyle = .fullScreen
+        self.present(mainController, animated: true)
     }
 }
 
