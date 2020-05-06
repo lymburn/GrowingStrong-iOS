@@ -20,8 +20,10 @@
 		2640FF8C2443EC870051A2BF /* RegisterDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2640FF8B2443EC870051A2BF /* RegisterDataController.swift */; };
 		26475C952442CB2E004A5C71 /* RegisterStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C942442CB2E004A5C71 /* RegisterStatsCell.swift */; };
 		26475C992442D00B004A5C71 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C982442D00B004A5C71 /* Constants.swift */; };
+		2658890B246340F300199012 /* DateBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2658890A246340F200199012 /* DateBar.swift */; };
 		266BB5A224632156009269B2 /* LearnController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A124632156009269B2 /* LearnController.swift */; };
 		266BB5A4246328F3009269B2 /* ActionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A3246328F3009269B2 /* ActionController.swift */; };
+		266BB5A624633A37009269B2 /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A524633A37009269B2 /* DiaryView.swift */; };
 		266BFA0B2443DB0E006E588D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BFA0A2443DB0E006E588D /* Extensions.swift */; };
 		269E3797242D05EB0070B110 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E3796242D05EB0070B110 /* AppDelegate.swift */; };
 		269E3799242D05EB0070B110 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E3798242D05EB0070B110 /* SceneDelegate.swift */; };
@@ -58,8 +60,10 @@
 		2640FF8B2443EC870051A2BF /* RegisterDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataController.swift; sourceTree = "<group>"; };
 		26475C942442CB2E004A5C71 /* RegisterStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterStatsCell.swift; sourceTree = "<group>"; };
 		26475C982442D00B004A5C71 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		2658890A246340F200199012 /* DateBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBar.swift; sourceTree = "<group>"; };
 		266BB5A124632156009269B2 /* LearnController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnController.swift; sourceTree = "<group>"; };
 		266BB5A3246328F3009269B2 /* ActionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionController.swift; sourceTree = "<group>"; };
+		266BB5A524633A37009269B2 /* DiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryView.swift; sourceTree = "<group>"; };
 		266BFA0A2443DB0E006E588D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		269E3793242D05EB0070B110 /* GrowingStrong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrowingStrong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		269E3796242D05EB0070B110 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 		2605A8AA24429B4A001CF085 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				266BB5A724633A42009269B2 /* DiaryViews */,
 				26475C932442CACF004A5C71 /* RegistrationViews */,
 				2605A8AB24429B56001CF085 /* LoginViews */,
 			);
@@ -185,6 +190,15 @@
 				26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		266BB5A724633A42009269B2 /* DiaryViews */ = {
+			isa = PBXGroup;
+			children = (
+				266BB5A524633A37009269B2 /* DiaryView.swift */,
+				2658890A246340F200199012 /* DateBar.swift */,
+			);
+			path = DiaryViews;
 			sourceTree = "<group>";
 		};
 		269E378A242D05EA0070B110 = {
@@ -336,6 +350,7 @@
 				26475C952442CB2E004A5C71 /* RegisterStatsCell.swift in Sources */,
 				266BB5A4246328F3009269B2 /* ActionController.swift in Sources */,
 				269E379B242D05EB0070B110 /* LoginController.swift in Sources */,
+				2658890B246340F300199012 /* DateBar.swift in Sources */,
 				266BB5A224632156009269B2 /* LearnController.swift in Sources */,
 				2605A8B32442BC1D001CF085 /* RegisterController.swift in Sources */,
 				269E3797242D05EB0070B110 /* AppDelegate.swift in Sources */,
@@ -344,6 +359,7 @@
 				2605A8AD24429B9C001CF085 /* LoginView.swift in Sources */,
 				2605A8AF2442B626001CF085 /* LoginContentView.swift in Sources */,
 				26475C992442D00B004A5C71 /* Constants.swift in Sources */,
+				266BB5A624633A37009269B2 /* DiaryView.swift in Sources */,
 				262F665D2462417800B24F51 /* DiaryController.swift in Sources */,
 				26F2E6F2244757A0000294D3 /* Enums.swift in Sources */,
 				269E3799242D05EB0070B110 /* SceneDelegate.swift in Sources */,

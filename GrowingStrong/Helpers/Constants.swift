@@ -20,4 +20,9 @@ struct ImageNames {
         static let settingsTab = "settings_icon"
         static let addIcon = "add_icon"
     }
+    
+    struct UtilityButton {
+        static let rightArrow = "right_arrow"
+        static let leftArrow = "left_arrow"
+    }
 }
