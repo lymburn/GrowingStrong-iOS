@@ -10,6 +10,10 @@ import Foundation
 
 class MeasurementUnitHelper {
     static func centimetersToFeetInches(_ value: Double) -> String {
+        if value < 0 {
+            return ""
+        }
+        
         let measureFormatter = MeasurementFormatter()
         measureFormatter.unitOptions = .providedUnit
         measureFormatter.unitStyle = .medium

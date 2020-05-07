@@ -1,24 +1,19 @@
 //
-//  LoginContentView.swift
+//  CreateAccountCell.swift
 //  GrowingStrong
 //
-//  Created by Eugene Lu on 2020-04-11.
+//  Created by Eugene Lu on 2020-04-16.
 //  Copyright © 2020 Eugene Lu. All rights reserved.
 //
 
 import UIKit
 
-protocol LoginContentViewDelegate: class {
-    func forgetPasswordButtonPressed()
-}
-
-class LoginContentView: UIView {
-    override init (frame: CGRect) {
+class CreateAccountCell: UICollectionViewCell {
+    override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setupViews()
     }
-    
-    weak var delegate: LoginContentViewDelegate?
     
     let emailTextField: UITextField = {
         var textField = UITextField()
@@ -36,13 +31,12 @@ class LoginContentView: UIView {
         return textField
     }()
     
-    lazy var forgetPasswordButton: UIButton = {
-        var button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Forget password?", for: .normal)
-        button.setTitleColor(.gray, for: .normal)
-        button.addTarget(self, action: #selector(forgetButtonPressed), for: .touchDown)
-        return button
+    let confirmPasswordTextField: UITextField = {
+        var textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.borderStyle = .roundedRect
+        textField.placeholder = "Confirm Password"
+        return textField
     }()
     
     required init?(coder: NSCoder) {
@@ -51,17 +45,17 @@ class LoginContentView: UIView {
 }
 
 //MARK: Setup
-extension LoginContentView {
+extension CreateAccountCell {
     fileprivate func setupViews() {
-        backgroundColor = .white
         addSubview(emailTextField)
         addSubview(passwordTextField)
-        addSubview(forgetPasswordButton)
+        addSubview(confirmPasswordTextField)
+        
         setupConstraints()
     }
     
     fileprivate func setupConstraints() {
-        emailTextField.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
+        emailTextField.topAnchor.constraint(equalTo: topAnchor, constant: Constants.ScreenSize.height * 0.3).isActive = true
         emailTextField.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
         emailTextField.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
         emailTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
@@ -71,15 +65,9 @@ extension LoginContentView {
         passwordTextField.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
         passwordTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
-        forgetPasswordButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16).isActive = true
-        forgetPasswordButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
-        forgetPasswordButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
-    }
-}
-
-//MARK: Events
-extension LoginContentView {
-    @objc func forgetButtonPressed() {
-        delegate?.forgetPasswordButtonPressed()
+        confirmPasswordTextField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30).isActive = true
+        confirmPasswordTextField.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
+        confirmPasswordTextField.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
+        confirmPasswordTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
 }

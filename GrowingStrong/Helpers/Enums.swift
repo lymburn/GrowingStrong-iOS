@@ -23,3 +23,10 @@ enum WeightGoal: String {
     case maintain = "Maintain"
     case lose = "Lose"
 }
+
+enum ActivityLevel: String {
+    case sedentary = "Sedentary"
+    case light = "Light"
+    case moderate = "Moderate"
+    case extreme = "Extreme"
+}

@@ -14,16 +14,19 @@ protocol RegisterDataControllerDelegate: class {
     func measurementUnitDidChange(to unit: MeasurementUnit)
     func weightGoalDidChange(to goal: WeightGoal)
     func birthdayFieldSelected()
+    func activityLevelDidChange(to level: ActivityLevel)
 }
 
 class RegisterDataController: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private let registerStatsCellId: String
+    private let createAccountCellId: String
     private var dateFormatter: DateFormatter
     
     weak var delegate: RegisterDataControllerDelegate?
     
-    init(registerStatsCellId: String, dateFormatter: DateFormatter) {
+    init(registerStatsCellId: String, createAccountCellId: String, dateFormatter: DateFormatter) {
         self.registerStatsCellId = registerStatsCellId
+        self.createAccountCellId = createAccountCellId
         self.dateFormatter = dateFormatter
         super.init()
     }
@@ -35,12 +38,12 @@ class RegisterDataController: NSObject, UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 0 {
             let registerStatsCell = collectionView.dequeueReusableCell(withReuseIdentifier: registerStatsCellId, for: indexPath) as! RegisterStatsCell
-            registerStatsCell.birthdayTextField.text = dateFormatter.string(from: Date())
+            registerStatsCell.birthdayTextField.text = dateFormatter.getCurrentDateString()
             registerStatsCell.delegate = self
             return registerStatsCell
         } else {
-            let registerStatsCell = collectionView.dequeueReusableCell(withReuseIdentifier: registerStatsCellId, for: indexPath) as! RegisterStatsCell
-            return registerStatsCell
+            let createAccountCell = collectionView.dequeueReusableCell(withReuseIdentifier: createAccountCellId, for: indexPath) as! CreateAccountCell
+            return createAccountCell
         }
     }
     
@@ -68,5 +71,9 @@ extension RegisterDataController: RegisterStatsCellDelegate {
     
     func birthdayFieldSelected() {
         delegate?.birthdayFieldSelected()
+    }
+    
+    func activityLevelDidChange(to level: ActivityLevel) {
+        delegate?.activityLevelDidChange(to: level)
     }
 }

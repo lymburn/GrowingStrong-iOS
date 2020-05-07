@@ -9,14 +9,16 @@
 import UIKit
 
 class LoginController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loginView.loginActionsView.delegate = self
-        loginView.loginContentView.delegate =  self
+        setupLoginView(lView)
         setupViews()
     }
+    
+    var loginView: LoginViewType!
+    var registerController: RegisterController!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -28,15 +30,20 @@ class LoginController: UIViewController {
         navigationController?.isNavigationBarHidden = false
     }
     
-    let loginView: LoginView = {
+    lazy var lView: LoginViewType = {
         let view = LoginView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.delegate = self
         return view
     }()
 }
 
 //MARK: Setup
 extension LoginController {
+    func setupLoginView(_ loginView: LoginViewType) {
+        self.loginView = loginView
+    }
+    
     fileprivate func setupViews() {
         view.backgroundColor = .white
         view.addSubview(loginView)
@@ -52,37 +59,31 @@ extension LoginController {
 }
 
 //MARK: Login content view delegate
-extension LoginController: LoginContentViewDelegate {
+extension LoginController: LoginViewDelegate {
     func forgetPasswordButtonPressed() {
         //TODO
         print("Forget password pressed")
     }
-}
 
-//MARK: Login actions view delegate
-extension LoginController: LoginActionsViewDelegate {
     func loginButtonPressed() {
-        guard let email = loginView.loginContentView.emailTextField.text else {return}
-        guard let password = loginView.loginContentView.passwordTextField.text else {return}
-        
+        let email = loginView.getEmailValue()
+        let password = loginView.getPasswordValue()
+
         //TO DO: Check for correct formatting in email & password
         if email.isEmpty {
             //TO DO: show error in UI
             print ("Email empty")
         }
-        
+
         if password.isEmpty {
             print ("Empty password")
         }
-        
+
     }
-    
+
     func registerButtonPressed() {
         print("register")
-        let registerController = RegisterController()
-        
         navigationController?.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(registerController, animated: true)
     }
 }
-

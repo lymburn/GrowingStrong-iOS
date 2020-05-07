@@ -15,12 +15,22 @@ class RegisterController: UIViewController {
         setupViews()
         
         collectionView.register(RegisterStatsCell.self, forCellWithReuseIdentifier: registerStatsCellId)
+        collectionView.register(CreateAccountCell.self, forCellWithReuseIdentifier: createAccountCellId)
+        
+        navigationItem.rightBarButtonItem = nextButton
+        navigationItem.leftBarButtonItem = backButton
     }
     
     let registerStatsCellId = "registerStatsCell"
+    let createAccountCellId = "createAccountCell"
+    lazy var nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextPageTapped))
+    lazy var backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
+    lazy var submitButton = UIBarButtonItem(title: "Submit", style: .plain, target: self, action: #selector(submitTapped))
     
     lazy var dataController: RegisterDataController = {
-        let dataController = RegisterDataController(registerStatsCellId: registerStatsCellId, dateFormatter: dateFormatter)
+        let dataController = RegisterDataController(registerStatsCellId: registerStatsCellId,
+                                                    createAccountCellId: createAccountCellId,
+                                                    dateFormatter: dateFormatter)
         dataController.delegate = self
         return dataController
     }()
@@ -120,6 +130,13 @@ extension RegisterController {
         
         cell.goalLabel.colorString(text: "I want to \(goal.rawValue.lowercased()) weight", coloredText: goal.rawValue.lowercased(), color: .green)
     }
+    
+    fileprivate func setRegisterStatsActivityLevelLabel(for level: ActivityLevel) {
+        let indexPath = IndexPath(item: 0, section: 0)
+        let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
+        
+        cell.activityLevelLabel.colorString(text: "My activity level is \(level.rawValue.lowercased())", coloredText: level.rawValue.lowercased(), color: .green)
+    }
 }
 
 //MARK: Events
@@ -129,6 +146,37 @@ extension RegisterController {
         let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
         
         cell.birthdayTextField.text = dateFormatter.string(from: datePicker.date)
+    }
+    
+    @objc func nextPageTapped() {
+        let indexPath = IndexPath(item: 1, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+        navigationItem.rightBarButtonItem = submitButton
+    }
+    
+    @objc func backTapped() {
+        let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        let visibleIndexPath = collectionView.indexPathForItem(at: visiblePoint)
+        
+        if let indexPath = visibleIndexPath {
+            if indexPath.item == 0 {
+                navigationController?.popViewController(animated: true)
+            } else {
+                let registerStatsIndexPath = IndexPath(item: 0, section: 0)
+                collectionView.scrollToItem(at: registerStatsIndexPath, at: .left, animated: true)
+                navigationItem.rightBarButtonItem = nextButton
+            }
+        }
+    }
+    
+    @objc func submitTapped() {
+        //TODO: Submit registration stats & account info to server
+        print ("Creating new account")
+        
+        let mainController = MainTabBarController()
+        mainController.modalPresentationStyle = .fullScreen
+        self.present(mainController, animated: true)
     }
 }
 
@@ -157,5 +205,9 @@ extension RegisterController : RegisterDataControllerDelegate {
         cell.birthdayTextField.inputView = UIView()
         cell.birthdayTextField.inputAccessoryView = datePicker
         cell.birthdayTextField.text = dateFormatter.string(from: datePicker.date)
+    }
+    
+    func activityLevelDidChange(to level: ActivityLevel) {
+        setRegisterStatsActivityLevelLabel(for: level)
     }
 }
