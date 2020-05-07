@@ -10,6 +10,8 @@ import UIKit
 
 protocol LoginContentViewDelegate: class {
     func forgetPasswordButtonPressed()
+    func loginButtonPressed()
+    func registerButtonPressed()
 }
 
 class LoginContentView: UIView {
@@ -45,6 +47,30 @@ class LoginContentView: UIView {
         return button
     }()
     
+    lazy var loginButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .green
+        button.setTitle("Log In", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(loginButtonPressed), for: .touchDown)
+        return button
+    }()
+    
+    lazy var registerButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .red
+        button.setTitle("Sign Up", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(registerButtonPressed), for: .touchDown)
+        return button
+    }()
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -57,6 +83,9 @@ extension LoginContentView {
         addSubview(emailTextField)
         addSubview(passwordTextField)
         addSubview(forgetPasswordButton)
+        addSubview(loginButton)
+        addSubview(registerButton)
+        
         setupConstraints()
     }
     
@@ -74,6 +103,14 @@ extension LoginContentView {
         forgetPasswordButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16).isActive = true
         forgetPasswordButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
         forgetPasswordButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        loginButton.topAnchor.constraint(equalTo: forgetPasswordButton.bottomAnchor, constant: 50).isActive = true
+        loginButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        loginButton.widthAnchor.constraint(equalToConstant: Constants.ScreenSize.width * 0.5).isActive = true
+        
+        registerButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 30).isActive = true
+        registerButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        registerButton.widthAnchor.constraint(equalToConstant: Constants.ScreenSize.width * 0.5).isActive = true
     }
 }
 
@@ -81,5 +118,13 @@ extension LoginContentView {
 extension LoginContentView {
     @objc func forgetButtonPressed() {
         delegate?.forgetPasswordButtonPressed()
+    }
+    
+    @objc func registerButtonPressed() {
+        delegate?.registerButtonPressed()
+    }
+    
+    @objc func loginButtonPressed() {
+        delegate?.loginButtonPressed()
     }
 }

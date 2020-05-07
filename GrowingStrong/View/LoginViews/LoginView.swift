@@ -28,12 +28,6 @@ class LoginView : UIView {
         return view
     }()
     
-    let loginActionsView: LoginActionsView = {
-        var view = LoginActionsView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -46,7 +40,6 @@ extension LoginView {
         backgroundColor = .white
         addSubview(logo)
         addSubview(loginContentView)
-        addSubview(loginActionsView)
         setupConstraints()
     }
     
@@ -59,11 +52,6 @@ extension LoginView {
         loginContentView.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 50).isActive = true
         loginContentView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         loginContentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        loginContentView.heightAnchor.constraint(equalToConstant: Constants.ScreenSize.height * 0.35).isActive = true
-        
-        loginActionsView.topAnchor.constraint(equalTo: loginContentView.bottomAnchor).isActive = true
-        loginActionsView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        loginActionsView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        loginActionsView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        loginContentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 }

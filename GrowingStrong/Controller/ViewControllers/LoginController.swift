@@ -13,8 +13,6 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loginView.loginActionsView.delegate = self
-        loginView.loginContentView.delegate =  self
         setupViews()
     }
     
@@ -28,9 +26,10 @@ class LoginController: UIViewController {
         navigationController?.isNavigationBarHidden = false
     }
     
-    let loginView: LoginView = {
+    lazy var loginView: LoginView = {
         let view = LoginView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.loginContentView.delegate = self
         return view
     }()
 }
@@ -57,10 +56,7 @@ extension LoginController: LoginContentViewDelegate {
         //TODO
         print("Forget password pressed")
     }
-}
-
-//MARK: Login actions view delegate
-extension LoginController: LoginActionsViewDelegate {
+    
     func loginButtonPressed() {
         guard let email = loginView.loginContentView.emailTextField.text else {return}
         guard let password = loginView.loginContentView.passwordTextField.text else {return}
@@ -85,4 +81,3 @@ extension LoginController: LoginActionsViewDelegate {
         navigationController?.pushViewController(registerController, animated: true)
     }
 }
-
