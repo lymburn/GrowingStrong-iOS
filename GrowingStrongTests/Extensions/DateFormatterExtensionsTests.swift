@@ -35,7 +35,7 @@ class DateFormatterExtensionsTests: XCTestCase {
     
     func testGetPreviousDateString() throws {
         let expectedString: String = "January 01, 2020"
-        let date = dateFormatter.date(from: "January 2, 2020")!
+        let date = dateFormatter.date(from: "January 02, 2020")!
         let dateString = dateFormatter.string(from: date)
         let previousDate = dateFormatter.getPreviousDateString(from: dateString)
         let previousDateString = try XCTUnwrap(previousDate)
@@ -43,5 +43,13 @@ class DateFormatterExtensionsTests: XCTestCase {
         XCTAssertEqual(expectedString, previousDateString)
     }
 
-    
+    func testGetNextDateString() throws {
+        let expectedString: String = "January 03, 2020"
+        let date = dateFormatter.date(from: "January 02, 2020")!
+        let dateString = dateFormatter.string(from: date)
+        let nextDate = dateFormatter.getNextDateString(from: dateString)
+        let nextDateString = try XCTUnwrap(nextDate)
+
+        XCTAssertEqual(expectedString, nextDateString)
+    }
 }

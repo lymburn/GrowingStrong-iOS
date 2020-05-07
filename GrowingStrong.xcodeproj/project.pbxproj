@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2605A8AD24429B9C001CF085 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2605A8AC24429B9C001CF085 /* LoginView.swift */; };
-		2605A8AF2442B626001CF085 /* LoginContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2605A8AE2442B626001CF085 /* LoginContentView.swift */; };
+		2605A8AF2442B626001CF085 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2605A8AE2442B626001CF085 /* LoginView.swift */; };
 		2605A8B32442BC1D001CF085 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2605A8B22442BC1D001CF085 /* RegisterController.swift */; };
 		261C8BCA2448A9F3009A1B79 /* CreateAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C8BC92448A9F3009A1B79 /* CreateAccountCell.swift */; };
 		261C8BD22448CD11009A1B79 /* MeasurementUnitHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C8BD12448CD11009A1B79 /* MeasurementUnitHelperTests.swift */; };
@@ -25,11 +24,31 @@
 		266BB5A4246328F3009269B2 /* ActionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A3246328F3009269B2 /* ActionController.swift */; };
 		266BB5A624633A37009269B2 /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A524633A37009269B2 /* DiaryView.swift */; };
 		266BFA0B2443DB0E006E588D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BFA0A2443DB0E006E588D /* Extensions.swift */; };
+		268FDFEE246396D600406420 /* LoginControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268FDFED246396D600406420 /* LoginControllerTests.swift */; };
+		268FDFEF246396F800406420 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2605A8AE2442B626001CF085 /* LoginView.swift */; };
+		268FDFF02463977900406420 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E379A242D05EB0070B110 /* LoginController.swift */; };
 		269E3797242D05EB0070B110 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E3796242D05EB0070B110 /* AppDelegate.swift */; };
 		269E3799242D05EB0070B110 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E3798242D05EB0070B110 /* SceneDelegate.swift */; };
 		269E379B242D05EB0070B110 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E379A242D05EB0070B110 /* LoginController.swift */; };
 		269E37A0242D05F00070B110 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 269E379F242D05F00070B110 /* Assets.xcassets */; };
 		269E37A3242D05F00070B110 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 269E37A1242D05F00070B110 /* LaunchScreen.storyboard */; };
+		26E0B55124639872002D5A07 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E0B55024639872002D5A07 /* Typealias.swift */; };
+		26E0B55224639885002D5A07 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E0B55024639872002D5A07 /* Typealias.swift */; };
+		26E0B55324639B8D002D5A07 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C982442D00B004A5C71 /* Constants.swift */; };
+		26E0B55524639DC4002D5A07 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2605A8B22442BC1D001CF085 /* RegisterController.swift */; };
+		26E0B55624639DDC002D5A07 /* RegisterDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2640FF8B2443EC870051A2BF /* RegisterDataController.swift */; };
+		26E0B55724639E15002D5A07 /* MeasurementUnitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */; };
+		26E0B55824639E1C002D5A07 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2E6F1244757A0000294D3 /* Enums.swift */; };
+		26E0B55924639E23002D5A07 /* DateBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2658890A246340F200199012 /* DateBar.swift */; };
+		26E0B55A24639E25002D5A07 /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A524633A37009269B2 /* DiaryView.swift */; };
+		26E0B55B24639E28002D5A07 /* RegisterStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C942442CB2E004A5C71 /* RegisterStatsCell.swift */; };
+		26E0B55C24639E2B002D5A07 /* CreateAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C8BC92448A9F3009A1B79 /* CreateAccountCell.swift */; };
+		26E0B55D24639E31002D5A07 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F665924623FBA00B24F51 /* MainTabBarController.swift */; };
+		26E0B55E24639E34002D5A07 /* DiaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F665C2462417800B24F51 /* DiaryController.swift */; };
+		26E0B55F24639E36002D5A07 /* TrendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F665E246241A500B24F51 /* TrendsController.swift */; };
+		26E0B56024639E38002D5A07 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F6660246241C500B24F51 /* SettingsController.swift */; };
+		26E0B56124639E3A002D5A07 /* LearnController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A124632156009269B2 /* LearnController.swift */; };
+		26E0B56224639E3D002D5A07 /* ActionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A3246328F3009269B2 /* ActionController.swift */; };
 		26E31A4324636D7D00C6EE1D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BFA0A2443DB0E006E588D /* Extensions.swift */; };
 		26F2E6F2244757A0000294D3 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2E6F1244757A0000294D3 /* Enums.swift */; };
 		26F2E6F4244769B9000294D3 /* MeasurementUnitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */; };
@@ -46,8 +65,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2605A8AC24429B9C001CF085 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		2605A8AE2442B626001CF085 /* LoginContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginContentView.swift; sourceTree = "<group>"; };
+		2605A8AE2442B626001CF085 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2605A8B22442BC1D001CF085 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		261C8BC92448A9F3009A1B79 /* CreateAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountCell.swift; sourceTree = "<group>"; };
 		261C8BCF2448CD11009A1B79 /* GrowingStrongTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrowingStrongTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +84,7 @@
 		266BB5A3246328F3009269B2 /* ActionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionController.swift; sourceTree = "<group>"; };
 		266BB5A524633A37009269B2 /* DiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryView.swift; sourceTree = "<group>"; };
 		266BFA0A2443DB0E006E588D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		268FDFED246396D600406420 /* LoginControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginControllerTests.swift; sourceTree = "<group>"; };
 		269E3793242D05EB0070B110 /* GrowingStrong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrowingStrong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		269E3796242D05EB0070B110 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		269E3798242D05EB0070B110 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +92,7 @@
 		269E379F242D05F00070B110 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		269E37A2242D05F00070B110 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		269E37A4242D05F00070B110 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		26E0B55024639872002D5A07 /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
 		26F2E6F1244757A0000294D3 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementUnitHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,8 +146,7 @@
 		2605A8AB24429B56001CF085 /* LoginViews */ = {
 			isa = PBXGroup;
 			children = (
-				2605A8AC24429B9C001CF085 /* LoginView.swift */,
-				2605A8AE2442B626001CF085 /* LoginContentView.swift */,
+				2605A8AE2442B626001CF085 /* LoginView.swift */,
 			);
 			path = LoginViews;
 			sourceTree = "<group>";
@@ -135,6 +154,7 @@
 		261C8BD02448CD11009A1B79 /* GrowingStrongTests */ = {
 			isa = PBXGroup;
 			children = (
+				268FDFEC2463969F00406420 /* Controllers */,
 				2658890C2463671400199012 /* Extensions */,
 				261C8BD92448D2B8009A1B79 /* Helpers */,
 				261C8BD32448CD11009A1B79 /* Info.plist */,
@@ -189,6 +209,7 @@
 				26475C982442D00B004A5C71 /* Constants.swift */,
 				266BFA0A2443DB0E006E588D /* Extensions.swift */,
 				26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */,
+				26E0B55024639872002D5A07 /* Typealias.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -208,6 +229,14 @@
 				2658890A246340F200199012 /* DateBar.swift */,
 			);
 			path = DiaryViews;
+			sourceTree = "<group>";
+		};
+		268FDFEC2463969F00406420 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				268FDFED246396D600406420 /* LoginControllerTests.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		269E378A242D05EA0070B110 = {
@@ -342,9 +371,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26E0B55B24639E28002D5A07 /* RegisterStatsCell.swift in Sources */,
 				261C8BD22448CD11009A1B79 /* MeasurementUnitHelperTests.swift in Sources */,
+				268FDFF02463977900406420 /* LoginController.swift in Sources */,
+				26E0B55C24639E2B002D5A07 /* CreateAccountCell.swift in Sources */,
+				268FDFEE246396D600406420 /* LoginControllerTests.swift in Sources */,
 				26E31A4324636D7D00C6EE1D /* Extensions.swift in Sources */,
+				26E0B55724639E15002D5A07 /* MeasurementUnitHelper.swift in Sources */,
+				26E0B55624639DDC002D5A07 /* RegisterDataController.swift in Sources */,
+				268FDFEF246396F800406420 /* LoginView.swift in Sources */,
 				265889102463678B00199012 /* DateFormatterExtensionsTests.swift in Sources */,
+				26E0B55224639885002D5A07 /* Typealias.swift in Sources */,
+				26E0B56224639E3D002D5A07 /* ActionController.swift in Sources */,
+				26E0B55324639B8D002D5A07 /* Constants.swift in Sources */,
+				26E0B56124639E3A002D5A07 /* LearnController.swift in Sources */,
+				26E0B55A24639E25002D5A07 /* DiaryView.swift in Sources */,
+				26E0B55E24639E34002D5A07 /* DiaryController.swift in Sources */,
+				26E0B55824639E1C002D5A07 /* Enums.swift in Sources */,
+				26E0B55524639DC4002D5A07 /* RegisterController.swift in Sources */,
+				26E0B56024639E38002D5A07 /* SettingsController.swift in Sources */,
+				26E0B55924639E23002D5A07 /* DateBar.swift in Sources */,
+				26E0B55F24639E36002D5A07 /* TrendsController.swift in Sources */,
+				26E0B55D24639E31002D5A07 /* MainTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,9 +413,9 @@
 				2605A8B32442BC1D001CF085 /* RegisterController.swift in Sources */,
 				269E3797242D05EB0070B110 /* AppDelegate.swift in Sources */,
 				266BFA0B2443DB0E006E588D /* Extensions.swift in Sources */,
+				26E0B55124639872002D5A07 /* Typealias.swift in Sources */,
 				26F2E6F4244769B9000294D3 /* MeasurementUnitHelper.swift in Sources */,
-				2605A8AD24429B9C001CF085 /* LoginView.swift in Sources */,
-				2605A8AF2442B626001CF085 /* LoginContentView.swift in Sources */,
+				2605A8AF2442B626001CF085 /* LoginView.swift in Sources */,
 				26475C992442D00B004A5C71 /* Constants.swift in Sources */,
 				266BB5A624633A37009269B2 /* DiaryView.swift in Sources */,
 				262F665D2462417800B24F51 /* DiaryController.swift in Sources */,
