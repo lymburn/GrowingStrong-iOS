@@ -1,5 +1,5 @@
 //
-//  DiaryView.swift
+//  DailyNutrition.swift
 //  GrowingStrong
 //
 //  Created by Eugene Lu on 2020-05-06.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DiaryView: UIView {
+class DailyNutritionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -23,7 +23,7 @@ class DiaryView: UIView {
 }
 
 //MARK: Setup
-extension DiaryView {
+extension DailyNutritionView {
     fileprivate func setupViews() {
         backgroundColor = .white
         

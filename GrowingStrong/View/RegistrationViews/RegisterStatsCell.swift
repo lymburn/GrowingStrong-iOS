@@ -144,7 +144,7 @@ class RegisterStatsCell: UICollectionViewCell {
     }()
     
     let activityLevelSelector: UISegmentedControl = {
-        let items = [ActivityLevel.sedentary.rawValue, ActivityLevel.light.rawValue, ActivityLevel.moderate.rawValue,              ActivityLevel.extreme.rawValue]
+        let items = [ActivityLevel.sedentary.rawValue, ActivityLevel.light.rawValue, ActivityLevel.moderate.rawValue, ActivityLevel.extreme.rawValue]
         let sc = UISegmentedControl(items: items)
         sc.translatesAutoresizingMaskIntoConstraints = false
         sc.selectedSegmentIndex = 0

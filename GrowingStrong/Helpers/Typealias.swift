@@ -9,3 +9,4 @@
 import UIKit
 
 typealias LoginViewType = LoginViewProtocol & UIView
+typealias DateBarType = DateBarProtocol & UIView

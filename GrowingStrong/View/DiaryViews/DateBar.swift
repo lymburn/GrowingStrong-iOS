@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol DateBarProtocol {
+    func getDateValue() -> String
+    func setDateValue(text: String?)
+}
+
 protocol DateBarDelegate: class {
-    func previousMonthPressed()
-    func nextMonthPressed()
+    func previousDatePressed()
+    func nextDatePressed()
 }
 
 class DateBar: UIView {
@@ -24,6 +29,7 @@ class DateBar: UIView {
     let dateLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
         label.sizeToFit()
@@ -34,7 +40,7 @@ class DateBar: UIView {
         let button = UIButton()
         button.setImage(UIImage(named: ImageNames.UtilityButton.leftArrow), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(previousMonthPressed), for: .touchDown)
+        button.addTarget(self, action: #selector(previousDatePressed), for: .touchDown)
         return button
     }()
     
@@ -42,7 +48,7 @@ class DateBar: UIView {
         let button = UIButton()
         button.setImage(UIImage(named: ImageNames.UtilityButton.rightArrow), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(nextMonthPressed), for: .touchDown)
+        button.addTarget(self, action: #selector(nextDatePressed), for: .touchDown)
         return button
     }()
     
@@ -80,11 +86,22 @@ extension DateBar {
 
 //MARK: Touch events
 extension DateBar {
-    @objc func previousMonthPressed() {
-        delegate?.previousMonthPressed()
+    @objc func previousDatePressed() {
+        delegate?.previousDatePressed()
     }
     
-    @objc func nextMonthPressed() {
-        delegate?.nextMonthPressed()
+    @objc func nextDatePressed() {
+        delegate?.nextDatePressed()
+    }
+}
+
+//MARK: DateBarProtocol Implementation
+extension DateBar: DateBarProtocol {
+    func getDateValue() -> String {
+        return dateLabel.text ?? ""
+    }
+    
+    func setDateValue(text: String?) {
+        dateLabel.text = text
     }
 }

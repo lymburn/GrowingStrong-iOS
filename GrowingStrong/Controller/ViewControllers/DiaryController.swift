@@ -13,8 +13,11 @@ class DiaryController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupDateBar(dBar)
         setupViews()
     }
+    
+    var dateBar: DateBarType!
     
     lazy var navBar: UINavigationBar = {
         let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
@@ -24,17 +27,17 @@ class DiaryController: UIViewController {
         return navBar
     }()
     
-    lazy var dateBar: DateBar = {
+    lazy var dBar: DateBar = {
         let bar = DateBar()
         bar.translatesAutoresizingMaskIntoConstraints = false
         bar.delegate = self
         return bar
     }()
     
-    let diaryView: DiaryView = {
-        let diaryView = DiaryView()
-        diaryView.translatesAutoresizingMaskIntoConstraints = false
-        return diaryView
+    let dailyNutritionView: DailyNutritionView = {
+        let view = DailyNutritionView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     lazy var dateFormatter: DateFormatter = {
@@ -46,14 +49,17 @@ class DiaryController: UIViewController {
 
 //MARK: Setup
 extension DiaryController {
+    func setupDateBar(_ dateBar: DateBarType) {
+        self.dateBar = dateBar
+    }
     
     fileprivate func setupViews() {
         view.backgroundColor = .white
         view.addSubview(navBar)
         view.addSubview(dateBar)
-        view.addSubview(diaryView)
+        view.addSubview(dailyNutritionView)
         
-        dateBar.dateLabel.text = dateFormatter.getCurrentDateString()
+        dateBar.setDateValue(text: dateFormatter.getCurrentDateString())
         
         setupConstraints()
     }
@@ -68,17 +74,15 @@ extension DiaryController {
 
 //MARK: Date bar delegate
 extension DiaryController: DateBarDelegate {
-    func previousMonthPressed() {
-        if let currentDateText = dateBar.dateLabel.text {
-            let previousDateText = dateFormatter.getPreviousDateString(from: currentDateText)
-            dateBar.dateLabel.text = previousDateText
-        }
+    func previousDatePressed() {
+        let currentDateText = dateBar.getDateValue()
+        let previousDateText = dateFormatter.getPreviousDateString(from: currentDateText)
+        dateBar.setDateValue(text: previousDateText)
     }
     
-    func nextMonthPressed() {
-        if let currentDateText = dateBar.dateLabel.text {
-            let nextDateText = dateFormatter.getNextDateString(from: currentDateText)
-            dateBar.dateLabel.text = nextDateText
-        }
+    func nextDatePressed() {
+        let currentDateText = dateBar.getDateValue()
+        let nextDateText = dateFormatter.getNextDateString(from: currentDateText)
+        dateBar.setDateValue(text: nextDateText)
     }
 }
