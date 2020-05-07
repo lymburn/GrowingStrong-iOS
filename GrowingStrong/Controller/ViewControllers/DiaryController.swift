@@ -14,10 +14,12 @@ class DiaryController: UIViewController {
         super.viewDidLoad()
         
         setupDateBar(dBar)
+        setupDailyNutritionView(dnView)
         setupViews()
     }
     
     var dateBar: DateBarType!
+    var dailyNutritionView: DailyNutritionViewType!
     
     lazy var navBar: UINavigationBar = {
         let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
@@ -34,7 +36,7 @@ class DiaryController: UIViewController {
         return bar
     }()
     
-    let dailyNutritionView: DailyNutritionView = {
+    let dnView: DailyNutritionView = {
         let view = DailyNutritionView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -53,6 +55,10 @@ extension DiaryController {
         self.dateBar = dateBar
     }
     
+    func setupDailyNutritionView(_ dailyNutritionView: DailyNutritionViewType) {
+        self.dailyNutritionView = dailyNutritionView
+    }
+    
     fileprivate func setupViews() {
         view.backgroundColor = .white
         view.addSubview(navBar)
@@ -68,7 +74,12 @@ extension DiaryController {
         dateBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         dateBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         dateBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        dateBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        dateBar.heightAnchor.constraint(equalToConstant: Constants.ScreenSize.height * 0.07).isActive = true
+        
+        dailyNutritionView.topAnchor.constraint(equalTo: dateBar.bottomAnchor).isActive = true
+        dailyNutritionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        dailyNutritionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        dailyNutritionView.heightAnchor.constraint(equalToConstant: Constants.ScreenSize.height * 0.25).isActive = true
     }
 }
 
