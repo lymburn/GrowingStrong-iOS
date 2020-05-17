@@ -16,10 +16,19 @@ class DiaryController: UIViewController {
         setupDateBar(dBar)
         setupDailyNutritionView(dnView)
         setupViews()
+        
+        tableView.register(FoodCell.self, forCellReuseIdentifier: foodCellId)
     }
+    
+    let foodCellId = "foodCell"
     
     var dateBar: DateBarType!
     var dailyNutritionView: DailyNutritionViewType!
+    
+    lazy var diaryDataController: DiaryDataController = {
+        let controller = DiaryDataController(cellIdentifier: foodCellId)
+        return controller
+    }()
     
     lazy var navBar: UINavigationBar = {
         let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
@@ -32,6 +41,7 @@ class DiaryController: UIViewController {
     lazy var dBar: DateBar = {
         let bar = DateBar()
         bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.setDateValue(text: dateFormatter.getCurrentDateString())
         bar.delegate = self
         return bar
     }()
@@ -40,6 +50,16 @@ class DiaryController: UIViewController {
         let view = DailyNutritionView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    lazy var tableView: UITableView = {
+        let tv = UITableView()
+        tv.rowHeight = SizeConstants.DiaryView.FoodTableViewRowHeight
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.tableFooterView = UIView()
+        tv.delegate = diaryDataController
+        tv.dataSource = diaryDataController
+        return tv
     }()
     
     lazy var dateFormatter: DateFormatter = {
@@ -64,8 +84,7 @@ extension DiaryController {
         view.addSubview(navBar)
         view.addSubview(dateBar)
         view.addSubview(dailyNutritionView)
-        
-        dateBar.setDateValue(text: dateFormatter.getCurrentDateString())
+        view.addSubview(tableView)
         
         setupConstraints()
     }
@@ -74,12 +93,17 @@ extension DiaryController {
         dateBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         dateBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         dateBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        dateBar.heightAnchor.constraint(equalToConstant: Constants.ScreenSize.height * 0.07).isActive = true
+        dateBar.heightAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.height * 0.07).isActive = true
         
         dailyNutritionView.topAnchor.constraint(equalTo: dateBar.bottomAnchor).isActive = true
         dailyNutritionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         dailyNutritionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        dailyNutritionView.heightAnchor.constraint(equalToConstant: Constants.ScreenSize.height * 0.25).isActive = true
+        dailyNutritionView.heightAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.height * 0.25).isActive = true
+        
+        tableView.topAnchor.constraint(equalTo: dailyNutritionView.bottomAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 }
 

@@ -186,7 +186,7 @@ extension RegisterStatsCell {
 
         measurementUnitSelector.topAnchor.constraint(equalTo: measurementUnitLabel.bottomAnchor, constant: 4).isActive = true
         measurementUnitSelector.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        measurementUnitSelector.widthAnchor.constraint(equalToConstant: Constants.ScreenSize.width * 0.4).isActive = true
+        measurementUnitSelector.widthAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.width * 0.4).isActive = true
 
         genderLabel.topAnchor.constraint(equalTo: measurementUnitSelector.bottomAnchor, constant: 24).isActive = true
         genderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
@@ -195,7 +195,7 @@ extension RegisterStatsCell {
 
         genderSelector.topAnchor.constraint(equalTo: genderLabel.bottomAnchor, constant: 4).isActive = true
         genderSelector.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        genderSelector.widthAnchor.constraint(equalToConstant: Constants.ScreenSize.width * 0.4).isActive = true
+        genderSelector.widthAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.width * 0.4).isActive = true
 
         birthdayLabel.topAnchor.constraint(equalTo: genderSelector.bottomAnchor, constant: 24).isActive = true
         birthdayLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
@@ -204,7 +204,7 @@ extension RegisterStatsCell {
 
         birthdayTextField.topAnchor.constraint(equalTo: birthdayLabel.bottomAnchor, constant: 4).isActive = true
         birthdayTextField.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        birthdayTextField.widthAnchor.constraint(equalToConstant: Constants.ScreenSize.width * 0.4).isActive = true
+        birthdayTextField.widthAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.width * 0.4).isActive = true
         
         heightLabel.topAnchor.constraint(equalTo: birthdayTextField.bottomAnchor, constant: 24).isActive = true
         heightLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
@@ -212,8 +212,8 @@ extension RegisterStatsCell {
         heightLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
 
         heightSlider.topAnchor.constraint(equalTo: heightLabel.bottomAnchor, constant: 4).isActive = true
-        heightSlider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.ScreenSize.width * 0.1).isActive = true
-        heightSlider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.ScreenSize.width * 0.1).isActive = true
+        heightSlider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: SizeConstants.ScreenSize.width * 0.1).isActive = true
+        heightSlider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -SizeConstants.ScreenSize.width * 0.1).isActive = true
         heightSlider.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         weightLabel.topAnchor.constraint(equalTo: heightSlider.bottomAnchor, constant: 24).isActive = true
@@ -222,8 +222,8 @@ extension RegisterStatsCell {
         weightLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
 
         weightSlider.topAnchor.constraint(equalTo: weightLabel.bottomAnchor, constant: 4).isActive = true
-        weightSlider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.ScreenSize.width * 0.1).isActive = true
-        weightSlider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.ScreenSize.width * 0.1).isActive = true
+        weightSlider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: SizeConstants.ScreenSize.width * 0.1).isActive = true
+        weightSlider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -SizeConstants.ScreenSize.width * 0.1).isActive = true
         weightSlider.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         goalLabel.topAnchor.constraint(equalTo: weightSlider.bottomAnchor, constant: 24).isActive = true
@@ -233,7 +233,7 @@ extension RegisterStatsCell {
 
         goalSelector.topAnchor.constraint(equalTo: goalLabel.bottomAnchor, constant: 4).isActive = true
         goalSelector.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        goalSelector.widthAnchor.constraint(equalToConstant: Constants.ScreenSize.width * 0.7).isActive = true
+        goalSelector.widthAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.width * 0.7).isActive = true
         
         activityLevelLabel.topAnchor.constraint(equalTo: goalSelector.bottomAnchor, constant: 24).isActive = true
         activityLevelLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
@@ -242,7 +242,7 @@ extension RegisterStatsCell {
 
         activityLevelSelector.topAnchor.constraint(equalTo: activityLevelLabel.bottomAnchor, constant: 4).isActive = true
         activityLevelSelector.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        activityLevelSelector.widthAnchor.constraint(equalToConstant: Constants.ScreenSize.width * 0.8).isActive = true
+        activityLevelSelector.widthAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.width * 0.8).isActive = true
     }
 }
 

@@ -12,13 +12,17 @@
 		261C8BCA2448A9F3009A1B79 /* CreateAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C8BC92448A9F3009A1B79 /* CreateAccountCell.swift */; };
 		261C8BD22448CD11009A1B79 /* MeasurementUnitHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C8BD12448CD11009A1B79 /* MeasurementUnitHelperTests.swift */; };
 		2624E8D72464640E00AC40EA /* DiaryControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8D62464640E00AC40EA /* DiaryControllerTests.swift */; };
+		2624E8D924647E4E00AC40EA /* DiaryDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8D824647E4E00AC40EA /* DiaryDataController.swift */; };
+		2624E8DA24647E4E00AC40EA /* DiaryDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8D824647E4E00AC40EA /* DiaryDataController.swift */; };
+		2624E8DC24647FAD00AC40EA /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8DB24647FAD00AC40EA /* FoodCell.swift */; };
+		2624E8DD24647FAD00AC40EA /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8DB24647FAD00AC40EA /* FoodCell.swift */; };
 		262F665A24623FBA00B24F51 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F665924623FBA00B24F51 /* MainTabBarController.swift */; };
 		262F665D2462417800B24F51 /* DiaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F665C2462417800B24F51 /* DiaryController.swift */; };
 		262F665F246241A500B24F51 /* TrendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F665E246241A500B24F51 /* TrendsController.swift */; };
 		262F6661246241C500B24F51 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F6660246241C500B24F51 /* SettingsController.swift */; };
 		2640FF8C2443EC870051A2BF /* RegisterDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2640FF8B2443EC870051A2BF /* RegisterDataController.swift */; };
 		26475C952442CB2E004A5C71 /* RegisterStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C942442CB2E004A5C71 /* RegisterStatsCell.swift */; };
-		26475C992442D00B004A5C71 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C982442D00B004A5C71 /* Constants.swift */; };
+		26475C992442D00B004A5C71 /* SizeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C982442D00B004A5C71 /* SizeConstants.swift */; };
 		2658890B246340F300199012 /* DateBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2658890A246340F200199012 /* DateBar.swift */; };
 		265889102463678B00199012 /* DateFormatterExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2658890F2463678B00199012 /* DateFormatterExtensionsTests.swift */; };
 		266BB5A224632156009269B2 /* LearnController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A124632156009269B2 /* LearnController.swift */; };
@@ -35,7 +39,7 @@
 		269E37A3242D05F00070B110 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 269E37A1242D05F00070B110 /* LaunchScreen.storyboard */; };
 		26E0B55124639872002D5A07 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E0B55024639872002D5A07 /* Typealias.swift */; };
 		26E0B55224639885002D5A07 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E0B55024639872002D5A07 /* Typealias.swift */; };
-		26E0B55324639B8D002D5A07 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C982442D00B004A5C71 /* Constants.swift */; };
+		26E0B55324639B8D002D5A07 /* SizeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C982442D00B004A5C71 /* SizeConstants.swift */; };
 		26E0B55524639DC4002D5A07 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2605A8B22442BC1D001CF085 /* RegisterController.swift */; };
 		26E0B55624639DDC002D5A07 /* RegisterDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2640FF8B2443EC870051A2BF /* RegisterDataController.swift */; };
 		26E0B55724639E15002D5A07 /* MeasurementUnitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */; };
@@ -73,13 +77,15 @@
 		261C8BD12448CD11009A1B79 /* MeasurementUnitHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementUnitHelperTests.swift; sourceTree = "<group>"; };
 		261C8BD32448CD11009A1B79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2624E8D62464640E00AC40EA /* DiaryControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryControllerTests.swift; sourceTree = "<group>"; };
+		2624E8D824647E4E00AC40EA /* DiaryDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDataController.swift; sourceTree = "<group>"; };
+		2624E8DB24647FAD00AC40EA /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
 		262F665924623FBA00B24F51 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		262F665C2462417800B24F51 /* DiaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryController.swift; sourceTree = "<group>"; };
 		262F665E246241A500B24F51 /* TrendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsController.swift; sourceTree = "<group>"; };
 		262F6660246241C500B24F51 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		2640FF8B2443EC870051A2BF /* RegisterDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataController.swift; sourceTree = "<group>"; };
 		26475C942442CB2E004A5C71 /* RegisterStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterStatsCell.swift; sourceTree = "<group>"; };
-		26475C982442D00B004A5C71 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		26475C982442D00B004A5C71 /* SizeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeConstants.swift; sourceTree = "<group>"; };
 		2658890A246340F200199012 /* DateBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBar.swift; sourceTree = "<group>"; };
 		2658890F2463678B00199012 /* DateFormatterExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtensionsTests.swift; sourceTree = "<group>"; };
 		266BB5A124632156009269B2 /* LearnController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnController.swift; sourceTree = "<group>"; };
@@ -176,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				2640FF8B2443EC870051A2BF /* RegisterDataController.swift */,
+				2624E8D824647E4E00AC40EA /* DiaryDataController.swift */,
 			);
 			path = DataControllers;
 			sourceTree = "<group>";
@@ -208,7 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				26F2E6F1244757A0000294D3 /* Enums.swift */,
-				26475C982442D00B004A5C71 /* Constants.swift */,
+				26475C982442D00B004A5C71 /* SizeConstants.swift */,
 				266BFA0A2443DB0E006E588D /* Extensions.swift */,
 				26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */,
 				26E0B55024639872002D5A07 /* Typealias.swift */,
@@ -229,6 +236,7 @@
 			children = (
 				266BB5A524633A37009269B2 /* DailyNutritionView.swift */,
 				2658890A246340F200199012 /* DateBar.swift */,
+				2624E8DB24647FAD00AC40EA /* FoodCell.swift */,
 			);
 			path = DiaryViews;
 			sourceTree = "<group>";
@@ -387,12 +395,14 @@
 				265889102463678B00199012 /* DateFormatterExtensionsTests.swift in Sources */,
 				26E0B55224639885002D5A07 /* Typealias.swift in Sources */,
 				26E0B56224639E3D002D5A07 /* ActionController.swift in Sources */,
-				26E0B55324639B8D002D5A07 /* Constants.swift in Sources */,
+				26E0B55324639B8D002D5A07 /* SizeConstants.swift in Sources */,
 				26E0B56124639E3A002D5A07 /* LearnController.swift in Sources */,
 				26E0B55A24639E25002D5A07 /* DailyNutritionView.swift in Sources */,
 				26E0B55E24639E34002D5A07 /* DiaryController.swift in Sources */,
+				2624E8DD24647FAD00AC40EA /* FoodCell.swift in Sources */,
 				26E0B55824639E1C002D5A07 /* Enums.swift in Sources */,
 				26E0B55524639DC4002D5A07 /* RegisterController.swift in Sources */,
+				2624E8DA24647E4E00AC40EA /* DiaryDataController.swift in Sources */,
 				26E0B56024639E38002D5A07 /* SettingsController.swift in Sources */,
 				26E0B55924639E23002D5A07 /* DateBar.swift in Sources */,
 				26E0B55F24639E36002D5A07 /* TrendsController.swift in Sources */,
@@ -411,8 +421,10 @@
 				262F665A24623FBA00B24F51 /* MainTabBarController.swift in Sources */,
 				26475C952442CB2E004A5C71 /* RegisterStatsCell.swift in Sources */,
 				266BB5A4246328F3009269B2 /* ActionController.swift in Sources */,
+				2624E8DC24647FAD00AC40EA /* FoodCell.swift in Sources */,
 				269E379B242D05EB0070B110 /* LoginController.swift in Sources */,
 				2658890B246340F300199012 /* DateBar.swift in Sources */,
+				2624E8D924647E4E00AC40EA /* DiaryDataController.swift in Sources */,
 				266BB5A224632156009269B2 /* LearnController.swift in Sources */,
 				2605A8B32442BC1D001CF085 /* RegisterController.swift in Sources */,
 				269E3797242D05EB0070B110 /* AppDelegate.swift in Sources */,
@@ -420,7 +432,7 @@
 				26E0B55124639872002D5A07 /* Typealias.swift in Sources */,
 				26F2E6F4244769B9000294D3 /* MeasurementUnitHelper.swift in Sources */,
 				2605A8AF2442B626001CF085 /* LoginView.swift in Sources */,
-				26475C992442D00B004A5C71 /* Constants.swift in Sources */,
+				26475C992442D00B004A5C71 /* SizeConstants.swift in Sources */,
 				266BB5A624633A37009269B2 /* DailyNutritionView.swift in Sources */,
 				262F665D2462417800B24F51 /* DiaryController.swift in Sources */,
 				26F2E6F2244757A0000294D3 /* Enums.swift in Sources */,
