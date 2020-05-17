@@ -10,17 +10,23 @@ import UIKit
 
 class DiaryDataController: NSObject, UITableViewDataSource, UITableViewDelegate {
     var cellIdentifier: String!
+    var foodViewModels: [FoodViewModel]!
     
-    init(cellIdentifier: String) {
+    init(cellIdentifier: String, foodViewModels: [FoodViewModel]) {
         self.cellIdentifier = cellIdentifier
+        self.foodViewModels = foodViewModels
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return foodViewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FoodCell
+        let foodViewModel = foodViewModels[indexPath.item]
+        cell.nameLabel.text = foodViewModel.name
+        cell.caloriesLabel.text = foodViewModel.totalCaloriesText
+        cell.quantityLabel.text = foodViewModel.totalQuantityText
         return cell
     }
 }

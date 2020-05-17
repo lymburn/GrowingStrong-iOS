@@ -30,3 +30,8 @@ enum ActivityLevel: String {
     case moderate = "Moderate"
     case extreme = "Extreme"
 }
+
+enum ServingSizeUnit: String {
+    case gram = "g"
+    case pound = "lb"
+}

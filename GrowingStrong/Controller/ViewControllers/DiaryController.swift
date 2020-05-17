@@ -8,12 +8,18 @@
 
 import UIKit
 
+let testFoods: [Food] = [
+    Food(id: 1, name: "Turkey", servingSizeQuantity: 100, servingSizeUnit: ServingSizeUnit.gram, servingAmount: 5, caloriesPerServing: 200),
+    Food(id: 2, name: "Chicken", servingSizeQuantity: 1.5, servingSizeUnit: ServingSizeUnit.pound, servingAmount: 1, caloriesPerServing: 1500)
+]
+
 class DiaryController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupDateBar(dBar)
+        self.testFoodViewModels = testFoods.map({return FoodViewModel.init(food: $0)})
         setupDailyNutritionView(dnView)
         setupViews()
         
@@ -22,11 +28,12 @@ class DiaryController: UIViewController {
     
     let foodCellId = "foodCell"
     
+    var testFoodViewModels: [FoodViewModel]!
     var dateBar: DateBarType!
     var dailyNutritionView: DailyNutritionViewType!
     
     lazy var diaryDataController: DiaryDataController = {
-        let controller = DiaryDataController(cellIdentifier: foodCellId)
+        let controller = DiaryDataController(cellIdentifier: foodCellId, foodViewModels: testFoodViewModels)
         return controller
     }()
     
