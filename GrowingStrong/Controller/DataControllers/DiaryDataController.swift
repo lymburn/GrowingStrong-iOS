@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol DiaryDataControllerDelegate: class {
+    func rowSelected(at row: Int)
+}
+
 class DiaryDataController: NSObject, UITableViewDataSource, UITableViewDelegate {
     var cellIdentifier: String!
     var foodViewModels: [FoodViewModel]!
+    weak var delegate: DiaryDataControllerDelegate?
     
     init(cellIdentifier: String, foodViewModels: [FoodViewModel]) {
         self.cellIdentifier = cellIdentifier
@@ -28,5 +33,9 @@ class DiaryDataController: NSObject, UITableViewDataSource, UITableViewDelegate 
         cell.caloriesLabel.text = foodViewModel.totalCaloriesText
         cell.quantityLabel.text = foodViewModel.totalQuantityText
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.rowSelected(at: indexPath.item)
     }
 }

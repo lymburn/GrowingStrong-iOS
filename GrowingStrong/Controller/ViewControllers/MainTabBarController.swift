@@ -16,7 +16,7 @@ class MainTabBarController: UITabBarController {
         setupControllers()
     }
     
-    lazy var diaryController = DiaryController()
+    lazy var diaryController = UINavigationController(rootViewController: DiaryController())
     lazy var learnController = LearnController()
     lazy var actionController = ActionController()
     lazy var trendsController = TrendsController()

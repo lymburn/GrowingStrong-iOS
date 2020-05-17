@@ -12,7 +12,10 @@ struct Food {
     let id: Int
     let name: String
     let servingSizeQuantity: Float
-    let servingSizeUnit: ServingSizeUnit
+    let servingSizeUnit: String
     let servingAmount: Float
     let caloriesPerServing: Float
+    let carbohydratesPerServing: Float
+    let fatPerServing: Float
+    let proteinPerServing: Float
 }

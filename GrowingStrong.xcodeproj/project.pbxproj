@@ -62,6 +62,10 @@
 		26F783262471996F00B7F0C8 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F783252471996F00B7F0C8 /* FoodViewModel.swift */; };
 		26F783272471996F00B7F0C8 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F783252471996F00B7F0C8 /* FoodViewModel.swift */; };
 		26F7832A2471A09800B7F0C8 /* FoodViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F783292471A09800B7F0C8 /* FoodViewModelTests.swift */; };
+		26F7832F2471A9B600B7F0C8 /* EditFoodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F7832E2471A9B600B7F0C8 /* EditFoodController.swift */; };
+		26F783302471A9B600B7F0C8 /* EditFoodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F7832E2471A9B600B7F0C8 /* EditFoodController.swift */; };
+		26F783332471B51300B7F0C8 /* MacroNutrientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F783322471B51300B7F0C8 /* MacroNutrientsView.swift */; };
+		26F783342471B51300B7F0C8 /* MacroNutrientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F783322471B51300B7F0C8 /* MacroNutrientsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +115,8 @@
 		26F783222471984900B7F0C8 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		26F783252471996F00B7F0C8 /* FoodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewModel.swift; sourceTree = "<group>"; };
 		26F783292471A09800B7F0C8 /* FoodViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewModelTests.swift; sourceTree = "<group>"; };
+		26F7832E2471A9B600B7F0C8 /* EditFoodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFoodController.swift; sourceTree = "<group>"; };
+		26F783322471B51300B7F0C8 /* MacroNutrientsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroNutrientsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +158,7 @@
 		2605A8AA24429B4A001CF085 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				26F783312471B4FC00B7F0C8 /* EditFoodViews */,
 				266BB5A724633A42009269B2 /* DiaryViews */,
 				26475C932442CACF004A5C71 /* RegistrationViews */,
 				2605A8AB24429B56001CF085 /* LoginViews */,
@@ -207,6 +214,7 @@
 				262F6660246241C500B24F51 /* SettingsController.swift */,
 				266BB5A124632156009269B2 /* LearnController.swift */,
 				266BB5A3246328F3009269B2 /* ActionController.swift */,
+				26F7832E2471A9B600B7F0C8 /* EditFoodController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -317,6 +325,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		26F783312471B4FC00B7F0C8 /* EditFoodViews */ = {
+			isa = PBXGroup;
+			children = (
+				26F783322471B51300B7F0C8 /* MacroNutrientsView.swift */,
+			);
+			path = EditFoodViews;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -418,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26E0B55B24639E28002D5A07 /* RegisterStatsCell.swift in Sources */,
+				26F783302471A9B600B7F0C8 /* EditFoodController.swift in Sources */,
 				261C8BD22448CD11009A1B79 /* MeasurementUnitHelperTests.swift in Sources */,
 				268FDFF02463977900406420 /* LoginController.swift in Sources */,
 				26E0B55C24639E2B002D5A07 /* CreateAccountCell.swift in Sources */,
@@ -430,6 +447,7 @@
 				268FDFEF246396F800406420 /* LoginView.swift in Sources */,
 				265889102463678B00199012 /* DateFormatterExtensionsTests.swift in Sources */,
 				26E0B55224639885002D5A07 /* Typealias.swift in Sources */,
+				26F783342471B51300B7F0C8 /* MacroNutrientsView.swift in Sources */,
 				26E0B56224639E3D002D5A07 /* ActionController.swift in Sources */,
 				26F783272471996F00B7F0C8 /* FoodViewModel.swift in Sources */,
 				26E0B55324639B8D002D5A07 /* SizeConstants.swift in Sources */,
@@ -463,10 +481,12 @@
 				266BB5A4246328F3009269B2 /* ActionController.swift in Sources */,
 				2624E8DC24647FAD00AC40EA /* FoodCell.swift in Sources */,
 				269E379B242D05EB0070B110 /* LoginController.swift in Sources */,
+				26F783332471B51300B7F0C8 /* MacroNutrientsView.swift in Sources */,
 				2658890B246340F300199012 /* DateBar.swift in Sources */,
 				2624E8D924647E4E00AC40EA /* DiaryDataController.swift in Sources */,
 				266BB5A224632156009269B2 /* LearnController.swift in Sources */,
 				2605A8B32442BC1D001CF085 /* RegisterController.swift in Sources */,
+				26F7832F2471A9B600B7F0C8 /* EditFoodController.swift in Sources */,
 				269E3797242D05EB0070B110 /* AppDelegate.swift in Sources */,
 				266BFA0B2443DB0E006E588D /* Extensions.swift in Sources */,
 				26E0B55124639872002D5A07 /* Typealias.swift in Sources */,

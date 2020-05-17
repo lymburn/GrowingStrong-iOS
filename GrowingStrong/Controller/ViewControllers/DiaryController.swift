@@ -9,8 +9,8 @@
 import UIKit
 
 let testFoods: [Food] = [
-    Food(id: 1, name: "Turkey", servingSizeQuantity: 100, servingSizeUnit: ServingSizeUnit.gram, servingAmount: 5, caloriesPerServing: 200),
-    Food(id: 2, name: "Chicken", servingSizeQuantity: 1.5, servingSizeUnit: ServingSizeUnit.pound, servingAmount: 1, caloriesPerServing: 1500)
+    Food(id: 1, name: "Turkey", servingSizeQuantity: 100, servingSizeUnit: ServingSizeUnit.gram.rawValue, servingAmount: 5, caloriesPerServing: 200, carbohydratesPerServing: 8.5, fatPerServing: 15.4, proteinPerServing: 30.5),
+    Food(id: 2, name: "Chicken", servingSizeQuantity: 1.5, servingSizeUnit: ServingSizeUnit.pound.rawValue, servingAmount: 1, caloriesPerServing: 1500, carbohydratesPerServing: 10, fatPerServing: 20.3, proteinPerServing: 40.6)
 ]
 
 class DiaryController: UIViewController {
@@ -26,19 +26,32 @@ class DiaryController: UIViewController {
         tableView.register(FoodCell.self, forCellReuseIdentifier: foodCellId)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     let foodCellId = "foodCell"
     
     var testFoodViewModels: [FoodViewModel]!
     var dateBar: DateBarType!
     var dailyNutritionView: DailyNutritionViewType!
     
+    lazy var navBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
+    
     lazy var diaryDataController: DiaryDataController = {
         let controller = DiaryDataController(cellIdentifier: foodCellId, foodViewModels: testFoodViewModels)
+        controller.delegate = self
         return controller
     }()
     
     lazy var navBar: UINavigationBar = {
-        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
+        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: navBarHeight))
         navBar.isTranslucent = true
         navBar.setBackgroundImage(UIImage(), for: .default)
         navBar.backgroundColor = .green
@@ -100,7 +113,7 @@ extension DiaryController {
         dateBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         dateBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         dateBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        dateBar.heightAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.height * 0.07).isActive = true
+        dateBar.heightAnchor.constraint(equalToConstant: navBarHeight).isActive = true
         
         dailyNutritionView.topAnchor.constraint(equalTo: dateBar.bottomAnchor).isActive = true
         dailyNutritionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -126,5 +139,14 @@ extension DiaryController: DateBarDelegate {
         let currentDateText = dateBar.getDateValue()
         let nextDateText = dateFormatter.getNextDateString(from: currentDateText)
         dateBar.setDateValue(text: nextDateText)
+    }
+}
+
+//MARK: Data controller delegate
+extension DiaryController: DiaryDataControllerDelegate {
+    func rowSelected(at row: Int) {
+        let editFoodController = EditFoodController()
+        editFoodController.foodViewModel = testFoodViewModels[row]
+        navigationController?.pushViewController(editFoodController, animated: true)
     }
 }

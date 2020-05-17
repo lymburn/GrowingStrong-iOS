@@ -23,14 +23,20 @@ class FoodViewModelTests: XCTestCase {
         let expectedTotalCaloriesText = "1000 kcal"
         let expectedTotalQuantity = 3
         let expectedTotalQuantityText = "3 lb"
+        let expectedTotalCarbs: Float = 10
+        let expectedTotalFat: Float = 21.4
+        let expectedTotalProtein: Float = 70
         
-        let food = Food(id: 0, name: "Chicken", servingSizeQuantity: 1.5, servingSizeUnit: ServingSizeUnit.pound, servingAmount: 2, caloriesPerServing: 500)
+        let food = Food(id: 0, name: "Chicken", servingSizeQuantity: 1.5, servingSizeUnit: ServingSizeUnit.pound.rawValue, servingAmount: 2, caloriesPerServing: 500, carbohydratesPerServing: 5, fatPerServing: 10.7, proteinPerServing: 35)
         let foodViewModel = FoodViewModel(food: food)
         
         XCTAssertEqual(foodViewModel.totalCalories, expectedTotalCalories)
         XCTAssertEqual(foodViewModel.totalCaloriesText, expectedTotalCaloriesText)
         XCTAssertEqual(foodViewModel.totalQuantity, expectedTotalQuantity)
         XCTAssertEqual(foodViewModel.totalQuantityText, expectedTotalQuantityText)
+        XCTAssertEqual(foodViewModel.totalCarbohydrates, expectedTotalCarbs)
+        XCTAssertEqual(foodViewModel.totalFat, expectedTotalFat)
+        XCTAssertEqual(foodViewModel.totalProtein, expectedTotalProtein)
     }
 
 }
