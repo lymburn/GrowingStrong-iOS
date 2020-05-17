@@ -37,6 +37,14 @@ class FoodCell: UITableViewCell {
         return label
     }()
     
+    let caloriesLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "100 kcal"
+        label.textAlignment = .right
+        return label
+    }()
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -49,6 +57,7 @@ extension FoodCell {
         addSubview(foodIcon)
         addSubview(nameLabel)
         addSubview(quantityLabel)
+        addSubview(caloriesLabel)
         
         setupConstraints()
     }
@@ -63,10 +72,12 @@ extension FoodCell {
         
         nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: height * 0.2).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: foodIcon.trailingAnchor, constant: 8).isActive = true
-        nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
         
         quantityLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8).isActive = true
         quantityLabel.leadingAnchor.constraint(equalTo: foodIcon.trailingAnchor, constant: 8).isActive = true
-        quantityLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
+        
+        caloriesLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 8).isActive = true
+        caloriesLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
+        caloriesLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
 }
