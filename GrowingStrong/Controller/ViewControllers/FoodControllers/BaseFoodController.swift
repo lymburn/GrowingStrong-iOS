@@ -1,5 +1,5 @@
 //
-//  EditFoodController.swift
+//  BaseFoodController.swift
 //  GrowingStrong
 //
 //  Created by Eugene Lu on 2020-05-17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditFoodController: UIViewController {
+class BaseFoodController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +27,19 @@ class EditFoodController: UIViewController {
         return view
     }()
     
+    lazy var servingInfoTableView: UITableView = {
+        let tv = UITableView()
+        tv.rowHeight = SizeConstants.FoodController.ServingInfoTableViewRowHeight
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.tableFooterView = UIView()
+        return tv
+    }()
+    
     var foodViewModel: FoodViewModel!
 }
 
 //MARK: Setup
-extension EditFoodController {
+extension BaseFoodController {
     func setupViews() {
         view.backgroundColor = .white
         view.addSubview(macroNutrientsView)
@@ -43,6 +51,5 @@ extension EditFoodController {
         macroNutrientsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         macroNutrientsView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         macroNutrientsView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        
     }
 }

@@ -11,8 +11,16 @@ import UIKit
 struct SizeConstants {
     static let ScreenSize: CGRect = UIScreen.main.bounds
     
-    struct DiaryView {
+    struct DiaryController {
         static let FoodTableViewRowHeight: CGFloat = SizeConstants.ScreenSize.height * 0.08
+    }
+    
+    struct FoodController {
+        static let ServingInfoTableViewRowHeight: CGFloat = SizeConstants.ScreenSize.height * 0.06
+    }
+    
+    struct ServingSizeController {
+        static let ServingSizeTableViewRowHeight: CGFloat = SizeConstants.ScreenSize.height * 0.05
     }
 }
 
