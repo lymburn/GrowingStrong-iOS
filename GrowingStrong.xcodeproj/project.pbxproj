@@ -33,6 +33,7 @@
 		2640FF8C2443EC870051A2BF /* RegisterDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2640FF8B2443EC870051A2BF /* RegisterDataController.swift */; };
 		26475C952442CB2E004A5C71 /* RegisterStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C942442CB2E004A5C71 /* RegisterStatsCell.swift */; };
 		26475C992442D00B004A5C71 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C982442D00B004A5C71 /* Constants.swift */; };
+		2649640B2474752400773638 /* ServingSizeOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */; };
 		2658890B246340F300199012 /* DateBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2658890A246340F200199012 /* DateBar.swift */; };
 		265889102463678B00199012 /* DateFormatterExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2658890F2463678B00199012 /* DateFormatterExtensionsTests.swift */; };
 		266BB5A224632156009269B2 /* LearnController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A124632156009269B2 /* LearnController.swift */; };
@@ -47,7 +48,7 @@
 		269E379B242D05EB0070B110 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E379A242D05EB0070B110 /* LoginController.swift */; };
 		269E37A0242D05F00070B110 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 269E379F242D05F00070B110 /* Assets.xcassets */; };
 		269E37A3242D05F00070B110 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 269E37A1242D05F00070B110 /* LaunchScreen.storyboard */; };
-		26C72D942473099000E86FE8 /* ServingSizeOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C72D932473099000E86FE8 /* ServingSizeOptionCell.swift */; };
+		26C72D942473099000E86FE8 /* ServingSizeOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */; };
 		26E0B55124639872002D5A07 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E0B55024639872002D5A07 /* Typealias.swift */; };
 		26E0B55224639885002D5A07 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E0B55024639872002D5A07 /* Typealias.swift */; };
 		26E0B55324639B8D002D5A07 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C982442D00B004A5C71 /* Constants.swift */; };
@@ -78,6 +79,7 @@
 		26F783332471B51300B7F0C8 /* MacroNutrientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F783322471B51300B7F0C8 /* MacroNutrientsView.swift */; };
 		26F783342471B51300B7F0C8 /* MacroNutrientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F783322471B51300B7F0C8 /* MacroNutrientsView.swift */; };
 		26F96AF72474692A00199476 /* ServingSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F96AF62474692A00199476 /* ServingSize.swift */; };
+		26F96AFA2474749000199476 /* ServingSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F96AF62474692A00199476 /* ServingSize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,7 +128,7 @@
 		269E379F242D05F00070B110 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		269E37A2242D05F00070B110 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		269E37A4242D05F00070B110 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		26C72D932473099000E86FE8 /* ServingSizeOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeOptionCell.swift; sourceTree = "<group>"; };
+		26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeOptionsCell.swift; sourceTree = "<group>"; };
 		26E0B55024639872002D5A07 /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
 		26F2E6F1244757A0000294D3 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementUnitHelper.swift; sourceTree = "<group>"; };
@@ -219,7 +221,7 @@
 			children = (
 				263B96742473048700340ED3 /* ServingSizeSelectorCell.swift */,
 				263B9677247304E400340ED3 /* ServingAmountCell.swift */,
-				26C72D932473099000E86FE8 /* ServingSizeOptionCell.swift */,
+				26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */,
 			);
 			path = BaseFoodViews;
 			sourceTree = "<group>";
@@ -498,6 +500,7 @@
 				268FDFF02463977900406420 /* LoginController.swift in Sources */,
 				26E0B55C24639E2B002D5A07 /* CreateAccountCell.swift in Sources */,
 				268FDFEE246396D600406420 /* LoginControllerTests.swift in Sources */,
+				2649640B2474752400773638 /* ServingSizeOptionsCell.swift in Sources */,
 				26E31A4324636D7D00C6EE1D /* Extensions.swift in Sources */,
 				26E0B55724639E15002D5A07 /* MeasurementUnitHelper.swift in Sources */,
 				26E0B55624639DDC002D5A07 /* RegisterDataController.swift in Sources */,
@@ -516,6 +519,7 @@
 				26E0B55A24639E25002D5A07 /* DailyNutritionView.swift in Sources */,
 				26F7832A2471A09800B7F0C8 /* FoodViewModelTests.swift in Sources */,
 				26E0B55E24639E34002D5A07 /* DiaryController.swift in Sources */,
+				26F96AFA2474749000199476 /* ServingSize.swift in Sources */,
 				2624E8DD24647FAD00AC40EA /* FoodCell.swift in Sources */,
 				263B9672247303A400340ED3 /* BaseFoodDataController.swift in Sources */,
 				26E0B55824639E1C002D5A07 /* Enums.swift in Sources */,
@@ -537,7 +541,7 @@
 				262F665F246241A500B24F51 /* TrendsController.swift in Sources */,
 				2640FF8C2443EC870051A2BF /* RegisterDataController.swift in Sources */,
 				263B9671247303A400340ED3 /* BaseFoodDataController.swift in Sources */,
-				26C72D942473099000E86FE8 /* ServingSizeOptionCell.swift in Sources */,
+				26C72D942473099000E86FE8 /* ServingSizeOptionsCell.swift in Sources */,
 				261C8BCA2448A9F3009A1B79 /* CreateAccountCell.swift in Sources */,
 				262F665A24623FBA00B24F51 /* MainTabBarController.swift in Sources */,
 				263B9678247304E400340ED3 /* ServingAmountCell.swift in Sources */,

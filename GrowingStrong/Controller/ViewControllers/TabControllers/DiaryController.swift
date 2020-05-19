@@ -9,13 +9,13 @@
 import UIKit
 
 let testServingSizes1: [ServingSize] = [
-    ServingSize(foodId: 1, quantity: 100, unit: "g"),
-    ServingSize(foodId: 1, quantity: 1, unit: "g"),
+    ServingSize(quantity: 100, unit: "g"),
+    ServingSize(quantity: 1, unit: "g"),
 ]
 
 let testServingSizes2: [ServingSize] = [
-    ServingSize(foodId: 2, quantity: 1.5, unit: "lb"),
-    ServingSize(foodId: 2, quantity: 4, unit: "ounce")
+    ServingSize(quantity: 1.5, unit: "lb"),
+    ServingSize(quantity: 4, unit: "ounce")
 ]
 
 let testFoods: [Food] = [

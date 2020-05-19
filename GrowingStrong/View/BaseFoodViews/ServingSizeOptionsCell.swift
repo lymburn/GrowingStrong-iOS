@@ -1,5 +1,5 @@
 //
-//  ServingSizeOptionCell.swift
+//  ServingSizeOptionsCell.swift
 //  GrowingStrong
 //
 //  Created by Eugene Lu on 2020-05-18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ServingSizeOptionCell: UITableViewCell {
+class ServingSizeOptionsCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -27,7 +27,7 @@ class ServingSizeOptionCell: UITableViewCell {
 }
 
 //MARK: Setup
-extension ServingSizeOptionCell {
+extension ServingSizeOptionsCell {
     fileprivate func setupViews() {
         addSubview(optionLabel)
         

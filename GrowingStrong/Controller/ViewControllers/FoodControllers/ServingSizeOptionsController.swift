@@ -13,7 +13,7 @@ class ServingSizeOptionsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        servingSizeTableView.register(ServingSizeOptionCell.self, forCellReuseIdentifier: cellIdentifier)
+        servingSizeTableView.register(ServingSizeOptionsCell.self, forCellReuseIdentifier: cellIdentifier)
         
         setupViews()
     }
@@ -56,7 +56,7 @@ extension ServingSizeOptionsController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ServingSizeOptionCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ServingSizeOptionsCell
         cell.optionLabel.text = servingSizeOptions[indexPath.row]
         return cell
     }

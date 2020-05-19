@@ -9,7 +9,6 @@
 import Foundation
 
 struct ServingSize {
-    let foodId: Int
     let quantity: Float
     let unit: String
 }
