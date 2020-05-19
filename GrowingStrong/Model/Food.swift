@@ -11,8 +11,7 @@ import Foundation
 struct Food {
     let id: Int
     let name: String
-    let servingSizeQuantity: Float
-    let servingSizeUnit: String
+    let servingSizes: [ServingSize]
     let servingAmount: Float
     let caloriesPerServing: Float
     let carbohydratesPerServing: Float

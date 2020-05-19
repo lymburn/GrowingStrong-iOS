@@ -8,9 +8,19 @@
 
 import UIKit
 
+let testServingSizes1: [ServingSize] = [
+    ServingSize(foodId: 1, quantity: 100, unit: "g"),
+    ServingSize(foodId: 1, quantity: 1, unit: "g"),
+]
+
+let testServingSizes2: [ServingSize] = [
+    ServingSize(foodId: 2, quantity: 1.5, unit: "lb"),
+    ServingSize(foodId: 2, quantity: 4, unit: "ounce")
+]
+
 let testFoods: [Food] = [
-    Food(id: 1, name: "Turkey", servingSizeQuantity: 100, servingSizeUnit: ServingSizeUnit.gram.rawValue, servingAmount: 5, caloriesPerServing: 200, carbohydratesPerServing: 8.5, fatPerServing: 15.4, proteinPerServing: 30.5),
-    Food(id: 2, name: "Chicken", servingSizeQuantity: 1.5, servingSizeUnit: ServingSizeUnit.pound.rawValue, servingAmount: 1, caloriesPerServing: 1500, carbohydratesPerServing: 10, fatPerServing: 20.3, proteinPerServing: 40.6)
+    Food(id: 1, name: "Turkey", servingSizes: testServingSizes1, servingAmount: 5, caloriesPerServing: 200, carbohydratesPerServing: 8.5, fatPerServing: 15.4, proteinPerServing: 30.5),
+    Food(id: 2, name: "Chicken", servingSizes: testServingSizes2, servingAmount: 1, caloriesPerServing: 1500, carbohydratesPerServing: 10, fatPerServing: 20.3, proteinPerServing: 40.6)
 ]
 
 class DiaryController: UIViewController {
@@ -19,7 +29,10 @@ class DiaryController: UIViewController {
         super.viewDidLoad()
         
         setupDateBar(dBar)
+        
+        //Setup test models/vms
         self.testFoodViewModels = testFoods.map({return FoodViewModel.init(food: $0)})
+        
         setupDailyNutritionView(dnView)
         setupViews()
         
@@ -154,6 +167,6 @@ extension DiaryController: DiaryDataControllerDelegate {
 //        servingSizeController.modalTransitionStyle = .crossDissolve
 //        let servingSizeOptions = testFoodViewModels.map({(foodVM: FoodViewModel) -> String in "\(foodVM.servingSizeQuantity) \(foodVM.servingSizeUnit)"})
 //        servingSizeController.servingSizeOptions = servingSizeOptions
-        self.present(editFoodController, animated: true)
+        //self.present(editFoodController, animated: true)
     }
 }

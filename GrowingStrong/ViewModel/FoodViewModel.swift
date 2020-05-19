@@ -10,14 +10,14 @@ import Foundation
 
 struct FoodViewModel{
     let name: String
-    let servingSizeQuantity: Float
-    let servingSizeUnit: String
+    let servingSizes: [ServingSize]
     let servingAmount: Float
     let caloriesPerServing: Float
     let carbohydratesPerServing: Float
     let fatPerServing: Float
     let proteinPerServing: Float
     
+    let selectedServingSize: ServingSize
     let totalQuantity: Int
     let totalQuantityText: String
     let totalCalories: Int
@@ -31,16 +31,16 @@ struct FoodViewModel{
     
     init(food: Food) {
         self.name = food.name
-        self.servingSizeQuantity = food.servingSizeQuantity
-        self.servingSizeUnit = food.servingSizeUnit
+        self.servingSizes = food.servingSizes
         self.servingAmount = food.servingAmount
         self.caloriesPerServing = food.caloriesPerServing
         self.carbohydratesPerServing = food.carbohydratesPerServing
         self.fatPerServing = food.fatPerServing
         self.proteinPerServing = food.proteinPerServing
         
-        totalQuantity = Int((servingSizeQuantity * servingAmount).rounded())
-        totalQuantityText = "\(totalQuantity) \(servingSizeUnit)"
+        selectedServingSize = servingSizes[0]
+        totalQuantity = Int((selectedServingSize.quantity * servingAmount).rounded())
+        totalQuantityText = "\(totalQuantity) \(selectedServingSize.unit)"
         totalCalories = Int((caloriesPerServing * servingAmount).rounded())
         totalCaloriesText = "\(totalCalories) kcal"
         

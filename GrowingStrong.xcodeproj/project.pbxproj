@@ -77,6 +77,7 @@
 		26F783302471A9B600B7F0C8 /* BaseFoodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F7832E2471A9B600B7F0C8 /* BaseFoodController.swift */; };
 		26F783332471B51300B7F0C8 /* MacroNutrientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F783322471B51300B7F0C8 /* MacroNutrientsView.swift */; };
 		26F783342471B51300B7F0C8 /* MacroNutrientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F783322471B51300B7F0C8 /* MacroNutrientsView.swift */; };
+		26F96AF72474692A00199476 /* ServingSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F96AF62474692A00199476 /* ServingSize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +135,7 @@
 		26F783292471A09800B7F0C8 /* FoodViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewModelTests.swift; sourceTree = "<group>"; };
 		26F7832E2471A9B600B7F0C8 /* BaseFoodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFoodController.swift; sourceTree = "<group>"; };
 		26F783322471B51300B7F0C8 /* MacroNutrientsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroNutrientsView.swift; sourceTree = "<group>"; };
+		26F96AF62474692A00199476 /* ServingSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSize.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				26F783222471984900B7F0C8 /* Food.swift */,
+				26F96AF62474692A00199476 /* ServingSize.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -549,6 +552,7 @@
 				2658890B246340F300199012 /* DateBar.swift in Sources */,
 				2624E8D924647E4E00AC40EA /* DiaryDataController.swift in Sources */,
 				266BB5A224632156009269B2 /* LearnController.swift in Sources */,
+				26F96AF72474692A00199476 /* ServingSize.swift in Sources */,
 				2605A8B32442BC1D001CF085 /* RegisterController.swift in Sources */,
 				26F7832F2471A9B600B7F0C8 /* BaseFoodController.swift in Sources */,
 				269E3797242D05EB0070B110 /* AppDelegate.swift in Sources */,
