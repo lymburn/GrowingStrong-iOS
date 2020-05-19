@@ -8,8 +8,20 @@
 
 import UIKit
 
-struct Constants {
+struct SizeConstants {
     static let ScreenSize: CGRect = UIScreen.main.bounds
+    
+    struct DiaryController {
+        static let FoodTableViewRowHeight: CGFloat = SizeConstants.ScreenSize.height * 0.08
+    }
+    
+    struct FoodController {
+        static let ServingInfoTableViewRowHeight: CGFloat = SizeConstants.ScreenSize.height * 0.06
+    }
+    
+    struct ServingSizeController {
+        static let ServingSizeTableViewRowHeight: CGFloat = SizeConstants.ScreenSize.height * 0.05
+    }
 }
 
 struct ImageNames {
