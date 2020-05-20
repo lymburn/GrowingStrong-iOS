@@ -161,12 +161,5 @@ extension DiaryController: DiaryDataControllerDelegate {
         let editFoodController = EditFoodController()
         editFoodController.foodViewModel = testFoodViewModels[row]
         navigationController?.pushViewController(editFoodController, animated: true)
-        
-//        let servingSizeController = ServingSizeOptionsController()
-//        servingSizeController.modalPresentationStyle = .overCurrentContext
-//        servingSizeController.modalTransitionStyle = .crossDissolve
-//        let servingSizeOptions = testFoodViewModels.map({(foodVM: FoodViewModel) -> String in "\(foodVM.servingSizeQuantity) \(foodVM.servingSizeUnit)"})
-//        servingSizeController.servingSizeOptions = servingSizeOptions
-        //self.present(editFoodController, animated: true)
     }
 }

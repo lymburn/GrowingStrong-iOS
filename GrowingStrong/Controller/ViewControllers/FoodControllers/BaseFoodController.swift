@@ -14,7 +14,7 @@ class BaseFoodController: UIViewController {
         super.viewDidLoad()
         navigationItem.title = foodViewModel.name
         
-        servingInfoTableView.register(ServingSizeOptionsCell.self, forCellReuseIdentifier: servingSizeOptionsCellIdentifier)
+        servingInfoTableView.register(ServingSizeSelectorCell.self, forCellReuseIdentifier: servingSizeSelectorCellIdentifier)
         servingInfoTableView.register(ServingAmountCell.self, forCellReuseIdentifier: servingAmountCellIdenfitier)
         
         setupViews()
@@ -22,8 +22,14 @@ class BaseFoodController: UIViewController {
     }
     
     let servingAmountCellIdenfitier = "servingAmountCellIdentifier"
-    let servingSizeOptionsCellIdentifier = "servingSizeOptionsCellIdentifier"
+    let servingSizeSelectorCellIdentifier = "servingSizeSelectorCellIdentifier"
     var foodViewModel: FoodViewModel!
+    
+    lazy var servingSizeOptionsLauncher: ServingSizeOptionsLauncher = {
+        let launcher = ServingSizeOptionsLauncher()
+        launcher.delegate = self
+        return launcher
+    }()
     
     lazy var macroNutrientsView: MacroNutrientsView = {
         let view = MacroNutrientsView()
@@ -36,7 +42,8 @@ class BaseFoodController: UIViewController {
     }()
     
     lazy var baseFoodDataController: BaseFoodDataController = {
-        let controller = BaseFoodDataController(servingAmountCellId: servingAmountCellIdenfitier, servingSizeOptionsCellId: servingSizeOptionsCellIdentifier)
+        let controller = BaseFoodDataController(servingAmountCellId: servingAmountCellIdenfitier, servingSizeOptionsCellId: servingSizeSelectorCellIdentifier, selectedServingSize: foodViewModel.selectedServingSize)
+        controller.delegate = self
         return controller
     }()
     
@@ -66,5 +73,35 @@ class BaseFoodController: UIViewController {
         servingInfoTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         servingInfoTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         servingInfoTableView.heightAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.height * 0.2).isActive = true
+    }
+}
+
+//MARK: Helpers
+extension BaseFoodController {
+    fileprivate func setServingSizeValueLabel(servingSizeText: String) {
+        let cell = servingInfoTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ServingSizeSelectorCell
+        cell.servingSizeValueLabel.text = servingSizeText
+    }
+}
+
+//MARK: BaseFoodDataController delegate
+extension BaseFoodController: BaseFoodDataControllerDelegate {
+    func servingSizeSelectorCellSelected() {
+        servingSizeOptionsLauncher.servingSizeOptions = foodViewModel.servingSizes
+        servingSizeOptionsLauncher.launchOptions()
+    }
+    
+    func servingAmountCellSelected() {
+        
+    }
+}
+
+//MARK: ServingSizeOptionsLauncher delegate
+extension BaseFoodController: ServingSizeOptionsLauncherDelegate {
+    func didSelectOption(option: ServingSize) {
+        setServingSizeValueLabel(servingSizeText: option.toText())
+        
+        //TODO: Save selected serving size for cached food view model... will do when implementing save
+        foodViewModel.selectedServingSize = option
     }
 }

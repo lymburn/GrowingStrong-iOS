@@ -17,7 +17,7 @@ struct FoodViewModel{
     let fatPerServing: Float
     let proteinPerServing: Float
     
-    let selectedServingSize: ServingSize
+    var selectedServingSize: ServingSize
     let totalQuantity: Int
     let totalQuantityText: String
     let totalCalories: Int

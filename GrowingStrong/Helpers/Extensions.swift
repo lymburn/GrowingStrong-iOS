@@ -45,3 +45,9 @@ extension DateFormatter {
         return nil
     }
 }
+
+extension ServingSize {
+    func toText() -> String {
+        return "\(self.quantity) \(self.unit)"
+    }
+}

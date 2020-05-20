@@ -28,8 +28,6 @@
 		263B96762473048700340ED3 /* ServingSizeSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B96742473048700340ED3 /* ServingSizeSelectorCell.swift */; };
 		263B9678247304E400340ED3 /* ServingAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B9677247304E400340ED3 /* ServingAmountCell.swift */; };
 		263B9679247304E400340ED3 /* ServingAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B9677247304E400340ED3 /* ServingAmountCell.swift */; };
-		263B967F247306A400340ED3 /* ServingSizeOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B967E247306A400340ED3 /* ServingSizeOptionsController.swift */; };
-		263B9680247306A400340ED3 /* ServingSizeOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B967E247306A400340ED3 /* ServingSizeOptionsController.swift */; };
 		2640FF8C2443EC870051A2BF /* RegisterDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2640FF8B2443EC870051A2BF /* RegisterDataController.swift */; };
 		26475C952442CB2E004A5C71 /* RegisterStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C942442CB2E004A5C71 /* RegisterStatsCell.swift */; };
 		26475C992442D00B004A5C71 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C982442D00B004A5C71 /* Constants.swift */; };
@@ -66,6 +64,8 @@
 		26E0B56024639E38002D5A07 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F6660246241C500B24F51 /* SettingsController.swift */; };
 		26E0B56124639E3A002D5A07 /* LearnController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A124632156009269B2 /* LearnController.swift */; };
 		26E0B56224639E3D002D5A07 /* ActionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A3246328F3009269B2 /* ActionController.swift */; };
+		26E22BB82475238500F466C3 /* ServingSizeOptionsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E22BB72475238500F466C3 /* ServingSizeOptionsLauncher.swift */; };
+		26E22BB9247524B500F466C3 /* ServingSizeOptionsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E22BB72475238500F466C3 /* ServingSizeOptionsLauncher.swift */; };
 		26E31A4324636D7D00C6EE1D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BFA0A2443DB0E006E588D /* Extensions.swift */; };
 		26F2E6F2244757A0000294D3 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2E6F1244757A0000294D3 /* Enums.swift */; };
 		26F2E6F4244769B9000294D3 /* MeasurementUnitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */; };
@@ -110,7 +110,6 @@
 		263B9670247303A400340ED3 /* BaseFoodDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFoodDataController.swift; sourceTree = "<group>"; };
 		263B96742473048700340ED3 /* ServingSizeSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeSelectorCell.swift; sourceTree = "<group>"; };
 		263B9677247304E400340ED3 /* ServingAmountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingAmountCell.swift; sourceTree = "<group>"; };
-		263B967E247306A400340ED3 /* ServingSizeOptionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeOptionsController.swift; sourceTree = "<group>"; };
 		2640FF8B2443EC870051A2BF /* RegisterDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataController.swift; sourceTree = "<group>"; };
 		26475C942442CB2E004A5C71 /* RegisterStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterStatsCell.swift; sourceTree = "<group>"; };
 		26475C982442D00B004A5C71 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -130,6 +129,7 @@
 		269E37A4242D05F00070B110 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeOptionsCell.swift; sourceTree = "<group>"; };
 		26E0B55024639872002D5A07 /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
+		26E22BB72475238500F466C3 /* ServingSizeOptionsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeOptionsLauncher.swift; sourceTree = "<group>"; };
 		26F2E6F1244757A0000294D3 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementUnitHelper.swift; sourceTree = "<group>"; };
 		26F783222471984900B7F0C8 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
@@ -251,9 +251,9 @@
 		263B967D2473066900340ED3 /* FoodControllers */ = {
 			isa = PBXGroup;
 			children = (
+				26E22BB72475238500F466C3 /* ServingSizeOptionsLauncher.swift */,
 				26F7832E2471A9B600B7F0C8 /* BaseFoodController.swift */,
 				263B966D2473014000340ED3 /* EditFoodController.swift */,
-				263B967E247306A400340ED3 /* ServingSizeOptionsController.swift */,
 			);
 			path = FoodControllers;
 			sourceTree = "<group>";
@@ -494,6 +494,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26E0B55B24639E28002D5A07 /* RegisterStatsCell.swift in Sources */,
+				26E22BB9247524B500F466C3 /* ServingSizeOptionsLauncher.swift in Sources */,
 				26F783302471A9B600B7F0C8 /* BaseFoodController.swift in Sources */,
 				263B9679247304E400340ED3 /* ServingAmountCell.swift in Sources */,
 				261C8BD22448CD11009A1B79 /* MeasurementUnitHelperTests.swift in Sources */,
@@ -506,7 +507,6 @@
 				26E0B55624639DDC002D5A07 /* RegisterDataController.swift in Sources */,
 				2624E8D72464640E00AC40EA /* DiaryControllerTests.swift in Sources */,
 				263B966F2473014000340ED3 /* EditFoodController.swift in Sources */,
-				263B9680247306A400340ED3 /* ServingSizeOptionsController.swift in Sources */,
 				26F783242471984900B7F0C8 /* Food.swift in Sources */,
 				268FDFEF246396F800406420 /* LoginView.swift in Sources */,
 				265889102463678B00199012 /* DateFormatterExtensionsTests.swift in Sources */,
@@ -541,6 +541,7 @@
 				262F665F246241A500B24F51 /* TrendsController.swift in Sources */,
 				2640FF8C2443EC870051A2BF /* RegisterDataController.swift in Sources */,
 				263B9671247303A400340ED3 /* BaseFoodDataController.swift in Sources */,
+				26E22BB82475238500F466C3 /* ServingSizeOptionsLauncher.swift in Sources */,
 				26C72D942473099000E86FE8 /* ServingSizeOptionsCell.swift in Sources */,
 				261C8BCA2448A9F3009A1B79 /* CreateAccountCell.swift in Sources */,
 				262F665A24623FBA00B24F51 /* MainTabBarController.swift in Sources */,
@@ -569,7 +570,6 @@
 				266BB5A624633A37009269B2 /* DailyNutritionView.swift in Sources */,
 				262F665D2462417800B24F51 /* DiaryController.swift in Sources */,
 				26F2E6F2244757A0000294D3 /* Enums.swift in Sources */,
-				263B967F247306A400340ED3 /* ServingSizeOptionsController.swift in Sources */,
 				269E3799242D05EB0070B110 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

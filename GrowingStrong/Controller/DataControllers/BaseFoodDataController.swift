@@ -8,13 +8,22 @@
 
 import UIKit
 
+protocol BaseFoodDataControllerDelegate: class {
+    func servingSizeSelectorCellSelected()
+    func servingAmountCellSelected()
+}
+
 class BaseFoodDataController: NSObject, UITableViewDataSource, UITableViewDelegate {
     var servingAmountCellId: String
-    var servingSizeOptionsCellId: String
+    var servingSizeSelectorCellId: String
+    var selectedServingSize: ServingSize
     
-    init(servingAmountCellId: String, servingSizeOptionsCellId: String) {
+    weak var delegate: BaseFoodDataControllerDelegate?
+    
+    init(servingAmountCellId: String, servingSizeOptionsCellId: String, selectedServingSize: ServingSize) {
         self.servingAmountCellId = servingAmountCellId
-        self.servingSizeOptionsCellId = servingSizeOptionsCellId
+        self.servingSizeSelectorCellId = servingSizeOptionsCellId
+        self.selectedServingSize = selectedServingSize
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -22,14 +31,21 @@ class BaseFoodDataController: NSObject, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell
-        
         if indexPath.item == 0 {
-            cell = tableView.dequeueReusableCell(withIdentifier: servingSizeOptionsCellId, for: indexPath) as! ServingSizeOptionsCell
+            let servingSizeSelectorCell = tableView.dequeueReusableCell(withIdentifier: servingSizeSelectorCellId, for: indexPath) as! ServingSizeSelectorCell
+            servingSizeSelectorCell.servingSizeValueLabel.text = selectedServingSize.toText()
+            return servingSizeSelectorCell
         } else {
-            cell = tableView.dequeueReusableCell(withIdentifier: servingAmountCellId, for: indexPath) as! ServingAmountCell
+            let servingAmountCell = tableView.dequeueReusableCell(withIdentifier: servingAmountCellId, for: indexPath) as! ServingAmountCell
+            return servingAmountCell
         }
-        
-        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.item == 0 {
+            delegate?.servingSizeSelectorCellSelected()
+        } else {
+            delegate?.servingAmountCellSelected()
+        }
     }
 }
