@@ -11,7 +11,7 @@ import Foundation
 struct FoodViewModel{
     let name: String
     let servingSizes: [ServingSize]
-    let servingAmount: Float
+    var servingAmount: Float
     let caloriesPerServing: Float
     let carbohydratesPerServing: Float
     let fatPerServing: Float

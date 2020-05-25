@@ -14,9 +14,11 @@ class BaseFoodController: UIViewController {
         super.viewDidLoad()
         navigationItem.title = foodViewModel.name
         
+        self.hideKeyboardWhenTappedAround()
+        
         servingInfoTableView.register(ServingSizeSelectorCell.self, forCellReuseIdentifier: servingSizeSelectorCellIdentifier)
         servingInfoTableView.register(ServingAmountCell.self, forCellReuseIdentifier: servingAmountCellIdenfitier)
-        
+
         setupViews()
         setupConstraints()
     }
@@ -24,6 +26,7 @@ class BaseFoodController: UIViewController {
     let servingAmountCellIdenfitier = "servingAmountCellIdentifier"
     let servingSizeSelectorCellIdentifier = "servingSizeSelectorCellIdentifier"
     var foodViewModel: FoodViewModel!
+    var selectedServingSize: ServingSize!
     
     lazy var servingSizeOptionsLauncher: ServingSizeOptionsLauncher = {
         let launcher = ServingSizeOptionsLauncher()
@@ -42,7 +45,7 @@ class BaseFoodController: UIViewController {
     }()
     
     lazy var baseFoodDataController: BaseFoodDataController = {
-        let controller = BaseFoodDataController(servingAmountCellId: servingAmountCellIdenfitier, servingSizeOptionsCellId: servingSizeSelectorCellIdentifier, selectedServingSize: foodViewModel.selectedServingSize)
+        let controller = BaseFoodDataController(servingAmountCellId: servingAmountCellIdenfitier, servingSizeOptionsCellId: servingSizeSelectorCellIdentifier, selectedServingSize: selectedServingSize)
         controller.delegate = self
         return controller
     }()
@@ -92,7 +95,8 @@ extension BaseFoodController: BaseFoodDataControllerDelegate {
     }
     
     func servingAmountCellSelected() {
-        
+        let cell = servingInfoTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! ServingAmountCell
+        cell.servingAmountValueTextField.becomeFirstResponder()
     }
 }
 
@@ -100,8 +104,6 @@ extension BaseFoodController: BaseFoodDataControllerDelegate {
 extension BaseFoodController: ServingSizeOptionsLauncherDelegate {
     func didSelectOption(option: ServingSize) {
         setServingSizeValueLabel(servingSizeText: option.toText())
-        
-        //TODO: Save selected serving size for cached food view model... will do when implementing save
-        foodViewModel.selectedServingSize = option
+        selectedServingSize = option
     }
 }

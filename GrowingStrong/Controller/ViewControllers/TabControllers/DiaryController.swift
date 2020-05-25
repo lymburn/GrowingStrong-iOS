@@ -159,7 +159,9 @@ extension DiaryController: DateBarDelegate {
 extension DiaryController: DiaryDataControllerDelegate {
     func rowSelected(at row: Int) {
         let editFoodController = EditFoodController()
-        editFoodController.foodViewModel = testFoodViewModels[row]
+        let foodVM = testFoodViewModels[row]
+        editFoodController.foodViewModel = foodVM
+        editFoodController.selectedServingSize = foodVM.selectedServingSize
         navigationController?.pushViewController(editFoodController, animated: true)
     }
 }
