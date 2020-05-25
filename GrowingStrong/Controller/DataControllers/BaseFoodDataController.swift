@@ -11,19 +11,20 @@ import UIKit
 protocol BaseFoodDataControllerDelegate: class {
     func servingSizeSelectorCellSelected()
     func servingAmountCellSelected()
+    func servingAmountTextFieldDidEndEditing(_ servingAmount: Float)
 }
 
-class BaseFoodDataController: NSObject, UITableViewDataSource, UITableViewDelegate {
+class BaseFoodDataController: NSObject, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     var servingAmountCellId: String
     var servingSizeSelectorCellId: String
-    var selectedServingSize: ServingSize
+    var selectedServing: Serving
     
     weak var delegate: BaseFoodDataControllerDelegate?
     
-    init(servingAmountCellId: String, servingSizeOptionsCellId: String, selectedServingSize: ServingSize) {
+    init(servingAmountCellId: String, servingSizeOptionsCellId: String, selectedServing: Serving) {
         self.servingAmountCellId = servingAmountCellId
         self.servingSizeSelectorCellId = servingSizeOptionsCellId
-        self.selectedServingSize = selectedServingSize
+        self.selectedServing = selectedServing
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -33,10 +34,11 @@ class BaseFoodDataController: NSObject, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.item == 0 {
             let servingSizeSelectorCell = tableView.dequeueReusableCell(withIdentifier: servingSizeSelectorCellId, for: indexPath) as! ServingSizeSelectorCell
-            servingSizeSelectorCell.servingSizeValueLabel.text = selectedServingSize.toText()
+            servingSizeSelectorCell.servingSizeValueLabel.text = selectedServing.servingSize.toText()
             return servingSizeSelectorCell
         } else {
             let servingAmountCell = tableView.dequeueReusableCell(withIdentifier: servingAmountCellId, for: indexPath) as! ServingAmountCell
+            servingAmountCell.servingAmountValueTextField.delegate = self
             return servingAmountCell
         }
     }
@@ -46,6 +48,13 @@ class BaseFoodDataController: NSObject, UITableViewDataSource, UITableViewDelega
             delegate?.servingSizeSelectorCellSelected()
         } else {
             delegate?.servingAmountCellSelected()
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let servingAmountText = textField.text {
+            let servingAmount = Float(servingAmountText)!
+            delegate?.servingAmountTextFieldDidEndEditing(servingAmount)
         }
     }
 }

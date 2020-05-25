@@ -12,7 +12,7 @@ class BaseFoodController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = foodViewModel.name
+        navigationItem.title = foodEntryViewModel.food.name
         
         self.hideKeyboardWhenTappedAround()
         
@@ -25,11 +25,12 @@ class BaseFoodController: UIViewController {
     
     let servingAmountCellIdenfitier = "servingAmountCellIdentifier"
     let servingSizeSelectorCellIdentifier = "servingSizeSelectorCellIdentifier"
-    var foodViewModel: FoodViewModel!
-    var selectedServingSize: ServingSize!
+    var foodEntryViewModel: FoodEntryViewModel!
+    var selectedServing: Serving!
     
     lazy var servingSizeOptionsLauncher: ServingSizeOptionsLauncher = {
         let launcher = ServingSizeOptionsLauncher()
+        launcher.servingOptions = foodEntryViewModel.food.servings
         launcher.delegate = self
         return launcher
     }()
@@ -37,15 +38,15 @@ class BaseFoodController: UIViewController {
     lazy var macroNutrientsView: MacroNutrientsView = {
         let view = MacroNutrientsView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.caloriesLabel.text = foodViewModel.totalCaloriesText
-        view.carbsLabel.text = foodViewModel.totalCarbohydratesText
-        view.fatLabel.text = foodViewModel.totalFatText
-        view.proteinLabel.text = foodViewModel.totalProteinText
+        view.caloriesLabel.text = foodEntryViewModel.totalCaloriesText
+        view.carbsLabel.text = foodEntryViewModel.totalCarbohydratesText
+        view.fatLabel.text = foodEntryViewModel.totalFatText
+        view.proteinLabel.text = foodEntryViewModel.totalProteinText
         return view
     }()
     
     lazy var baseFoodDataController: BaseFoodDataController = {
-        let controller = BaseFoodDataController(servingAmountCellId: servingAmountCellIdenfitier, servingSizeOptionsCellId: servingSizeSelectorCellIdentifier, selectedServingSize: selectedServingSize)
+        let controller = BaseFoodDataController(servingAmountCellId: servingAmountCellIdenfitier, servingSizeOptionsCellId: servingSizeSelectorCellIdentifier, selectedServing: selectedServing)
         controller.delegate = self
         return controller
     }()
@@ -85,12 +86,18 @@ extension BaseFoodController {
         let cell = servingInfoTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ServingSizeSelectorCell
         cell.servingSizeValueLabel.text = servingSizeText
     }
+    
+    fileprivate func updateMacroNutrientsView() {
+        macroNutrientsView.caloriesLabel.text = foodEntryViewModel.totalCaloriesText
+        macroNutrientsView.carbsLabel.text = foodEntryViewModel.totalCarbohydratesText
+        macroNutrientsView.fatLabel.text = foodEntryViewModel.totalFatText
+        macroNutrientsView.proteinLabel.text = foodEntryViewModel.totalProteinText
+    }
 }
 
 //MARK: BaseFoodDataController delegate
 extension BaseFoodController: BaseFoodDataControllerDelegate {
     func servingSizeSelectorCellSelected() {
-        servingSizeOptionsLauncher.servingSizeOptions = foodViewModel.servingSizes
         servingSizeOptionsLauncher.launchOptions()
     }
     
@@ -98,12 +105,19 @@ extension BaseFoodController: BaseFoodDataControllerDelegate {
         let cell = servingInfoTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! ServingAmountCell
         cell.servingAmountValueTextField.becomeFirstResponder()
     }
+    
+    func servingAmountTextFieldDidEndEditing(_ servingAmount: Float) {
+        foodEntryViewModel.servingAmount = servingAmount
+        updateMacroNutrientsView()
+    }
 }
 
 //MARK: ServingSizeOptionsLauncher delegate
 extension BaseFoodController: ServingSizeOptionsLauncherDelegate {
-    func didSelectOption(option: ServingSize) {
-        setServingSizeValueLabel(servingSizeText: option.toText())
-        selectedServingSize = option
+    func didSelectOption(option: Serving) {
+        setServingSizeValueLabel(servingSizeText: option.servingSize.toText())
+        selectedServing = option
+        foodEntryViewModel.selectedServing = selectedServing
+        updateMacroNutrientsView()
     }
 }

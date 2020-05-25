@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ServingSizeOptionsLauncherDelegate: class {
-    func didSelectOption(option: ServingSize)
+    func didSelectOption(option: Serving)
 }
 
 class ServingSizeOptionsLauncher: NSObject {
@@ -20,8 +20,7 @@ class ServingSizeOptionsLauncher: NSObject {
     }
     
     let servingSizeOptionsCellIdentifier = "servingSizeOptionsCellIdentifier"
-    var servingSizeOptions: [ServingSize]!
-    var servingSizeOptionsTexts: [String]!
+    var servingOptions: [Serving]!
     
     weak var delegate: ServingSizeOptionsLauncherDelegate?
     
@@ -76,17 +75,17 @@ class ServingSizeOptionsLauncher: NSObject {
 //MARK: Data source & delegate
 extension ServingSizeOptionsLauncher: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return servingSizeOptions.count
+        return servingOptions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: servingSizeOptionsCellIdentifier, for: indexPath) as! ServingSizeOptionsCell
-        cell.optionLabel.text = servingSizeOptions[indexPath.row].toText()
+        cell.optionLabel.text = servingOptions[indexPath.row].servingSize.toText()
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismissOptions()
-        delegate?.didSelectOption(option: servingSizeOptions[indexPath.row])
+        delegate?.didSelectOption(option: servingOptions[indexPath.row])
     }
 }

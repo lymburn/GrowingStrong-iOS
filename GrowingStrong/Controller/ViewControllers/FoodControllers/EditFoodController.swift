@@ -57,17 +57,14 @@ extension EditFoodController {
         //TO DO: implement persistence for food view model
         let servingAmount = getServingAmount()
         
-        if selectedServingSize == nil || servingAmount == nil {
+        if selectedServing == nil || servingAmount == nil {
             print("Selected serving option or serving amount is nil")
             return
         }
         
-        if let selectedServingSize = selectedServingSize {
-            foodViewModel.selectedServingSize = selectedServingSize
-        }
-        
-        if let servingAmount = servingAmount {
-            foodViewModel.servingAmount = servingAmount
+        if let selectedServingSize = selectedServing, let servingAmount = servingAmount {
+            foodEntryViewModel.selectedServing = selectedServingSize
+            foodEntryViewModel.servingAmount = servingAmount
         }
     }
     

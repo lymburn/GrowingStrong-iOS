@@ -14,24 +14,24 @@ protocol DiaryDataControllerDelegate: class {
 
 class DiaryDataController: NSObject, UITableViewDataSource, UITableViewDelegate {
     var cellIdentifier: String!
-    var foodViewModels: [FoodViewModel]!
+    var foodEntryViewModels: [FoodEntryViewModel]!
     weak var delegate: DiaryDataControllerDelegate?
     
-    init(cellIdentifier: String, foodViewModels: [FoodViewModel]) {
+    init(cellIdentifier: String, foodEntryViewModels: [FoodEntryViewModel]) {
         self.cellIdentifier = cellIdentifier
-        self.foodViewModels = foodViewModels
+        self.foodEntryViewModels = foodEntryViewModels
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return foodViewModels.count
+        return foodEntryViewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FoodCell
-        let foodViewModel = foodViewModels[indexPath.item]
-        cell.nameLabel.text = foodViewModel.name
-        cell.caloriesLabel.text = foodViewModel.totalCaloriesText
-        cell.quantityLabel.text = foodViewModel.totalQuantityText
+        let foodEntryViewModel = foodEntryViewModels[indexPath.item]
+        cell.nameLabel.text = foodEntryViewModel.food.name
+        cell.caloriesLabel.text = foodEntryViewModel.totalCaloriesText
+        cell.quantityLabel.text = foodEntryViewModel.totalQuantityText
         return cell
     }
     

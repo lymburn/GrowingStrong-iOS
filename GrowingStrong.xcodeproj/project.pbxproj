@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		2605A8AF2442B626001CF085 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2605A8AE2442B626001CF085 /* LoginView.swift */; };
 		2605A8B32442BC1D001CF085 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2605A8B22442BC1D001CF085 /* RegisterController.swift */; };
+		26119AF0247C5718009FDD79 /* FoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26119AEF247C5718009FDD79 /* FoodEntry.swift */; };
+		26119AF1247C5718009FDD79 /* FoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26119AEF247C5718009FDD79 /* FoodEntry.swift */; };
+		26119AF3247C5860009FDD79 /* FoodEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26119AF2247C5860009FDD79 /* FoodEntryViewModel.swift */; };
+		26119AF4247C5860009FDD79 /* FoodEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26119AF2247C5860009FDD79 /* FoodEntryViewModel.swift */; };
+		26119AF6247C61A3009FDD79 /* Serving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26119AF5247C61A3009FDD79 /* Serving.swift */; };
+		26119AF7247C61A3009FDD79 /* Serving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26119AF5247C61A3009FDD79 /* Serving.swift */; };
 		261C8BCA2448A9F3009A1B79 /* CreateAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C8BC92448A9F3009A1B79 /* CreateAccountCell.swift */; };
 		261C8BD22448CD11009A1B79 /* MeasurementUnitHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C8BD12448CD11009A1B79 /* MeasurementUnitHelperTests.swift */; };
 		2624E8D72464640E00AC40EA /* DiaryControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8D62464640E00AC40EA /* DiaryControllerTests.swift */; };
@@ -47,6 +53,7 @@
 		269E37A0242D05F00070B110 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 269E379F242D05F00070B110 /* Assets.xcassets */; };
 		269E37A3242D05F00070B110 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 269E37A1242D05F00070B110 /* LaunchScreen.storyboard */; };
 		26A8D4C5247530F8000BC5C6 /* ServingSizeExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A8D4C4247530F8000BC5C6 /* ServingSizeExtensionsTests.swift */; };
+		26B2537E247C6DB9000CE403 /* FoodEntryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B2537D247C6DB9000CE403 /* FoodEntryViewModelTests.swift */; };
 		26C72D942473099000E86FE8 /* ServingSizeOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */; };
 		26E0B55124639872002D5A07 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E0B55024639872002D5A07 /* Typealias.swift */; };
 		26E0B55224639885002D5A07 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E0B55024639872002D5A07 /* Typealias.swift */; };
@@ -96,6 +103,9 @@
 /* Begin PBXFileReference section */
 		2605A8AE2442B626001CF085 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2605A8B22442BC1D001CF085 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
+		26119AEF247C5718009FDD79 /* FoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntry.swift; sourceTree = "<group>"; };
+		26119AF2247C5860009FDD79 /* FoodEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryViewModel.swift; sourceTree = "<group>"; };
+		26119AF5247C61A3009FDD79 /* Serving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serving.swift; sourceTree = "<group>"; };
 		261C8BC92448A9F3009A1B79 /* CreateAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountCell.swift; sourceTree = "<group>"; };
 		261C8BCF2448CD11009A1B79 /* GrowingStrongTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrowingStrongTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		261C8BD12448CD11009A1B79 /* MeasurementUnitHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementUnitHelperTests.swift; sourceTree = "<group>"; };
@@ -129,6 +139,7 @@
 		269E37A2242D05F00070B110 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		269E37A4242D05F00070B110 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26A8D4C4247530F8000BC5C6 /* ServingSizeExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeExtensionsTests.swift; sourceTree = "<group>"; };
+		26B2537D247C6DB9000CE403 /* FoodEntryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryViewModelTests.swift; sourceTree = "<group>"; };
 		26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeOptionsCell.swift; sourceTree = "<group>"; };
 		26E0B55024639872002D5A07 /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
 		26E22BB72475238500F466C3 /* ServingSizeOptionsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeOptionsLauncher.swift; sourceTree = "<group>"; };
@@ -182,7 +193,6 @@
 			isa = PBXGroup;
 			children = (
 				263B96732473044E00340ED3 /* BaseFoodViews */,
-				26F783312471B4FC00B7F0C8 /* EditFoodViews */,
 				266BB5A724633A42009269B2 /* DiaryViews */,
 				26475C932442CACF004A5C71 /* RegistrationViews */,
 				2605A8AB24429B56001CF085 /* LoginViews */,
@@ -221,6 +231,7 @@
 		263B96732473044E00340ED3 /* BaseFoodViews */ = {
 			isa = PBXGroup;
 			children = (
+				26F783322471B51300B7F0C8 /* MacroNutrientsView.swift */,
 				263B96742473048700340ED3 /* ServingSizeSelectorCell.swift */,
 				263B9677247304E400340ED3 /* ServingAmountCell.swift */,
 				26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */,
@@ -314,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				26F783252471996F00B7F0C8 /* FoodViewModel.swift */,
+				26119AF2247C5860009FDD79 /* FoodEntryViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -323,6 +335,8 @@
 			children = (
 				26F783222471984900B7F0C8 /* Food.swift */,
 				26F96AF62474692A00199476 /* ServingSize.swift */,
+				26119AEF247C5718009FDD79 /* FoodEntry.swift */,
+				26119AF5247C61A3009FDD79 /* Serving.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -384,16 +398,9 @@
 			isa = PBXGroup;
 			children = (
 				26F783292471A09800B7F0C8 /* FoodViewModelTests.swift */,
+				26B2537D247C6DB9000CE403 /* FoodEntryViewModelTests.swift */,
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		26F783312471B4FC00B7F0C8 /* EditFoodViews */ = {
-			isa = PBXGroup;
-			children = (
-				26F783322471B51300B7F0C8 /* MacroNutrientsView.swift */,
-			);
-			path = EditFoodViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -509,6 +516,7 @@
 				26E0B55724639E15002D5A07 /* MeasurementUnitHelper.swift in Sources */,
 				26E0B55624639DDC002D5A07 /* RegisterDataController.swift in Sources */,
 				2624E8D72464640E00AC40EA /* DiaryControllerTests.swift in Sources */,
+				26119AF7247C61A3009FDD79 /* Serving.swift in Sources */,
 				263B966F2473014000340ED3 /* EditFoodController.swift in Sources */,
 				26A8D4C5247530F8000BC5C6 /* ServingSizeExtensionsTests.swift in Sources */,
 				26F783242471984900B7F0C8 /* Food.swift in Sources */,
@@ -521,11 +529,14 @@
 				26E0B55324639B8D002D5A07 /* Constants.swift in Sources */,
 				26E0B56124639E3A002D5A07 /* LearnController.swift in Sources */,
 				26E0B55A24639E25002D5A07 /* DailyNutritionView.swift in Sources */,
+				26119AF4247C5860009FDD79 /* FoodEntryViewModel.swift in Sources */,
+				26119AF1247C5718009FDD79 /* FoodEntry.swift in Sources */,
 				26F7832A2471A09800B7F0C8 /* FoodViewModelTests.swift in Sources */,
 				26E0B55E24639E34002D5A07 /* DiaryController.swift in Sources */,
 				26F96AFA2474749000199476 /* ServingSize.swift in Sources */,
 				2624E8DD24647FAD00AC40EA /* FoodCell.swift in Sources */,
 				263B9672247303A400340ED3 /* BaseFoodDataController.swift in Sources */,
+				26B2537E247C6DB9000CE403 /* FoodEntryViewModelTests.swift in Sources */,
 				26E0B55824639E1C002D5A07 /* Enums.swift in Sources */,
 				26E0B55524639DC4002D5A07 /* RegisterController.swift in Sources */,
 				2624E8DA24647E4E00AC40EA /* DiaryDataController.swift in Sources */,
@@ -542,6 +553,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				262F6661246241C500B24F51 /* SettingsController.swift in Sources */,
+				26119AF0247C5718009FDD79 /* FoodEntry.swift in Sources */,
 				262F665F246241A500B24F51 /* TrendsController.swift in Sources */,
 				2640FF8C2443EC870051A2BF /* RegisterDataController.swift in Sources */,
 				263B9671247303A400340ED3 /* BaseFoodDataController.swift in Sources */,
@@ -557,10 +569,12 @@
 				2624E8DC24647FAD00AC40EA /* FoodCell.swift in Sources */,
 				269E379B242D05EB0070B110 /* LoginController.swift in Sources */,
 				26F783332471B51300B7F0C8 /* MacroNutrientsView.swift in Sources */,
+				26119AF6247C61A3009FDD79 /* Serving.swift in Sources */,
 				263B96752473048700340ED3 /* ServingSizeSelectorCell.swift in Sources */,
 				2658890B246340F300199012 /* DateBar.swift in Sources */,
 				2624E8D924647E4E00AC40EA /* DiaryDataController.swift in Sources */,
 				266BB5A224632156009269B2 /* LearnController.swift in Sources */,
+				26119AF3247C5860009FDD79 /* FoodEntryViewModel.swift in Sources */,
 				26F96AF72474692A00199476 /* ServingSize.swift in Sources */,
 				2605A8B32442BC1D001CF085 /* RegisterController.swift in Sources */,
 				26F7832F2471A9B600B7F0C8 /* BaseFoodController.swift in Sources */,
