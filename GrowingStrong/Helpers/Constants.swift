@@ -19,8 +19,8 @@ struct SizeConstants {
         static let ServingInfoTableViewRowHeight: CGFloat = SizeConstants.ScreenSize.height * 0.06
     }
     
-    struct ServingSizeController {
-        static let ServingSizeTableViewRowHeight: CGFloat = SizeConstants.ScreenSize.height * 0.05
+    struct ServingSizeOptionsLauncher {
+        static let ServingSizeOptionsTableViewRowHeight: CGFloat = SizeConstants.ScreenSize.height * 0.05
     }
 }
 

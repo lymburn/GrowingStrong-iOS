@@ -1,14 +1,14 @@
 //
-//  FoodViewModelTests.swift
+//  FoodEntryViewModelTests.swift
 //  GrowingStrongTests
 //
-//  Created by Eugene Lu on 2020-05-17.
+//  Created by Eugene Lu on 2020-05-25.
 //  Copyright © 2020 Eugene Lu. All rights reserved.
 //
 
 import XCTest
 
-class FoodViewModelTests: XCTestCase {
+class FoodEntryViewModelTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -18,8 +18,8 @@ class FoodViewModelTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testFoodViewModel() throws {
-
+    func testFoodEntryViewModel() throws {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
-
 }

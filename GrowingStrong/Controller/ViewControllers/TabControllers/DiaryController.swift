@@ -10,7 +10,7 @@ import UIKit
 
 let testServingSizes1: [ServingSize] = [
     ServingSize(quantity: 100, unit: "g"),
-    ServingSize(quantity: 1, unit: "g"),
+    ServingSize(quantity: 10, unit: "g"),
 ]
 
 let testServingSizes2: [ServingSize] = [
@@ -18,9 +18,24 @@ let testServingSizes2: [ServingSize] = [
     ServingSize(quantity: 4, unit: "ounce")
 ]
 
+let testServings1: [Serving] = [
+    Serving(caloriesPerServing: 1500, carbohydratesPerServing: 10, fatPerServing: 20.3, proteinPerServing: 40.6, servingSize: testServingSizes1[0]),
+    Serving(caloriesPerServing: 150, carbohydratesPerServing: 1, fatPerServing: 2.03, proteinPerServing: 4.06, servingSize: testServingSizes1[1])
+]
+
+let testServings2: [Serving] = [
+    Serving(caloriesPerServing: 1000, carbohydratesPerServing: 50, fatPerServing: 30, proteinPerServing: 20, servingSize: testServingSizes2[0]),
+    Serving(caloriesPerServing: 200, carbohydratesPerServing: 15, fatPerServing: 10, proteinPerServing: 5, servingSize: testServingSizes2[1])
+]
+
 let testFoods: [Food] = [
-    Food(id: 1, name: "Turkey", servingSizes: testServingSizes1, servingAmount: 5, caloriesPerServing: 200, carbohydratesPerServing: 8.5, fatPerServing: 15.4, proteinPerServing: 30.5),
-    Food(id: 2, name: "Chicken", servingSizes: testServingSizes2, servingAmount: 1, caloriesPerServing: 1500, carbohydratesPerServing: 10, fatPerServing: 20.3, proteinPerServing: 40.6)
+    Food(id: 1, name: "Turkey", servings: testServings1),
+    Food(id: 2, name: "Chicken", servings: testServings2)
+]
+
+let testFoodEntries: [FoodEntry] = [
+    FoodEntry(id: 1, food: testFoods[0], selectedServing: testServings1[0], servingAmount: 1, dateAdded: Date()),
+    FoodEntry(id: 2, food: testFoods[1], selectedServing: testServings2[0], servingAmount: 1, dateAdded: Date())
 ]
 
 class DiaryController: UIViewController {
@@ -32,6 +47,7 @@ class DiaryController: UIViewController {
         
         //Setup test models/vms
         self.testFoodViewModels = testFoods.map({return FoodViewModel.init(food: $0)})
+        self.testFoodEntryViewModels = testFoodEntries.map({return FoodEntryViewModel.init(foodEntry: $0)})
         
         setupDailyNutritionView(dnView)
         setupViews()
@@ -51,6 +67,7 @@ class DiaryController: UIViewController {
     
     let foodCellId = "foodCell"
     
+    var testFoodEntryViewModels: [FoodEntryViewModel]!
     var testFoodViewModels: [FoodViewModel]!
     var dateBar: DateBarType!
     var dailyNutritionView: DailyNutritionViewType!
@@ -58,7 +75,7 @@ class DiaryController: UIViewController {
     lazy var navBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
     
     lazy var diaryDataController: DiaryDataController = {
-        let controller = DiaryDataController(cellIdentifier: foodCellId, foodViewModels: testFoodViewModels)
+        let controller = DiaryDataController(cellIdentifier: foodCellId, foodEntryViewModels: testFoodEntryViewModels)
         controller.delegate = self
         return controller
     }()
@@ -159,14 +176,9 @@ extension DiaryController: DateBarDelegate {
 extension DiaryController: DiaryDataControllerDelegate {
     func rowSelected(at row: Int) {
         let editFoodController = EditFoodController()
-        editFoodController.foodViewModel = testFoodViewModels[row]
+        let foodEntryVM = testFoodEntryViewModels[row]
+        editFoodController.foodEntryViewModel = foodEntryVM
+        editFoodController.selectedServing = foodEntryVM.selectedServing
         navigationController?.pushViewController(editFoodController, animated: true)
-        
-//        let servingSizeController = ServingSizeOptionsController()
-//        servingSizeController.modalPresentationStyle = .overCurrentContext
-//        servingSizeController.modalTransitionStyle = .crossDissolve
-//        let servingSizeOptions = testFoodViewModels.map({(foodVM: FoodViewModel) -> String in "\(foodVM.servingSizeQuantity) \(foodVM.servingSizeUnit)"})
-//        servingSizeController.servingSizeOptions = servingSizeOptions
-        //self.present(editFoodController, animated: true)
     }
 }

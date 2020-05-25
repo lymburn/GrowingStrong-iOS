@@ -31,12 +31,45 @@ class EditFoodController: BaseFoodController {
         saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -SizeConstants.ScreenSize.width * 0.2).isActive = true
     }
     
-    let saveButton: UIButton = {
+    lazy var saveButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .green
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(.black, for: .normal)
         button.setTitle("Save", for: .normal)
+        button.addTarget(self, action: #selector(saveEditingFoodButtonPressed), for: .touchDown)
         return button
     }()
+}
+
+extension EditFoodController {
+    fileprivate func getServingAmount() -> Float? {
+        var servingAmount: Float? = nil
+        let cell = servingInfoTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! ServingAmountCell
+        if let servingAmountText = cell.servingAmountValueTextField.text {
+            servingAmount = Float(servingAmountText)
+        }
+        
+        return servingAmount
+    }
+    
+    fileprivate func saveFoodInfo() {
+        //TO DO: implement persistence for food view model
+        let servingAmount = getServingAmount()
+        
+        if selectedServing == nil || servingAmount == nil {
+            print("Selected serving option or serving amount is nil")
+            return
+        }
+        
+        if let selectedServingSize = selectedServing, let servingAmount = servingAmount {
+            foodEntryViewModel.selectedServing = selectedServingSize
+            foodEntryViewModel.servingAmount = servingAmount
+        }
+    }
+    
+    @objc func saveEditingFoodButtonPressed() {
+        saveFoodInfo()
+        navigationController?.popViewController(animated: true)
+    }
 }
