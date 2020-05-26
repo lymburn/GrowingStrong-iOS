@@ -12,10 +12,13 @@ class DiaryControllerTests: XCTestCase {
     
     let controller = DiaryController()
     let mockDateBar = MockDateBar()
+    let mockDailyNutritionView = MockDailyNutritionView()
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         controller.setupDateBar(mockDateBar)
+        controller.setupDailyNutritionView(mockDailyNutritionView)
+        controller.setupFoodEntryViewModels(testFoodEntries.map({return FoodEntryViewModel.init(foodEntry: $0)}))
     }
 
     override func tearDownWithError() throws {
@@ -53,5 +56,23 @@ class MockDateBar: DateBarType {
     
     func setDateValue(text: String?) {
         dateValue = text
+    }
+}
+
+class MockDailyNutritionView: DailyNutritionViewType {
+    func getCaloriesValueLabel() -> String {
+        return ""
+    }
+    
+    func getCarbsValueLabel() -> String {
+        return ""
+    }
+    
+    func getFatValueLabel() -> String {
+        return ""
+    }
+    
+    func getProteinValueLabel() -> String {
+        return ""
     }
 }

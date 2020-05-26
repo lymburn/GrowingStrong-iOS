@@ -44,11 +44,8 @@ class DiaryController: UIViewController {
         super.viewDidLoad()
         
         setupDateBar(dBar)
-        
-        //Setup test models/vms
-        self.testFoodEntryViewModels = testFoodEntries.map({return FoodEntryViewModel.init(foodEntry: $0)})
-        
         setupDailyNutritionView(dnView)
+        setupFoodEntryViewModels(testFoodEntries.map({return FoodEntryViewModel.init(foodEntry: $0)}))
         setupViews()
         
         foodEntriesTableView.register(FoodCell.self, forCellReuseIdentifier: foodEntryCellId)
@@ -125,6 +122,10 @@ extension DiaryController {
     
     func setupDailyNutritionView(_ dailyNutritionView: DailyNutritionViewType) {
         self.dailyNutritionView = dailyNutritionView
+    }
+    
+    func setupFoodEntryViewModels(_ foodEntryViewModels: [FoodEntryViewModel]) {
+        self.testFoodEntryViewModels = foodEntryViewModels
     }
     
     fileprivate func setupViews() {

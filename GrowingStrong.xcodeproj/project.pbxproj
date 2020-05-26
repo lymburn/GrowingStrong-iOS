@@ -17,7 +17,6 @@
 		26119AF7247C61A3009FDD79 /* Serving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26119AF5247C61A3009FDD79 /* Serving.swift */; };
 		261C8BCA2448A9F3009A1B79 /* CreateAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C8BC92448A9F3009A1B79 /* CreateAccountCell.swift */; };
 		261C8BD22448CD11009A1B79 /* MeasurementUnitHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C8BD12448CD11009A1B79 /* MeasurementUnitHelperTests.swift */; };
-		2624E8D72464640E00AC40EA /* DiaryControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8D62464640E00AC40EA /* DiaryControllerTests.swift */; };
 		2624E8D924647E4E00AC40EA /* DiaryDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8D824647E4E00AC40EA /* DiaryDataController.swift */; };
 		2624E8DA24647E4E00AC40EA /* DiaryDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8D824647E4E00AC40EA /* DiaryDataController.swift */; };
 		2624E8DC24647FAD00AC40EA /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8DB24647FAD00AC40EA /* FoodCell.swift */; };
@@ -45,7 +44,8 @@
 		266BB5A624633A37009269B2 /* DailyNutritionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A524633A37009269B2 /* DailyNutritionView.swift */; };
 		266BFA0B2443DB0E006E588D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BFA0A2443DB0E006E588D /* Extensions.swift */; };
 		2679316D247D72DE00413FAD /* DateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2679316C247D72DE00413FAD /* DateExtensionsTests.swift */; };
-		268FDFEE246396D600406420 /* LoginControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268FDFED246396D600406420 /* LoginControllerTests.swift */; };
+		26793171247D77C800413FAD /* LoginControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2679316F247D77C800413FAD /* LoginControllerTests.swift */; };
+		26793172247D77C800413FAD /* DiaryControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26793170247D77C800413FAD /* DiaryControllerTests.swift */; };
 		268FDFEF246396F800406420 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2605A8AE2442B626001CF085 /* LoginView.swift */; };
 		268FDFF02463977900406420 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E379A242D05EB0070B110 /* LoginController.swift */; };
 		269E3797242D05EB0070B110 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E3796242D05EB0070B110 /* AppDelegate.swift */; };
@@ -111,7 +111,6 @@
 		261C8BCF2448CD11009A1B79 /* GrowingStrongTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrowingStrongTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		261C8BD12448CD11009A1B79 /* MeasurementUnitHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementUnitHelperTests.swift; sourceTree = "<group>"; };
 		261C8BD32448CD11009A1B79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2624E8D62464640E00AC40EA /* DiaryControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryControllerTests.swift; sourceTree = "<group>"; };
 		2624E8D824647E4E00AC40EA /* DiaryDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDataController.swift; sourceTree = "<group>"; };
 		2624E8DB24647FAD00AC40EA /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
 		262F665924623FBA00B24F51 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -132,7 +131,8 @@
 		266BB5A524633A37009269B2 /* DailyNutritionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNutritionView.swift; sourceTree = "<group>"; };
 		266BFA0A2443DB0E006E588D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2679316C247D72DE00413FAD /* DateExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionsTests.swift; sourceTree = "<group>"; };
-		268FDFED246396D600406420 /* LoginControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginControllerTests.swift; sourceTree = "<group>"; };
+		2679316F247D77C800413FAD /* LoginControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginControllerTests.swift; sourceTree = "<group>"; };
+		26793170247D77C800413FAD /* DiaryControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryControllerTests.swift; sourceTree = "<group>"; };
 		269E3793242D05EB0070B110 /* GrowingStrong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrowingStrong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		269E3796242D05EB0070B110 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		269E3798242D05EB0070B110 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -213,8 +213,8 @@
 		261C8BD02448CD11009A1B79 /* GrowingStrongTests */ = {
 			isa = PBXGroup;
 			children = (
+				2679316E247D77C800413FAD /* Controllers */,
 				26F783282471A07E00B7F0C8 /* ViewModels */,
-				268FDFEC2463969F00406420 /* Controllers */,
 				2658890C2463671400199012 /* Extensions */,
 				261C8BD92448D2B8009A1B79 /* Helpers */,
 				261C8BD32448CD11009A1B79 /* Info.plist */,
@@ -354,14 +354,15 @@
 			path = DiaryViews;
 			sourceTree = "<group>";
 		};
-		268FDFEC2463969F00406420 /* Controllers */ = {
+		2679316E247D77C800413FAD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				268FDFED246396D600406420 /* LoginControllerTests.swift */,
-				2624E8D62464640E00AC40EA /* DiaryControllerTests.swift */,
+				2679316F247D77C800413FAD /* LoginControllerTests.swift */,
+				26793170247D77C800413FAD /* DiaryControllerTests.swift */,
 			);
-			path = Controllers;
-			sourceTree = "<group>";
+			name = Controllers;
+			path = GrowingStrongTests/Controllers;
+			sourceTree = SOURCE_ROOT;
 		};
 		269E378A242D05EA0070B110 = {
 			isa = PBXGroup;
@@ -511,15 +512,14 @@
 				26E22BB9247524B500F466C3 /* ServingSizeOptionsLauncher.swift in Sources */,
 				26F783302471A9B600B7F0C8 /* BaseFoodController.swift in Sources */,
 				263B9679247304E400340ED3 /* ServingAmountCell.swift in Sources */,
+				26793172247D77C800413FAD /* DiaryControllerTests.swift in Sources */,
 				261C8BD22448CD11009A1B79 /* MeasurementUnitHelperTests.swift in Sources */,
 				268FDFF02463977900406420 /* LoginController.swift in Sources */,
 				26E0B55C24639E2B002D5A07 /* CreateAccountCell.swift in Sources */,
-				268FDFEE246396D600406420 /* LoginControllerTests.swift in Sources */,
 				2649640B2474752400773638 /* ServingSizeOptionsCell.swift in Sources */,
 				26E31A4324636D7D00C6EE1D /* Extensions.swift in Sources */,
 				26E0B55724639E15002D5A07 /* MeasurementUnitHelper.swift in Sources */,
 				26E0B55624639DDC002D5A07 /* RegisterDataController.swift in Sources */,
-				2624E8D72464640E00AC40EA /* DiaryControllerTests.swift in Sources */,
 				26119AF7247C61A3009FDD79 /* Serving.swift in Sources */,
 				263B966F2473014000340ED3 /* EditFoodController.swift in Sources */,
 				26A8D4C5247530F8000BC5C6 /* ServingSizeExtensionsTests.swift in Sources */,
@@ -543,6 +543,7 @@
 				26B2537E247C6DB9000CE403 /* FoodEntryViewModelTests.swift in Sources */,
 				26E0B55824639E1C002D5A07 /* Enums.swift in Sources */,
 				26E0B55524639DC4002D5A07 /* RegisterController.swift in Sources */,
+				26793171247D77C800413FAD /* LoginControllerTests.swift in Sources */,
 				2624E8DA24647E4E00AC40EA /* DiaryDataController.swift in Sources */,
 				263B96762473048700340ED3 /* ServingSizeSelectorCell.swift in Sources */,
 				26E0B56024639E38002D5A07 /* SettingsController.swift in Sources */,
