@@ -46,6 +46,16 @@ extension DateFormatter {
     }
 }
 
+extension Date {
+    func isEqualTo(date: Date, by granularity: Calendar.Component) -> Bool {
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone.current
+        let result = calendar.compare(self, to: date, toGranularity: granularity)
+        let isSameDay = result == .orderedSame
+        return isSameDay
+    }
+}
+
 extension ServingSize {
     func toText() -> String {
         return "\(self.quantity) \(self.unit)"

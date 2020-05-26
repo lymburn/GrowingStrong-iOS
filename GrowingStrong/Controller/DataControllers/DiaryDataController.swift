@@ -22,6 +22,10 @@ class DiaryDataController: NSObject, UITableViewDataSource, UITableViewDelegate 
         self.foodEntryViewModels = foodEntryViewModels
     }
     
+    func updateFoodEntryViewModels(_ foodEntryViewModels: [FoodEntryViewModel]) {
+        self.foodEntryViewModels = foodEntryViewModels
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return foodEntryViewModels.count
     }

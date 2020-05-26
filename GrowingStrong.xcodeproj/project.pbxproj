@@ -44,6 +44,7 @@
 		266BB5A4246328F3009269B2 /* ActionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A3246328F3009269B2 /* ActionController.swift */; };
 		266BB5A624633A37009269B2 /* DailyNutritionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A524633A37009269B2 /* DailyNutritionView.swift */; };
 		266BFA0B2443DB0E006E588D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BFA0A2443DB0E006E588D /* Extensions.swift */; };
+		2679316D247D72DE00413FAD /* DateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2679316C247D72DE00413FAD /* DateExtensionsTests.swift */; };
 		268FDFEE246396D600406420 /* LoginControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268FDFED246396D600406420 /* LoginControllerTests.swift */; };
 		268FDFEF246396F800406420 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2605A8AE2442B626001CF085 /* LoginView.swift */; };
 		268FDFF02463977900406420 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E379A242D05EB0070B110 /* LoginController.swift */; };
@@ -130,6 +131,7 @@
 		266BB5A3246328F3009269B2 /* ActionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionController.swift; sourceTree = "<group>"; };
 		266BB5A524633A37009269B2 /* DailyNutritionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNutritionView.swift; sourceTree = "<group>"; };
 		266BFA0A2443DB0E006E588D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		2679316C247D72DE00413FAD /* DateExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionsTests.swift; sourceTree = "<group>"; };
 		268FDFED246396D600406420 /* LoginControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginControllerTests.swift; sourceTree = "<group>"; };
 		269E3793242D05EB0070B110 /* GrowingStrong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrowingStrong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		269E3796242D05EB0070B110 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 			children = (
 				2658890F2463678B00199012 /* DateFormatterExtensionsTests.swift */,
 				26A8D4C4247530F8000BC5C6 /* ServingSizeExtensionsTests.swift */,
+				2679316C247D72DE00413FAD /* DateExtensionsTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -503,6 +506,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2679316D247D72DE00413FAD /* DateExtensionsTests.swift in Sources */,
 				26E0B55B24639E28002D5A07 /* RegisterStatsCell.swift in Sources */,
 				26E22BB9247524B500F466C3 /* ServingSizeOptionsLauncher.swift in Sources */,
 				26F783302471A9B600B7F0C8 /* BaseFoodController.swift in Sources */,

@@ -46,13 +46,12 @@ class DiaryController: UIViewController {
         setupDateBar(dBar)
         
         //Setup test models/vms
-        self.testFoodViewModels = testFoods.map({return FoodViewModel.init(food: $0)})
         self.testFoodEntryViewModels = testFoodEntries.map({return FoodEntryViewModel.init(foodEntry: $0)})
         
         setupDailyNutritionView(dnView)
         setupViews()
         
-        tableView.register(FoodCell.self, forCellReuseIdentifier: foodCellId)
+        foodEntriesTableView.register(FoodCell.self, forCellReuseIdentifier: foodEntryCellId)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,17 +64,16 @@ class DiaryController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    let foodCellId = "foodCell"
+    let foodEntryCellId = "foodEntryCellId"
     
     var testFoodEntryViewModels: [FoodEntryViewModel]!
-    var testFoodViewModels: [FoodViewModel]!
     var dateBar: DateBarType!
     var dailyNutritionView: DailyNutritionViewType!
     
     lazy var navBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
     
     lazy var diaryDataController: DiaryDataController = {
-        let controller = DiaryDataController(cellIdentifier: foodCellId, foodEntryViewModels: testFoodEntryViewModels)
+        let controller = DiaryDataController(cellIdentifier: foodEntryCellId, foodEntryViewModels: getFoodEntriesByDate(testFoodEntryViewModels, Date()))
         controller.delegate = self
         return controller
     }()
@@ -102,7 +100,7 @@ class DiaryController: UIViewController {
         return view
     }()
     
-    lazy var tableView: UITableView = {
+    lazy var foodEntriesTableView: UITableView = {
         let tv = UITableView()
         tv.rowHeight = SizeConstants.DiaryController.FoodTableViewRowHeight
         tv.translatesAutoresizingMaskIntoConstraints = false
@@ -134,7 +132,7 @@ extension DiaryController {
         view.addSubview(navBar)
         view.addSubview(dateBar)
         view.addSubview(dailyNutritionView)
-        view.addSubview(tableView)
+        view.addSubview(foodEntriesTableView)
         
         setupConstraints()
     }
@@ -150,10 +148,22 @@ extension DiaryController {
         dailyNutritionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         dailyNutritionView.heightAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.height * 0.25).isActive = true
         
-        tableView.topAnchor.constraint(equalTo: dailyNutritionView.bottomAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        foodEntriesTableView.topAnchor.constraint(equalTo: dailyNutritionView.bottomAnchor).isActive = true
+        foodEntriesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        foodEntriesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        foodEntriesTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+}
+
+//MARK: Helpers
+extension DiaryController {
+    fileprivate func getFoodEntriesByDate(_ foodEntryViewModels: [FoodEntryViewModel], _ date: Date) -> [FoodEntryViewModel] {
+        return foodEntryViewModels.filter({$0.dateAdded.isEqualTo(date: date, by: .day)})
+    }
+    
+    fileprivate func updateFoodEntriesUI(for date: Date) {
+        diaryDataController.updateFoodEntryViewModels(getFoodEntriesByDate(testFoodEntryViewModels, date))
+        foodEntriesTableView.reloadData()
     }
 }
 
@@ -163,12 +173,20 @@ extension DiaryController: DateBarDelegate {
         let currentDateText = dateBar.getDateValue()
         let previousDateText = dateFormatter.getPreviousDateString(from: currentDateText)
         dateBar.setDateValue(text: previousDateText)
+        
+        if let previousDateText = previousDateText, let previousDate = dateFormatter.date(from: previousDateText) {
+            updateFoodEntriesUI(for: previousDate)
+        }
     }
     
     func nextDatePressed() {
         let currentDateText = dateBar.getDateValue()
         let nextDateText = dateFormatter.getNextDateString(from: currentDateText)
         dateBar.setDateValue(text: nextDateText)
+        
+        if let nextDateText = nextDateText, let nextDate = dateFormatter.date(from: nextDateText) {
+            updateFoodEntriesUI(for: nextDate)
+        }
     }
 }
 
