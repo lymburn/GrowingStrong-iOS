@@ -78,6 +78,16 @@ class BaseFoodController: UIViewController {
         servingInfoTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         servingInfoTableView.heightAnchor.constraint(equalToConstant: SizeConstants.screenSize.height * 0.2).isActive = true
     }
+    
+    func getServingAmount() -> Float? {
+        var servingAmount: Float? = nil
+        let cell = servingInfoTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! ServingAmountCell
+        if let servingAmountText = cell.servingAmountValueTextField.text {
+            servingAmount = Float(servingAmountText)
+        }
+        
+        return servingAmount
+    }
 }
 
 //MARK: Helpers

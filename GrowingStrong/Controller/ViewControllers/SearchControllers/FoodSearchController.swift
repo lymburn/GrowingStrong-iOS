@@ -63,6 +63,10 @@ extension FoodSearchController {
 //MARK: Data controller deelgate
 extension FoodSearchController: FoodEntriesDataControllerDelegate {
     func rowSelected(at row: Int) {
-        
+        let addFoodController = AddFoodController()
+        let foodEntryVM = foodEntryViewModels[row]
+        addFoodController.foodEntryViewModel = foodEntryVM
+        addFoodController.selectedServing = foodEntryVM.selectedServing
+        navigationController?.pushViewController(addFoodController, animated: true)
     }
 }

@@ -45,6 +45,8 @@
 		26519273247EC1B500483915 /* BaseOptionsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26519271247EC1B500483915 /* BaseOptionsLauncher.swift */; };
 		26519276247EC5D300483915 /* ActionOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26519275247EC5D300483915 /* ActionOptionsView.swift */; };
 		26519277247EC5D300483915 /* ActionOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26519275247EC5D300483915 /* ActionOptionsView.swift */; };
+		26519279247EEF1A00483915 /* AddFoodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26519278247EEF1A00483915 /* AddFoodController.swift */; };
+		2651927A247EEF1A00483915 /* AddFoodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26519278247EEF1A00483915 /* AddFoodController.swift */; };
 		2658890B246340F300199012 /* DateBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2658890A246340F200199012 /* DateBar.swift */; };
 		265889102463678B00199012 /* DateFormatterExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2658890F2463678B00199012 /* DateFormatterExtensionsTests.swift */; };
 		266BB5A224632156009269B2 /* LearnController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A124632156009269B2 /* LearnController.swift */; };
@@ -131,6 +133,7 @@
 		2651926D247EC0E700483915 /* ActionOptionsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionOptionsLauncher.swift; sourceTree = "<group>"; };
 		26519271247EC1B500483915 /* BaseOptionsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseOptionsLauncher.swift; sourceTree = "<group>"; };
 		26519275247EC5D300483915 /* ActionOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionOptionsView.swift; sourceTree = "<group>"; };
+		26519278247EEF1A00483915 /* AddFoodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodController.swift; sourceTree = "<group>"; };
 		2658890A246340F200199012 /* DateBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBar.swift; sourceTree = "<group>"; };
 		2658890F2463678B00199012 /* DateFormatterExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtensionsTests.swift; sourceTree = "<group>"; };
 		266BB5A124632156009269B2 /* LearnController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnController.swift; sourceTree = "<group>"; };
@@ -274,6 +277,7 @@
 				26E22BB72475238500F466C3 /* ServingSizeOptionsLauncher.swift */,
 				26F7832E2471A9B600B7F0C8 /* BaseFoodController.swift */,
 				263B966D2473014000340ED3 /* EditFoodController.swift */,
+				26519278247EEF1A00483915 /* AddFoodController.swift */,
 			);
 			path = FoodControllers;
 			sourceTree = "<group>";
@@ -540,6 +544,7 @@
 				26519273247EC1B500483915 /* BaseOptionsLauncher.swift in Sources */,
 				2649640B2474752400773638 /* ServingSizeOptionsCell.swift in Sources */,
 				2651926F247EC0E700483915 /* ActionOptionsLauncher.swift in Sources */,
+				2651927A247EEF1A00483915 /* AddFoodController.swift in Sources */,
 				26E31A4324636D7D00C6EE1D /* Extensions.swift in Sources */,
 				26E0B55724639E15002D5A07 /* MeasurementUnitHelper.swift in Sources */,
 				26E0B55624639DDC002D5A07 /* RegisterDataController.swift in Sources */,
@@ -586,6 +591,7 @@
 				263B9671247303A400340ED3 /* BaseFoodDataController.swift in Sources */,
 				26E22BB82475238500F466C3 /* ServingSizeOptionsLauncher.swift in Sources */,
 				26C72D942473099000E86FE8 /* ServingSizeOptionsCell.swift in Sources */,
+				26519279247EEF1A00483915 /* AddFoodController.swift in Sources */,
 				261C8BCA2448A9F3009A1B79 /* CreateAccountCell.swift in Sources */,
 				262F665A24623FBA00B24F51 /* MainTabBarController.swift in Sources */,
 				2651926E247EC0E700483915 /* ActionOptionsLauncher.swift in Sources */,

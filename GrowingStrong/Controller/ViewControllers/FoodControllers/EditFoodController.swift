@@ -49,19 +49,9 @@ class EditFoodController: BaseFoodController {
 }
 
 extension EditFoodController {
-    fileprivate func getServingAmount() -> Float? {
-        var servingAmount: Float? = nil
-        let cell = servingInfoTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! ServingAmountCell
-        if let servingAmountText = cell.servingAmountValueTextField.text {
-            servingAmount = Float(servingAmountText)
-        }
-        
-        return servingAmount
-    }
-    
     fileprivate func saveFoodInfo() {
         //TO DO: implement persistence for food view model
-        let servingAmount = getServingAmount()
+        let servingAmount = super.getServingAmount()
         
         if selectedServing == nil || servingAmount == nil {
             print("Selected serving option or serving amount is nil")

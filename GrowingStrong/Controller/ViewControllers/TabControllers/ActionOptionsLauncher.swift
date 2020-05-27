@@ -62,6 +62,7 @@ class ActionOptionsLauncher: BaseOptionsLauncher {
 
 extension ActionOptionsLauncher: ActionOptionsViewDelegate {
     func addFoodButtonPressed() {
+        dismissOptions()
         delegate?.addFoodButtonPressed()
     }
 }
