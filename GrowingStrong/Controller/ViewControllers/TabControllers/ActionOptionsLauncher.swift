@@ -8,13 +8,20 @@
 
 import UIKit
 
+protocol ActionOptionsLauncherDelegate: class {
+    func addFoodButtonPressed()
+}
+
 class ActionOptionsLauncher: BaseOptionsLauncher {
     override init() {
         super.init()
     }
     
-    let actionOptionsView: ActionOptionsView = {
+    weak var delegate: ActionOptionsLauncherDelegate?
+    
+    lazy var actionOptionsView: ActionOptionsView = {
         let view = ActionOptionsView()
+        view.delegate = self
         return view
     }()
     
@@ -50,5 +57,11 @@ class ActionOptionsLauncher: BaseOptionsLauncher {
                  self.actionOptionsView.frame = CGRect(x: 0, y: window.frame.height, width: self.actionOptionsView.frame.width, height: self.actionOptionsView.frame.height)
              }
          })
+    }
+}
+
+extension ActionOptionsLauncher: ActionOptionsViewDelegate {
+    func addFoodButtonPressed() {
+        delegate?.addFoodButtonPressed()
     }
 }

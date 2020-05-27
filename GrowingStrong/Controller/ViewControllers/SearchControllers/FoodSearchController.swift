@@ -13,20 +13,11 @@ class FoodSearchController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        setupFoodEntryViewModels(testFoodEntries.map({return FoodEntryViewModel.init(foodEntry: $0)}))
-//        foodEntriesTableView.register(FoodCell.self, forCellReuseIdentifier: foodEntryCellId)
-//
-//        setupViews()
-        
-        //navigationController?.pushViewController(UIViewController(), animated: true)
-        //servingSizeOptionsLauncher.launchOptions()
+        setupFoodEntryViewModels(testFoodEntries.map({return FoodEntryViewModel.init(foodEntry: $0)}))
+        foodEntriesTableView.register(FoodCell.self, forCellReuseIdentifier: foodEntryCellId)
+
+        setupViews()
     }
-    
-    lazy var servingSizeOptionsLauncher: ServingSizeOptionsLauncher = {
-        let launcher = ServingSizeOptionsLauncher()
-        launcher.servingOptions = []
-        return launcher
-    }()
     
     var foodEntryViewModels: [FoodEntryViewModel]!
     let foodEntryCellId = "foodEntryCellId"

@@ -199,7 +199,6 @@
 			isa = PBXGroup;
 			children = (
 				26519274247EC5BC00483915 /* ActionOptionsView */,
-				26793176247D8F5B00413FAD /* CustomTableViews */,
 				263B96732473044E00340ED3 /* BaseFoodViews */,
 				266BB5A724633A42009269B2 /* DiaryViews */,
 				26475C932442CACF004A5C71 /* RegistrationViews */,
@@ -386,13 +385,6 @@
 			name = Controllers;
 			path = GrowingStrongTests/Controllers;
 			sourceTree = SOURCE_ROOT;
-		};
-		26793176247D8F5B00413FAD /* CustomTableViews */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CustomTableViews;
-			sourceTree = "<group>";
 		};
 		269E378A242D05EA0070B110 = {
 			isa = PBXGroup;

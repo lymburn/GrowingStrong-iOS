@@ -17,8 +17,9 @@ struct SizeConstants {
     
     static let servingSizeOptionsTableViewRowHeight: CGFloat = SizeConstants.screenSize.height * 0.05
 
-    
     static let actionButtonSize = CGSize(width: 64, height: 64)
+    
+    static let actionOptionSize = CGSize(width: 50, height: 50)
 }
 
 struct ImageNames {
@@ -34,5 +35,9 @@ struct ImageNames {
     struct UtilityButton {
         static let rightArrow = "right_arrow"
         static let leftArrow = "left_arrow"
+    }
+    
+    struct ActionOption {
+        static let foodIcon = "food_icon"
     }
 }

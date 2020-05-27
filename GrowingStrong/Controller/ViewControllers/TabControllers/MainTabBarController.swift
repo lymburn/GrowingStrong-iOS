@@ -33,6 +33,7 @@ class MainTabBarController: UITabBarController {
     
     lazy var actionOptionsLauncher: ActionOptionsLauncher = {
         let launcher = ActionOptionsLauncher()
+        launcher.delegate = self
         return launcher
     }()
     
@@ -78,5 +79,12 @@ extension MainTabBarController {
         actionButton.widthAnchor.constraint(equalToConstant: SizeConstants.actionButtonSize.width).isActive = true
         actionButton.heightAnchor.constraint(equalToConstant: SizeConstants.actionButtonSize.height).isActive = true
         actionButton.bottomAnchor.constraint(equalTo: tabBar.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+}
+
+extension MainTabBarController: ActionOptionsLauncherDelegate {
+    func addFoodButtonPressed() {
+        let nav = UINavigationController(rootViewController: FoodSearchController())
+        present(nav, animated: true, completion: nil)
     }
 }
