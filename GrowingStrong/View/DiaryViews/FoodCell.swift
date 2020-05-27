@@ -63,7 +63,7 @@ extension FoodCell {
     }
     
     fileprivate func setupConstraints() {
-        let height = SizeConstants.DiaryController.FoodTableViewRowHeight
+        let height = SizeConstants.foodEntriesTableViewRowHeight
         
         foodIcon.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         foodIcon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true

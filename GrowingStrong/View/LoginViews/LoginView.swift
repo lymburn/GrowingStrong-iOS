@@ -103,12 +103,12 @@ extension LoginView {
     }
     
     fileprivate func setupConstraints() {
-        logo.topAnchor.constraint(equalTo: topAnchor, constant: SizeConstants.ScreenSize.height * 0.1).isActive = true
+        logo.topAnchor.constraint(equalTo: topAnchor, constant: SizeConstants.screenSize.height * 0.1).isActive = true
         logo.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        logo.heightAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.height * 0.15).isActive = true
-        logo.widthAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.height * 0.15).isActive = true
+        logo.heightAnchor.constraint(equalToConstant: SizeConstants.screenSize.height * 0.15).isActive = true
+        logo.widthAnchor.constraint(equalToConstant: SizeConstants.screenSize.height * 0.15).isActive = true
         
-        emailTextField.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: SizeConstants.ScreenSize.height * 0.2).isActive = true
+        emailTextField.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: SizeConstants.screenSize.height * 0.2).isActive = true
         emailTextField.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
         emailTextField.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
         emailTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
@@ -124,11 +124,11 @@ extension LoginView {
         
         loginButton.topAnchor.constraint(equalTo: forgetPasswordButton.bottomAnchor, constant: 50).isActive = true
         loginButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        loginButton.widthAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.width * 0.5).isActive = true
+        loginButton.widthAnchor.constraint(equalToConstant: SizeConstants.screenSize.width * 0.5).isActive = true
         
         registerButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 30).isActive = true
         registerButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        registerButton.widthAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.width * 0.5).isActive = true
+        registerButton.widthAnchor.constraint(equalToConstant: SizeConstants.screenSize.width * 0.5).isActive = true
     }
 }
 

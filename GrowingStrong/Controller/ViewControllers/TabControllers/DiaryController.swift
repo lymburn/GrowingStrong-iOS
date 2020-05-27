@@ -69,8 +69,8 @@ class DiaryController: UIViewController {
     
     lazy var navBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
     
-    lazy var diaryDataController: DiaryDataController = {
-        let controller = DiaryDataController(cellIdentifier: foodEntryCellId, foodEntryViewModels: getFoodEntriesByDate(testFoodEntryViewModels, Date()))
+    lazy var foodEntriesDataController: FoodEntriesDataController = {
+        let controller = FoodEntriesDataController(cellIdentifier: foodEntryCellId, foodEntryViewModels: getFoodEntriesByDate(testFoodEntryViewModels, Date()))
         controller.delegate = self
         return controller
     }()
@@ -99,11 +99,11 @@ class DiaryController: UIViewController {
     
     lazy var foodEntriesTableView: UITableView = {
         let tv = UITableView()
-        tv.rowHeight = SizeConstants.DiaryController.FoodTableViewRowHeight
+        tv.rowHeight = SizeConstants.foodEntriesTableViewRowHeight
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.tableFooterView = UIView()
-        tv.delegate = diaryDataController
-        tv.dataSource = diaryDataController
+        tv.delegate = foodEntriesDataController
+        tv.dataSource = foodEntriesDataController
         return tv
     }()
     
@@ -147,7 +147,7 @@ extension DiaryController {
         dailyNutritionView.topAnchor.constraint(equalTo: dateBar.bottomAnchor).isActive = true
         dailyNutritionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         dailyNutritionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        dailyNutritionView.heightAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.height * 0.25).isActive = true
+        dailyNutritionView.heightAnchor.constraint(equalToConstant: SizeConstants.screenSize.height * 0.25).isActive = true
         
         foodEntriesTableView.topAnchor.constraint(equalTo: dailyNutritionView.bottomAnchor).isActive = true
         foodEntriesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -163,7 +163,7 @@ extension DiaryController {
     }
     
     fileprivate func updateFoodEntriesUI(for date: Date) {
-        diaryDataController.updateFoodEntryViewModels(getFoodEntriesByDate(testFoodEntryViewModels, date))
+        foodEntriesDataController.updateFoodEntryViewModels(getFoodEntriesByDate(testFoodEntryViewModels, date))
         foodEntriesTableView.reloadData()
     }
 }
@@ -192,7 +192,7 @@ extension DiaryController: DateBarDelegate {
 }
 
 //MARK: Data controller delegate
-extension DiaryController: DiaryDataControllerDelegate {
+extension DiaryController: FoodEntriesDataControllerDelegate {
     func rowSelected(at row: Int) {
         let editFoodController = EditFoodController()
         let foodEntryVM = testFoodEntryViewModels[row]

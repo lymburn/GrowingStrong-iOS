@@ -12,7 +12,7 @@ protocol ServingSizeOptionsLauncherDelegate: class {
     func didSelectOption(option: Serving)
 }
 
-class ServingSizeOptionsLauncher: NSObject {
+class ServingSizeOptionsLauncher: BaseOptionsLauncher {
     override init() {
         super.init()
         
@@ -26,7 +26,7 @@ class ServingSizeOptionsLauncher: NSObject {
     
     lazy var servingSizeOptionsTableView: UITableView = {
         let tv = UITableView()
-        tv.rowHeight = SizeConstants.ServingSizeOptionsLauncher.ServingSizeOptionsTableViewRowHeight
+        tv.rowHeight = SizeConstants.servingSizeOptionsTableViewRowHeight
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.tableFooterView = UIView()
         tv.delegate = self
@@ -34,19 +34,14 @@ class ServingSizeOptionsLauncher: NSObject {
         return tv
     }()
     
-    let blackView = UIView()
+    override func launchOptions(withDim: Bool) {
+        super.launchOptions(withDim: withDim)
+        displayServingSizeOptionsTableView()
+    }
     
-    func launchOptions() {
-        if let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first {
-            blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
-            
-            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissOptions)))
-            
-            window.addSubview(blackView)
-            blackView.frame = window.frame
-            blackView.alpha = 0
-            
-            let height: CGFloat = SizeConstants.ScreenSize.height * 0.3
+    private func displayServingSizeOptionsTableView() {
+        if let window = window {
+            let height: CGFloat = SizeConstants.screenSize.height * 0.3
             let y = window.frame.height - height
             
             window.addSubview(servingSizeOptionsTableView)
@@ -54,21 +49,23 @@ class ServingSizeOptionsLauncher: NSObject {
             servingSizeOptionsTableView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
             
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.blackView.alpha = 1
                 self.servingSizeOptionsTableView.frame = CGRect(x: 0, y: y, width: self.servingSizeOptionsTableView.frame.width, height: self.servingSizeOptionsTableView.frame.height)
                 
             }, completion: nil)
         }
     }
     
-    @objc func dismissOptions() {
+    private func dismissServingSizeOptionsTableView() {
         UIView.animate(withDuration: 0.5, animations: {
-            self.blackView.alpha = 0
-            
-            if let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first {
-                self.servingSizeOptionsTableView.frame = CGRect(x: 0, y: window.frame.height, width: self.servingSizeOptionsTableView.frame.width, height: self.servingSizeOptionsTableView.frame.height)
-            }
-        })
+             if let window = self.window {
+                 self.servingSizeOptionsTableView.frame = CGRect(x: 0, y: window.frame.height, width: self.servingSizeOptionsTableView.frame.width, height: self.servingSizeOptionsTableView.frame.height)
+             }
+         })
+    }
+
+    @objc override func dismissOptions() {
+        super.dismissOptions()
+        dismissServingSizeOptionsTableView()
     }
 }
 

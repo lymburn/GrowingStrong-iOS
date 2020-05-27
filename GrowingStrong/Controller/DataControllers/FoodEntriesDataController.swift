@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol DiaryDataControllerDelegate: class {
+protocol FoodEntriesDataControllerDelegate: class {
     func rowSelected(at row: Int)
 }
 
 class FoodEntriesDataController: NSObject, UITableViewDataSource, UITableViewDelegate {
     var cellIdentifier: String!
     var foodEntryViewModels: [FoodEntryViewModel]!
-    weak var delegate: DiaryDataControllerDelegate?
+    weak var delegate: FoodEntriesDataControllerDelegate?
     
     init(cellIdentifier: String, foodEntryViewModels: [FoodEntryViewModel]) {
         self.cellIdentifier = cellIdentifier

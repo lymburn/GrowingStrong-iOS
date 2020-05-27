@@ -26,9 +26,9 @@ class EditFoodController: BaseFoodController {
         super.setupConstraints()
         
         saveButton.topAnchor.constraint(equalTo: servingInfoTableView.bottomAnchor).isActive = true
-        saveButton.heightAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.height * 0.05).isActive = true
-        saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: SizeConstants.ScreenSize.width * 0.2).isActive = true
-        saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -SizeConstants.ScreenSize.width * 0.2).isActive = true
+        saveButton.heightAnchor.constraint(equalToConstant: SizeConstants.screenSize.height * 0.05).isActive = true
+        saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: SizeConstants.screenSize.width * 0.2).isActive = true
+        saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -SizeConstants.screenSize.width * 0.2).isActive = true
     }
     
     lazy var saveButton: UIButton = {
