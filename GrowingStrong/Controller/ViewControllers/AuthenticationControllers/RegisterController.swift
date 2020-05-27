@@ -59,7 +59,7 @@ class RegisterController: UIViewController {
     
     lazy var dateFormatter: DateFormatter = {
         let df = DateFormatter()
-        df.dateFormat = "MMM dd, yyyy"
+        df.dateFormat = DateFormatConstants.shortMonthDefault
         return df
     }()
 }

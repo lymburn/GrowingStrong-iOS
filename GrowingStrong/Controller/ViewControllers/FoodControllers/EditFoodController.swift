@@ -11,9 +11,15 @@ import UIKit
 class EditFoodController: BaseFoodController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.tabBar.isHidden = true
         
         setupViews()
         setupConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let tabBarController = self.tabBarController as? MainTabBarController
+        tabBarController?.hideTabBar()
     }
     
     override func setupViews() {
@@ -26,9 +32,9 @@ class EditFoodController: BaseFoodController {
         super.setupConstraints()
         
         saveButton.topAnchor.constraint(equalTo: servingInfoTableView.bottomAnchor).isActive = true
-        saveButton.heightAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.height * 0.05).isActive = true
-        saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: SizeConstants.ScreenSize.width * 0.2).isActive = true
-        saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -SizeConstants.ScreenSize.width * 0.2).isActive = true
+        saveButton.heightAnchor.constraint(equalToConstant: SizeConstants.screenSize.height * 0.05).isActive = true
+        saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: SizeConstants.screenSize.width * 0.2).isActive = true
+        saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -SizeConstants.screenSize.width * 0.2).isActive = true
     }
     
     lazy var saveButton: UIButton = {
@@ -43,19 +49,9 @@ class EditFoodController: BaseFoodController {
 }
 
 extension EditFoodController {
-    fileprivate func getServingAmount() -> Float? {
-        var servingAmount: Float? = nil
-        let cell = servingInfoTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! ServingAmountCell
-        if let servingAmountText = cell.servingAmountValueTextField.text {
-            servingAmount = Float(servingAmountText)
-        }
-        
-        return servingAmount
-    }
-    
     fileprivate func saveFoodInfo() {
         //TO DO: implement persistence for food view model
-        let servingAmount = getServingAmount()
+        let servingAmount = super.getServingAmount()
         
         if selectedServing == nil || servingAmount == nil {
             print("Selected serving option or serving amount is nil")

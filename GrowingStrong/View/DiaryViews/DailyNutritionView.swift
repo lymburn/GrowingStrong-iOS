@@ -111,19 +111,19 @@ extension DailyNutritionView {
     fileprivate func setupConstraints() {
         caloriesLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
         caloriesLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
-        caloriesLabel.widthAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.width * 0.6).isActive = true
+        caloriesLabel.widthAnchor.constraint(equalToConstant: SizeConstants.screenSize.width * 0.6).isActive = true
         
         carbsLabel.topAnchor.constraint(equalTo: caloriesLabel.bottomAnchor, constant: 8).isActive = true
         carbsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
-        carbsLabel.widthAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.width * 0.6).isActive = true
+        carbsLabel.widthAnchor.constraint(equalToConstant: SizeConstants.screenSize.width * 0.6).isActive = true
         
         fatLabel.topAnchor.constraint(equalTo: carbsLabel.bottomAnchor, constant: 8).isActive = true
         fatLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
-        fatLabel.widthAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.width * 0.6).isActive = true
+        fatLabel.widthAnchor.constraint(equalToConstant: SizeConstants.screenSize.width * 0.6).isActive = true
         
         proteinLabel.topAnchor.constraint(equalTo: fatLabel.bottomAnchor, constant: 8).isActive = true
         proteinLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
-        proteinLabel.widthAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.width * 0.6).isActive = true
+        proteinLabel.widthAnchor.constraint(equalToConstant: SizeConstants.screenSize.width * 0.6).isActive = true
         
         caloriesValueLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
         caloriesValueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true

@@ -14,29 +14,77 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         
         setupControllers()
+        setupViews()
     }
     
     lazy var diaryController = UINavigationController(rootViewController: DiaryController())
     lazy var learnController = LearnController()
-    lazy var actionController = ActionController()
+    lazy var dummyController = UIViewController()
     lazy var trendsController = TrendsController()
     lazy var settingsController = SettingsController()
     
-    private func setupControllers() {
-        diaryController.tabBarItem.image = UIImage(named: ImageNames.TabBar.diaryTab)
-        learnController.tabBarItem.image = UIImage(named: ImageNames.TabBar.learnTab)
-        actionController.tabBarItem.image = UIImage(named: ImageNames.TabBar.addIcon)?.withRenderingMode(.alwaysOriginal)
-        trendsController.tabBarItem.image = UIImage(named: ImageNames.TabBar.trendsTab)
-        settingsController.tabBarItem.image = UIImage(named: ImageNames.TabBar.settingsTab)
+    let actionButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: ImageNameConstants.actionButton), for: .normal)
+        button.addTarget(self, action: #selector(launchActionOptions), for: .touchDown)
+        return button
+    }()
+    
+    lazy var actionOptionsLauncher: ActionOptionsLauncher = {
+        let launcher = ActionOptionsLauncher()
+        launcher.delegate = self
+        return launcher
+    }()
+    
+    @objc func launchActionOptions() {
+        actionOptionsLauncher.launchOptions(withDim: true)
+    }
+    
+    func hideTabBar() {
+        self.tabBar.isHidden = true
+        self.actionButton.isHidden = true
+    }
+    
+    func showTabBar() {
+        self.tabBar.isHidden = false
+        self.actionButton.isHidden = false
+    }
+}
+
+//MARK: Setup
+extension MainTabBarController {
+    fileprivate func setupControllers() {
+        diaryController.tabBarItem.image = UIImage(named: ImageNameConstants.TabBar.diaryTab)
+        learnController.tabBarItem.image = UIImage(named: ImageNameConstants.TabBar.learnTab)
+        trendsController.tabBarItem.image = UIImage(named: ImageNameConstants.TabBar.trendsTab)
+        settingsController.tabBarItem.image = UIImage(named: ImageNameConstants.TabBar.settingsTab)
         
         diaryController.tabBarItem.title = "Diary"
         learnController.tabBarItem.title = "Learn"
-        actionController.tabBarItem.title = nil
         trendsController.tabBarItem.title = "Trends"
         settingsController.tabBarItem.title = "Settings"
         
-        actionController.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+        viewControllers = [diaryController, learnController, dummyController, trendsController, settingsController]
+    }
+    
+    fileprivate func setupViews() {
+        view.addSubview(actionButton)
         
-        viewControllers = [diaryController, learnController, actionController, trendsController, settingsController]
+        setupConstraints()
+    }
+    
+    fileprivate func setupConstraints() {
+        actionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        actionButton.widthAnchor.constraint(equalToConstant: SizeConstants.actionButtonSize.width).isActive = true
+        actionButton.heightAnchor.constraint(equalToConstant: SizeConstants.actionButtonSize.height).isActive = true
+        actionButton.bottomAnchor.constraint(equalTo: tabBar.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+}
+
+extension MainTabBarController: ActionOptionsLauncherDelegate {
+    func addFoodButtonPressed() {
+        let nav = UINavigationController(rootViewController: FoodSearchController())
+        present(nav, animated: true, completion: nil)
     }
 }

@@ -55,7 +55,7 @@ extension CreateAccountCell {
     }
     
     fileprivate func setupConstraints() {
-        emailTextField.topAnchor.constraint(equalTo: topAnchor, constant: SizeConstants.ScreenSize.height * 0.3).isActive = true
+        emailTextField.topAnchor.constraint(equalTo: topAnchor, constant: SizeConstants.screenSize.height * 0.3).isActive = true
         emailTextField.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
         emailTextField.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
         emailTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true

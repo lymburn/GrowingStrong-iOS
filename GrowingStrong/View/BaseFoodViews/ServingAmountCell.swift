@@ -50,7 +50,7 @@ extension ServingAmountCell {
         servingAmountTextLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
         servingAmountTextLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         servingAmountTextLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
-        servingAmountTextLabel.widthAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.width * 0.4).isActive = true
+        servingAmountTextLabel.widthAnchor.constraint(equalToConstant: SizeConstants.screenSize.width * 0.4).isActive = true
         
         servingAmountValueTextField.topAnchor.constraint(equalTo: topAnchor).isActive = true
         servingAmountValueTextField.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true

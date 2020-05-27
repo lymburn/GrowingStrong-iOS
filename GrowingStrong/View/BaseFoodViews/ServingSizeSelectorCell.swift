@@ -48,7 +48,7 @@ extension ServingSizeSelectorCell {
         servingSizeTextLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
         servingSizeTextLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         servingSizeTextLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
-        servingSizeTextLabel.widthAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.width * 0.4).isActive = true
+        servingSizeTextLabel.widthAnchor.constraint(equalToConstant: SizeConstants.screenSize.width * 0.4).isActive = true
         
         servingSizeValueLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
         servingSizeValueLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true

@@ -53,7 +53,7 @@ class BaseFoodController: UIViewController {
     
     lazy var servingInfoTableView: UITableView = {
         let tv = UITableView()
-        tv.rowHeight = SizeConstants.FoodController.ServingInfoTableViewRowHeight
+        tv.rowHeight = SizeConstants.servingInfoTableViewRowHeight
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.tableFooterView = UIView()
         tv.delegate = baseFoodDataController
@@ -71,12 +71,22 @@ class BaseFoodController: UIViewController {
         macroNutrientsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         macroNutrientsView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         macroNutrientsView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        macroNutrientsView.heightAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.height * 0.3).isActive = true
+        macroNutrientsView.heightAnchor.constraint(equalToConstant: SizeConstants.screenSize.height * 0.3).isActive = true
         
         servingInfoTableView.topAnchor.constraint(equalTo: macroNutrientsView.bottomAnchor).isActive = true
         servingInfoTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         servingInfoTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        servingInfoTableView.heightAnchor.constraint(equalToConstant: SizeConstants.ScreenSize.height * 0.2).isActive = true
+        servingInfoTableView.heightAnchor.constraint(equalToConstant: SizeConstants.screenSize.height * 0.2).isActive = true
+    }
+    
+    func getServingAmount() -> Float? {
+        var servingAmount: Float? = nil
+        let cell = servingInfoTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! ServingAmountCell
+        if let servingAmountText = cell.servingAmountValueTextField.text {
+            servingAmount = Float(servingAmountText)
+        }
+        
+        return servingAmount
     }
 }
 
@@ -98,7 +108,7 @@ extension BaseFoodController {
 //MARK: BaseFoodDataController delegate
 extension BaseFoodController: BaseFoodDataControllerDelegate {
     func servingSizeSelectorCellSelected() {
-        servingSizeOptionsLauncher.launchOptions()
+        servingSizeOptionsLauncher.launchOptions(withDim: true)
     }
     
     func servingAmountCellSelected() {
