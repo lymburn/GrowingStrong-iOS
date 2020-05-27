@@ -38,7 +38,7 @@ class DateBar: UIView {
     
     let previousMonth: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: ImageNames.UtilityButton.leftArrow), for: .normal)
+        button.setImage(UIImage(named: ImageNameConstants.UtilityButton.leftArrow), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(previousDatePressed), for: .touchDown)
         return button
@@ -46,7 +46,7 @@ class DateBar: UIView {
     
     let nextMonth: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: ImageNames.UtilityButton.rightArrow), for: .normal)
+        button.setImage(UIImage(named: ImageNameConstants.UtilityButton.rightArrow), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(nextDatePressed), for: .touchDown)
         return button

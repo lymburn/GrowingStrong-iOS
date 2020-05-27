@@ -24,7 +24,7 @@ class ActionOptionsView: UIView {
     lazy var addFoodButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: ImageNames.ActionOption.foodIcon), for: .normal)
+        button.setImage(UIImage(named: ImageNameConstants.ActionOption.foodIcon), for: .normal)
         button.addTarget(self, action: #selector(addFoodButtonPressed), for: .touchDown)
         return button
     }()

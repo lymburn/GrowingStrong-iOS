@@ -16,7 +16,7 @@ class FoodCell: UITableViewCell {
     }
     
     let foodIcon: UIImageView = {
-        let icon = UIImageView(image: UIImage(named: ImageNames.ActionOption.foodIcon))
+        let icon = UIImageView(image: UIImage(named: ImageNameConstants.ActionOption.foodIcon))
         icon.translatesAutoresizingMaskIntoConstraints = false
         return icon
     }()

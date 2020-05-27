@@ -22,7 +22,7 @@ struct SizeConstants {
     static let actionOptionSize = CGSize(width: 50, height: 50)
 }
 
-struct ImageNames {
+struct ImageNameConstants {
     struct TabBar {
         static let diaryTab = "diary_icon"
         static let learnTab = "learn_icon"
@@ -40,4 +40,9 @@ struct ImageNames {
     struct ActionOption {
         static let foodIcon = "food_icon"
     }
+}
+
+struct DateFormatConstants {
+    static let longMonthDefault = "MMMM dd, yyyy"
+    static let shortMonthDefault = "MMM dd, yyyy"
 }

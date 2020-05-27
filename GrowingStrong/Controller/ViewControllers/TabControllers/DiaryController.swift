@@ -111,7 +111,7 @@ class DiaryController: UIViewController {
     
     lazy var dateFormatter: DateFormatter = {
         let df = DateFormatter()
-        df.dateFormat = "MMMM dd, yyyy"
+        df.dateFormat = DateFormatConstants.longMonthDefault
         return df
     }()
 }

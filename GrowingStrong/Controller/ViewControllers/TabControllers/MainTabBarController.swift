@@ -26,7 +26,7 @@ class MainTabBarController: UITabBarController {
     let actionButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: ImageNames.actionButton), for: .normal)
+        button.setImage(UIImage(named: ImageNameConstants.actionButton), for: .normal)
         button.addTarget(self, action: #selector(launchActionOptions), for: .touchDown)
         return button
     }()
@@ -55,10 +55,10 @@ class MainTabBarController: UITabBarController {
 //MARK: Setup
 extension MainTabBarController {
     fileprivate func setupControllers() {
-        diaryController.tabBarItem.image = UIImage(named: ImageNames.TabBar.diaryTab)
-        learnController.tabBarItem.image = UIImage(named: ImageNames.TabBar.learnTab)
-        trendsController.tabBarItem.image = UIImage(named: ImageNames.TabBar.trendsTab)
-        settingsController.tabBarItem.image = UIImage(named: ImageNames.TabBar.settingsTab)
+        diaryController.tabBarItem.image = UIImage(named: ImageNameConstants.TabBar.diaryTab)
+        learnController.tabBarItem.image = UIImage(named: ImageNameConstants.TabBar.learnTab)
+        trendsController.tabBarItem.image = UIImage(named: ImageNameConstants.TabBar.trendsTab)
+        settingsController.tabBarItem.image = UIImage(named: ImageNameConstants.TabBar.settingsTab)
         
         diaryController.tabBarItem.title = "Diary"
         learnController.tabBarItem.title = "Learn"
