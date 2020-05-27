@@ -39,6 +39,16 @@ class MainTabBarController: UITabBarController {
     @objc func launchActionOptions() {
         actionOptionsLauncher.launchOptions(withDim: true)
     }
+    
+    func hideTabBar() {
+        self.tabBar.isHidden = true
+        self.actionButton.isHidden = true
+    }
+    
+    func showTabBar() {
+        self.tabBar.isHidden = false
+        self.actionButton.isHidden = false
+    }
 }
 
 //MARK: Setup

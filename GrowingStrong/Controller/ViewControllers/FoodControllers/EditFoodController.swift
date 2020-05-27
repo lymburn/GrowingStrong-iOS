@@ -11,9 +11,15 @@ import UIKit
 class EditFoodController: BaseFoodController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.tabBar.isHidden = true
         
         setupViews()
         setupConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let tabBarController = self.tabBarController as? MainTabBarController
+        tabBarController?.hideTabBar()
     }
     
     override func setupViews() {

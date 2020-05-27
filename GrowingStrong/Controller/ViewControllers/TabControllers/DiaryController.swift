@@ -39,7 +39,6 @@ let testFoodEntries: [FoodEntry] = [
 ]
 
 class DiaryController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,6 +53,9 @@ class DiaryController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        let tabBarController = self.tabBarController as? MainTabBarController
+        tabBarController?.showTabBar()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
