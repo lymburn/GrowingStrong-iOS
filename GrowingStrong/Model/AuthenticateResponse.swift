@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  AuthenticateResponse.swift
 //  GrowingStrong
 //
 //  Created by Eugene Lu on 2020-06-08.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct User: Codable {
-    let id: Int
-    let emailAddress: String
+struct AuthenticateResponse: Codable {
+    let token: String
+    let user: User
 }

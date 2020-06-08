@@ -16,7 +16,7 @@ class LoginController: UIViewController {
         setupLoginView(lView)
         setupUserNetworkManager(userNetworkManager: UserNetworkManager())
         setupViews()
-        
+//        
 //        userNetworkManager.getUser(id: 10) { user, error in
 //            if let error = error {
 //                print(error)
@@ -24,6 +24,17 @@ class LoginController: UIViewController {
 //
 //            if let user = user {
 //                print(user)
+//            }
+//        }
+        
+//        let params = ["EmailAddress": "test@gmail.com", "Password": "password1"]
+//        userNetworkManager.authenticateUser(userAuthenticationParameters: params) {authenticateResponse, error in
+//            if let error = error {
+//                print(error)
+//            }
+//
+//            if let response = authenticateResponse {
+//                print(response)
 //            }
 //        }
     }

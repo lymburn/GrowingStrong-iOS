@@ -15,6 +15,7 @@ enum NetworkEnvironment {
 
 public enum UserApi {
     case user (id: Int)
+    case authenticate (bodyParameters: Parameters)
 }
 
 extension UserApi : EndPointType {
@@ -34,26 +35,30 @@ extension UserApi : EndPointType {
         switch self {
         case .user(let id):
             return "\(id)"
+        case .authenticate ( _):
+            return "authenticate"
         }
     }
     
     var httpMethod: HTTPMethod {
         switch self {
-        case .user(let id):
+        case .user( _):
             return .get
+        case .authenticate ( _):
+            return .post
         }
     }
     
     var task: HTTPTask {
         switch self {
-        case .user(let id):
+        case .user( _):
             return .request
+        case .authenticate (let bodyParameters):
+            return .requestParameters(bodyParameters: bodyParameters, urlParameters: nil)
         }
     }
     
     var headers: HTTPHeaders? {
         return nil
     }
-    
-    
 }

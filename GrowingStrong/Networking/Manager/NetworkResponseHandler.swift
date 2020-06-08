@@ -1,12 +1,17 @@
 //
-//  NetworkManager.swift
+//  NetworkResponseHandler.swift
 //  GrowingStrong
 //
-//  Created by Eugene Lu on 2020-06-07.
+//  Created by Eugene Lu on 2020-06-08.
 //  Copyright © 2020 Eugene Lu. All rights reserved.
 //
 
 import Foundation
+
+enum Result<String> {
+    case success
+    case failure(String)
+}
 
 enum NetworkResponse:String {
     case success
@@ -18,17 +23,8 @@ enum NetworkResponse:String {
     case unableToDecode = "We could not decode the response."
 }
 
-enum Result<String> {
-    case success
-    case failure(String)
-}
-
-protocol NetworkManagerType {
-    func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String>
-}
-
-class NetworkManager: NetworkManagerType {
-    func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String> {
+struct NetworkResponseHandler {
+    static func handleResponse(_ response: HTTPURLResponse) -> Result<String> {
         switch response.statusCode {
         case 200...299: return .success
         case 401...500: return .failure(NetworkResponse.authenticationError.rawValue)

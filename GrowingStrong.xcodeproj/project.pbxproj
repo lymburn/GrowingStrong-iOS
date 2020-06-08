@@ -27,8 +27,6 @@
 		26087D60248DE308009B4548 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26087D5E248DE308009B4548 /* Router.swift */; };
 		26087D62248DE8AD009B4548 /* UserEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26087D61248DE8AD009B4548 /* UserEndPoint.swift */; };
 		26087D63248DE8AD009B4548 /* UserEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26087D61248DE8AD009B4548 /* UserEndPoint.swift */; };
-		26087D65248DEA78009B4548 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26087D64248DEA78009B4548 /* NetworkManager.swift */; };
-		26087D66248DEA78009B4548 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26087D64248DEA78009B4548 /* NetworkManager.swift */; };
 		26087D68248DF85A009B4548 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26087D67248DF85A009B4548 /* User.swift */; };
 		26087D69248DF85A009B4548 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26087D67248DF85A009B4548 /* User.swift */; };
 		26087D6B248DFAE2009B4548 /* UserNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26087D6A248DFAE2009B4548 /* UserNetworkManager.swift */; };
@@ -89,6 +87,8 @@
 		26A8D4C5247530F8000BC5C6 /* ServingSizeExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A8D4C4247530F8000BC5C6 /* ServingSizeExtensionsTests.swift */; };
 		26B2537E247C6DB9000CE403 /* FoodEntryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B2537D247C6DB9000CE403 /* FoodEntryViewModelTests.swift */; };
 		26C72D942473099000E86FE8 /* ServingSizeOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */; };
+		26E020AF248EB76000DBBC5C /* AuthenticateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020AE248EB76000DBBC5C /* AuthenticateResponse.swift */; };
+		26E020B1248ECD8700DBBC5C /* NetworkResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020B0248ECD8700DBBC5C /* NetworkResponseHandler.swift */; };
 		26E0B55124639872002D5A07 /* ViewTypealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E0B55024639872002D5A07 /* ViewTypealias.swift */; };
 		26E0B55224639885002D5A07 /* ViewTypealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E0B55024639872002D5A07 /* ViewTypealias.swift */; };
 		26E0B55324639B8D002D5A07 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C982442D00B004A5C71 /* Constants.swift */; };
@@ -142,7 +142,6 @@
 		26087D5B248DDD79009B4548 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		26087D5E248DE308009B4548 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		26087D61248DE8AD009B4548 /* UserEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEndPoint.swift; sourceTree = "<group>"; };
-		26087D64248DEA78009B4548 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		26087D67248DF85A009B4548 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		26087D6A248DFAE2009B4548 /* UserNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkManager.swift; sourceTree = "<group>"; };
 		26119AEF247C5718009FDD79 /* FoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntry.swift; sourceTree = "<group>"; };
@@ -188,6 +187,8 @@
 		26A8D4C4247530F8000BC5C6 /* ServingSizeExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeExtensionsTests.swift; sourceTree = "<group>"; };
 		26B2537D247C6DB9000CE403 /* FoodEntryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryViewModelTests.swift; sourceTree = "<group>"; };
 		26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeOptionsCell.swift; sourceTree = "<group>"; };
+		26E020AE248EB76000DBBC5C /* AuthenticateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateResponse.swift; sourceTree = "<group>"; };
+		26E020B0248ECD8700DBBC5C /* NetworkResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponseHandler.swift; sourceTree = "<group>"; };
 		26E0B55024639872002D5A07 /* ViewTypealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTypealias.swift; sourceTree = "<group>"; };
 		26E22BB72475238500F466C3 /* ServingSizeOptionsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeOptionsLauncher.swift; sourceTree = "<group>"; };
 		26F2E6F1244757A0000294D3 /* RegistrationEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationEnums.swift; sourceTree = "<group>"; };
@@ -276,8 +277,8 @@
 		26087D45248DD6B3009B4548 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				26087D64248DEA78009B4548 /* NetworkManager.swift */,
 				26087D6A248DFAE2009B4548 /* UserNetworkManager.swift */,
+				26E020B0248ECD8700DBBC5C /* NetworkResponseHandler.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -453,6 +454,7 @@
 				26119AEF247C5718009FDD79 /* FoodEntry.swift */,
 				26119AF5247C61A3009FDD79 /* Serving.swift */,
 				26087D67248DF85A009B4548 /* User.swift */,
+				26E020AE248EB76000DBBC5C /* AuthenticateResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -659,7 +661,6 @@
 				26E0B56124639E3A002D5A07 /* LearnController.swift in Sources */,
 				26E0B55A24639E25002D5A07 /* DailyNutritionView.swift in Sources */,
 				26119AF4247C5860009FDD79 /* FoodEntryViewModel.swift in Sources */,
-				26087D66248DEA78009B4548 /* NetworkManager.swift in Sources */,
 				26119AF1247C5718009FDD79 /* FoodEntry.swift in Sources */,
 				26E0B55E24639E34002D5A07 /* DiaryController.swift in Sources */,
 				2651926C247EB71400483915 /* FoodSearchController.swift in Sources */,
@@ -696,6 +697,7 @@
 				26519279247EEF1A00483915 /* AddFoodController.swift in Sources */,
 				261C8BCA2448A9F3009A1B79 /* CreateAccountCell.swift in Sources */,
 				26087D49248DD6E7009B4548 /* EndPointType.swift in Sources */,
+				26E020B1248ECD8700DBBC5C /* NetworkResponseHandler.swift in Sources */,
 				262F665A24623FBA00B24F51 /* MainTabBarController.swift in Sources */,
 				2651926E247EC0E700483915 /* ActionOptionsLauncher.swift in Sources */,
 				263B9678247304E400340ED3 /* ServingAmountCell.swift in Sources */,
@@ -706,7 +708,6 @@
 				26519276247EC5D300483915 /* ActionOptionsView.swift in Sources */,
 				269E379B242D05EB0070B110 /* LoginController.swift in Sources */,
 				26F783332471B51300B7F0C8 /* MacroNutrientsView.swift in Sources */,
-				26087D65248DEA78009B4548 /* NetworkManager.swift in Sources */,
 				26119AF6247C61A3009FDD79 /* Serving.swift in Sources */,
 				263B96752473048700340ED3 /* ServingSizeSelectorCell.swift in Sources */,
 				2651926B247EB71400483915 /* FoodSearchController.swift in Sources */,
@@ -730,6 +731,7 @@
 				2605A8AF2442B626001CF085 /* LoginView.swift in Sources */,
 				26087D5F248DE308009B4548 /* Router.swift in Sources */,
 				26087D53248DD8C3009B4548 /* ParameterEncoding.swift in Sources */,
+				26E020AF248EB76000DBBC5C /* AuthenticateResponse.swift in Sources */,
 				26475C992442D00B004A5C71 /* Constants.swift in Sources */,
 				266BB5A624633A37009269B2 /* DailyNutritionView.swift in Sources */,
 				26087D59248DDC20009B4548 /* JSONParameterEncoder.swift in Sources */,
