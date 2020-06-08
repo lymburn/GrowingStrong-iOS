@@ -192,8 +192,8 @@
 		2605A8A924429474001CF085 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				2640FF8D2443F2830051A2BF /* ViewControllers */,
-				2640FF8A2443EBE40051A2BF /* DataControllers */,
+				2640FF8D2443F2830051A2BF /* ViewController */,
+				2640FF8A2443EBE40051A2BF /* DataController */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -282,17 +282,17 @@
 			path = FoodControllers;
 			sourceTree = "<group>";
 		};
-		2640FF8A2443EBE40051A2BF /* DataControllers */ = {
+		2640FF8A2443EBE40051A2BF /* DataController */ = {
 			isa = PBXGroup;
 			children = (
 				2640FF8B2443EC870051A2BF /* RegisterDataController.swift */,
 				2624E8D824647E4E00AC40EA /* FoodEntriesDataController.swift */,
 				263B9670247303A400340ED3 /* BaseFoodDataController.swift */,
 			);
-			path = DataControllers;
+			path = DataController;
 			sourceTree = "<group>";
 		};
-		2640FF8D2443F2830051A2BF /* ViewControllers */ = {
+		2640FF8D2443F2830051A2BF /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				26519269247EB6C300483915 /* SearchControllers */,
@@ -300,7 +300,7 @@
 				263B967B2473062200340ED3 /* TabControllers */,
 				263B967A247305D100340ED3 /* AuthenticationControllers */,
 			);
-			path = ViewControllers;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		26475C932442CACF004A5C71 /* RegistrationViews */ = {
