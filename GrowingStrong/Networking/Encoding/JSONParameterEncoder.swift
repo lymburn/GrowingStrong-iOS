@@ -15,7 +15,7 @@ public struct JSONParameterEncoder: ParameterEncoder {
             urlRequest.httpBody = jsonAsData
             
             if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
-                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.setValue(NetworkEncodingConstants.jsonParameterContentType, forHTTPHeaderField: "Content-Type")
             }
         } catch {
             throw NetworkError.encodingFailed

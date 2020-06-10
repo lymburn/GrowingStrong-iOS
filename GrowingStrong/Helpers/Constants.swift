@@ -60,6 +60,11 @@ struct URLConstants {
     }
 }
 
+struct NetworkEncodingConstants {
+    static let urlParameterContentType = "application/x-www-form-urlencoded; charset=utf-8"
+    static let jsonParameterContentType = "application/json"
+}
+
 struct Configuration {
     static let defaultEnvironment: NetworkEnvironment = .dev
 }
