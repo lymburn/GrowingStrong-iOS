@@ -46,3 +46,25 @@ struct DateFormatConstants {
     static let longMonthDefault = "MMMM dd, yyyy"
     static let shortMonthDefault = "MMM dd, yyyy"
 }
+
+struct URLConstants {
+    struct Domains {
+        static let dev = "http://localhost:5000"
+        static let prod = "http://localhost:5000"
+    }
+    
+    struct Routes {
+        struct Api {
+            static let user = "/api/user"
+        }
+    }
+}
+
+struct NetworkEncodingConstants {
+    static let urlParameterContentType = "application/x-www-form-urlencoded; charset=utf-8"
+    static let jsonParameterContentType = "application/json"
+}
+
+struct Configuration {
+    static let defaultEnvironment: NetworkEnvironment = .dev
+}

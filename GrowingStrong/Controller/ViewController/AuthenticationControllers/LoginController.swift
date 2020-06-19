@@ -14,9 +14,32 @@ class LoginController: UIViewController {
         super.viewDidLoad()
         
         setupLoginView(lView)
+        setupUserNetworkManager(userNetworkManager: UserNetworkManager())
         setupViews()
+//        
+//        userNetworkManager.getUser(id: 10) { user, error in
+//            if let error = error {
+//                print(error)
+//            }
+//
+//            if let user = user {
+//                print(user)
+//            }
+//        }
+        
+//        let params = ["EmailAddress": "test@gmail.com", "Password": "password1"]
+//        userNetworkManager.authenticateUser(userAuthenticationParameters: params) {authenticateResponse, error in
+//            if let error = error {
+//                print(error)
+//            }
+//
+//            if let response = authenticateResponse {
+//                print(response)
+//            }
+//        }
     }
     
+    var userNetworkManager: UserNetworkManager!
     var loginView: LoginViewType!
     var registerController: RegisterController!
     
@@ -42,6 +65,10 @@ class LoginController: UIViewController {
 extension LoginController {
     func setupLoginView(_ loginView: LoginViewType) {
         self.loginView = loginView
+    }
+    
+    func setupUserNetworkManager(userNetworkManager: UserNetworkManager) {
+        self.userNetworkManager = userNetworkManager
     }
     
     fileprivate func setupViews() {
