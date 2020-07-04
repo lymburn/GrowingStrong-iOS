@@ -13,14 +13,30 @@ class FoodSearchController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupFoodEntryViewModels(testFoodEntries.map({return FoodEntryViewModel.init(foodEntry: $0)}))
+        foodEntryViewModels = testFoodEntries.map({return FoodEntryViewModel.init(foodEntry: $0)})
+
+        setupSearchController()
+        setupNavigationItems()
+        setupFoodEntryViewModels(foodEntryViewModels)
         foodEntriesTableView.register(FoodCell.self, forCellReuseIdentifier: foodEntryCellId)
 
         setupViews()
     }
     
+    let searchController = UISearchController(searchResultsController: nil)
+    
     var foodEntryViewModels: [FoodEntryViewModel]!
     let foodEntryCellId = "foodEntryCellId"
+    
+    var filteredFoodEntryViewModels: [FoodEntryViewModel] = []
+    
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
+    }
     
     lazy var foodEntriesDataController: FoodEntriesDataController = {
         let controller = FoodEntriesDataController(cellIdentifier: foodEntryCellId, foodEntryViewModels: foodEntryViewModels)
@@ -45,6 +61,17 @@ extension FoodSearchController {
         self.foodEntryViewModels = foodEntryViewModels
     }
     
+    fileprivate func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Food"
+    }
+    
+    fileprivate func setupNavigationItems() {
+        navigationItem.title = "Add Food"
+        navigationItem.searchController = searchController
+    }
+    
     fileprivate func setupViews() {
         view.backgroundColor = .white
         view.addSubview(foodEntriesTableView)
@@ -60,7 +87,7 @@ extension FoodSearchController {
     }
 }
 
-//MARK: Data controller deelgate
+//MARK: Data controller delegate
 extension FoodSearchController: FoodEntriesDataControllerDelegate {
     func rowSelected(at row: Int) {
         let addFoodController = AddFoodController()
@@ -68,5 +95,30 @@ extension FoodSearchController: FoodEntriesDataControllerDelegate {
         addFoodController.foodEntryViewModel = foodEntryVM
         addFoodController.selectedServing = foodEntryVM.selectedServing
         navigationController?.pushViewController(addFoodController, animated: true)
+    }
+}
+
+//MARK: Search results updating protocol
+extension FoodSearchController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        filterContentForSearchText(searchBar.text!)
+    }
+}
+
+//MARK: Searching & filtering functionality
+extension FoodSearchController {
+    func filterContentForSearchText(_ searchText: String) {
+        filteredFoodEntryViewModels = foodEntryViewModels.filter { (foodEntryViewModel: FoodEntryViewModel) -> Bool in
+            return foodEntryViewModel.food.name.lowercased().contains(searchText.lowercased())
+        }
+        
+        if isFiltering {
+            foodEntriesDataController.updateFoodEntryViewModels(filteredFoodEntryViewModels)
+        } else {
+            foodEntriesDataController.updateFoodEntryViewModels(foodEntryViewModels)
+        }
+        
+        foodEntriesTableView.reloadData()
     }
 }
