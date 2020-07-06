@@ -1,5 +1,5 @@
 //
-//  AuthenticateResponse.swift
+//  AuthenticateInfo.swift
 //  GrowingStrong
 //
 //  Created by Eugene Lu on 2020-06-08.
@@ -9,8 +9,8 @@
 import Foundation
 import CoreData
 
-@objc(AuthenticateResponse)
-class AuthenticateResponse: NSManagedObject, Codable {
+@objc(AuthenticateInfo)
+class AuthenticateInfo: NSManagedObject, Codable {
     private enum CodingKeys: String, CodingKey {
         case token
         case user
@@ -24,7 +24,7 @@ class AuthenticateResponse: NSManagedObject, Codable {
             let managedObjectContext = decoder.userInfo[codingUserInfoKeyManagedObjectContext] as? NSManagedObjectContext,
             let entity = NSEntityDescription.entity(forEntityName: EntityNames.authenticateResponse.rawValue, in: managedObjectContext)
         else {
-            fatalError("Failed to decode AuthenticateResponse")
+            fatalError("Failed to decode AuthenticateInfo")
         }
 
         self.init(entity: entity, insertInto: managedObjectContext)

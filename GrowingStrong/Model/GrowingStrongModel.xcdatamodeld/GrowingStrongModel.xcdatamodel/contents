@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="AuthenticateResponse" representedClassName="AuthenticateResponse" syncable="YES">
+    <entity name="AuthenticateInfo" representedClassName="AuthenticateInfo" syncable="YES">
         <attribute name="token" optional="YES" attributeType="String"/>
-        <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="authenticateResponse" inverseEntity="User"/>
+        <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="authenticateInfo" inverseEntity="User"/>
     </entity>
     <entity name="Food" representedClassName="Food" syncable="YES">
         <attribute name="foodId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -35,10 +35,10 @@
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="emailAddress" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="authenticateResponse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AuthenticateResponse" inverseName="user" inverseEntity="AuthenticateResponse"/>
+        <relationship name="authenticateInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AuthenticateInfo" inverseName="user" inverseEntity="AuthenticateInfo"/>
     </entity>
     <elements>
-        <element name="AuthenticateResponse" positionX="-579.984375" positionY="-19.6328125" width="128" height="73"/>
+        <element name="AuthenticateInfo" positionX="-579.984375" positionY="-19.6328125" width="128" height="73"/>
         <element name="Food" positionX="-114.88671875" positionY="-1.13671875" width="128" height="103"/>
         <element name="FoodEntry" positionX="-317.6640625" positionY="-58.0703125" width="128" height="118"/>
         <element name="Serving" positionX="-337.98046875" positionY="169.0234375" width="128" height="163"/>

@@ -12,7 +12,7 @@ import CoreData
 protocol UserNetworkManagerType {
     func getUser(id: Int, completion: @escaping (_ user: User?, _ error: String?) ->())
     func authenticateUser(userAuthenticationParameters: Parameters,
-                          completion: @escaping (_ response: AuthenticateResponse?, _ error: String?) -> ())
+                          completion: @escaping (_ response: AuthenticateInfo?, _ error: String?) -> ())
 }
 
 class UserNetworkManager {
@@ -67,7 +67,7 @@ class UserNetworkManager {
     }
     
     func authenticateUser(userAuthenticationParameters: Parameters,
-                          completion: @escaping (_ response: AuthenticateResponse?, _ error: String?) -> ()) {
+                          completion: @escaping (_ response: AuthenticateInfo?, _ error: String?) -> ()) {
         
         router.request(.authenticate(bodyParameters: userAuthenticationParameters)) { data, response, error in
             
@@ -92,7 +92,7 @@ class UserNetworkManager {
                     do {
                         let decoder = JSONDecoder()
                         decoder.userInfo[codingUserInfoKeyManagedObjectContext] = self.managedObjectContext
-                        let authenticateResponse = try decoder.decode(AuthenticateResponse.self, from: responseData)
+                        let authenticateResponse = try decoder.decode(AuthenticateInfo.self, from: responseData)
                         try self.managedObjectContext.save()
 
                         completion(authenticateResponse, nil)

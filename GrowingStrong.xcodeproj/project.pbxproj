@@ -58,13 +58,15 @@
 		269E379B242D05EB0070B110 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E379A242D05EB0070B110 /* LoginController.swift */; };
 		269E37A0242D05F00070B110 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 269E379F242D05F00070B110 /* Assets.xcassets */; };
 		269E37A3242D05F00070B110 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 269E37A1242D05F00070B110 /* LaunchScreen.storyboard */; };
+		26A0B06B24B3A226000874EC /* AuthenticationFormatChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0B06A24B3A226000874EC /* AuthenticationFormatChecker.swift */; };
+		26A0B06D24B3A49B000874EC /* AuthenticationFormatCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0B06C24B3A49B000874EC /* AuthenticationFormatCheckerTests.swift */; };
 		26A8D4C5247530F8000BC5C6 /* ServingSizeExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A8D4C4247530F8000BC5C6 /* ServingSizeExtensionsTests.swift */; };
 		26B2537E247C6DB9000CE403 /* FoodEntryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B2537D247C6DB9000CE403 /* FoodEntryViewModelTests.swift */; };
 		26BC18E524B2C76F0027E1B3 /* FoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC18E424B2C76F0027E1B3 /* FoodEntry.swift */; };
 		26BC18E724B2C9CB0027E1B3 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC18E624B2C9CB0027E1B3 /* Food.swift */; };
 		26BC18E924B2CBB00027E1B3 /* Serving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC18E824B2CBB00027E1B3 /* Serving.swift */; };
 		26C72D942473099000E86FE8 /* ServingSizeOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */; };
-		26E020AF248EB76000DBBC5C /* AuthenticateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020AE248EB76000DBBC5C /* AuthenticateResponse.swift */; };
+		26E020AF248EB76000DBBC5C /* AuthenticateInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020AE248EB76000DBBC5C /* AuthenticateInfo.swift */; };
 		26E020B1248ECD8700DBBC5C /* NetworkResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020B0248ECD8700DBBC5C /* NetworkResponseHandler.swift */; };
 		26E020B5248EF23300DBBC5C /* URLParameterEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020B4248EF23300DBBC5C /* URLParameterEncoderTests.swift */; };
 		26E020B7248EF24200DBBC5C /* JSONParameterEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020B6248EF24200DBBC5C /* JSONParameterEncoderTests.swift */; };
@@ -143,13 +145,15 @@
 		269E379F242D05F00070B110 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		269E37A2242D05F00070B110 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		269E37A4242D05F00070B110 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		26A0B06A24B3A226000874EC /* AuthenticationFormatChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationFormatChecker.swift; sourceTree = "<group>"; };
+		26A0B06C24B3A49B000874EC /* AuthenticationFormatCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationFormatCheckerTests.swift; sourceTree = "<group>"; };
 		26A8D4C4247530F8000BC5C6 /* ServingSizeExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeExtensionsTests.swift; sourceTree = "<group>"; };
 		26B2537D247C6DB9000CE403 /* FoodEntryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryViewModelTests.swift; sourceTree = "<group>"; };
 		26BC18E424B2C76F0027E1B3 /* FoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntry.swift; sourceTree = "<group>"; };
 		26BC18E624B2C9CB0027E1B3 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		26BC18E824B2CBB00027E1B3 /* Serving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serving.swift; sourceTree = "<group>"; };
 		26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeOptionsCell.swift; sourceTree = "<group>"; };
-		26E020AE248EB76000DBBC5C /* AuthenticateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateResponse.swift; sourceTree = "<group>"; };
+		26E020AE248EB76000DBBC5C /* AuthenticateInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateInfo.swift; sourceTree = "<group>"; };
 		26E020B0248ECD8700DBBC5C /* NetworkResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponseHandler.swift; sourceTree = "<group>"; };
 		26E020B4248EF23300DBBC5C /* URLParameterEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParameterEncoderTests.swift; sourceTree = "<group>"; };
 		26E020B6248EF24200DBBC5C /* JSONParameterEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoderTests.swift; sourceTree = "<group>"; };
@@ -285,6 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				261C8BD12448CD11009A1B79 /* MeasurementUnitHelperTests.swift */,
+				26A0B06C24B3A49B000874EC /* AuthenticationFormatCheckerTests.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -372,6 +377,7 @@
 				26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */,
 				26E0B55024639872002D5A07 /* ViewTypealias.swift */,
 				26519271247EC1B500483915 /* BaseOptionsLauncher.swift */,
+				26A0B06A24B3A226000874EC /* AuthenticationFormatChecker.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -415,7 +421,7 @@
 			children = (
 				268A6CA124B14883007113B6 /* GrowingStrongModel.xcdatamodeld */,
 				26087D67248DF85A009B4548 /* User.swift */,
-				26E020AE248EB76000DBBC5C /* AuthenticateResponse.swift */,
+				26E020AE248EB76000DBBC5C /* AuthenticateInfo.swift */,
 				26BC18E424B2C76F0027E1B3 /* FoodEntry.swift */,
 				26BC18E624B2C9CB0027E1B3 /* Food.swift */,
 				26BC18E824B2CBB00027E1B3 /* Serving.swift */,
@@ -623,6 +629,7 @@
 				26A8D4C5247530F8000BC5C6 /* ServingSizeExtensionsTests.swift in Sources */,
 				265889102463678B00199012 /* DateFormatterExtensionsTests.swift in Sources */,
 				26B2537E247C6DB9000CE403 /* FoodEntryViewModelTests.swift in Sources */,
+				26A0B06D24B3A49B000874EC /* AuthenticationFormatCheckerTests.swift in Sources */,
 				26793171247D77C800413FAD /* LoginControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -649,6 +656,7 @@
 				2651926E247EC0E700483915 /* ActionOptionsLauncher.swift in Sources */,
 				263B9678247304E400340ED3 /* ServingAmountCell.swift in Sources */,
 				26087D62248DE8AD009B4548 /* UserEndPoint.swift in Sources */,
+				26A0B06B24B3A226000874EC /* AuthenticationFormatChecker.swift in Sources */,
 				26475C952442CB2E004A5C71 /* RegisterStatsCell.swift in Sources */,
 				268A6CAA24B26C56007113B6 /* FoodEntryDataManager.swift in Sources */,
 				2624E8DC24647FAD00AC40EA /* FoodCell.swift in Sources */,
@@ -681,7 +689,7 @@
 				2605A8AF2442B626001CF085 /* LoginView.swift in Sources */,
 				26087D5F248DE308009B4548 /* Router.swift in Sources */,
 				26087D53248DD8C3009B4548 /* ParameterEncoding.swift in Sources */,
-				26E020AF248EB76000DBBC5C /* AuthenticateResponse.swift in Sources */,
+				26E020AF248EB76000DBBC5C /* AuthenticateInfo.swift in Sources */,
 				26475C992442D00B004A5C71 /* Constants.swift in Sources */,
 				266BB5A624633A37009269B2 /* DailyNutritionView.swift in Sources */,
 				26087D59248DDC20009B4548 /* JSONParameterEncoder.swift in Sources */,

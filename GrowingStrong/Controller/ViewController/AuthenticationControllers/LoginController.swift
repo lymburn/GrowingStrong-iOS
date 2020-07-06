@@ -119,17 +119,20 @@ extension LoginController: LoginViewDelegate {
     func loginButtonPressed() {
         let email = loginView.getEmailValue()
         let password = loginView.getPasswordValue()
+        
+        let isValidEmail = AuthenticationFormatChecker.isValidEmail(email)
+        let isValidPassword = AuthenticationFormatChecker.isValidPassword(password)
 
-        //TO DO: Check for correct formatting in email & password
-        if email.isEmpty {
-            //TO DO: show error in UI
-            print ("Email empty")
+        if !isValidEmail {
+            print ("Invalid email format")
+            return
         }
-
-        if password.isEmpty {
-            print ("Empty password")
+        
+        if !isValidPassword {
+            print ("Invalid password format")
+            return
         }
-
+        
     }
 
     func registerButtonPressed() {

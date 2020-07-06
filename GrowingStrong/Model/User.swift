@@ -19,7 +19,7 @@ class User: NSManagedObject, Codable {
     
     @NSManaged var id: Int32
     @NSManaged var emailAddress: String
-    @NSManaged var authenticateResponse: AuthenticateResponse
+    @NSManaged var authenticateInfo: AuthenticateInfo
 
     required convenience init(from decoder: Decoder) throws {
         guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext,
