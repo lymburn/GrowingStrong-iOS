@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import GrowingStrong
 
 class DiaryControllerTests: XCTestCase {
     

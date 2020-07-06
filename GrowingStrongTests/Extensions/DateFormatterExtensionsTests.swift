@@ -7,7 +7,7 @@
 //
 
 import XCTest
-
+@testable import GrowingStrong
 
 class DateFormatterExtensionsTests: XCTestCase {
     var dateFormatter: DateFormatter = {

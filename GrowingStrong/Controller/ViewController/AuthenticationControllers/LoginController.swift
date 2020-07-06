@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class LoginController: UIViewController {
     
@@ -14,7 +15,8 @@ class LoginController: UIViewController {
         super.viewDidLoad()
         
         setupLoginView(lView)
-        setupUserNetworkManager(userNetworkManager: UserNetworkManager())
+        let userNetworkManager = UserNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer)
+        setupUserNetworkManager(userNetworkManager: userNetworkManager)
         setupViews()
 //        
 //        userNetworkManager.getUser(id: 10) { user, error in
@@ -26,6 +28,17 @@ class LoginController: UIViewController {
 //                print(user)
 //            }
 //        }
+//
+//        let fetchRequest = NSFetchRequest<User>(entityName: EntityNames.user.rawValue)
+//
+//        do {
+//            let users = try CoreDataManager.shared.context.fetch(fetchRequest)
+//            print(users)
+//        } catch let fetchError {
+//            print("Failed to fetch food entries: \(fetchError)")
+//        }
+        
+        
         
 //        let params = ["EmailAddress": "test@gmail.com", "Password": "password1"]
 //        userNetworkManager.authenticateUser(userAuthenticationParameters: params) {authenticateResponse, error in
@@ -36,7 +49,18 @@ class LoginController: UIViewController {
 //            if let response = authenticateResponse {
 //                print(response)
 //            }
+//            
+//            let fetchRequest = NSFetchRequest<AuthenticateResponse>(entityName: EntityNames.authenticateResponse.rawValue)
+//
+//            do {
+//                let authenticateResponse = try CoreDataManager.shared.context.fetch(fetchRequest)
+//                print(authenticateResponse.first!.user.emailAddress)
+//            } catch let fetchError {
+//                print("Failed to fetch food entries: \(fetchError)")
+//            }
 //        }
+        
+
     }
     
     var userNetworkManager: UserNetworkManager!

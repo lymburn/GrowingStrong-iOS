@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 protocol UserNetworkManagerType {
     func getUser(id: Int, completion: @escaping (_ user: User?, _ error: String?) ->())
@@ -14,8 +15,16 @@ protocol UserNetworkManagerType {
                           completion: @escaping (_ response: AuthenticateResponse?, _ error: String?) -> ())
 }
 
-struct UserNetworkManager {
+class UserNetworkManager {
     private let router = Router<UserApi>()
+    
+    private let persistentContainer: NSPersistentContainer
+    
+    private lazy var managedObjectContext = self.persistentContainer.viewContext
+    
+    init(persistentContainer: NSPersistentContainer) {
+        self.persistentContainer = persistentContainer
+    }
     
     func getUser(id: Int, completion: @escaping (_ user: User?, _ error: String?) ->()) {
         
@@ -23,6 +32,10 @@ struct UserNetworkManager {
             
             if error != nil {
                 completion(nil, "Please check your network connection.")
+            }
+            
+            guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext else {
+                fatalError("Failed to retrieve context")
             }
             
             if let response = response as? HTTPURLResponse {
@@ -36,7 +49,11 @@ struct UserNetworkManager {
                     }
                     
                     do {
-                        let user = try JSONDecoder().decode(User.self, from: responseData)
+                        let decoder = JSONDecoder()
+                        decoder.userInfo[codingUserInfoKeyManagedObjectContext] = self.managedObjectContext
+                        let user = try decoder.decode(User.self, from: responseData)
+                        try self.managedObjectContext.save()
+                        
                         completion(user, nil)
                     } catch {
                         completion(nil, NetworkResponse.unableToDecode.rawValue)
@@ -58,6 +75,10 @@ struct UserNetworkManager {
                 completion(nil, "Please check your network connection.")
             }
             
+            guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext else {
+                fatalError("Failed to retrieve context")
+            }
+            
             if let response = response as? HTTPURLResponse {
                 let result = NetworkResponseHandler.handleResponse(response)
                 
@@ -69,7 +90,11 @@ struct UserNetworkManager {
                     }
                     
                     do {
-                        let authenticateResponse = try JSONDecoder().decode(AuthenticateResponse.self, from: responseData)
+                        let decoder = JSONDecoder()
+                        decoder.userInfo[codingUserInfoKeyManagedObjectContext] = self.managedObjectContext
+                        let authenticateResponse = try decoder.decode(AuthenticateResponse.self, from: responseData)
+                        try self.managedObjectContext.save()
+
                         completion(authenticateResponse, nil)
                     } catch {
                         completion(nil, NetworkResponse.unableToDecode.rawValue)

@@ -68,3 +68,7 @@ struct NetworkEncodingConstants {
 struct Configuration {
     static let defaultEnvironment: NetworkEnvironment = .dev
 }
+
+struct CoreDataConstants {
+    static let dataModelName = "GrowingStrongModel"
+}

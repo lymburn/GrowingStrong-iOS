@@ -7,6 +7,8 @@
 //
 
 import XCTest
+import CoreData
+@testable import GrowingStrong
 
 class ServingSizeExtensionsTests: XCTestCase {
 
@@ -20,7 +22,13 @@ class ServingSizeExtensionsTests: XCTestCase {
 
     func testToTextFunction() throws {
         let expectedText = "100.0 g"
-        let servingSize = ServingSize(quantity: 100, unit: "g")
+        
+        let servingSizeEntity: NSEntityDescription = NSEntityDescription.entity(forEntityName: EntityNames.servingSize.rawValue,
+                                                                                 in: CoreDataManager.shared.context)!
+        
+        let servingSize = NSManagedObject(entity: servingSizeEntity, insertInto: nil) as! ServingSize
+        servingSize.quantity = 100
+        servingSize.unit = "g"
         let text = servingSize.toText()
         
         XCTAssertEqual(expectedText, text)
