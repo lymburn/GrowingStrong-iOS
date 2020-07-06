@@ -137,6 +137,12 @@ extension RegisterController {
         
         cell.activityLevelLabel.colorString(text: "My activity level is \(level.rawValue.lowercased())", coloredText: level.rawValue.lowercased(), color: .green)
     }
+    
+    fileprivate func navigateToMainPage() {
+        let mainController = MainTabBarController()
+        mainController.modalPresentationStyle = .fullScreen
+        self.present(mainController, animated: true)
+    }
 }
 
 //MARK: Events
@@ -174,9 +180,7 @@ extension RegisterController {
         //TODO: Submit registration stats & account info to server
         print ("Creating new account")
         
-        let mainController = MainTabBarController()
-        mainController.modalPresentationStyle = .fullScreen
-        self.present(mainController, animated: true)
+        navigateToMainPage()
     }
 }
 

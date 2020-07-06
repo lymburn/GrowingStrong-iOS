@@ -68,3 +68,12 @@ struct NetworkEncodingConstants {
 struct Configuration {
     static let defaultEnvironment: NetworkEnvironment = .dev
 }
+
+struct CoreDataConstants {
+    static let dataModelName = "GrowingStrongModel"
+}
+
+struct KeyChainKeys {
+    static let jwtToken = "jwtToken"
+    static let unitTestJwtToken = "unitTestJwtToken"
+}

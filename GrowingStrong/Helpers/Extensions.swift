@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 extension UILabel {
     func colorString(text: String, coloredText: String, color: UIColor) {
@@ -72,4 +73,8 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+}
+
+public extension CodingUserInfoKey {
+    static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")
 }

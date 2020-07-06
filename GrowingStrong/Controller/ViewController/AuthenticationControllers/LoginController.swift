@@ -7,39 +7,21 @@
 //
 
 import UIKit
-
+import CoreData
+import SwiftKeychainWrapper
 class LoginController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupLoginView(lView)
-        setupUserNetworkManager(userNetworkManager: UserNetworkManager())
+        let userNetworkManager = UserNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer)
+        authenticationHelper = AuthenticationHelper(userNetworkManager: userNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken)
+
         setupViews()
-//        
-//        userNetworkManager.getUser(id: 10) { user, error in
-//            if let error = error {
-//                print(error)
-//            }
-//
-//            if let user = user {
-//                print(user)
-//            }
-//        }
-        
-//        let params = ["EmailAddress": "test@gmail.com", "Password": "password1"]
-//        userNetworkManager.authenticateUser(userAuthenticationParameters: params) {authenticateResponse, error in
-//            if let error = error {
-//                print(error)
-//            }
-//
-//            if let response = authenticateResponse {
-//                print(response)
-//            }
-//        }
     }
     
-    var userNetworkManager: UserNetworkManager!
+    var authenticationHelper: AuthenticationHelper!
     var loginView: LoginViewType!
     var registerController: RegisterController!
     
@@ -67,9 +49,6 @@ extension LoginController {
         self.loginView = loginView
     }
     
-    func setupUserNetworkManager(userNetworkManager: UserNetworkManager) {
-        self.userNetworkManager = userNetworkManager
-    }
     
     fileprivate func setupViews() {
         view.backgroundColor = .white
@@ -95,22 +74,35 @@ extension LoginController: LoginViewDelegate {
     func loginButtonPressed() {
         let email = loginView.getEmailValue()
         let password = loginView.getPasswordValue()
-
-        //TO DO: Check for correct formatting in email & password
-        if email.isEmpty {
-            //TO DO: show error in UI
-            print ("Email empty")
+        
+        authenticationHelper.authenticate(email: email, password: password) { response in
+            switch response {
+            case .invalidEmailFormat:
+                print ("Invalid email format")
+            case .invalidPasswordFormat:
+                print ("Invalid password format")
+            case .networkError:
+                print ("Network error")
+            case .savingTokenError:
+                print ("Error saving token")
+            case .success:
+                self.navigateToMainPage()
+            }
         }
-
-        if password.isEmpty {
-            print ("Empty password")
-        }
-
     }
 
     func registerButtonPressed() {
-        print("register")
         navigationController?.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(registerController, animated: true)
+    }
+}
+
+extension LoginController {
+    fileprivate func navigateToMainPage() {
+        DispatchQueue.main.async {
+            let mainController = MainTabBarController()
+            mainController.modalPresentationStyle = .fullScreen
+            self.present(mainController, animated: true)
+        }
     }
 }

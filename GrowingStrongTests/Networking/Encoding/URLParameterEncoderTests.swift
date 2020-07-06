@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import GrowingStrong
 
 class URLParameterEncoderTests: XCTestCase {
     override func setUpWithError() throws {

@@ -9,7 +9,7 @@
 import Foundation
 
 struct FoodEntryViewModel{
-    var id: Int
+    var id: Int32
     var food: Food
     var dateAdded: Date
     var selectedServing: Serving {
@@ -36,21 +36,21 @@ struct FoodEntryViewModel{
     var totalProteinText: String
     
     init(foodEntry: FoodEntry) {
-        self.id = foodEntry.id
+        self.id = foodEntry.foodEntryId
         self.food = foodEntry.food
         self.dateAdded = foodEntry.dateAdded
-        self.selectedServing = foodEntry.food.servings[0]
+        self.selectedServing = foodEntry.selectedServing
         self.servingAmount = foodEntry.servingAmount
         
         let selectedServingSize = selectedServing.servingSize
         self.totalQuantity = Int((selectedServingSize.quantity * self.servingAmount).rounded())
         self.totalQuantityText = "\(self.totalQuantity) \(selectedServingSize.unit)"
-        self.totalCalories = Int((self.selectedServing.caloriesPerServing * self.servingAmount).rounded())
+        self.totalCalories = Int((self.selectedServing.calories * self.servingAmount).rounded())
         self.totalCaloriesText = "\(self.totalCalories) kcal"
 
-        self.totalCarbohydrates = self.servingAmount * self.selectedServing.carbohydratesPerServing
-        self.totalFat = self.servingAmount * self.selectedServing.fatPerServing
-        self.totalProtein = self.servingAmount * self.selectedServing.proteinPerServing
+        self.totalCarbohydrates = self.servingAmount * self.selectedServing.carbohydrates
+        self.totalFat = self.servingAmount * self.selectedServing.fat
+        self.totalProtein = self.servingAmount * self.selectedServing.protein
         self.totalCarbohydratesText = "Carbohydrates - \(totalCarbohydrates) g"
         self.totalFatText = "Fat - \(totalFat) g"
         self.totalProteinText = "Protein - \(totalProtein) g"
@@ -60,12 +60,12 @@ struct FoodEntryViewModel{
         let selectedServingSize = selectedServing.servingSize
         self.totalQuantity = Int((selectedServingSize.quantity * self.servingAmount).rounded())
         self.totalQuantityText = "\(self.totalQuantity) \(selectedServingSize.unit)"
-        self.totalCalories = Int((self.selectedServing.caloriesPerServing * self.servingAmount).rounded())
+        self.totalCalories = Int((self.selectedServing.calories * self.servingAmount).rounded())
         self.totalCaloriesText = "\(self.totalCalories) kcal"
 
-        self.totalCarbohydrates = self.servingAmount * self.selectedServing.carbohydratesPerServing
-        self.totalFat = self.servingAmount * self.selectedServing.fatPerServing
-        self.totalProtein = self.servingAmount * self.selectedServing.proteinPerServing
+        self.totalCarbohydrates = self.servingAmount * self.selectedServing.carbohydrates
+        self.totalFat = self.servingAmount * self.selectedServing.fat
+        self.totalProtein = self.servingAmount * self.selectedServing.protein
         self.totalCarbohydratesText = "Carbohydrates - \(totalCarbohydrates) g"
         self.totalFatText = "Fat - \(totalFat) g"
         self.totalProteinText = "Protein - \(totalProtein) g"
