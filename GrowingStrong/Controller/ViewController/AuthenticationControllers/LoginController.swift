@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-
+import SwiftKeychainWrapper
 class LoginController: UIViewController {
     
     override func viewDidLoad() {
@@ -16,54 +16,12 @@ class LoginController: UIViewController {
         
         setupLoginView(lView)
         let userNetworkManager = UserNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer)
-        setupUserNetworkManager(userNetworkManager: userNetworkManager)
-        setupViews()
-//        
-//        userNetworkManager.getUser(id: 10) { user, error in
-//            if let error = error {
-//                print(error)
-//            }
-//
-//            if let user = user {
-//                print(user)
-//            }
-//        }
-//
-//        let fetchRequest = NSFetchRequest<User>(entityName: EntityNames.user.rawValue)
-//
-//        do {
-//            let users = try CoreDataManager.shared.context.fetch(fetchRequest)
-//            print(users)
-//        } catch let fetchError {
-//            print("Failed to fetch food entries: \(fetchError)")
-//        }
-        
-        
-        
-//        let params = ["EmailAddress": "test@gmail.com", "Password": "password1"]
-//        userNetworkManager.authenticateUser(userAuthenticationParameters: params) {authenticateResponse, error in
-//            if let error = error {
-//                print(error)
-//            }
-//
-//            if let response = authenticateResponse {
-//                print(response)
-//            }
-//            
-//            let fetchRequest = NSFetchRequest<AuthenticateResponse>(entityName: EntityNames.authenticateResponse.rawValue)
-//
-//            do {
-//                let authenticateResponse = try CoreDataManager.shared.context.fetch(fetchRequest)
-//                print(authenticateResponse.first!.user.emailAddress)
-//            } catch let fetchError {
-//                print("Failed to fetch food entries: \(fetchError)")
-//            }
-//        }
-        
+        authenticationHelper = AuthenticationHelper(userNetworkManager: userNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken)
 
+        setupViews()
     }
     
-    var userNetworkManager: UserNetworkManager!
+    var authenticationHelper: AuthenticationHelper!
     var loginView: LoginViewType!
     var registerController: RegisterController!
     
@@ -91,9 +49,6 @@ extension LoginController {
         self.loginView = loginView
     }
     
-    func setupUserNetworkManager(userNetworkManager: UserNetworkManager) {
-        self.userNetworkManager = userNetworkManager
-    }
     
     fileprivate func setupViews() {
         view.backgroundColor = .white
@@ -120,24 +75,34 @@ extension LoginController: LoginViewDelegate {
         let email = loginView.getEmailValue()
         let password = loginView.getPasswordValue()
         
-        let isValidEmail = AuthenticationFormatChecker.isValidEmail(email)
-        let isValidPassword = AuthenticationFormatChecker.isValidPassword(password)
-
-        if !isValidEmail {
-            print ("Invalid email format")
-            return
+        authenticationHelper.authenticate(email: email, password: password) { response in
+            switch response {
+            case .invalidEmailFormat:
+                print ("Invalid email format")
+            case .invalidPasswordFormat:
+                print ("Invalid password format")
+            case .networkError:
+                print ("Network error")
+            case .savingTokenError:
+                print ("Error saving token")
+            case .success:
+                self.navigateToMainPage()
+            }
         }
-        
-        if !isValidPassword {
-            print ("Invalid password format")
-            return
-        }
-        
     }
 
     func registerButtonPressed() {
-        print("register")
         navigationController?.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(registerController, animated: true)
+    }
+}
+
+extension LoginController {
+    fileprivate func navigateToMainPage() {
+        DispatchQueue.main.async {
+            let mainController = MainTabBarController()
+            mainController.modalPresentationStyle = .fullScreen
+            self.present(mainController, animated: true)
+        }
     }
 }

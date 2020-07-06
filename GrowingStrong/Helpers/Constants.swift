@@ -72,3 +72,8 @@ struct Configuration {
 struct CoreDataConstants {
     static let dataModelName = "GrowingStrongModel"
 }
+
+struct KeyChainKeys {
+    static let jwtToken = "jwtToken"
+    static let unitTestJwtToken = "unitTestJwtToken"
+}

@@ -1,5 +1,5 @@
 //
-//  AuthenticateInfo.swift
+//  User.swift
 //  GrowingStrong
 //
 //  Created by Eugene Lu on 2020-06-08.
@@ -9,35 +9,36 @@
 import Foundation
 import CoreData
 
-@objc(AuthenticateInfo)
-class AuthenticateInfo: NSManagedObject, Codable {
+@objc(User)
+class User: NSManagedObject, Codable {
+    
     private enum CodingKeys: String, CodingKey {
-        case token
-        case user
+        case id
+        case emailAddress
     }
     
-    @NSManaged var token: String
-    @NSManaged var user: User
-    
+    @NSManaged var id: Int32
+    @NSManaged var emailAddress: String
+
     required convenience init(from decoder: Decoder) throws {
         guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext,
             let managedObjectContext = decoder.userInfo[codingUserInfoKeyManagedObjectContext] as? NSManagedObjectContext,
-            let entity = NSEntityDescription.entity(forEntityName: EntityNames.authenticateResponse.rawValue, in: managedObjectContext)
+            let entity = NSEntityDescription.entity(forEntityName: EntityNames.user.rawValue, in: managedObjectContext)
         else {
-            fatalError("Failed to decode AuthenticateInfo")
+            fatalError("Failed to decode User")
         }
 
         self.init(entity: entity, insertInto: managedObjectContext)
 
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.token = try container.decode(String.self, forKey: .token)
-        self.user = try container.decode(User.self, forKey: .user)
+        self.id = try container.decode(Int32.self, forKey: .id)
+        self.emailAddress = try container.decode(String.self, forKey: .emailAddress)
     }
     
     // MARK: - Encodable
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(token, forKey: .token)
-        try container.encode(user, forKey: .user)
+        try container.encode(id, forKey: .id)
+        try container.encode(emailAddress, forKey: .emailAddress)
     }
 }

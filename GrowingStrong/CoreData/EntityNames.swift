@@ -14,5 +14,4 @@ enum EntityNames: String {
     case serving = "Serving"
     case servingSize = "ServingSize"
     case user = "User"
-    case authenticateResponse = "AuthenticateResponse"
 }
