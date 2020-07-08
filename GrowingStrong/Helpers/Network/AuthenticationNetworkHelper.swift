@@ -1,5 +1,5 @@
 //
-//  AuthenticationHelper.swift
+//  AuthenticationNetworkHelper.swift
 //  GrowingStrong
 //
 //  Created by Eugene Lu on 2020-07-06.
@@ -9,7 +9,11 @@
 import Foundation
 import SwiftKeychainWrapper
 
-enum AuthenticationHelperResponse {
+protocol AuthenticationNetworkHelperType {
+    func authenticate(email: String, password: String, completion: @escaping (_ response: AuthenticationNetworkHelperResponse) -> ())
+}
+
+enum AuthenticationNetworkHelperResponse {
     case success
     case invalidEmailFormat
     case invalidPasswordFormat
@@ -18,7 +22,7 @@ enum AuthenticationHelperResponse {
     case networkError
 }
 
-struct AuthenticationHelper {
+struct AuthenticationNetworkHelper: AuthenticationNetworkHelperType {
     let userNetworkManager: UserNetworkManagerType
     let jwtTokenKey: String
     
@@ -29,10 +33,10 @@ struct AuthenticationHelper {
     
     func authenticate(email: String,
                       password: String,
-                      completion: @escaping (_ response: AuthenticationHelperResponse) -> ()) {
+                      completion: @escaping (_ response: AuthenticationNetworkHelperResponse) -> ()) {
         
-        let isValidEmail = AuthenticationFormatChecker.isValidEmail(email)
-        let isValidPassword = AuthenticationFormatChecker.isValidPassword(password)
+        let isValidEmail = CredentialsFormatChecker.isValidEmail(email)
+        let isValidPassword = CredentialsFormatChecker.isValidPassword(password)
 
         if !isValidEmail {
             return completion(.invalidEmailFormat)
@@ -65,6 +69,5 @@ struct AuthenticationHelper {
                 }
             }
         }
-        
     }
 }

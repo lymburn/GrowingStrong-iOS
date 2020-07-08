@@ -1,5 +1,5 @@
 //
-//  AuthenticationHelperTests.swift
+//  AuthenticationNetworkHelperTests.swift
 //  GrowingStrongTests
 //
 //  Created by Eugene Lu on 2020-07-06.
@@ -9,19 +9,19 @@
 import XCTest
 @testable import GrowingStrong
 
-class AuthenticationHelperTests: XCTestCase {
+class AuthenticationNetworkHelperTests: XCTestCase {
     let mockNoErrorUserNetworkManager = MockNoErrorUserNetworkManager()
     
     let mockNetworkErrorUserNetworkManager = MockNetworkErrorUserNetworkManager()
     
     let mockAuthenticationErrorUserNetworkManager = MockAuthenticationErrorUserNetworkManager()
     
-    lazy var authenticationHelperNetworkError = AuthenticationHelper(userNetworkManager: mockNetworkErrorUserNetworkManager,
+    lazy var authenticationNetworkHelperNetworkError = AuthenticationNetworkHelper(userNetworkManager: mockNetworkErrorUserNetworkManager,
                                                                      jwtTokenKey: KeyChainKeys.unitTestJwtToken)
     
-    lazy var authenticationHelperAuthenticationError = AuthenticationHelper(userNetworkManager: mockAuthenticationErrorUserNetworkManager,                                                                           jwtTokenKey: KeyChainKeys.unitTestJwtToken)
+    lazy var authenticationNetworkHelperAuthenticationError = AuthenticationNetworkHelper(userNetworkManager: mockAuthenticationErrorUserNetworkManager, jwtTokenKey: KeyChainKeys.unitTestJwtToken)
     
-    lazy var authenticationHelperNoError = AuthenticationHelper(userNetworkManager: mockNoErrorUserNetworkManager,
+    lazy var authenticationNetworkHelperNoError = AuthenticationNetworkHelper(userNetworkManager: mockNoErrorUserNetworkManager,
                                                                 jwtTokenKey: KeyChainKeys.unitTestJwtToken)
     
     override func setUpWithError() throws {
@@ -35,46 +35,50 @@ class AuthenticationHelperTests: XCTestCase {
     func testAuthenticateWithInvalidEmail() throws {
         let invalidEmail = "test123gmail.com"
         let password = "Password@1"
-        authenticationHelperNoError.authenticate(email: invalidEmail, password: password) { response in
-            XCTAssertEqual(response, AuthenticationHelperResponse.invalidEmailFormat)
+        authenticationNetworkHelperNoError.authenticate(email: invalidEmail, password: password) { response in
+            XCTAssertEqual(response, AuthenticationNetworkHelperResponse.invalidEmailFormat)
         }
     }
     
     func testAuthenticateWithInvalidPassword() throws {
         let email = "test123@gmail.com"
         let invalidPassword = "Password1"
-        authenticationHelperNoError.authenticate(email: email, password: invalidPassword) { response in
-            XCTAssertEqual(response, AuthenticationHelperResponse.invalidPasswordFormat)
+        authenticationNetworkHelperNoError.authenticate(email: email, password: invalidPassword) { response in
+            XCTAssertEqual(response, AuthenticationNetworkHelperResponse.invalidPasswordFormat)
         }
     }
     
     func testAuthenticateWithNetworkError() throws {
         let email = "test123@gmail.com"
         let password = "Password@123"
-        authenticationHelperNetworkError.authenticate(email: email, password: password) { response in
-            XCTAssertEqual(response, AuthenticationHelperResponse.networkError)
+        authenticationNetworkHelperNetworkError.authenticate(email: email, password: password) { response in
+            XCTAssertEqual(response, AuthenticationNetworkHelperResponse.networkError)
         }
     }
     
     func testAuthenticateWithAuthenticationError() throws {
         let email = "test123@gmail.com"
         let password = "Password@123"
-        authenticationHelperAuthenticationError.authenticate(email: email, password: password) { response in
-            XCTAssertEqual(response, AuthenticationHelperResponse.authenticationError)
+        authenticationNetworkHelperAuthenticationError.authenticate(email: email, password: password) { response in
+            XCTAssertEqual(response, AuthenticationNetworkHelperResponse.authenticationError)
         }
     }
     
     func testAuthenticateSuccess() throws {
         let email = "test123@gmail.com"
         let password = "Password@123"
-        authenticationHelperNoError.authenticate(email: email, password: password) { response in
-            XCTAssertEqual(response, AuthenticationHelperResponse.success)
+        authenticationNetworkHelperNoError.authenticate(email: email, password: password) { response in
+            XCTAssertEqual(response, AuthenticationNetworkHelperResponse.success)
         }
     }
 }
 
 //Mock successfully authenticated user network manager
 class MockNoErrorUserNetworkManager: UserNetworkManagerType {
+    func registerUser(registrationParameters: Parameters, completion: @escaping (RegisterResponse?, String?) -> ()) {
+        
+    }
+    
     func getUser(id: Int, completion: @escaping (User?, String?) -> ()) {
         
     }
@@ -87,17 +91,25 @@ class MockNoErrorUserNetworkManager: UserNetworkManagerType {
 
 //Mock user network manager returning general network error
 class MockNetworkErrorUserNetworkManager: UserNetworkManagerType {
+    func registerUser(registrationParameters: Parameters, completion: @escaping (RegisterResponse?, String?) -> ()) {
+        
+    }
+    
     func getUser(id: Int, completion: @escaping (User?, String?) -> ()) {
         
     }
     
     func authenticateUser(userAuthenticationParameters: Parameters, completion: @escaping (AuthenticateResponse?, String?) -> ()) {
-        completion(nil, "Please check your network connection.")
+        completion(nil, NetworkResponse.generalError.rawValue)
     }
 }
 
 //Mock user network manager returning general network error
 class MockAuthenticationErrorUserNetworkManager: UserNetworkManagerType {
+    func registerUser(registrationParameters: Parameters, completion: @escaping (RegisterResponse?, String?) -> ()) {
+        
+    }
+    
     func getUser(id: Int, completion: @escaping (User?, String?) -> ()) {
         
     }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class RegisterController: UIViewController {
 
@@ -19,6 +20,9 @@ class RegisterController: UIViewController {
         
         navigationItem.rightBarButtonItem = nextButton
         navigationItem.leftBarButtonItem = backButton
+        
+        let userNetworkManager = UserNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer)
+        setupRegistrationNetworkHelper(registrationNetworkHelper: RegistrationNetworkHelper(userNetworkManager: userNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken))
     }
     
     let registerStatsCellId = "registerStatsCell"
@@ -26,6 +30,8 @@ class RegisterController: UIViewController {
     lazy var nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextPageTapped))
     lazy var backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
     lazy var submitButton = UIBarButtonItem(title: "Submit", style: .plain, target: self, action: #selector(submitTapped))
+    
+    var registrationNetworkHelper: RegistrationNetworkHelperType!
     
     lazy var dataController: RegisterDataController = {
         let dataController = RegisterDataController(registerStatsCellId: registerStatsCellId,
@@ -66,6 +72,10 @@ class RegisterController: UIViewController {
 
 //MARK: Setup
 extension RegisterController {
+    func setupRegistrationNetworkHelper(registrationNetworkHelper: RegistrationNetworkHelperType) {
+        self.registrationNetworkHelper = registrationNetworkHelper
+    }
+    
     fileprivate func setupViews() {
         view.backgroundColor = .white
         view.addSubview(collectionView)
@@ -139,9 +149,20 @@ extension RegisterController {
     }
     
     fileprivate func navigateToMainPage() {
-        let mainController = MainTabBarController()
-        mainController.modalPresentationStyle = .fullScreen
-        self.present(mainController, animated: true)
+        DispatchQueue.main.async {
+            let mainController = MainTabBarController()
+            mainController.modalPresentationStyle = .fullScreen
+            self.present(mainController, animated: true)
+        }
+    }
+    
+    fileprivate func passwordsMatch() -> Bool {
+        let indexPath = IndexPath(item: 1, section: 0)
+        let cell = collectionView.cellForItem(at: indexPath) as! CreateAccountCell
+        let password = cell.passwordTextField.text!
+        let confirmPassword = cell.confirmPasswordTextField.text!
+        
+        return password == confirmPassword
     }
 }
 
@@ -178,9 +199,31 @@ extension RegisterController {
     
     @objc func submitTapped() {
         //TODO: Submit registration stats & account info to server
-        print ("Creating new account")
+        let indexPath = IndexPath(item: 1, section: 0)
+        let cell = collectionView.cellForItem(at: indexPath) as! CreateAccountCell
+        let email = cell.emailTextField.text!
+        let password = cell.passwordTextField.text!
         
-        navigateToMainPage()
+        if !passwordsMatch() {
+            print ("Passwords do not match")
+        } else {
+            registrationNetworkHelper.register(email: email, password: password) { response in
+                switch response {
+                case .invalidEmailFormat:
+                    print ("Invalid email format")
+                case .invalidPasswordFormat:
+                    print ("Invalid password format")
+                case .userAlreadyExists:
+                    print ("Email address taken")
+                case .networkError:
+                    print ("Network error")
+                case .savingTokenError:
+                    print ("Error saving token")
+                case .success:
+                    self.navigateToMainPage()
+                }
+            }
+        }
     }
 }
 

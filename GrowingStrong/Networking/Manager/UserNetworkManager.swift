@@ -9,10 +9,16 @@
 import Foundation
 import CoreData
 
+enum UserNetworkResponseError: String {
+    case userAlreadyExists = "User with this email already exists"
+}
+
 protocol UserNetworkManagerType {
     func getUser(id: Int, completion: @escaping (_ user: User?, _ error: String?) ->())
     func authenticateUser(userAuthenticationParameters: Parameters,
                           completion: @escaping (_ response: AuthenticateResponse?, _ error: String?) -> ())
+    func registerUser(registrationParameters: Parameters,
+                      completion: @escaping (_ response: RegisterResponse?, _ error: String?) -> ())
 }
 
 class UserNetworkManager: UserNetworkManagerType {
@@ -31,7 +37,7 @@ class UserNetworkManager: UserNetworkManagerType {
         router.request(.user(id: id)) { data, response, error in
             
             if error != nil {
-                completion(nil, "Please check your network connection.")
+                completion(nil, NetworkResponse.generalError.rawValue)
             }
             
             guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext else {
@@ -40,7 +46,7 @@ class UserNetworkManager: UserNetworkManagerType {
             
             if let response = response as? HTTPURLResponse {
                 let result = NetworkResponseHandler.handleResponse(response)
-                
+
                 switch result {
                 case .success:
                     guard let responseData = data else {
@@ -72,7 +78,7 @@ class UserNetworkManager: UserNetworkManagerType {
         router.request(.authenticate(bodyParameters: userAuthenticationParameters)) { data, response, error in
             
             if error != nil {
-                completion(nil, "Please check your network connection.")
+                completion(nil, NetworkResponse.generalError.rawValue)
             }
             
             if let response = response as? HTTPURLResponse {
@@ -96,6 +102,51 @@ class UserNetworkManager: UserNetworkManagerType {
                     
                 case.failure(let networkFailureError):
                     completion(nil, networkFailureError)
+                }
+            }
+        }
+    }
+    
+    func registerUser(registrationParameters: Parameters,
+                      completion: @escaping (RegisterResponse?, String?) -> ()) {
+        
+        router.request(.register(bodyParameters: registrationParameters)) { data, response, error in
+            
+            if error != nil {
+                completion(nil, NetworkResponse.generalError.rawValue)
+            }
+            
+            guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext else {
+                    fatalError("Failed to retrieve context")
+                }
+                
+            if let response = response as? HTTPURLResponse {
+                let result = NetworkResponseHandler.handleResponse(response)
+                
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        let decoder = JSONDecoder()
+                        decoder.userInfo[codingUserInfoKeyManagedObjectContext] = self.managedObjectContext
+                        let registerResponse = try decoder.decode(RegisterResponse.self, from: responseData)
+                        try self.managedObjectContext.save()
+                        
+                        completion(registerResponse, nil)
+                    } catch {
+                        completion(nil, NetworkResponse.unableToDecode.rawValue)
+                    }
+                    
+                case.failure(let networkFailureError):
+                    if response.statusCode == 409 {
+                        completion(nil, UserNetworkResponseError.userAlreadyExists.rawValue)
+                    } else {
+                        completion(nil, networkFailureError)
+                    }
                 }
             }
         }

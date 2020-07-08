@@ -1,5 +1,5 @@
 //
-//  AuthenticationFormatChecker.swift
+//  CredentialsFormatChecker.swift
 //  GrowingStrong
 //
 //  Created by Eugene Lu on 2020-07-06.
@@ -9,7 +9,7 @@
 import Foundation
 
 //Helper to check correct formats in login/registration info
-struct AuthenticationFormatChecker {
+struct CredentialsFormatChecker {
     static func isValidEmail(_ email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
 

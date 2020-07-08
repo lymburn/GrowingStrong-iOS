@@ -16,6 +16,7 @@ enum NetworkEnvironment {
 public enum UserApi {
     case user (id: Int)
     case authenticate (bodyParameters: Parameters)
+    case register (bodyParameters: Parameters)
 }
 
 extension UserApi : EndPointType {
@@ -37,6 +38,8 @@ extension UserApi : EndPointType {
             return "\(id)"
         case .authenticate ( _):
             return "authenticate"
+        case .register ( _):
+            return "register"
         }
     }
     
@@ -46,6 +49,8 @@ extension UserApi : EndPointType {
             return .get
         case .authenticate ( _):
             return .post
+        case .register( _):
+            return .post
         }
     }
     
@@ -54,6 +59,8 @@ extension UserApi : EndPointType {
         case .user( _):
             return .request
         case .authenticate (let bodyParameters):
+            return .requestParameters(bodyParameters: bodyParameters, urlParameters: nil)
+        case .register (let bodyParameters):
             return .requestParameters(bodyParameters: bodyParameters, urlParameters: nil)
         }
     }
