@@ -12,10 +12,14 @@ import XCTest
 class AuthenticationHelperTests: XCTestCase {
     let mockNoErrorUserNetworkManager = MockNoErrorUserNetworkManager()
     
-    let mockErrorUserNetworkManager = MockErrorUserNetworkManager()
+    let mockNetworkErrorUserNetworkManager = MockNetworkErrorUserNetworkManager()
     
-    lazy var authenticationHelperError = AuthenticationHelper(userNetworkManager: mockErrorUserNetworkManager,
-                                                              jwtTokenKey: KeyChainKeys.unitTestJwtToken)
+    let mockAuthenticationErrorUserNetworkManager = MockAuthenticationErrorUserNetworkManager()
+    
+    lazy var authenticationHelperNetworkError = AuthenticationHelper(userNetworkManager: mockNetworkErrorUserNetworkManager,
+                                                                     jwtTokenKey: KeyChainKeys.unitTestJwtToken)
+    
+    lazy var authenticationHelperAuthenticationError = AuthenticationHelper(userNetworkManager: mockAuthenticationErrorUserNetworkManager,                                                                           jwtTokenKey: KeyChainKeys.unitTestJwtToken)
     
     lazy var authenticationHelperNoError = AuthenticationHelper(userNetworkManager: mockNoErrorUserNetworkManager,
                                                                 jwtTokenKey: KeyChainKeys.unitTestJwtToken)
@@ -47,8 +51,16 @@ class AuthenticationHelperTests: XCTestCase {
     func testAuthenticateWithNetworkError() throws {
         let email = "test123@gmail.com"
         let password = "Password@123"
-        authenticationHelperError.authenticate(email: email, password: password) { response in
+        authenticationHelperNetworkError.authenticate(email: email, password: password) { response in
             XCTAssertEqual(response, AuthenticationHelperResponse.networkError)
+        }
+    }
+    
+    func testAuthenticateWithAuthenticationError() throws {
+        let email = "test123@gmail.com"
+        let password = "Password@123"
+        authenticationHelperAuthenticationError.authenticate(email: email, password: password) { response in
+            XCTAssertEqual(response, AuthenticationHelperResponse.authenticationError)
         }
     }
     
@@ -73,13 +85,24 @@ class MockNoErrorUserNetworkManager: UserNetworkManagerType {
     }
 }
 
-//Mock user network manager returning error
-class MockErrorUserNetworkManager: UserNetworkManagerType {
+//Mock user network manager returning general network error
+class MockNetworkErrorUserNetworkManager: UserNetworkManagerType {
     func getUser(id: Int, completion: @escaping (User?, String?) -> ()) {
         
     }
     
     func authenticateUser(userAuthenticationParameters: Parameters, completion: @escaping (AuthenticateResponse?, String?) -> ()) {
         completion(nil, "Please check your network connection.")
+    }
+}
+
+//Mock user network manager returning general network error
+class MockAuthenticationErrorUserNetworkManager: UserNetworkManagerType {
+    func getUser(id: Int, completion: @escaping (User?, String?) -> ()) {
+        
+    }
+    
+    func authenticateUser(userAuthenticationParameters: Parameters, completion: @escaping (AuthenticateResponse?, String?) -> ()) {
+        completion(nil, NetworkResponse.authenticationError.rawValue)
     }
 }

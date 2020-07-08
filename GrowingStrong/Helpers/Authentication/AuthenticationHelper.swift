@@ -14,6 +14,7 @@ enum AuthenticationHelperResponse {
     case invalidEmailFormat
     case invalidPasswordFormat
     case savingTokenError
+    case authenticationError
     case networkError
 }
 
@@ -47,11 +48,14 @@ struct AuthenticationHelper {
         userNetworkManager.authenticateUser(userAuthenticationParameters: params) {authenticateResponse, error in
             if let error = error {
                 print(error)
-                completion(.networkError)
+                if (error == NetworkResponse.authenticationError.rawValue) {
+                    completion(.authenticationError)
+                } else {
+                    completion(.networkError)
+                }
             }
 
             if let response = authenticateResponse {
-                print(response)
                 let savedToKeyChainSuccessfully = KeychainWrapper.standard.set (response.token, forKey: self.jwtTokenKey)
                 
                 if !savedToKeyChainSuccessfully {

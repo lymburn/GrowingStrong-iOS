@@ -81,6 +81,8 @@ extension LoginController: LoginViewDelegate {
                 print ("Invalid email format")
             case .invalidPasswordFormat:
                 print ("Invalid password format")
+            case .authenticationError:
+                print ("Authentication error")
             case .networkError:
                 print ("Network error")
             case .savingTokenError:
