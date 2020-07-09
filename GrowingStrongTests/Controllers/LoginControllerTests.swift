@@ -24,13 +24,3 @@ class LoginControllerTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 }
-
-class MockLoginView: LoginViewType {
-    func getEmailValue() -> String {
-        return ""
-    }
-    
-    func getPasswordValue() -> String {
-        return ""
-    }
-}

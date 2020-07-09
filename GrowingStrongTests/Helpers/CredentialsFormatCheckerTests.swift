@@ -1,5 +1,5 @@
 //
-//  AuthenticationFormatCheckerTests.swift
+//  CredentialsFormatCheckerTests.swift
 //  GrowingStrongTests
 //
 //  Created by Eugene Lu on 2020-07-06.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import GrowingStrong
 
-class AuthenticationFormatCheckerTests: XCTestCase {
+class CredentialsFormatCheckerTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -21,42 +21,42 @@ class AuthenticationFormatCheckerTests: XCTestCase {
 
     func testIsValidEmailSuccess() throws {
         let email = "test@gmail.com"
-        let isValidEmail = AuthenticationFormatChecker.isValidEmail(email)
+        let isValidEmail = CredentialsFormatChecker.isValidEmail(email)
         
         XCTAssertTrue(isValidEmail)
     }
     
     func testIsValidEmailFailure() throws {
         let email = "testgmail.com"
-        let isValidEmail = AuthenticationFormatChecker.isValidEmail(email)
+        let isValidEmail = CredentialsFormatChecker.isValidEmail(email)
         
         XCTAssertFalse(isValidEmail)
     }
     
     func testIsValidEmailSpecialChars() throws {
         let email = "1=1;@gmail.com"
-        let isValidEmail = AuthenticationFormatChecker.isValidEmail(email)
+        let isValidEmail = CredentialsFormatChecker.isValidEmail(email)
         
         XCTAssertFalse(isValidEmail)
     }
     
     func testIsValidPasswordSuccess() throws {
         let password = "Password@123"
-        let isValidPassword = AuthenticationFormatChecker.isValidPassword(password)
+        let isValidPassword = CredentialsFormatChecker.isValidPassword(password)
         
         XCTAssertTrue(isValidPassword)
     }
     
     func testIsValidPasswordNoSpecialChars() throws {
         let password = "password123"
-        let isValidPassword = AuthenticationFormatChecker.isValidPassword(password)
+        let isValidPassword = CredentialsFormatChecker.isValidPassword(password)
         
         XCTAssertFalse(isValidPassword)
     }
     
     func testIsValidPasswordUnder6Chars() {
         let password = "pass"
-        let isValidPassword = AuthenticationFormatChecker.isValidPassword(password)
+        let isValidPassword = CredentialsFormatChecker.isValidPassword(password)
         
         XCTAssertFalse(isValidPassword)
     }

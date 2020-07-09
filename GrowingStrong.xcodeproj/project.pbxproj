@@ -20,17 +20,25 @@
 		26087D62248DE8AD009B4548 /* UserEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26087D61248DE8AD009B4548 /* UserEndPoint.swift */; };
 		26087D68248DF85A009B4548 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26087D67248DF85A009B4548 /* User.swift */; };
 		26087D6B248DFAE2009B4548 /* UserNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26087D6A248DFAE2009B4548 /* UserNetworkManager.swift */; };
+		260F2C6024B67DBC00B9585E /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260F2C5F24B67DBC00B9585E /* RequestModel.swift */; };
+		260F2C6224B67E1A00B9585E /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260F2C6124B67E1A00B9585E /* RegisterRequest.swift */; };
+		260F2C6424B67E6000B9585E /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260F2C6324B67E6000B9585E /* RegisterResponse.swift */; };
+		260F2C6724B6854900B9585E /* RegistrationNetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260F2C6624B6854900B9585E /* RegistrationNetworkHelper.swift */; };
 		26119AF3247C5860009FDD79 /* FoodEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26119AF2247C5860009FDD79 /* FoodEntryViewModel.swift */; };
-		261A68A224B3D42400AE199C /* AuthenticationHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261A68A124B3D42400AE199C /* AuthenticationHelperTests.swift */; };
+		261A68A224B3D42400AE199C /* AuthenticationNetworkHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261A68A124B3D42400AE199C /* AuthenticationNetworkHelperTests.swift */; };
 		261C8BCA2448A9F3009A1B79 /* CreateAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C8BC92448A9F3009A1B79 /* CreateAccountCell.swift */; };
 		261C8BD22448CD11009A1B79 /* MeasurementUnitHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C8BD12448CD11009A1B79 /* MeasurementUnitHelperTests.swift */; };
+		262408C624B6915700B6EB3C /* RegistrationNetworkHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262408C524B6915700B6EB3C /* RegistrationNetworkHelperTests.swift */; };
+		262408C924B691B800B6EB3C /* UserNetworkManagerMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262408C824B691B800B6EB3C /* UserNetworkManagerMocks.swift */; };
+		262408CB24B6964F00B6EB3C /* DiaryControllerMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262408CA24B6964F00B6EB3C /* DiaryControllerMocks.swift */; };
+		262408CD24B6969200B6EB3C /* LoginControllerMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262408CC24B6969200B6EB3C /* LoginControllerMocks.swift */; };
 		2624E8D924647E4E00AC40EA /* FoodEntriesDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8D824647E4E00AC40EA /* FoodEntriesDataController.swift */; };
 		2624E8DC24647FAD00AC40EA /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8DB24647FAD00AC40EA /* FoodCell.swift */; };
 		262F665A24623FBA00B24F51 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F665924623FBA00B24F51 /* MainTabBarController.swift */; };
 		262F665D2462417800B24F51 /* DiaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F665C2462417800B24F51 /* DiaryController.swift */; };
 		262F665F246241A500B24F51 /* TrendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F665E246241A500B24F51 /* TrendsController.swift */; };
 		262F6661246241C500B24F51 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F6660246241C500B24F51 /* SettingsController.swift */; };
-		2634C40424B3C92F00A3FCAC /* AuthenticationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2634C40324B3C92F00A3FCAC /* AuthenticationHelper.swift */; };
+		2634C40424B3C92F00A3FCAC /* AuthenticationNetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2634C40324B3C92F00A3FCAC /* AuthenticationNetworkHelper.swift */; };
 		2634C40824B3CAFE00A3FCAC /* AuthenticateRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2634C40724B3CAFE00A3FCAC /* AuthenticateRequestTests.swift */; };
 		263B966E2473014000340ED3 /* EditFoodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B966D2473014000340ED3 /* EditFoodController.swift */; };
 		263B9671247303A400340ED3 /* BaseFoodDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B9670247303A400340ED3 /* BaseFoodDataController.swift */; };
@@ -61,8 +69,8 @@
 		269E379B242D05EB0070B110 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E379A242D05EB0070B110 /* LoginController.swift */; };
 		269E37A0242D05F00070B110 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 269E379F242D05F00070B110 /* Assets.xcassets */; };
 		269E37A3242D05F00070B110 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 269E37A1242D05F00070B110 /* LaunchScreen.storyboard */; };
-		26A0B06B24B3A226000874EC /* AuthenticationFormatChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0B06A24B3A226000874EC /* AuthenticationFormatChecker.swift */; };
-		26A0B06D24B3A49B000874EC /* AuthenticationFormatCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0B06C24B3A49B000874EC /* AuthenticationFormatCheckerTests.swift */; };
+		26A0B06B24B3A226000874EC /* CredentialsFormatChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0B06A24B3A226000874EC /* CredentialsFormatChecker.swift */; };
+		26A0B06D24B3A49B000874EC /* CredentialsFormatCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0B06C24B3A49B000874EC /* CredentialsFormatCheckerTests.swift */; };
 		26A58E4124B3C6E4009A3209 /* AuthenticateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A58E4024B3C6E4009A3209 /* AuthenticateRequest.swift */; };
 		26A8D4C5247530F8000BC5C6 /* ServingSizeExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A8D4C4247530F8000BC5C6 /* ServingSizeExtensionsTests.swift */; };
 		26B2537E247C6DB9000CE403 /* FoodEntryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B2537D247C6DB9000CE403 /* FoodEntryViewModelTests.swift */; };
@@ -108,19 +116,27 @@
 		26087D61248DE8AD009B4548 /* UserEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEndPoint.swift; sourceTree = "<group>"; };
 		26087D67248DF85A009B4548 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		26087D6A248DFAE2009B4548 /* UserNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkManager.swift; sourceTree = "<group>"; };
+		260F2C5F24B67DBC00B9585E /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
+		260F2C6124B67E1A00B9585E /* RegisterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRequest.swift; sourceTree = "<group>"; };
+		260F2C6324B67E6000B9585E /* RegisterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterResponse.swift; sourceTree = "<group>"; };
+		260F2C6624B6854900B9585E /* RegistrationNetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationNetworkHelper.swift; sourceTree = "<group>"; };
 		26119AF2247C5860009FDD79 /* FoodEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryViewModel.swift; sourceTree = "<group>"; };
-		261A68A124B3D42400AE199C /* AuthenticationHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationHelperTests.swift; sourceTree = "<group>"; };
+		261A68A124B3D42400AE199C /* AuthenticationNetworkHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationNetworkHelperTests.swift; sourceTree = "<group>"; };
 		261C8BC92448A9F3009A1B79 /* CreateAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountCell.swift; sourceTree = "<group>"; };
 		261C8BCF2448CD11009A1B79 /* GrowingStrongTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrowingStrongTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		261C8BD12448CD11009A1B79 /* MeasurementUnitHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementUnitHelperTests.swift; sourceTree = "<group>"; };
 		261C8BD32448CD11009A1B79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		262408C524B6915700B6EB3C /* RegistrationNetworkHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationNetworkHelperTests.swift; sourceTree = "<group>"; };
+		262408C824B691B800B6EB3C /* UserNetworkManagerMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkManagerMocks.swift; sourceTree = "<group>"; };
+		262408CA24B6964F00B6EB3C /* DiaryControllerMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryControllerMocks.swift; sourceTree = "<group>"; };
+		262408CC24B6969200B6EB3C /* LoginControllerMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginControllerMocks.swift; sourceTree = "<group>"; };
 		2624E8D824647E4E00AC40EA /* FoodEntriesDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntriesDataController.swift; sourceTree = "<group>"; };
 		2624E8DB24647FAD00AC40EA /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
 		262F665924623FBA00B24F51 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		262F665C2462417800B24F51 /* DiaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryController.swift; sourceTree = "<group>"; };
 		262F665E246241A500B24F51 /* TrendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsController.swift; sourceTree = "<group>"; };
 		262F6660246241C500B24F51 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
-		2634C40324B3C92F00A3FCAC /* AuthenticationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationHelper.swift; sourceTree = "<group>"; };
+		2634C40324B3C92F00A3FCAC /* AuthenticationNetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationNetworkHelper.swift; sourceTree = "<group>"; };
 		2634C40724B3CAFE00A3FCAC /* AuthenticateRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateRequestTests.swift; sourceTree = "<group>"; };
 		263B966D2473014000340ED3 /* EditFoodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFoodController.swift; sourceTree = "<group>"; };
 		263B9670247303A400340ED3 /* BaseFoodDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFoodDataController.swift; sourceTree = "<group>"; };
@@ -153,8 +169,8 @@
 		269E379F242D05F00070B110 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		269E37A2242D05F00070B110 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		269E37A4242D05F00070B110 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		26A0B06A24B3A226000874EC /* AuthenticationFormatChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationFormatChecker.swift; sourceTree = "<group>"; };
-		26A0B06C24B3A49B000874EC /* AuthenticationFormatCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationFormatCheckerTests.swift; sourceTree = "<group>"; };
+		26A0B06A24B3A226000874EC /* CredentialsFormatChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsFormatChecker.swift; sourceTree = "<group>"; };
+		26A0B06C24B3A49B000874EC /* CredentialsFormatCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsFormatCheckerTests.swift; sourceTree = "<group>"; };
 		26A58E4024B3C6E4009A3209 /* AuthenticateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateRequest.swift; sourceTree = "<group>"; };
 		26A8D4C4247530F8000BC5C6 /* ServingSizeExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeExtensionsTests.swift; sourceTree = "<group>"; };
 		26B2537D247C6DB9000CE403 /* FoodEntryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryViewModelTests.swift; sourceTree = "<group>"; };
@@ -285,9 +301,28 @@
 			path = Encoding;
 			sourceTree = "<group>";
 		};
+		260F2C5E24B67D9500B9585E /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				260F2C6124B67E1A00B9585E /* RegisterRequest.swift */,
+				260F2C6324B67E6000B9585E /* RegisterResponse.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		260F2C6824B6878C00B9585E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2634C40324B3C92F00A3FCAC /* AuthenticationNetworkHelper.swift */,
+				260F2C6624B6854900B9585E /* RegistrationNetworkHelper.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		261C8BD02448CD11009A1B79 /* GrowingStrongTests */ = {
 			isa = PBXGroup;
 			children = (
+				262408C724B691A500B6EB3C /* Mocks */,
 				2634C40624B3CAE600A3FCAC /* Models */,
 				26E020B2248EF1FA00DBBC5C /* Networking */,
 				2679316E247D77C800413FAD /* Controllers */,
@@ -303,10 +338,21 @@
 			isa = PBXGroup;
 			children = (
 				261C8BD12448CD11009A1B79 /* MeasurementUnitHelperTests.swift */,
-				26A0B06C24B3A49B000874EC /* AuthenticationFormatCheckerTests.swift */,
-				261A68A124B3D42400AE199C /* AuthenticationHelperTests.swift */,
+				26A0B06C24B3A49B000874EC /* CredentialsFormatCheckerTests.swift */,
+				261A68A124B3D42400AE199C /* AuthenticationNetworkHelperTests.swift */,
+				262408C524B6915700B6EB3C /* RegistrationNetworkHelperTests.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		262408C724B691A500B6EB3C /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				262408C824B691B800B6EB3C /* UserNetworkManagerMocks.swift */,
+				262408CA24B6964F00B6EB3C /* DiaryControllerMocks.swift */,
+				262408CC24B6969200B6EB3C /* LoginControllerMocks.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		2634C40624B3CAE600A3FCAC /* Models */ = {
@@ -315,15 +361,6 @@
 				2634C40724B3CAFE00A3FCAC /* AuthenticateRequestTests.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		2634C40924B3D3B100A3FCAC /* Authentication */ = {
-			isa = PBXGroup;
-			children = (
-				26A0B06A24B3A226000874EC /* AuthenticationFormatChecker.swift */,
-				2634C40324B3C92F00A3FCAC /* AuthenticationHelper.swift */,
-			);
-			path = Authentication;
 			sourceTree = "<group>";
 		};
 		263B96732473044E00340ED3 /* BaseFoodViews */ = {
@@ -341,7 +378,6 @@
 			isa = PBXGroup;
 			children = (
 				269E379A242D05EB0070B110 /* LoginController.swift */,
-				2605A8B22442BC1D001CF085 /* RegisterController.swift */,
 			);
 			path = AuthenticationControllers;
 			sourceTree = "<group>";
@@ -383,6 +419,7 @@
 		2640FF8D2443F2830051A2BF /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				267D2AA624B67C390076776A /* RegistrationControllers */,
 				26519269247EB6C300483915 /* SearchControllers */,
 				263B967D2473066900340ED3 /* FoodControllers */,
 				263B967B2473062200340ED3 /* TabControllers */,
@@ -403,7 +440,8 @@
 		26475C972442CFF2004A5C71 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				2634C40924B3D3B100A3FCAC /* Authentication */,
+				260F2C6824B6878C00B9585E /* Network */,
+				26A0B06A24B3A226000874EC /* CredentialsFormatChecker.swift */,
 				26F2E6F1244757A0000294D3 /* RegistrationEnums.swift */,
 				26475C982442D00B004A5C71 /* Constants.swift */,
 				266BFA0A2443DB0E006E588D /* Extensions.swift */,
@@ -451,9 +489,11 @@
 		265E2A382471980D00DBD91E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				260F2C5E24B67D9500B9585E /* Registration */,
 				26A58E4424B3C72D009A3209 /* Authentication */,
 				26A58E4324B3C71E009A3209 /* CoreDataModel */,
 				26A58E4224B3C6FE009A3209 /* Entities */,
+				260F2C5F24B67DBC00B9585E /* RequestModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -477,6 +517,14 @@
 			name = Controllers;
 			path = GrowingStrongTests/Controllers;
 			sourceTree = SOURCE_ROOT;
+		};
+		267D2AA624B67C390076776A /* RegistrationControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2605A8B22442BC1D001CF085 /* RegisterController.swift */,
+			);
+			path = RegistrationControllers;
+			sourceTree = "<group>";
 		};
 		268A6CA524B14E5B007113B6 /* CoreData */ = {
 			isa = PBXGroup;
@@ -744,15 +792,19 @@
 				2679316D247D72DE00413FAD /* DateExtensionsTests.swift in Sources */,
 				2634C40824B3CAFE00A3FCAC /* AuthenticateRequestTests.swift in Sources */,
 				26793172247D77C800413FAD /* DiaryControllerTests.swift in Sources */,
+				262408C924B691B800B6EB3C /* UserNetworkManagerMocks.swift in Sources */,
 				26E020B5248EF23300DBBC5C /* URLParameterEncoderTests.swift in Sources */,
 				261C8BD22448CD11009A1B79 /* MeasurementUnitHelperTests.swift in Sources */,
-				261A68A224B3D42400AE199C /* AuthenticationHelperTests.swift in Sources */,
+				261A68A224B3D42400AE199C /* AuthenticationNetworkHelperTests.swift in Sources */,
 				26E020B7248EF24200DBBC5C /* JSONParameterEncoderTests.swift in Sources */,
+				262408C624B6915700B6EB3C /* RegistrationNetworkHelperTests.swift in Sources */,
 				26A8D4C5247530F8000BC5C6 /* ServingSizeExtensionsTests.swift in Sources */,
 				265889102463678B00199012 /* DateFormatterExtensionsTests.swift in Sources */,
 				26B2537E247C6DB9000CE403 /* FoodEntryViewModelTests.swift in Sources */,
-				26A0B06D24B3A49B000874EC /* AuthenticationFormatCheckerTests.swift in Sources */,
+				262408CB24B6964F00B6EB3C /* DiaryControllerMocks.swift in Sources */,
+				26A0B06D24B3A49B000874EC /* CredentialsFormatCheckerTests.swift in Sources */,
 				26793171247D77C800413FAD /* LoginControllerTests.swift in Sources */,
+				262408CD24B6969200B6EB3C /* LoginControllerMocks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -774,11 +826,13 @@
 				26087D49248DD6E7009B4548 /* EndPointType.swift in Sources */,
 				26E020B1248ECD8700DBBC5C /* NetworkResponseHandler.swift in Sources */,
 				262F665A24623FBA00B24F51 /* MainTabBarController.swift in Sources */,
+				260F2C6724B6854900B9585E /* RegistrationNetworkHelper.swift in Sources */,
 				26BC18E924B2CBB00027E1B3 /* Serving.swift in Sources */,
 				2651926E247EC0E700483915 /* ActionOptionsLauncher.swift in Sources */,
 				263B9678247304E400340ED3 /* ServingAmountCell.swift in Sources */,
 				26087D62248DE8AD009B4548 /* UserEndPoint.swift in Sources */,
-				26A0B06B24B3A226000874EC /* AuthenticationFormatChecker.swift in Sources */,
+				260F2C6424B67E6000B9585E /* RegisterResponse.swift in Sources */,
+				26A0B06B24B3A226000874EC /* CredentialsFormatChecker.swift in Sources */,
 				26475C952442CB2E004A5C71 /* RegisterStatsCell.swift in Sources */,
 				268A6CAA24B26C56007113B6 /* FoodEntryDataManager.swift in Sources */,
 				2624E8DC24647FAD00AC40EA /* FoodCell.swift in Sources */,
@@ -800,8 +854,10 @@
 				26F7832F2471A9B600B7F0C8 /* BaseFoodController.swift in Sources */,
 				26087D5C248DDD79009B4548 /* NetworkRouter.swift in Sources */,
 				26BC18E524B2C76F0027E1B3 /* FoodEntry.swift in Sources */,
+				260F2C6024B67DBC00B9585E /* RequestModel.swift in Sources */,
 				269E3797242D05EB0070B110 /* AppDelegate.swift in Sources */,
-				2634C40424B3C92F00A3FCAC /* AuthenticationHelper.swift in Sources */,
+				260F2C6224B67E1A00B9585E /* RegisterRequest.swift in Sources */,
+				2634C40424B3C92F00A3FCAC /* AuthenticationNetworkHelper.swift in Sources */,
 				266BFA0B2443DB0E006E588D /* Extensions.swift in Sources */,
 				26E0B55124639872002D5A07 /* ViewTypealias.swift in Sources */,
 				26F2E6F4244769B9000294D3 /* MeasurementUnitHelper.swift in Sources */,

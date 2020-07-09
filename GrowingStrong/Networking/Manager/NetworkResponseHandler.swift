@@ -20,7 +20,8 @@ enum NetworkResponse:String {
     case outdated = "The url you requested is outdated."
     case failed = "Network request failed."
     case noData = "Response returned with no data to decode."
-    case unableToDecode = "We could not decode the response."
+    case unableToDecode = "Could not decode the response."
+    case generalError = "General network error. Please check the network."
 }
 
 struct NetworkResponseHandler {
@@ -32,5 +33,9 @@ struct NetworkResponseHandler {
         case 600: return .failure(NetworkResponse.outdated.rawValue)
         default: return .failure(NetworkResponse.failed.rawValue)
         }
+    }
+    
+    static func getStatusCode(_ response: HTTPURLResponse) -> Int {
+        return response.statusCode
     }
 }

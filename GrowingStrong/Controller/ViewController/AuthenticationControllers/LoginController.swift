@@ -16,12 +16,12 @@ class LoginController: UIViewController {
         
         setupLoginView(lView)
         let userNetworkManager = UserNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer)
-        authenticationHelper = AuthenticationHelper(userNetworkManager: userNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken)
-
+        setupAuthenticationNetworkHelper(authenticationNetworkHelper: AuthenticationNetworkHelper(userNetworkManager: userNetworkManager,
+                                                                             jwtTokenKey: KeyChainKeys.jwtToken))
         setupViews()
     }
     
-    var authenticationHelper: AuthenticationHelper!
+    var authenticationNetworkHelper: AuthenticationNetworkHelperType!
     var loginView: LoginViewType!
     var registerController: RegisterController!
     
@@ -70,17 +70,23 @@ extension LoginController: LoginViewDelegate {
         //TODO
         print("Forget password pressed")
     }
+    
+    func setupAuthenticationNetworkHelper(authenticationNetworkHelper: AuthenticationNetworkHelperType) {
+        self.authenticationNetworkHelper = authenticationNetworkHelper
+    }
 
     func loginButtonPressed() {
         let email = loginView.getEmailValue()
         let password = loginView.getPasswordValue()
         
-        authenticationHelper.authenticate(email: email, password: password) { response in
+        authenticationNetworkHelper.authenticate(email: email, password: password) { response in
             switch response {
             case .invalidEmailFormat:
                 print ("Invalid email format")
             case .invalidPasswordFormat:
                 print ("Invalid password format")
+            case .authenticationError:
+                print ("Authentication error")
             case .networkError:
                 print ("Network error")
             case .savingTokenError:
