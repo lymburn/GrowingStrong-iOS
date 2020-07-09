@@ -47,33 +47,3 @@ class DiaryControllerTests: XCTestCase {
     }
 
 }
-
-class MockDateBar: DateBarType {
-    var dateValue: String?
-    
-    func getDateValue() -> String {
-        return "January 01, 2020"
-    }
-    
-    func setDateValue(text: String?) {
-        dateValue = text
-    }
-}
-
-class MockDailyNutritionView: DailyNutritionViewType {
-    func getCaloriesValueLabel() -> String {
-        return ""
-    }
-    
-    func getCarbsValueLabel() -> String {
-        return ""
-    }
-    
-    func getFatValueLabel() -> String {
-        return ""
-    }
-    
-    func getProteinValueLabel() -> String {
-        return ""
-    }
-}
