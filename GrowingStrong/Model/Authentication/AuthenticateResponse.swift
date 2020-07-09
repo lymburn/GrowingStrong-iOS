@@ -10,4 +10,5 @@ import Foundation
 
 struct AuthenticateResponse: Codable {
     let token: String
+    let user: User 
 }

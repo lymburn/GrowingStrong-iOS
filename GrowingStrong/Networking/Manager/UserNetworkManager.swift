@@ -81,6 +81,10 @@ class UserNetworkManager: UserNetworkManagerType {
                 completion(nil, NetworkResponse.generalError.rawValue)
             }
             
+            guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext else {
+                fatalError("Failed to retrieve context")
+            }
+            
             if let response = response as? HTTPURLResponse {
                 let result = NetworkResponseHandler.handleResponse(response)
                 
@@ -93,7 +97,9 @@ class UserNetworkManager: UserNetworkManagerType {
                     
                     do {
                         let decoder = JSONDecoder()
+                        decoder.userInfo[codingUserInfoKeyManagedObjectContext] = self.managedObjectContext
                         let authenticateResponse = try decoder.decode(AuthenticateResponse.self, from: responseData)
+                        try self.managedObjectContext.save()
   
                         completion(authenticateResponse, nil)
                     } catch {
