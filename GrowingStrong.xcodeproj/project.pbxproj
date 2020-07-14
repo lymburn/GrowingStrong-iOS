@@ -48,6 +48,7 @@
 		2640FF8C2443EC870051A2BF /* RegisterDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2640FF8B2443EC870051A2BF /* RegisterDataController.swift */; };
 		26475C952442CB2E004A5C71 /* RegisterStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C942442CB2E004A5C71 /* RegisterStatsCell.swift */; };
 		26475C992442D00B004A5C71 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C982442D00B004A5C71 /* Constants.swift */; };
+		264B211324BE53350008B55F /* DateFormatterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B211224BE53350008B55F /* DateFormatterHelper.swift */; };
 		2651926B247EB71400483915 /* FoodSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2651926A247EB71400483915 /* FoodSearchController.swift */; };
 		2651926E247EC0E700483915 /* ActionOptionsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2651926D247EC0E700483915 /* ActionOptionsLauncher.swift */; };
 		26519272247EC1B500483915 /* BaseOptionsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26519271247EC1B500483915 /* BaseOptionsLauncher.swift */; };
@@ -146,6 +147,7 @@
 		2640FF8B2443EC870051A2BF /* RegisterDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataController.swift; sourceTree = "<group>"; };
 		26475C942442CB2E004A5C71 /* RegisterStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterStatsCell.swift; sourceTree = "<group>"; };
 		26475C982442D00B004A5C71 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		264B211224BE53350008B55F /* DateFormatterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterHelper.swift; sourceTree = "<group>"; };
 		2651926A247EB71400483915 /* FoodSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchController.swift; sourceTree = "<group>"; };
 		2651926D247EC0E700483915 /* ActionOptionsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionOptionsLauncher.swift; sourceTree = "<group>"; };
 		26519271247EC1B500483915 /* BaseOptionsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseOptionsLauncher.swift; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 				26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */,
 				26E0B55024639872002D5A07 /* ViewTypealias.swift */,
 				26519271247EC1B500483915 /* BaseOptionsLauncher.swift */,
+				264B211224BE53350008B55F /* DateFormatterHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -843,6 +846,7 @@
 				26BC18E724B2C9CB0027E1B3 /* Food.swift in Sources */,
 				26F783332471B51300B7F0C8 /* MacroNutrientsView.swift in Sources */,
 				263B96752473048700340ED3 /* ServingSizeSelectorCell.swift in Sources */,
+				264B211324BE53350008B55F /* DateFormatterHelper.swift in Sources */,
 				2651926B247EB71400483915 /* FoodSearchController.swift in Sources */,
 				2658890B246340F300199012 /* DateBar.swift in Sources */,
 				2624E8D924647E4E00AC40EA /* FoodEntriesDataController.swift in Sources */,

@@ -50,7 +50,7 @@ class EditFoodController: BaseFoodController {
 
 extension EditFoodController {
     fileprivate func saveFoodInfo() {
-        //TO DO: implement persistence for food view model
+        //TODO: implement persistence for food view model
         let servingAmount = super.getServingAmount()
         
         if selectedServing == nil || servingAmount == nil {

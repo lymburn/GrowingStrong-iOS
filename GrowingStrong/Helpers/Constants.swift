@@ -10,15 +10,10 @@ import UIKit
 
 struct SizeConstants {
     static let screenSize: CGRect = UIScreen.main.bounds
-    
     static let foodEntriesTableViewRowHeight: CGFloat = SizeConstants.screenSize.height * 0.08
-    
     static let servingInfoTableViewRowHeight: CGFloat = SizeConstants.screenSize.height * 0.06
-    
     static let servingSizeOptionsTableViewRowHeight: CGFloat = SizeConstants.screenSize.height * 0.05
-
     static let actionButtonSize = CGSize(width: 64, height: 64)
-    
     static let actionOptionSize = CGSize(width: 50, height: 50)
 }
 
@@ -45,6 +40,7 @@ struct ImageNameConstants {
 struct DateFormatConstants {
     static let longMonthDefault = "MMMM dd, yyyy"
     static let shortMonthDefault = "MMM dd, yyyy"
+    static let ISO8601 = "yyyy-MM-dd'T'HH:mm:ss"
 }
 
 struct URLConstants {

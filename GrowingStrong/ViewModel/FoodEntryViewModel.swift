@@ -11,7 +11,7 @@ import Foundation
 struct FoodEntryViewModel{
     var id: Int32
     var food: Food
-    var dateAdded: String
+    var dateAdded: Date
     var selectedServing: Serving {
         didSet {
             calculateNutritionInfo()
