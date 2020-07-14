@@ -12,6 +12,5 @@ enum EntityNames: String {
     case foodEntry = "FoodEntry"
     case food = "Food"
     case serving = "Serving"
-    case servingSize = "ServingSize"
     case user = "User"
 }

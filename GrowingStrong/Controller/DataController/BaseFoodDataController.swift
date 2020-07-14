@@ -34,7 +34,7 @@ class BaseFoodDataController: NSObject, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.item == 0 {
             let servingSizeSelectorCell = tableView.dequeueReusableCell(withIdentifier: servingSizeSelectorCellId, for: indexPath) as! ServingSizeSelectorCell
-            servingSizeSelectorCell.servingSizeValueLabel.text = selectedServing.servingSize.toText()
+            servingSizeSelectorCell.servingSizeValueLabel.text = selectedServing.getServingSizeText()
             return servingSizeSelectorCell
         } else {
             let servingAmountCell = tableView.dequeueReusableCell(withIdentifier: servingAmountCellId, for: indexPath) as! ServingAmountCell

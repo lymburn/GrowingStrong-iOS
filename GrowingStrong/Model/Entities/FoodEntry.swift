@@ -20,7 +20,7 @@ class FoodEntry: NSManagedObject, Codable {
         case selectedServing
     }
     
-    @NSManaged var dateAdded: Date
+    @NSManaged var dateAdded: String
     @NSManaged var foodEntryId: Int32
     @NSManaged var servingAmount: Float
     @NSManaged var food: Food
@@ -37,11 +37,11 @@ class FoodEntry: NSManagedObject, Codable {
         self.init(entity: entity, insertInto: managedObjectContext)
 
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.dateAdded = try container.decode(Date.self, forKey: .dateAdded)
+        self.dateAdded = try container.decode(String.self, forKey: .dateAdded)
         self.foodEntryId = try container.decode(Int32.self, forKey: .foodEntryId)
         self.servingAmount = try container.decode(Float.self, forKey: .servingAmount)
         self.food = try container.decode(Food.self, forKey: .food)
-        self.selectedServing = try container.decode(Serving.self, forKey: .food)
+        self.selectedServing = try container.decode(Serving.self, forKey: .selectedServing)
     }
     
     // MARK: - Encodable

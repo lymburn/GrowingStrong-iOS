@@ -19,6 +19,7 @@ protocol UserNetworkManagerType {
                           completion: @escaping (_ response: AuthenticateResponse?, _ error: String?) -> ())
     func registerUser(registrationParameters: Parameters,
                       completion: @escaping (_ response: RegisterResponse?, _ error: String?) -> ())
+    func getUserFoodEntries(userId: Int, completion: @escaping (_ foodEntries: [FoodEntry]?, _ error: String?) -> ())
 }
 
 class UserNetworkManager: UserNetworkManagerType {
@@ -153,6 +154,46 @@ class UserNetworkManager: UserNetworkManagerType {
                     } else {
                         completion(nil, networkFailureError)
                     }
+                }
+            }
+        }
+    }
+    
+    func getUserFoodEntries(userId: Int, completion: @escaping (_ foodEntries: [FoodEntry]?, _ error: String?) -> ()) {
+        
+        router.request(.userFoodEntries(userId: userId)) { data, response, error in
+            
+            if error != nil {
+                completion(nil, NetworkResponse.generalError.rawValue)
+            }
+            
+            guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext else {
+                fatalError("Failed to retrieve context")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = NetworkResponseHandler.handleResponse(response)
+                
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        let decoder = JSONDecoder()
+                        decoder.userInfo[codingUserInfoKeyManagedObjectContext] = self.managedObjectContext
+                        let foodEntries = try decoder.decode([FoodEntry].self, from: responseData)
+                        //try self.managedObjectContext.save()
+                        
+                        completion(foodEntries, nil)
+                    } catch {
+                        completion(nil, NetworkResponse.unableToDecode.rawValue)
+                    }
+                    
+                case.failure(let networkFailureError):
+                    completion(nil, networkFailureError)
                 }
             }
         }

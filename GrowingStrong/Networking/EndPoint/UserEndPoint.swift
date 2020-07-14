@@ -17,6 +17,7 @@ public enum UserApi {
     case user (id: Int)
     case authenticate (bodyParameters: Parameters)
     case register (bodyParameters: Parameters)
+    case userFoodEntries (userId: Int)
 }
 
 extension UserApi : EndPointType {
@@ -40,12 +41,16 @@ extension UserApi : EndPointType {
             return "authenticate"
         case .register ( _):
             return "register"
+        case .userFoodEntries(let userId):
+            return "\(userId)/foodEntries"
         }
     }
     
     var httpMethod: HTTPMethod {
         switch self {
         case .user( _):
+            return .get
+        case .userFoodEntries( _):
             return .get
         case .authenticate ( _):
             return .post
@@ -57,6 +62,8 @@ extension UserApi : EndPointType {
     var task: HTTPTask {
         switch self {
         case .user( _):
+            return .request
+        case .userFoodEntries( _):
             return .request
         case .authenticate (let bodyParameters):
             return .requestParameters(bodyParameters: bodyParameters, urlParameters: nil)

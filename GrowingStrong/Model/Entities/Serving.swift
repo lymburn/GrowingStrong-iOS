@@ -13,23 +13,21 @@ import CoreData
 class Serving: NSManagedObject, Codable {
     private enum CodingKeys: String, CodingKey {
         case servingId
-        case calories
-        case carbohydrates
+        case quantity
+        case unit
+        case kcal
+        case carb
         case fat
         case protein
-        case food
-        case foodEntries
-        case servingSize
     }
     
     @NSManaged var servingId: Int32
-    @NSManaged var calories: Float
-    @NSManaged var carbohydrates: Float
+    @NSManaged var quantity: Float
+    @NSManaged var unit: String
+    @NSManaged var kcal: Float
+    @NSManaged var carb: Float
     @NSManaged var fat: Float
     @NSManaged var protein: Float
-    @NSManaged var food: Food
-    @NSManaged var foodEntries: [FoodEntry]?
-    @NSManaged var servingSize: ServingSize
 
     required convenience init(from decoder: Decoder) throws {
         guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext,
@@ -43,25 +41,23 @@ class Serving: NSManagedObject, Codable {
 
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.servingId = try container.decode(Int32.self, forKey: .servingId)
-        self.calories = try container.decode(Float.self, forKey: .calories)
-        self.carbohydrates = try container.decode(Float.self, forKey: .carbohydrates)
+        self.quantity = try container.decode(Float.self, forKey: .quantity)
+        self.unit = try container.decode(String.self, forKey: .unit)
+        self.kcal = try container.decode(Float.self, forKey: .kcal)
+        self.carb = try container.decode(Float.self, forKey: .carb)
         self.fat = try container.decode(Float.self, forKey: .fat)
         self.protein = try container.decode(Float.self, forKey: .protein)
-        self.food = try container.decode(Food.self, forKey: .food)
-        self.foodEntries = try container.decode([FoodEntry]?.self, forKey: .foodEntries)
-        self.servingSize = try container.decode(ServingSize.self, forKey: .servingSize)
     }
     
     // MARK: - Encodable
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(servingId, forKey: .servingId)
-        try container.encode(calories, forKey: .calories)
-        try container.encode(carbohydrates, forKey: .carbohydrates)
+        try container.encode(quantity, forKey: .quantity)
+        try container.encode(unit, forKey: .unit)
+        try container.encode(kcal, forKey: .kcal)
+        try container.encode(carb, forKey: .carb)
         try container.encode(fat, forKey: .fat)
         try container.encode(protein, forKey: .protein)
-        try container.encode(food, forKey: .food)
-        try container.encode(foodEntries, forKey: .foodEntries)
-        try container.encode(servingSize, forKey: .servingSize)
     }
 }

@@ -20,7 +20,8 @@ struct FoodEntryDataManager {
         let foodEntry = NSEntityDescription.insertNewObject(forEntityName: EntityNames.foodEntry.rawValue, into: context) as! FoodEntry
         
         foodEntry.food = food
-        foodEntry.dateAdded = dateAdded
+        foodEntry.dateAdded = ""
+        //foodEntry.dateAdded = dateAdded
         foodEntry.servingAmount = servingAmount
         foodEntry.selectedServing = selectedServing
         

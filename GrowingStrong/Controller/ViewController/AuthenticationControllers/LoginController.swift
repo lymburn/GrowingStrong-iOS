@@ -18,10 +18,14 @@ class LoginController: UIViewController {
         let userNetworkManager = UserNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer)
         setupAuthenticationNetworkHelper(authenticationNetworkHelper: AuthenticationNetworkHelper(userNetworkManager: userNetworkManager,
                                                                              jwtTokenKey: KeyChainKeys.jwtToken))
+        
+        userNetworkHelper = UserNetworkHelper(userNetworkManager: userNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken)
+        
         setupViews()
     }
     
     var authenticationNetworkHelper: AuthenticationNetworkHelperType!
+    var userNetworkHelper: UserNetworkHelperType!
     var loginView: LoginViewType!
     var registerController: RegisterController!
     
@@ -93,6 +97,12 @@ extension LoginController: LoginViewDelegate {
                 print ("Error saving token")
             case .success:
                 self.navigateToMainPage()
+            }
+        }
+        
+        userNetworkHelper.getUserFoodEntries(userId: 4) { response, foodEntries in
+            if response == .success {
+                print (foodEntries)
             }
         }
     }

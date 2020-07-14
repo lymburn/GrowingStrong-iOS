@@ -12,7 +12,7 @@ class BaseFoodController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = foodEntryViewModel.food.name
+        navigationItem.title = foodEntryViewModel.food.foodName
         
         self.hideKeyboardWhenTappedAround()
         
@@ -30,7 +30,7 @@ class BaseFoodController: UIViewController {
     
     lazy var servingSizeOptionsLauncher: ServingSizeOptionsLauncher = {
         let launcher = ServingSizeOptionsLauncher()
-        launcher.servingOptions = foodEntryViewModel.food.servings
+        launcher.servingOptions = Array(foodEntryViewModel.food.servings)
         launcher.delegate = self
         return launcher
     }()
@@ -125,7 +125,7 @@ extension BaseFoodController: BaseFoodDataControllerDelegate {
 //MARK: ServingSizeOptionsLauncher delegate
 extension BaseFoodController: ServingSizeOptionsLauncherDelegate {
     func didSelectOption(option: Serving) {
-        setServingSizeValueLabel(servingSizeText: option.servingSize.toText())
+        setServingSizeValueLabel(servingSizeText: option.getServingSizeText())
         selectedServing = option
         foodEntryViewModel.selectedServing = selectedServing
         updateMacroNutrientsView()

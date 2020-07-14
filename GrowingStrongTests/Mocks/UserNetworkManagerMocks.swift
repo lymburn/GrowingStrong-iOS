@@ -11,8 +11,12 @@ import Foundation
 
 //Mock successfully authenticated user network manager
 class MockNoErrorUserNetworkManager: UserNetworkManagerType {
+    func getUserFoodEntries(userId: Int, completion: @escaping ([FoodEntry]?, String?) -> ()) {
+        
+    }
+    
     func registerUser(registrationParameters: Parameters, completion: @escaping (RegisterResponse?, String?) -> ()) {
-        let response = RegisterResponse(token: "Token", user: User())
+        let response = RegisterResponse(token: "Token", userId: 1)
         completion (response, nil)
     }
     
@@ -20,13 +24,17 @@ class MockNoErrorUserNetworkManager: UserNetworkManagerType {
     }
     
     func authenticateUser(userAuthenticationParameters: Parameters, completion: @escaping (AuthenticateResponse?, String?) -> ()) {
-        let response = AuthenticateResponse(token: "Token")
+        let response = AuthenticateResponse(token: "Token", userId: 1)
         completion(response, nil)
     }
 }
 
 //Mock user network manager returning general network error
 class MockNetworkErrorUserNetworkManager: UserNetworkManagerType {
+    func getUserFoodEntries(userId: Int, completion: @escaping ([FoodEntry]?, String?) -> ()) {
+        
+    }
+    
     func registerUser(registrationParameters: Parameters, completion: @escaping (RegisterResponse?, String?) -> ()) {
         completion(nil, NetworkResponse.generalError.rawValue)
     }
@@ -41,6 +49,10 @@ class MockNetworkErrorUserNetworkManager: UserNetworkManagerType {
 
 //Mock user network manager returning authentication network error
 class MockAuthenticationErrorUserNetworkManager: UserNetworkManagerType {
+    func getUserFoodEntries(userId: Int, completion: @escaping ([FoodEntry]?, String?) -> ()) {
+        
+    }
+    
     func registerUser(registrationParameters: Parameters, completion: @escaping (RegisterResponse?, String?) -> ()) {
     }
     
@@ -54,6 +66,10 @@ class MockAuthenticationErrorUserNetworkManager: UserNetworkManagerType {
 
 //Mock user network manager returning user already exists network error
 class MockUserExistsUserNetworkManager: UserNetworkManagerType {
+    func getUserFoodEntries(userId: Int, completion: @escaping ([FoodEntry]?, String?) -> ()) {
+        
+    }
+    
     func getUser(id: Int, completion: @escaping (User?, String?) -> ()) {
     }
     

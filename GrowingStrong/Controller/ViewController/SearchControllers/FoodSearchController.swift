@@ -110,7 +110,7 @@ extension FoodSearchController: UISearchResultsUpdating {
 extension FoodSearchController {
     func filterContentForSearchText(_ searchText: String) {
         filteredFoodEntryViewModels = foodEntryViewModels.filter { (foodEntryViewModel: FoodEntryViewModel) -> Bool in
-            return foodEntryViewModel.food.name.lowercased().contains(searchText.lowercased())
+            return foodEntryViewModel.food.foodName.lowercased().contains(searchText.lowercased())
         }
         
         if isFiltering {

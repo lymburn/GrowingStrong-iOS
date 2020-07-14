@@ -8,13 +8,6 @@
 
 import UIKit
 
-let testServingSizes1: [ServingSize] = [
-
-]
-
-let testServingSizes2: [ServingSize] = [
-
-]
 
 let testServings1: [Serving] = [
 
@@ -42,6 +35,8 @@ class DiaryController: UIViewController {
         setupViews()
         
         foodEntriesTableView.register(FoodCell.self, forCellReuseIdentifier: foodEntryCellId)
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -155,7 +150,8 @@ extension DiaryController {
 //MARK: Helpers
 extension DiaryController {
     fileprivate func getFoodEntriesByDate(_ foodEntryViewModels: [FoodEntryViewModel], _ date: Date) -> [FoodEntryViewModel] {
-        return foodEntryViewModels.filter({$0.dateAdded.isEqualTo(date: date, by: .day)})
+        //return foodEntryViewModels.filter({$0.dateAdded.isEqualTo(date: date, by: .day)})
+        return []
     }
     
     fileprivate func updateFoodEntriesUI(for date: Date) {
