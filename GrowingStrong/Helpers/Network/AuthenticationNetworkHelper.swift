@@ -12,7 +12,7 @@ import SwiftKeychainWrapper
 protocol AuthenticationNetworkHelperType {
     func authenticate(email: String,
                       password: String,
-                      completion: @escaping (_ response: AuthenticationNetworkHelperResponse, _ userId: Int?) -> ())
+                      completion: @escaping (_ response: AuthenticationNetworkHelperResponse, _ user: User?) -> ())
 }
 
 enum AuthenticationNetworkHelperResponse {
@@ -35,7 +35,7 @@ struct AuthenticationNetworkHelper: AuthenticationNetworkHelperType {
     
     func authenticate(email: String,
                       password: String,
-                      completion: @escaping (_ response: AuthenticationNetworkHelperResponse, _ userId: Int?) -> ()) {
+                      completion: @escaping (_ response: AuthenticationNetworkHelperResponse, _ user: User?) -> ()) {
         
         let isValidEmail = CredentialsFormatChecker.isValidEmail(email)
         let isValidPassword = CredentialsFormatChecker.isValidPassword(password)
@@ -67,7 +67,7 @@ struct AuthenticationNetworkHelper: AuthenticationNetworkHelperType {
                 if !savedToKeyChainSuccessfully {
                     completion(.savingTokenError, nil)
                 } else {
-                    completion(.success, response.userId)
+                    completion(.success, response.user)
                 }
             }
         }

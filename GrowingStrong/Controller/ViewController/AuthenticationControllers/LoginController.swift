@@ -103,8 +103,8 @@ extension LoginController {
         let email = loginView.getEmailValue()
         let password = loginView.getPasswordValue()
         
-        authenticationNetworkHelper.authenticate(email: email, password: password) { response, userId in
-            self.handleAuthenticationResponse(response, userId, email)
+        authenticationNetworkHelper.authenticate(email: email, password: password) { response, user in
+            self.handleAuthenticationResponse(response, user)
         }
     }
     
@@ -121,8 +121,7 @@ extension LoginController {
     }
     
     fileprivate func handleAuthenticationResponse(_ response: AuthenticationNetworkHelperResponse,
-                                                  _ userId: Int?,
-                                                  _ emailAddress: String) {
+                                                  _ user: User?) {
         //TODO: Do stuff with errors (e.g. UI)
         switch response {
         case .invalidEmailFormat:
@@ -136,8 +135,9 @@ extension LoginController {
         case .savingTokenError:
             print ("Error saving token")
         case .success:
-            if let userId = userId {
-                createUser(userId: userId, emailAddress: emailAddress)
+            if let user = user {
+                let userId = Int(user.userId)
+                createUser(userId: userId, emailAddress: user.emailAddress)
                 getUserFoodEntries(userId: userId)
             }
         }
