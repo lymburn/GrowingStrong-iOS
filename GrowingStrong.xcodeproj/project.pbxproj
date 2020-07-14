@@ -49,6 +49,7 @@
 		26475C952442CB2E004A5C71 /* RegisterStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C942442CB2E004A5C71 /* RegisterStatsCell.swift */; };
 		26475C992442D00B004A5C71 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26475C982442D00B004A5C71 /* Constants.swift */; };
 		264B211324BE53350008B55F /* DateFormatterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B211224BE53350008B55F /* DateFormatterHelper.swift */; };
+		264B211524BE60500008B55F /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B211424BE60500008B55F /* UserDataManager.swift */; };
 		2651926B247EB71400483915 /* FoodSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2651926A247EB71400483915 /* FoodSearchController.swift */; };
 		2651926E247EC0E700483915 /* ActionOptionsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2651926D247EC0E700483915 /* ActionOptionsLauncher.swift */; };
 		26519272247EC1B500483915 /* BaseOptionsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26519271247EC1B500483915 /* BaseOptionsLauncher.swift */; };
@@ -148,6 +149,7 @@
 		26475C942442CB2E004A5C71 /* RegisterStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterStatsCell.swift; sourceTree = "<group>"; };
 		26475C982442D00B004A5C71 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		264B211224BE53350008B55F /* DateFormatterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterHelper.swift; sourceTree = "<group>"; };
+		264B211424BE60500008B55F /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		2651926A247EB71400483915 /* FoodSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchController.swift; sourceTree = "<group>"; };
 		2651926D247EC0E700483915 /* ActionOptionsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionOptionsLauncher.swift; sourceTree = "<group>"; };
 		26519271247EC1B500483915 /* BaseOptionsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseOptionsLauncher.swift; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 				268A6CA624B2563E007113B6 /* CoreDataManager.swift */,
 				268A6CA924B26C56007113B6 /* FoodEntryDataManager.swift */,
 				268A6CAC24B26E33007113B6 /* EntityNames.swift */,
+				264B211424BE60500008B55F /* UserDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -853,6 +856,7 @@
 				266BB5A224632156009269B2 /* LearnController.swift in Sources */,
 				26119AF3247C5860009FDD79 /* FoodEntryViewModel.swift in Sources */,
 				26087D6B248DFAE2009B4548 /* UserNetworkManager.swift in Sources */,
+				264B211524BE60500008B55F /* UserDataManager.swift in Sources */,
 				2605A8B32442BC1D001CF085 /* RegisterController.swift in Sources */,
 				26519272247EC1B500483915 /* BaseOptionsLauncher.swift in Sources */,
 				26F7832F2471A9B600B7F0C8 /* BaseFoodController.swift in Sources */,

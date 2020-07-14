@@ -27,4 +27,22 @@ class CoreDataManager {
 
         return container
     }()
+    
+    private func clearStorage(forEntity entityName: String) throws {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        try context.execute(batchDeleteRequest)
+    }
+    
+    //Return true on success and false otherwise
+    func clearAllStorage() {
+        EntityNames.allCases.forEach {
+            do {
+                try clearStorage(forEntity: $0.rawValue)
+            } catch let error {
+                print (error)
+            }
+        }
+    }
 }

@@ -185,7 +185,7 @@ class UserNetworkManager: UserNetworkManagerType {
                         let decoder = JSONDecoder()
                         decoder.userInfo[codingUserInfoKeyManagedObjectContext] = self.managedObjectContext
                         let foodEntries = try decoder.decode([FoodEntry].self, from: responseData)
-                        //try self.managedObjectContext.save()
+                        try self.managedObjectContext.save()
                         
                         completion(foodEntries, nil)
                     } catch {

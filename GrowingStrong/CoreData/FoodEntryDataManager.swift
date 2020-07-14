@@ -8,7 +8,12 @@
 
 import CoreData
 
-struct FoodEntryDataManager {
+protocol FoodEntryDataManagerType {
+    func createFoodEntry(food: Food, dateAdded: Date, servingAmount: Float, selectedServing: Serving) -> FoodEntry?
+    func fetchFoodEntries () -> [FoodEntry]?
+}
+
+struct FoodEntryDataManager: FoodEntryDataManagerType {
     let context: NSManagedObjectContext = CoreDataManager.shared.context
     
     @discardableResult

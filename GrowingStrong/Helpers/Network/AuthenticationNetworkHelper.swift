@@ -10,7 +10,9 @@ import Foundation
 import SwiftKeychainWrapper
 
 protocol AuthenticationNetworkHelperType {
-    func authenticate(email: String, password: String, completion: @escaping (_ response: AuthenticationNetworkHelperResponse) -> ())
+    func authenticate(email: String,
+                      password: String,
+                      completion: @escaping (_ response: AuthenticationNetworkHelperResponse, _ userId: Int?) -> ())
 }
 
 enum AuthenticationNetworkHelperResponse {
@@ -33,17 +35,17 @@ struct AuthenticationNetworkHelper: AuthenticationNetworkHelperType {
     
     func authenticate(email: String,
                       password: String,
-                      completion: @escaping (_ response: AuthenticationNetworkHelperResponse) -> ()) {
+                      completion: @escaping (_ response: AuthenticationNetworkHelperResponse, _ userId: Int?) -> ()) {
         
         let isValidEmail = CredentialsFormatChecker.isValidEmail(email)
         let isValidPassword = CredentialsFormatChecker.isValidPassword(password)
 
         if !isValidEmail {
-            return completion(.invalidEmailFormat)
+            return completion(.invalidEmailFormat, nil)
         }
         
         if !isValidPassword {
-            return completion(.invalidPasswordFormat)
+            return completion(.invalidPasswordFormat, nil)
         }
         
         let authenticateRequest = AuthenticateRequest(email: email, password: password)
@@ -53,9 +55,9 @@ struct AuthenticationNetworkHelper: AuthenticationNetworkHelperType {
             if let error = error {
                 print(error)
                 if (error == NetworkResponse.authenticationError.rawValue) {
-                    completion(.authenticationError)
+                    completion(.authenticationError, nil)
                 } else {
-                    completion(.networkError)
+                    completion(.networkError, nil)
                 }
             }
 
@@ -63,9 +65,9 @@ struct AuthenticationNetworkHelper: AuthenticationNetworkHelperType {
                 let savedToKeyChainSuccessfully = KeychainWrapper.standard.set (response.token, forKey: self.jwtTokenKey)
                 
                 if !savedToKeyChainSuccessfully {
-                    completion(.savingTokenError)
+                    completion(.savingTokenError, nil)
                 } else {
-                    completion(.success)
+                    completion(.success, response.userId)
                 }
             }
         }

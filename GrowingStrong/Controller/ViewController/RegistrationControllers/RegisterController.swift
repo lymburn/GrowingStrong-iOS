@@ -203,7 +203,7 @@ extension RegisterController {
         if !passwordsMatch() {
             print ("Passwords do not match")
         } else {
-            registrationNetworkHelper.register(email: email, password: password) { response in
+            registrationNetworkHelper.register(email: email, password: password) { response, userId in
                 switch response {
                 case .invalidEmailFormat:
                     print ("Invalid email format")

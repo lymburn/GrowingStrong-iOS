@@ -35,7 +35,6 @@ struct UserNetworkHelper: UserNetworkHelperType {
             }
             
             if let foodEntries = foodEntries {
-                print(foodEntries)
                 completion(.success, foodEntries)
             }
         }

@@ -35,7 +35,7 @@ class AuthenticationNetworkHelperTests: XCTestCase {
     func testAuthenticateWithInvalidEmail() throws {
         let invalidEmail = "test123gmail.com"
         let password = "Password@1"
-        authenticationNetworkHelperNoError.authenticate(email: invalidEmail, password: password) { response in
+        authenticationNetworkHelperNoError.authenticate(email: invalidEmail, password: password) { response, userId  in
             XCTAssertEqual(response, AuthenticationNetworkHelperResponse.invalidEmailFormat)
         }
     }
@@ -43,7 +43,7 @@ class AuthenticationNetworkHelperTests: XCTestCase {
     func testAuthenticateWithInvalidPassword() throws {
         let email = "test123@gmail.com"
         let invalidPassword = "Password1"
-        authenticationNetworkHelperNoError.authenticate(email: email, password: invalidPassword) { response in
+        authenticationNetworkHelperNoError.authenticate(email: email, password: invalidPassword) { response, userId in
             XCTAssertEqual(response, AuthenticationNetworkHelperResponse.invalidPasswordFormat)
         }
     }
@@ -51,7 +51,7 @@ class AuthenticationNetworkHelperTests: XCTestCase {
     func testAuthenticateWithNetworkError() throws {
         let email = "test123@gmail.com"
         let password = "Password@123"
-        authenticationNetworkHelperNetworkError.authenticate(email: email, password: password) { response in
+        authenticationNetworkHelperNetworkError.authenticate(email: email, password: password) { response, userId in
             XCTAssertEqual(response, AuthenticationNetworkHelperResponse.networkError)
         }
     }
@@ -59,7 +59,7 @@ class AuthenticationNetworkHelperTests: XCTestCase {
     func testAuthenticateWithAuthenticationError() throws {
         let email = "test123@gmail.com"
         let password = "Password@123"
-        authenticationNetworkHelperAuthenticationError.authenticate(email: email, password: password) { response in
+        authenticationNetworkHelperAuthenticationError.authenticate(email: email, password: password) { response, userId in
             XCTAssertEqual(response, AuthenticationNetworkHelperResponse.authenticationError)
         }
     }
@@ -67,7 +67,7 @@ class AuthenticationNetworkHelperTests: XCTestCase {
     func testAuthenticateSuccess() throws {
         let email = "test123@gmail.com"
         let password = "Password@123"
-        authenticationNetworkHelperNoError.authenticate(email: email, password: password) { response in
+        authenticationNetworkHelperNoError.authenticate(email: email, password: password) { response, userId in
             XCTAssertEqual(response, AuthenticationNetworkHelperResponse.success)
         }
     }
