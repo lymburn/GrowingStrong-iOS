@@ -17,12 +17,10 @@ class LoginController: UIViewController {
         let userNetworkManager = UserNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer)
         let authenticationNetworkHelper = AuthenticationNetworkHelper(userNetworkManager: userNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken)
         let userNetworkHelper = UserNetworkHelper(userNetworkManager: userNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken)
-        let userDataManager = UserDataManager()
         
         setupDependencies(loginView: lView,
                           authenticationNetworkHelper: authenticationNetworkHelper,
-                          userNetworkHelper: userNetworkHelper,
-                          userDataManager: userDataManager)
+                          userNetworkHelper: userNetworkHelper)
         
         CoreDataManager.shared.clearAllStorage()
         
@@ -33,7 +31,6 @@ class LoginController: UIViewController {
     var userNetworkHelper: UserNetworkHelperType!
     var loginView: LoginViewType!
     var registerController: RegisterController!
-    var userDataManager: UserDataManagerType!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -57,13 +54,11 @@ class LoginController: UIViewController {
 extension LoginController {
     func setupDependencies(loginView: LoginViewType,
                            authenticationNetworkHelper: AuthenticationNetworkHelperType,
-                           userNetworkHelper: UserNetworkHelperType,
-                           userDataManager: UserDataManagerType) {
+                           userNetworkHelper: UserNetworkHelperType) {
         
         self.loginView = loginView
         self.authenticationNetworkHelper = authenticationNetworkHelper
         self.userNetworkHelper = userNetworkHelper
-        self.userDataManager = userDataManager
     }
     
     fileprivate func setupViews() {
@@ -112,7 +107,9 @@ extension LoginController {
         userNetworkHelper.getUserFoodEntries(userId: 4) { response, foodEntries in
             switch response {
             case .success:
-                self.navigateToMainPage()
+                if let foodEntries = foodEntries {
+                    self.navigateToMainPage(foodEntries: foodEntries)
+                }
             case .networkError:
                 //TODO: Handle this
                 print ("Error retrieving user's food entries")
@@ -144,10 +141,10 @@ extension LoginController {
     }
     
     fileprivate func createUser(userId: Int, emailAddress: String) {
-        userDataManager.createUser(userId: userId, emailAddress: emailAddress)
+        UserDataManager.createUser(userId: userId, emailAddress: emailAddress)
     }
     
-    fileprivate func navigateToMainPage() {
+    fileprivate func navigateToMainPage(foodEntries: [FoodEntry]) {
         DispatchQueue.main.async {
             let mainController = MainTabBarController()
             mainController.modalPresentationStyle = .fullScreen

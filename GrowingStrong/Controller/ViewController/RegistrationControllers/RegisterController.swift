@@ -24,10 +24,8 @@ class RegisterController: UIViewController {
         
         let userNetworkManager = UserNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer)
         let registrationNetworkHelper = RegistrationNetworkHelper(userNetworkManager: userNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken)
-        let userDataManager = UserDataManager()
         
-        setupDependencies(registrationNetworkHelper: registrationNetworkHelper,
-                          userDataManager: userDataManager)
+        setupDependencies(registrationNetworkHelper: registrationNetworkHelper)
     }
     
     let registerStatsCellId = "registerStatsCell"
@@ -37,8 +35,6 @@ class RegisterController: UIViewController {
     lazy var submitButton = UIBarButtonItem(title: "Submit", style: .plain, target: self, action: #selector(submitTapped))
     
     var registrationNetworkHelper: RegistrationNetworkHelperType!
-    
-    var userDataManager: UserDataManagerType!
     
     lazy var dataController: RegisterDataController = {
         let dataController = RegisterDataController(registerStatsCellId: registerStatsCellId,
@@ -75,11 +71,9 @@ class RegisterController: UIViewController {
 
 //MARK: Setup
 extension RegisterController {
-    func setupDependencies(registrationNetworkHelper: RegistrationNetworkHelperType,
-                           userDataManager: UserDataManagerType) {
+    func setupDependencies(registrationNetworkHelper: RegistrationNetworkHelperType) {
         
         self.registrationNetworkHelper = registrationNetworkHelper
-        self.userDataManager = userDataManager
     }
     
     fileprivate func setupViews() {
@@ -196,7 +190,7 @@ extension RegisterController {
     }
     
     fileprivate func createUser(userId: Int, emailAddress: String) {
-        userDataManager.createUser(userId: userId, emailAddress: emailAddress)
+        UserDataManager.createUser(userId: userId, emailAddress: emailAddress)
     }
 }
 

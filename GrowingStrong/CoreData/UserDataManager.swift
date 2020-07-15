@@ -9,16 +9,11 @@
 import Foundation
 import CoreData
 
-protocol UserDataManagerType {
-    func createUser (userId: Int, emailAddress: String) -> User?
-    func fetchUser (byId userId: Int) -> User?
-}
-
-struct UserDataManager: UserDataManagerType {
-    let context: NSManagedObjectContext = CoreDataManager.shared.context
+struct UserDataManager {
+    static let context: NSManagedObjectContext = CoreDataManager.shared.context
     
     @discardableResult
-    func createUser (userId: Int,
+    static func createUser (userId: Int,
                      emailAddress: String) -> User? {
         
         let user = NSEntityDescription.insertNewObject(forEntityName: EntityNames.user.rawValue, into: context) as! User
@@ -36,7 +31,7 @@ struct UserDataManager: UserDataManagerType {
         return nil
     }
     
-    func fetchUser (byId userId: Int) -> User? {
+    static func fetchUser (byId userId: Int) -> User? {
         let fetchRequest = NSFetchRequest<User>(entityName: EntityNames.user.rawValue)
         let predicate = NSPredicate(format: "userId == %d", userId)
         fetchRequest.predicate = predicate

@@ -13,13 +13,12 @@ class FoodSearchController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        foodEntryViewModels = testFoodEntries.map({return FoodEntryViewModel.init(foodEntry: $0)})
-
+        foodEntryViewModels = []
         setupSearchController()
         setupNavigationItems()
         setupFoodEntryViewModels(foodEntryViewModels)
         foodEntriesTableView.register(FoodCell.self, forCellReuseIdentifier: foodEntryCellId)
-
+        
         setupViews()
     }
     

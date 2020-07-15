@@ -8,16 +8,11 @@
 
 import CoreData
 
-protocol FoodEntryDataManagerType {
-    func createFoodEntry(food: Food, dateAdded: Date, servingAmount: Float, selectedServing: Serving) -> FoodEntry?
-    func fetchFoodEntries () -> [FoodEntry]?
-}
-
-struct FoodEntryDataManager: FoodEntryDataManagerType {
-    let context: NSManagedObjectContext = CoreDataManager.shared.context
+struct FoodEntryDataManager {
+    static let context: NSManagedObjectContext = CoreDataManager.shared.context
     
     @discardableResult
-    func createFoodEntry (food: Food,
+    static func createFoodEntry (food: Food,
                           dateAdded: Date,
                           servingAmount: Float,
                           selectedServing: Serving) -> FoodEntry? {
@@ -39,7 +34,7 @@ struct FoodEntryDataManager: FoodEntryDataManagerType {
         return nil
     }
     
-    func fetchFoodEntries () -> [FoodEntry]? {
+    static func fetchFoodEntries () -> [FoodEntry]? {
         let fetchRequest = NSFetchRequest<FoodEntry>(entityName: EntityNames.foodEntry.rawValue)
 
         do {

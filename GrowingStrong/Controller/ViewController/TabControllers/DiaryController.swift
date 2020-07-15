@@ -8,35 +8,15 @@
 
 import UIKit
 
-
-let testServings1: [Serving] = [
-
-]
-
-let testServings2: [Serving] = [
-
-]
-
-let testFoods: [Food] = [
-
-]
-
-let testFoodEntries: [FoodEntry] = [
-
-]
-
 class DiaryController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupDependencies(dateBar: dBar,
+                          dailyNutritionView: dnView)
         
-        setupDateBar(dBar)
-        setupDailyNutritionView(dnView)
-        setupFoodEntryViewModels(testFoodEntries.map({return FoodEntryViewModel.init(foodEntry: $0)}))
         setupViews()
         
         foodEntriesTableView.register(FoodCell.self, forCellReuseIdentifier: foodEntryCellId)
-        
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,14 +34,15 @@ class DiaryController: UIViewController {
     
     let foodEntryCellId = "foodEntryCellId"
     
-    var testFoodEntryViewModels: [FoodEntryViewModel]!
+    var foodEntryViewModels: [FoodEntryViewModel]! = FoodEntryDataManager.fetchFoodEntries()?.map { return FoodEntryViewModel(foodEntry: $0)}
     var dateBar: DateBarType!
     var dailyNutritionView: DailyNutritionViewType!
     
     lazy var navBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
     
     lazy var foodEntriesDataController: FoodEntriesDataController = {
-        let controller = FoodEntriesDataController(cellIdentifier: foodEntryCellId, foodEntryViewModels: getFoodEntriesByDate(testFoodEntryViewModels, Date()))
+        let controller = FoodEntriesDataController(cellIdentifier: foodEntryCellId,
+                                                   foodEntryViewModels: getFoodEntryViewModelsByDate(foodEntryViewModels, Date()))
         controller.delegate = self
         return controller
     }()
@@ -103,16 +84,11 @@ class DiaryController: UIViewController {
 
 //MARK: Setup
 extension DiaryController {
-    func setupDateBar(_ dateBar: DateBarType) {
+    func setupDependencies (dateBar: DateBarType,
+                            dailyNutritionView: DailyNutritionViewType) {
+        
         self.dateBar = dateBar
-    }
-    
-    func setupDailyNutritionView(_ dailyNutritionView: DailyNutritionViewType) {
         self.dailyNutritionView = dailyNutritionView
-    }
-    
-    func setupFoodEntryViewModels(_ foodEntryViewModels: [FoodEntryViewModel]) {
-        self.testFoodEntryViewModels = foodEntryViewModels
     }
     
     fileprivate func setupViews() {
@@ -145,13 +121,12 @@ extension DiaryController {
 
 //MARK: Helpers
 extension DiaryController {
-    fileprivate func getFoodEntriesByDate(_ foodEntryViewModels: [FoodEntryViewModel], _ date: Date) -> [FoodEntryViewModel] {
-        //return foodEntryViewModels.filter({$0.dateAdded.isEqualTo(date: date, by: .day)})
-        return []
+    fileprivate func getFoodEntryViewModelsByDate(_ foodEntryViewModels: [FoodEntryViewModel], _ date: Date) -> [FoodEntryViewModel] {
+        return foodEntryViewModels.filter({$0.dateAdded.isEqualTo(date: date, by: .day)})
     }
     
     fileprivate func updateFoodEntriesUI(for date: Date) {
-        foodEntriesDataController.updateFoodEntryViewModels(getFoodEntriesByDate(testFoodEntryViewModels, date))
+        foodEntriesDataController.updateFoodEntryViewModels(getFoodEntryViewModelsByDate(foodEntryViewModels, date))
         foodEntriesTableView.reloadData()
     }
 }
@@ -183,7 +158,7 @@ extension DiaryController: DateBarDelegate {
 extension DiaryController: FoodEntriesDataControllerDelegate {
     func rowSelected(at row: Int) {
         let editFoodController = EditFoodController()
-        let foodEntryVM = testFoodEntryViewModels[row]
+        let foodEntryVM = foodEntryViewModels[row]
         editFoodController.foodEntryViewModel = foodEntryVM
         editFoodController.selectedServing = foodEntryVM.selectedServing
         navigationController?.pushViewController(editFoodController, animated: true)
