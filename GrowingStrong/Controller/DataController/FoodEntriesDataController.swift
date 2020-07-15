@@ -33,7 +33,7 @@ class FoodEntriesDataController: NSObject, UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FoodCell
         let foodEntryViewModel = foodEntryViewModels[indexPath.item]
-        cell.nameLabel.text = foodEntryViewModel.food.name
+        cell.nameLabel.text = foodEntryViewModel.food.foodName
         cell.caloriesLabel.text = foodEntryViewModel.totalCaloriesText
         cell.quantityLabel.text = foodEntryViewModel.totalQuantityText
         return cell

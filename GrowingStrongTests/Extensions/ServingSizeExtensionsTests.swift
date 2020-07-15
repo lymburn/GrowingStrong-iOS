@@ -1,5 +1,5 @@
 //
-//  ServingSizeExtensionsTests.swift
+//  ServingExtensionsTests.swift
 //  GrowingStrongTests
 //
 //  Created by Eugene Lu on 2020-05-20.
@@ -10,7 +10,7 @@ import XCTest
 import CoreData
 @testable import GrowingStrong
 
-class ServingSizeExtensionsTests: XCTestCase {
+class ServingExtensionsTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -20,16 +20,15 @@ class ServingSizeExtensionsTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testToTextFunction() throws {
+    func testGetServingSizeTextFunction() throws {
         let expectedText = "100.0 g"
         
-        let servingSizeEntity: NSEntityDescription = NSEntityDescription.entity(forEntityName: EntityNames.servingSize.rawValue,
-                                                                                 in: CoreDataManager.shared.context)!
+        let servingEntity: NSEntityDescription = NSEntityDescription.entity(forEntityName: EntityNames.serving.rawValue, in: CoreDataManager.shared.context)!
         
-        let servingSize = NSManagedObject(entity: servingSizeEntity, insertInto: nil) as! ServingSize
-        servingSize.quantity = 100
-        servingSize.unit = "g"
-        let text = servingSize.toText()
+        let serving = NSManagedObject(entity: servingEntity, insertInto: nil) as! Serving
+        serving.quantity = 100
+        serving.unit = "g"
+        let text = serving.getServingSizeText()
         
         XCTAssertEqual(expectedText, text)
     }

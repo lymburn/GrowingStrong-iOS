@@ -13,13 +13,12 @@ class FoodSearchController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        foodEntryViewModels = testFoodEntries.map({return FoodEntryViewModel.init(foodEntry: $0)})
-
+        foodEntryViewModels = []
         setupSearchController()
         setupNavigationItems()
         setupFoodEntryViewModels(foodEntryViewModels)
         foodEntriesTableView.register(FoodCell.self, forCellReuseIdentifier: foodEntryCellId)
-
+        
         setupViews()
     }
     
@@ -110,7 +109,7 @@ extension FoodSearchController: UISearchResultsUpdating {
 extension FoodSearchController {
     func filterContentForSearchText(_ searchText: String) {
         filteredFoodEntryViewModels = foodEntryViewModels.filter { (foodEntryViewModel: FoodEntryViewModel) -> Bool in
-            return foodEntryViewModel.food.name.lowercased().contains(searchText.lowercased())
+            return foodEntryViewModel.food.foodName.lowercased().contains(searchText.lowercased())
         }
         
         if isFiltering {

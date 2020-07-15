@@ -13,11 +13,11 @@ import CoreData
 class User: NSManagedObject, Codable {
     
     private enum CodingKeys: String, CodingKey {
-        case id
+        case userId
         case emailAddress
     }
     
-    @NSManaged var id: Int32
+    @NSManaged var userId: Int32
     @NSManaged var emailAddress: String
 
     required convenience init(from decoder: Decoder) throws {
@@ -31,14 +31,14 @@ class User: NSManagedObject, Codable {
         self.init(entity: entity, insertInto: managedObjectContext)
 
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(Int32.self, forKey: .id)
+        self.userId = try container.decode(Int32.self, forKey: .userId)
         self.emailAddress = try container.decode(String.self, forKey: .emailAddress)
     }
     
     // MARK: - Encodable
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
+        try container.encode(userId, forKey: .userId)
         try container.encode(emailAddress, forKey: .emailAddress)
     }
 }

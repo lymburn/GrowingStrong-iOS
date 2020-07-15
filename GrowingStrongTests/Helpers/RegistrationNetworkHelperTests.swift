@@ -36,7 +36,7 @@ class RegistrationNetworkHelperTests: XCTestCase {
     func testRegisterWithInvalidEmail() throws {
         let invalidEmail = "test123gmail.com"
         let password = "Password@1"
-        registrationNetworkHelperNoError.register(email: invalidEmail, password: password) { response in
+        registrationNetworkHelperNoError.register(email: invalidEmail, password: password) { response, userId in
             XCTAssertEqual(response, RegistrationNetworkHelperResponse.invalidEmailFormat)
         }
     }
@@ -44,7 +44,7 @@ class RegistrationNetworkHelperTests: XCTestCase {
     func testRegisterWithInvalidPassword() throws {
         let email = "test123@gmail.com"
         let invalidPassword = "Password1"
-        registrationNetworkHelperNoError.register(email: email, password: invalidPassword) { response in
+        registrationNetworkHelperNoError.register(email: email, password: invalidPassword) { response, userId in
             XCTAssertEqual(response, RegistrationNetworkHelperResponse.invalidPasswordFormat)
         }
     }
@@ -52,7 +52,7 @@ class RegistrationNetworkHelperTests: XCTestCase {
     func testRegisterWithNetworkError() throws {
         let email = "test123@gmail.com"
         let password = "Password@123"
-        registrationNetworkHelperNetworkError.register(email: email, password: password) { response in
+        registrationNetworkHelperNetworkError.register(email: email, password: password) { response, userId in
             XCTAssertEqual(response, RegistrationNetworkHelperResponse.networkError)
         }
     }
@@ -60,7 +60,7 @@ class RegistrationNetworkHelperTests: XCTestCase {
     func testRegisterWithExistingUserError() throws {
         let email = "test123@gmail.com"
         let password = "Password@123"
-        registrationNetworkHelperUserExistsError.register(email: email, password: password) { response in
+        registrationNetworkHelperUserExistsError.register(email: email, password: password) { response, userId in
             XCTAssertEqual(response, RegistrationNetworkHelperResponse.userAlreadyExists)
         }
     }
@@ -68,7 +68,7 @@ class RegistrationNetworkHelperTests: XCTestCase {
     func testRegisterSuccess() throws {
         let email = "test123@gmail.com"
         let password = "Password@123"
-        registrationNetworkHelperNoError.register(email: email, password: password) { response in
+        registrationNetworkHelperNoError.register(email: email, password: password) { response, userId in
             XCTAssertEqual(response, RegistrationNetworkHelperResponse.success)
         }
     }

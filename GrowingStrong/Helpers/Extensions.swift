@@ -57,8 +57,8 @@ extension Date {
     }
 }
 
-extension ServingSize {
-    func toText() -> String {
+extension Serving {
+    func getServingSizeText() -> String {
         return "\(self.quantity) \(self.unit)"
     }
 }

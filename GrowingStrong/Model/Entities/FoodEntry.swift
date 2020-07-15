@@ -37,11 +37,17 @@ class FoodEntry: NSManagedObject, Codable {
         self.init(entity: entity, insertInto: managedObjectContext)
 
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.dateAdded = try container.decode(Date.self, forKey: .dateAdded)
+        let dateString = try container.decode(String.self, forKey: .dateAdded)
+        let dateFormatter = DateFormatterHelper.generateDateFormatter(withFormat: DateFormatConstants.ISO8601)
+        
+        if let date = dateFormatter.date(from: dateString) {
+            self.dateAdded = date
+        }
+        
         self.foodEntryId = try container.decode(Int32.self, forKey: .foodEntryId)
         self.servingAmount = try container.decode(Float.self, forKey: .servingAmount)
         self.food = try container.decode(Food.self, forKey: .food)
-        self.selectedServing = try container.decode(Serving.self, forKey: .food)
+        self.selectedServing = try container.decode(Serving.self, forKey: .selectedServing)
     }
     
     // MARK: - Encodable

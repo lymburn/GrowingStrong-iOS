@@ -50,7 +50,7 @@ class EditFoodController: BaseFoodController {
 
 extension EditFoodController {
     fileprivate func saveFoodInfo() {
-        //TO DO: implement persistence for food view model
+        //TODO: notification manager for updating core data object
         let servingAmount = super.getServingAmount()
         
         if selectedServing == nil || servingAmount == nil {
@@ -58,9 +58,12 @@ extension EditFoodController {
             return
         }
         
-        if let selectedServingSize = selectedServing, let servingAmount = servingAmount {
-            foodEntryViewModel.selectedServing = selectedServingSize
-            foodEntryViewModel.servingAmount = servingAmount
+        if let selectedServing = selectedServing, let servingAmount = servingAmount {
+            FoodEntryDataManager.updateFoodEntry(foodEntryViewModel.foodEntryId,
+                                                 servingAmount: servingAmount,
+                                                 selectedServing: selectedServing)
+            
+            let foodEntry = FoodEntryDataManager.fetchFoodEntryById(foodEntryViewModel.foodEntryId)
         }
     }
     

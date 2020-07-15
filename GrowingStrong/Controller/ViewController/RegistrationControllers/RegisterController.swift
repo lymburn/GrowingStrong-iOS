@@ -21,8 +21,11 @@ class RegisterController: UIViewController {
         navigationItem.rightBarButtonItem = nextButton
         navigationItem.leftBarButtonItem = backButton
         
+        
         let userNetworkManager = UserNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer)
-        setupRegistrationNetworkHelper(registrationNetworkHelper: RegistrationNetworkHelper(userNetworkManager: userNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken))
+        let registrationNetworkHelper = RegistrationNetworkHelper(userNetworkManager: userNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken)
+        
+        setupDependencies(registrationNetworkHelper: registrationNetworkHelper)
     }
     
     let registerStatsCellId = "registerStatsCell"
@@ -63,16 +66,13 @@ class RegisterController: UIViewController {
         return picker
     }()
     
-    lazy var dateFormatter: DateFormatter = {
-        let df = DateFormatter()
-        df.dateFormat = DateFormatConstants.shortMonthDefault
-        return df
-    }()
+    lazy var dateFormatter: DateFormatter = DateFormatterHelper.generateDateFormatter(withFormat: DateFormatConstants.longMonthDefault)
 }
 
 //MARK: Setup
 extension RegisterController {
-    func setupRegistrationNetworkHelper(registrationNetworkHelper: RegistrationNetworkHelperType) {
+    func setupDependencies(registrationNetworkHelper: RegistrationNetworkHelperType) {
+        
         self.registrationNetworkHelper = registrationNetworkHelper
     }
     
@@ -164,6 +164,34 @@ extension RegisterController {
         
         return password == confirmPassword
     }
+    
+    fileprivate func handleRegisterResponse(_ response: RegistrationNetworkHelperResponse,
+                                            _ user: User?) {
+        
+        switch response {
+        case .invalidEmailFormat:
+            print ("Invalid email format")
+        case .invalidPasswordFormat:
+            print ("Invalid password format")
+        case .userAlreadyExists:
+            print ("Email address taken")
+        case .networkError:
+            print ("Network error")
+        case .savingTokenError:
+            print ("Error saving token")
+        case .success:
+            if let user = user {
+                let userId = Int(user.userId)
+                self.createUser(userId: userId, emailAddress: user.emailAddress)
+                self.navigateToMainPage()
+            }
+            
+        }
+    }
+    
+    fileprivate func createUser(userId: Int, emailAddress: String) {
+        UserDataManager.createUser(userId: userId, emailAddress: emailAddress)
+    }
 }
 
 //MARK: Events
@@ -198,7 +226,7 @@ extension RegisterController {
     }
     
     @objc func submitTapped() {
-        //TODO: Submit registration stats & account info to server
+        //TODO:
         let indexPath = IndexPath(item: 1, section: 0)
         let cell = collectionView.cellForItem(at: indexPath) as! CreateAccountCell
         let email = cell.emailTextField.text!
@@ -207,21 +235,8 @@ extension RegisterController {
         if !passwordsMatch() {
             print ("Passwords do not match")
         } else {
-            registrationNetworkHelper.register(email: email, password: password) { response in
-                switch response {
-                case .invalidEmailFormat:
-                    print ("Invalid email format")
-                case .invalidPasswordFormat:
-                    print ("Invalid password format")
-                case .userAlreadyExists:
-                    print ("Email address taken")
-                case .networkError:
-                    print ("Network error")
-                case .savingTokenError:
-                    print ("Error saving token")
-                case .success:
-                    self.navigateToMainPage()
-                }
+            registrationNetworkHelper.register(email: email, password: password) { response, userId in
+                self.handleRegisterResponse(response, userId)
             }
         }
     }

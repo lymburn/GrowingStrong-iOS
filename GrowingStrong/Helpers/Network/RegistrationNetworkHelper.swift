@@ -10,7 +10,9 @@ import Foundation
 import SwiftKeychainWrapper
 
 protocol RegistrationNetworkHelperType {
-    func register(email: String, password: String, completion: @escaping (_ response: RegistrationNetworkHelperResponse) -> ())
+    func register(email: String,
+                  password: String,
+                  completion: @escaping (_ response: RegistrationNetworkHelperResponse, _ user: User?) -> ())
 }
 
 enum RegistrationNetworkHelperResponse {
@@ -33,17 +35,17 @@ struct RegistrationNetworkHelper: RegistrationNetworkHelperType {
     
     func register(email: String,
                       password: String,
-                      completion: @escaping (_ response: RegistrationNetworkHelperResponse) -> ()) {
+                      completion: @escaping (_ response: RegistrationNetworkHelperResponse, _ user: User?) -> ()) {
         
         let isValidEmail = CredentialsFormatChecker.isValidEmail(email)
         let isValidPassword = CredentialsFormatChecker.isValidPassword(password)
 
         if !isValidEmail {
-            return completion(.invalidEmailFormat)
+            return completion(.invalidEmailFormat, nil)
         }
         
         if !isValidPassword {
-            return completion(.invalidPasswordFormat)
+            return completion(.invalidPasswordFormat, nil)
         }
         
         let registerRequest = RegisterRequest(email: email, password: password)
@@ -53,9 +55,9 @@ struct RegistrationNetworkHelper: RegistrationNetworkHelperType {
             if let error = error {
                 print(error)
                 if (error == UserNetworkResponseError.userAlreadyExists.rawValue) {
-                    completion(.userAlreadyExists)
+                    completion(.userAlreadyExists, nil)
                 } else {
-                    completion(.networkError)
+                    completion(.networkError, nil)
                 }
             }
 
@@ -63,9 +65,9 @@ struct RegistrationNetworkHelper: RegistrationNetworkHelperType {
                 let savedToKeyChainSuccessfully = KeychainWrapper.standard.set (response.token, forKey: self.jwtTokenKey)
                 
                 if !savedToKeyChainSuccessfully {
-                    completion(.savingTokenError)
+                    completion(.savingTokenError, nil)
                 } else {
-                    completion(.success)
+                    completion(.success, response.user)
                 }
             }
         }

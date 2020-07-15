@@ -77,7 +77,7 @@ extension ServingSizeOptionsLauncher: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: servingSizeOptionsCellIdentifier, for: indexPath) as! ServingSizeOptionsCell
-        cell.optionLabel.text = servingOptions[indexPath.row].servingSize.toText()
+        cell.optionLabel.text = servingOptions[indexPath.row].getServingSizeText()
         return cell
     }
     

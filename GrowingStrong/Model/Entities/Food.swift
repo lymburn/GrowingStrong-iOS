@@ -13,15 +13,14 @@ import CoreData
 class Food: NSManagedObject, Codable {
     private enum CodingKeys: String, CodingKey {
         case foodId
-        case name
+        case foodName
         case foodEntries
         case servings
     }
     
     @NSManaged var foodId: Int32
-    @NSManaged var name: String
-    @NSManaged var foodEntries: [FoodEntry]?
-    @NSManaged var servings: [Serving]
+    @NSManaged var foodName: String
+    @NSManaged var servings: Set<Serving>
 
     required convenience init(from decoder: Decoder) throws {
         guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext,
@@ -35,17 +34,15 @@ class Food: NSManagedObject, Codable {
 
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.foodId = try container.decode(Int32.self, forKey: .foodId)
-        self.name = try container.decode(String.self, forKey: .name)
-        self.foodEntries = try container.decode([FoodEntry]?.self, forKey: .foodEntries)
-        self.servings = try container.decode([Serving].self, forKey: .servings)
+        self.foodName = try container.decode(String.self, forKey: .foodName)
+        self.servings  = try container.decode(Set<Serving>.self, forKey: .servings)
     }
     
     // MARK: - Encodable
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(foodId, forKey: .foodId)
-        try container.encode(name, forKey: .name)
-        try container.encode(foodEntries, forKey: .foodEntries)
+        try container.encode(foodName, forKey: .foodName)
         try container.encode(servings, forKey: .servings)
     }
 }

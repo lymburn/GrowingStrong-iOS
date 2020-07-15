@@ -14,14 +14,21 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupLoginView(lView)
         let userNetworkManager = UserNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer)
-        setupAuthenticationNetworkHelper(authenticationNetworkHelper: AuthenticationNetworkHelper(userNetworkManager: userNetworkManager,
-                                                                             jwtTokenKey: KeyChainKeys.jwtToken))
+        let authenticationNetworkHelper = AuthenticationNetworkHelper(userNetworkManager: userNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken)
+        let userNetworkHelper = UserNetworkHelper(userNetworkManager: userNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken)
+        
+        setupDependencies(loginView: lView,
+                          authenticationNetworkHelper: authenticationNetworkHelper,
+                          userNetworkHelper: userNetworkHelper)
+        
+        CoreDataManager.shared.clearAllStorage()
+        
         setupViews()
     }
     
     var authenticationNetworkHelper: AuthenticationNetworkHelperType!
+    var userNetworkHelper: UserNetworkHelperType!
     var loginView: LoginViewType!
     var registerController: RegisterController!
     
@@ -45,10 +52,14 @@ class LoginController: UIViewController {
 
 //MARK: Setup
 extension LoginController {
-    func setupLoginView(_ loginView: LoginViewType) {
+    func setupDependencies(loginView: LoginViewType,
+                           authenticationNetworkHelper: AuthenticationNetworkHelperType,
+                           userNetworkHelper: UserNetworkHelperType) {
+        
         self.loginView = loginView
+        self.authenticationNetworkHelper = authenticationNetworkHelper
+        self.userNetworkHelper = userNetworkHelper
     }
-    
     
     fileprivate func setupViews() {
         view.backgroundColor = .white
@@ -70,31 +81,9 @@ extension LoginController: LoginViewDelegate {
         //TODO
         print("Forget password pressed")
     }
-    
-    func setupAuthenticationNetworkHelper(authenticationNetworkHelper: AuthenticationNetworkHelperType) {
-        self.authenticationNetworkHelper = authenticationNetworkHelper
-    }
 
     func loginButtonPressed() {
-        let email = loginView.getEmailValue()
-        let password = loginView.getPasswordValue()
-        
-        authenticationNetworkHelper.authenticate(email: email, password: password) { response in
-            switch response {
-            case .invalidEmailFormat:
-                print ("Invalid email format")
-            case .invalidPasswordFormat:
-                print ("Invalid password format")
-            case .authenticationError:
-                print ("Authentication error")
-            case .networkError:
-                print ("Network error")
-            case .savingTokenError:
-                print ("Error saving token")
-            case .success:
-                self.navigateToMainPage()
-            }
-        }
+        authenticateUser()
     }
 
     func registerButtonPressed() {
@@ -103,8 +92,59 @@ extension LoginController: LoginViewDelegate {
     }
 }
 
+//Helpers
 extension LoginController {
-    fileprivate func navigateToMainPage() {
+    fileprivate func authenticateUser() {
+        let email = loginView.getEmailValue()
+        let password = loginView.getPasswordValue()
+        
+        authenticationNetworkHelper.authenticate(email: email, password: password) { response, user in
+            self.handleAuthenticationResponse(response, user)
+        }
+    }
+    
+    fileprivate func getUserFoodEntries(userId: Int) {
+        userNetworkHelper.getUserFoodEntries(userId: 4) { response, foodEntries in
+            switch response {
+            case .success:
+                if let foodEntries = foodEntries {
+                    self.navigateToMainPage(foodEntries: foodEntries)
+                }
+            case .networkError:
+                //TODO: Handle this
+                print ("Error retrieving user's food entries")
+            }
+        }
+    }
+    
+    fileprivate func handleAuthenticationResponse(_ response: AuthenticationNetworkHelperResponse,
+                                                  _ user: User?) {
+        //TODO: Do stuff with errors (e.g. UI)
+        switch response {
+        case .invalidEmailFormat:
+            print ("Invalid email format")
+        case .invalidPasswordFormat:
+            print ("Invalid password format")
+        case .authenticationError:
+            print ("Authentication error")
+        case .networkError:
+            print ("Network error")
+        case .savingTokenError:
+            print ("Error saving token")
+        case .success:
+            if let user = user {
+                let userId = Int(user.userId)
+                createUser(userId: userId, emailAddress: user.emailAddress)
+                getUserFoodEntries(userId: userId)
+            }
+        }
+    }
+    
+    fileprivate func createUser(userId: Int, emailAddress: String) {
+        UserDataManager.createUser(userId: userId, emailAddress: emailAddress)
+    }
+    
+    fileprivate func navigateToMainPage(foodEntries: [FoodEntry]) {
         DispatchQueue.main.async {
             let mainController = MainTabBarController()
             mainController.modalPresentationStyle = .fullScreen

@@ -8,10 +8,9 @@
 
 import Foundation
 
-enum EntityNames: String {
+enum EntityNames: String, CaseIterable {
     case foodEntry = "FoodEntry"
     case food = "Food"
     case serving = "Serving"
-    case servingSize = "ServingSize"
     case user = "User"
 }
