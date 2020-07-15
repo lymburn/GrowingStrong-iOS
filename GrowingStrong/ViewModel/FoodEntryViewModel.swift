@@ -9,7 +9,7 @@
 import Foundation
 
 struct FoodEntryViewModel{
-    var id: Int32
+    var foodEntryId: Int32
     var food: Food
     var dateAdded: Date
     var selectedServing: Serving {
@@ -36,7 +36,7 @@ struct FoodEntryViewModel{
     var totalProteinText: String
     
     init(foodEntry: FoodEntry) {
-        self.id = foodEntry.foodEntryId
+        self.foodEntryId = foodEntry.foodEntryId
         self.food = foodEntry.food
         self.dateAdded = foodEntry.dateAdded
         self.selectedServing = foodEntry.selectedServing

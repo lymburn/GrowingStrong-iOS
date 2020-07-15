@@ -46,4 +46,36 @@ struct FoodEntryDataManager {
         
         return nil
     }
+    
+    static func fetchFoodEntryById (_ foodEntryId: Int32) -> FoodEntry? {
+        let fetchRequest = NSFetchRequest<FoodEntry>(entityName: EntityNames.foodEntry.rawValue)
+        
+        let predicate = NSPredicate(format: "foodEntryId == %d", foodEntryId)
+        fetchRequest.predicate = predicate
+        fetchRequest.fetchLimit = 1
+        
+        do {
+            let foodEntries = try context.fetch(fetchRequest)
+            return foodEntries.first
+        } catch let fetchError {
+            print("Failed to fetch food entry: \(fetchError)")
+        }
+        
+        return nil
+    }
+    
+    static func updateFoodEntry (_ foodEntryId: Int32, servingAmount: Float, selectedServing: Serving) {
+        let foodEntry = fetchFoodEntryById(foodEntryId)
+        
+        if let foodEntry = foodEntry {
+            foodEntry.servingAmount = servingAmount
+            foodEntry.selectedServing = selectedServing
+        }
+        
+        do {
+            try context.save()
+        } catch let updateError {
+            print("Failed to update food entry: \(updateError)")
+        }
+    }
 }
