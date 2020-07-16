@@ -88,6 +88,10 @@ extension FoodSearchController {
 
 //MARK: Data controller delegate
 extension FoodSearchController: FoodEntriesDataControllerDelegate {
+    func rowDeleted(at row: Int) {
+        //TODO: Separate this controller out to not use food entries data controller
+    }
+    
     func rowSelected(at row: Int) {
         let addFoodController = AddFoodController()
         let foodEntryVM = foodEntryViewModels[row]

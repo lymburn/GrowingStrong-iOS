@@ -78,4 +78,12 @@ struct FoodEntryDataManager {
             print("Failed to update food entry: \(updateError)")
         }
     }
+    
+    static func deleteFoodEntry (foodEntryId: Int32) {
+        let foodEntry = fetchFoodEntryById(foodEntryId)
+        
+        if let foodEntry = foodEntry {
+            context.delete(foodEntry)
+        }
+    }
 }

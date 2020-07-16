@@ -177,11 +177,18 @@ extension DiaryController: FoodEntriesDataControllerDelegate {
         editFoodController.selectedServing = foodEntryVM.selectedServing
         navigationController?.pushViewController(editFoodController, animated: true)
     }
+    
+    func rowDeleted(at row: Int) {
+        let foodEntryViewModel = foodEntryViewModels[row]
+        FoodEntryDataManager.deleteFoodEntry(foodEntryId: foodEntryViewModel.foodEntryId)
+    }
 }
 
 //MARK: Notification center
 extension DiaryController {
     @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
+        //TODO: Network request to insert/update/delete food entry item
+        
         guard let userInfo = notification.userInfo else { return }
         
         updateFoodEntryViewModelsFromCoreData()
@@ -189,17 +196,14 @@ extension DiaryController {
         
         if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, !inserts.isEmpty {
             print("Diary controller - inserted objects")
-            print(inserts)
         }
 
         if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, !updates.isEmpty {
             print("Diary controller - updated objects")
-            print(updates)
         }
 
         if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, !deletes.isEmpty {
             print("Diary controller - deleted objects")
-            print(deletes)
         }
     }
 }

@@ -50,7 +50,6 @@ class EditFoodController: BaseFoodController {
 
 extension EditFoodController {
     fileprivate func saveFoodInfo() {
-        //TODO: notification manager for updating core data object
         let servingAmount = super.getServingAmount()
         
         if selectedServing == nil || servingAmount == nil {

@@ -87,6 +87,7 @@
 		26E020B7248EF24200DBBC5C /* JSONParameterEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020B6248EF24200DBBC5C /* JSONParameterEncoderTests.swift */; };
 		26E0B55124639872002D5A07 /* ViewTypealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E0B55024639872002D5A07 /* ViewTypealias.swift */; };
 		26E22BB82475238500F466C3 /* ServingOptionsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E22BB72475238500F466C3 /* ServingOptionsLauncher.swift */; };
+		26EC645524C105650043BDF8 /* BaseFoodEntriesDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EC645424C105650043BDF8 /* BaseFoodEntriesDataController.swift */; };
 		26F2E6F2244757A0000294D3 /* RegistrationEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2E6F1244757A0000294D3 /* RegistrationEnums.swift */; };
 		26F2E6F4244769B9000294D3 /* MeasurementUnitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */; };
 		26F7832F2471A9B600B7F0C8 /* BaseFoodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F7832E2471A9B600B7F0C8 /* BaseFoodController.swift */; };
@@ -189,6 +190,7 @@
 		26E020B6248EF24200DBBC5C /* JSONParameterEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoderTests.swift; sourceTree = "<group>"; };
 		26E0B55024639872002D5A07 /* ViewTypealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTypealias.swift; sourceTree = "<group>"; };
 		26E22BB72475238500F466C3 /* ServingOptionsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingOptionsLauncher.swift; sourceTree = "<group>"; };
+		26EC645424C105650043BDF8 /* BaseFoodEntriesDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFoodEntriesDataController.swift; sourceTree = "<group>"; };
 		26F2E6F1244757A0000294D3 /* RegistrationEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationEnums.swift; sourceTree = "<group>"; };
 		26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementUnitHelper.swift; sourceTree = "<group>"; };
 		26F7832E2471A9B600B7F0C8 /* BaseFoodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFoodController.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 				2640FF8B2443EC870051A2BF /* RegisterDataController.swift */,
 				2624E8D824647E4E00AC40EA /* FoodEntriesDataController.swift */,
 				263B9670247303A400340ED3 /* BaseFoodDataController.swift */,
+				26EC645424C105650043BDF8 /* BaseFoodEntriesDataController.swift */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -866,6 +869,7 @@
 				269E3797242D05EB0070B110 /* AppDelegate.swift in Sources */,
 				260F2C6224B67E1A00B9585E /* RegisterRequest.swift in Sources */,
 				2634C40424B3C92F00A3FCAC /* AuthenticationNetworkHelper.swift in Sources */,
+				26EC645524C105650043BDF8 /* BaseFoodEntriesDataController.swift in Sources */,
 				266BFA0B2443DB0E006E588D /* Extensions.swift in Sources */,
 				26E0B55124639872002D5A07 /* ViewTypealias.swift in Sources */,
 				26F2E6F4244769B9000294D3 /* MeasurementUnitHelper.swift in Sources */,

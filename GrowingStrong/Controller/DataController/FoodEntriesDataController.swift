@@ -10,36 +10,27 @@ import UIKit
 
 protocol FoodEntriesDataControllerDelegate: class {
     func rowSelected(at row: Int)
+    func rowDeleted(at row: Int)
 }
 
-class FoodEntriesDataController: NSObject, UITableViewDataSource, UITableViewDelegate {
-    var cellIdentifier: String!
-    var foodEntryViewModels: [FoodEntryViewModel]!
+class FoodEntriesDataController: BaseFoodEntriesDataController {
     weak var delegate: FoodEntriesDataControllerDelegate?
-    
-    init(cellIdentifier: String, foodEntryViewModels: [FoodEntryViewModel]) {
-        self.cellIdentifier = cellIdentifier
-        self.foodEntryViewModels = foodEntryViewModels
-    }
     
     func updateFoodEntryViewModels(_ foodEntryViewModels: [FoodEntryViewModel]) {
         self.foodEntryViewModels = foodEntryViewModels
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return foodEntryViewModels.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FoodCell
-        let foodEntryViewModel = foodEntryViewModels[indexPath.item]
-        cell.nameLabel.text = foodEntryViewModel.food.foodName
-        cell.caloriesLabel.text = foodEntryViewModel.totalCaloriesText
-        cell.quantityLabel.text = foodEntryViewModel.totalQuantityText
-        return cell
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.rowSelected(at: indexPath.item)
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            delegate?.rowDeleted(at: indexPath.item)
+        }
     }
 }
