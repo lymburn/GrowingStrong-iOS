@@ -51,9 +51,9 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
                 
             case .requestParametersAndHeaders(let bodyParameters,
                                               let urlParameters,
-                                              let additionalHeaders):
+                                              let headers):
                 
-                self.addAdditionalHeaders(additionalHeaders, request: &request)
+                self.addAdditionalHeaders(headers, request: &request)
                 try self.configureParameters(bodyParameters: bodyParameters,
                                              urlParameters: urlParameters,
                                              request: &request)
@@ -82,8 +82,8 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
         }
     }
     
-    fileprivate func addAdditionalHeaders(_ additionalHeaders: HTTPHeaders?, request: inout URLRequest) {
-        guard let headers = additionalHeaders else { return }
+    fileprivate func addAdditionalHeaders(_ headers: HTTPHeaders?, request: inout URLRequest) {
+        guard let headers = headers else { return }
         for (key, value) in headers {
             request.setValue(value, forHTTPHeaderField: key)
         }

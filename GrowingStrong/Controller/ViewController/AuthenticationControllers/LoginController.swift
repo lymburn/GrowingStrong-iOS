@@ -104,7 +104,14 @@ extension LoginController {
     }
     
     fileprivate func getUserFoodEntries(userId: Int) {
-        userNetworkHelper.getUserFoodEntries(userId: 4) { response, foodEntries in
+        let authorizationHeader = JWTHeaderGenerator.generateHeader(jwtTokenKey: KeyChainKeys.jwtToken)
+        
+        guard let header = authorizationHeader else {
+            //TODO: Handle this
+            return
+        }
+
+        userNetworkHelper.getUserFoodEntries(userId: 4, headers: header) { response, foodEntries in
             switch response {
             case .success:
                 if let foodEntries = foodEntries {

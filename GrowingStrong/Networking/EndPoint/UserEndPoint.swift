@@ -17,7 +17,7 @@ public enum UserApi {
     case user (id: Int)
     case authenticate (bodyParameters: Parameters)
     case register (bodyParameters: Parameters)
-    case userFoodEntries (userId: Int)
+    case userFoodEntries (userId: Int, headers: HTTPHeaders)
 }
 
 extension UserApi : EndPointType {
@@ -41,7 +41,7 @@ extension UserApi : EndPointType {
             return "authenticate"
         case .register ( _):
             return "register"
-        case .userFoodEntries(let userId):
+        case .userFoodEntries(userId: let userId, headers: _):
             return "\(userId)/foodEntries"
         }
     }
@@ -50,7 +50,7 @@ extension UserApi : EndPointType {
         switch self {
         case .user( _):
             return .get
-        case .userFoodEntries( _):
+        case .userFoodEntries(userId: _, headers: _):
             return .get
         case .authenticate ( _):
             return .post
@@ -63,8 +63,8 @@ extension UserApi : EndPointType {
         switch self {
         case .user( _):
             return .request
-        case .userFoodEntries( _):
-            return .request
+        case .userFoodEntries(userId: _, headers: let headers):
+            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, headers: headers)
         case .authenticate (let bodyParameters):
             return .requestParameters(bodyParameters: bodyParameters, urlParameters: nil)
         case .register (let bodyParameters):
@@ -72,7 +72,7 @@ extension UserApi : EndPointType {
         }
     }
     
-    var headers: HTTPHeaders? {
-        return nil
-    }
+//    var headers: HTTPHeaders? {
+//        return nil
+//    }
 }

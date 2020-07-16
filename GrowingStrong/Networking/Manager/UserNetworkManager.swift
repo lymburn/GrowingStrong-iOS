@@ -14,12 +14,15 @@ enum UserNetworkResponseError: String {
 }
 
 protocol UserNetworkManagerType {
-    func getUser(id: Int, completion: @escaping (_ user: User?, _ error: String?) ->())
+    func getUser(id: Int,
+                 completion: @escaping (_ user: User?, _ error: String?) ->())
     func authenticateUser(userAuthenticationParameters: Parameters,
                           completion: @escaping (_ response: AuthenticateResponse?, _ error: String?) -> ())
     func registerUser(registrationParameters: Parameters,
                       completion: @escaping (_ response: RegisterResponse?, _ error: String?) -> ())
-    func getUserFoodEntries(userId: Int, completion: @escaping (_ foodEntries: [FoodEntry]?, _ error: String?) -> ())
+    func getUserFoodEntries(userId: Int,
+                            headers: HTTPHeaders,
+                            completion: @escaping (_ foodEntries: [FoodEntry]?, _ error: String?) -> ())
 }
 
 class UserNetworkManager: UserNetworkManagerType {
@@ -159,9 +162,9 @@ class UserNetworkManager: UserNetworkManagerType {
         }
     }
     
-    func getUserFoodEntries(userId: Int, completion: @escaping (_ foodEntries: [FoodEntry]?, _ error: String?) -> ()) {
+    func getUserFoodEntries(userId: Int, headers: HTTPHeaders, completion: @escaping (_ foodEntries: [FoodEntry]?, _ error: String?) -> ()) {
         
-        router.request(.userFoodEntries(userId: userId)) { data, response, error in
+        router.request(.userFoodEntries(userId: userId, headers: headers)) { data, response, error in
             
             if error != nil {
                 completion(nil, NetworkResponse.generalError.rawValue)

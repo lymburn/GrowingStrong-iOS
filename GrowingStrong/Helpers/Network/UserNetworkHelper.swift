@@ -10,7 +10,9 @@ import Foundation
 import SwiftKeychainWrapper
 
 protocol UserNetworkHelperType {
-    func getUserFoodEntries(userId: Int, completion: @escaping (_ response: UserNetworkHelperResponse,_ foodEntries: [FoodEntry]?) -> ())
+    func getUserFoodEntries(userId: Int,
+                            headers: HTTPHeaders,
+                            completion: @escaping (_ response: UserNetworkHelperResponse,_ foodEntries: [FoodEntry]?) -> ())
 }
 
 enum UserNetworkHelperResponse {
@@ -27,8 +29,11 @@ struct UserNetworkHelper: UserNetworkHelperType {
         self.jwtTokenKey = jwtTokenKey
     }
     
-    func getUserFoodEntries(userId: Int, completion: @escaping (UserNetworkHelperResponse, [FoodEntry]?) -> ()) {
-        self.userNetworkManager.getUserFoodEntries(userId: userId) { foodEntries, error in
+    func getUserFoodEntries(userId: Int,
+                            headers: HTTPHeaders,
+                            completion: @escaping (UserNetworkHelperResponse, [FoodEntry]?) -> ()) {
+        
+        self.userNetworkManager.getUserFoodEntries(userId: userId, headers: headers) { foodEntries, error in
             if let error = error {
                 print(error)
                 completion(.networkError, nil)
