@@ -62,8 +62,6 @@ extension EditFoodController {
             FoodEntryDataManager.updateFoodEntry(foodEntryViewModel.foodEntryId,
                                                  servingAmount: servingAmount,
                                                  selectedServing: selectedServing)
-            
-            let foodEntry = FoodEntryDataManager.fetchFoodEntryById(foodEntryViewModel.foodEntryId)
         }
     }
     

@@ -7,14 +7,14 @@
 //
 
 import UIKit
+import CoreData
 
 class DiaryController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupDependencies(dateBar: dBar,
-                          dailyNutritionView: dnView)
-        
+        setupDependencies(dateBar: dBar, dailyNutritionView: dnView)
         setupViews()
+        setupNotificationCenter()
         
         foodEntriesTableView.register(FoodCell.self, forCellReuseIdentifier: foodEntryCellId)
     }
@@ -91,6 +91,11 @@ extension DiaryController {
         self.dailyNutritionView = dailyNutritionView
     }
     
+    fileprivate func setupNotificationCenter() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: Notification.Name.NSManagedObjectContextObjectsDidChange, object: CoreDataManager.shared.context)
+    }
+    
     fileprivate func setupViews() {
         view.backgroundColor = .white
         view.addSubview(navBar)
@@ -129,6 +134,15 @@ extension DiaryController {
         foodEntriesDataController.updateFoodEntryViewModels(getFoodEntryViewModelsByDate(foodEntryViewModels, date))
         foodEntriesTableView.reloadData()
     }
+    
+    fileprivate func updateFoodEntriesUI() {
+        foodEntriesDataController.updateFoodEntryViewModels(foodEntryViewModels)
+        foodEntriesTableView.reloadData()
+    }
+    
+    fileprivate func updateFoodEntryViewModelsFromCoreData() {
+        foodEntryViewModels = FoodEntryDataManager.fetchFoodEntries()?.map { return FoodEntryViewModel(foodEntry: $0)}
+    }
 }
 
 //MARK: Date bar delegate
@@ -162,5 +176,30 @@ extension DiaryController: FoodEntriesDataControllerDelegate {
         editFoodController.foodEntryViewModel = foodEntryVM
         editFoodController.selectedServing = foodEntryVM.selectedServing
         navigationController?.pushViewController(editFoodController, animated: true)
+    }
+}
+
+//MARK: Notification center
+extension DiaryController {
+    @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        
+        updateFoodEntryViewModelsFromCoreData()
+        updateFoodEntriesUI()
+        
+        if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, !inserts.isEmpty {
+            print("Diary controller - inserted objects")
+            print(inserts)
+        }
+
+        if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, !updates.isEmpty {
+            print("Diary controller - updated objects")
+            print(updates)
+        }
+
+        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, !deletes.isEmpty {
+            print("Diary controller - deleted objects")
+            print(deletes)
+        }
     }
 }
