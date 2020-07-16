@@ -37,9 +37,9 @@ class FoodSearchController: UIViewController {
       return searchController.isActive && !isSearchBarEmpty
     }
     
-    lazy var foodEntriesDataController: FoodEntriesDataController = {
-        let controller = FoodEntriesDataController(cellIdentifier: foodEntryCellId, foodEntryViewModels: foodEntryViewModels)
-        controller.delegate = self
+    lazy var searchFoodEntriesDataController: SearchFoodEntriesDataController = {
+        let controller = SearchFoodEntriesDataController(cellIdentifier: foodEntryCellId, foodEntryViewModels: foodEntryViewModels)
+        controller.baseFoodEntriesDataControllerDelegate = self
         return controller
     }()
     
@@ -48,8 +48,8 @@ class FoodSearchController: UIViewController {
         tv.rowHeight = SizeConstants.foodEntriesTableViewRowHeight
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.tableFooterView = UIView()
-        tv.delegate = foodEntriesDataController
-        tv.dataSource = foodEntriesDataController
+        tv.delegate = searchFoodEntriesDataController
+        tv.dataSource = searchFoodEntriesDataController
         return tv
     }()
 }
@@ -87,11 +87,7 @@ extension FoodSearchController {
 }
 
 //MARK: Data controller delegate
-extension FoodSearchController: FoodEntriesDataControllerDelegate {
-    func rowDeleted(at row: Int) {
-        //TODO: Separate this controller out to not use food entries data controller
-    }
-    
+extension FoodSearchController: BaseFoodEntriesDataControllerDelegate {
     func rowSelected(at row: Int) {
         let addFoodController = AddFoodController()
         let foodEntryVM = foodEntryViewModels[row]
@@ -117,9 +113,9 @@ extension FoodSearchController {
         }
         
         if isFiltering {
-            foodEntriesDataController.updateFoodEntryViewModels(filteredFoodEntryViewModels)
+            searchFoodEntriesDataController.updateFoodEntryViewModels(filteredFoodEntryViewModels)
         } else {
-            foodEntriesDataController.updateFoodEntryViewModels(foodEntryViewModels)
+            searchFoodEntriesDataController.updateFoodEntryViewModels(foodEntryViewModels)
         }
         
         foodEntriesTableView.reloadData()

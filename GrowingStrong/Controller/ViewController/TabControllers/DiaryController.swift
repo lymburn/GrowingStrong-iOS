@@ -40,10 +40,11 @@ class DiaryController: UIViewController {
     
     lazy var navBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
     
-    lazy var foodEntriesDataController: FoodEntriesDataController = {
-        let controller = FoodEntriesDataController(cellIdentifier: foodEntryCellId,
+    lazy var diaryFoodEntriesDataController: DiaryFoodEntriesDataController = {
+        let controller = DiaryFoodEntriesDataController(cellIdentifier: foodEntryCellId,
                                                    foodEntryViewModels: getFoodEntryViewModelsByDate(foodEntryViewModels, Date()))
-        controller.delegate = self
+        controller.diaryFoodEntriesDataControllerDelegate = self
+        controller.baseFoodEntriesDataControllerDelegate = self
         return controller
     }()
     
@@ -74,8 +75,8 @@ class DiaryController: UIViewController {
         tv.rowHeight = SizeConstants.foodEntriesTableViewRowHeight
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.tableFooterView = UIView()
-        tv.delegate = foodEntriesDataController
-        tv.dataSource = foodEntriesDataController
+        tv.delegate = diaryFoodEntriesDataController
+        tv.dataSource = diaryFoodEntriesDataController
         return tv
     }()
     
@@ -131,12 +132,12 @@ extension DiaryController {
     }
     
     fileprivate func updateFoodEntriesUI(for date: Date) {
-        foodEntriesDataController.updateFoodEntryViewModels(getFoodEntryViewModelsByDate(foodEntryViewModels, date))
+        diaryFoodEntriesDataController.updateFoodEntryViewModels(getFoodEntryViewModelsByDate(foodEntryViewModels, date))
         foodEntriesTableView.reloadData()
     }
     
     fileprivate func updateFoodEntriesUI() {
-        foodEntriesDataController.updateFoodEntryViewModels(foodEntryViewModels)
+        diaryFoodEntriesDataController.updateFoodEntryViewModels(foodEntryViewModels)
         foodEntriesTableView.reloadData()
     }
     
@@ -169,18 +170,20 @@ extension DiaryController: DateBarDelegate {
 }
 
 //MARK: Data controller delegate
-extension DiaryController: FoodEntriesDataControllerDelegate {
+extension DiaryController: DiaryFoodEntriesDataControllerDelegate {
+    func rowDeleted(at row: Int) {
+        let foodEntryViewModel = foodEntryViewModels[row]
+        FoodEntryDataManager.deleteFoodEntry(foodEntryId: foodEntryViewModel.foodEntryId)
+    }
+}
+
+extension DiaryController: BaseFoodEntriesDataControllerDelegate {
     func rowSelected(at row: Int) {
         let editFoodController = EditFoodController()
         let foodEntryVM = foodEntryViewModels[row]
         editFoodController.foodEntryViewModel = foodEntryVM
         editFoodController.selectedServing = foodEntryVM.selectedServing
         navigationController?.pushViewController(editFoodController, animated: true)
-    }
-    
-    func rowDeleted(at row: Int) {
-        let foodEntryViewModel = foodEntryViewModels[row]
-        FoodEntryDataManager.deleteFoodEntry(foodEntryId: foodEntryViewModel.foodEntryId)
     }
 }
 

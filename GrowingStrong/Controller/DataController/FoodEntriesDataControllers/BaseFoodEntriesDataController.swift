@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol BaseFoodEntriesDataControllerDelegate: class {
+    func rowSelected(at row: Int)
+}
+
 class BaseFoodEntriesDataController: NSObject, UITableViewDataSource, UITableViewDelegate {
     var cellIdentifier: String!
     var foodEntryViewModels: [FoodEntryViewModel]!
+    weak var baseFoodEntriesDataControllerDelegate: BaseFoodEntriesDataControllerDelegate?
     
     init(cellIdentifier: String, foodEntryViewModels: [FoodEntryViewModel]) {
         self.cellIdentifier = cellIdentifier
@@ -21,6 +26,10 @@ class BaseFoodEntriesDataController: NSObject, UITableViewDataSource, UITableVie
         return foodEntryViewModels.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        baseFoodEntriesDataControllerDelegate?.rowSelected(at: indexPath.item)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FoodCell
         let foodEntryViewModel = foodEntryViewModels[indexPath.item]
@@ -28,5 +37,9 @@ class BaseFoodEntriesDataController: NSObject, UITableViewDataSource, UITableVie
         cell.caloriesLabel.text = foodEntryViewModel.totalCaloriesText
         cell.quantityLabel.text = foodEntryViewModel.totalQuantityText
         return cell
+    }
+    
+    func updateFoodEntryViewModels(_ foodEntryViewModels: [FoodEntryViewModel]) {
+        self.foodEntryViewModels = foodEntryViewModels
     }
 }
