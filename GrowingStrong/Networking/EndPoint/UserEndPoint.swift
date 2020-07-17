@@ -71,8 +71,4 @@ extension UserApi : EndPointType {
             return .requestParameters(bodyParameters: bodyParameters, urlParameters: nil)
         }
     }
-    
-//    var headers: HTTPHeaders? {
-//        return nil
-//    }
 }
