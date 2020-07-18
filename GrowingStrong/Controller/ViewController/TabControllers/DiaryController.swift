@@ -136,11 +136,6 @@ extension DiaryController {
         foodEntriesTableView.reloadData()
     }
     
-    fileprivate func updateFoodEntriesUI() {
-        diaryFoodEntriesDataController.updateFoodEntryViewModels(foodEntryViewModels)
-        foodEntriesTableView.reloadData()
-    }
-    
     fileprivate func updateFoodEntryViewModelsFromCoreData() {
         foodEntryViewModels = FoodEntryDataManager.fetchFoodEntries()?.map { return FoodEntryViewModel(foodEntry: $0)}
     }
@@ -180,7 +175,7 @@ extension DiaryController: DiaryFoodEntriesDataControllerDelegate {
 extension DiaryController: BaseFoodEntriesDataControllerDelegate {
     func rowSelected(at row: Int) {
         let editFoodController = EditFoodController()
-        let foodEntryVM = foodEntryViewModels[row]
+        let foodEntryVM = getFoodEntryViewModelsByDate(foodEntryViewModels, Date())[row]
         editFoodController.foodEntryViewModel = foodEntryVM
         editFoodController.selectedServing = foodEntryVM.selectedServing
         navigationController?.pushViewController(editFoodController, animated: true)
@@ -195,7 +190,7 @@ extension DiaryController {
         guard let userInfo = notification.userInfo else { return }
         
         updateFoodEntryViewModelsFromCoreData()
-        updateFoodEntriesUI()
+        updateFoodEntriesUI(for: Date())
         
         if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, !inserts.isEmpty {
             print("Diary controller - inserted objects")
