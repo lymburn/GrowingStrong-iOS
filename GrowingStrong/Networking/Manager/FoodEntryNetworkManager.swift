@@ -25,14 +25,6 @@ protocol FoodEntryNetworkManagerType {
 class FoodEntryNetworkManager: FoodEntryNetworkManagerType {
     private let router = Router<FoodEntryApi>()
     
-    private let persistentContainer: NSPersistentContainer
-    
-    private lazy var managedObjectContext = self.persistentContainer.viewContext
-    
-    init(persistentContainer: NSPersistentContainer) {
-        self.persistentContainer = persistentContainer
-    }
-    
     func createFoodEntry(bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (String?) -> ()) {
         router.request(.create(bodyParameters: bodyParameters, headers: headers)) { data, response, error in
             

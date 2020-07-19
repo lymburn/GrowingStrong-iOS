@@ -12,7 +12,13 @@ import CoreData
 class DiaryController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupDependencies(dateBar: dBar, dailyNutritionView: dnView)
+        let foodEntryNetworkManager = FoodEntryNetworkManager()
+        let foodEntryNetworkHelper = FoodEntryNetworkHelper(foodEntryNetworkManager: foodEntryNetworkManager,
+                                                            jwtTokenKey: KeyChainKeys.jwtToken)
+        
+        setupDependencies(dateBar: dBar,
+                          dailyNutritionView: dnView,
+                          foodEntryNetworkHelper: foodEntryNetworkHelper)
         setupViews()
         setupNotificationCenter()
         
@@ -33,16 +39,17 @@ class DiaryController: UIViewController {
     }
     
     let foodEntryCellId = "foodEntryCellId"
-    
+    var currentDate: Date = Date()
     var foodEntryViewModels: [FoodEntryViewModel]! = FoodEntryDataManager.fetchFoodEntries()?.map { return FoodEntryViewModel(foodEntry: $0)}
     var dateBar: DateBarType!
     var dailyNutritionView: DailyNutritionViewType!
+    var foodEntryNetworkHelper: FoodEntryNetworkHelperType!
     
     lazy var navBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
     
     lazy var diaryFoodEntriesDataController: DiaryFoodEntriesDataController = {
         let controller = DiaryFoodEntriesDataController(cellIdentifier: foodEntryCellId,
-                                                   foodEntryViewModels: getFoodEntryViewModelsByDate(foodEntryViewModels, Date()))
+                                                   foodEntryViewModels: getFoodEntryViewModelsByDate(foodEntryViewModels, currentDate))
         controller.diaryFoodEntriesDataControllerDelegate = self
         controller.baseFoodEntriesDataControllerDelegate = self
         return controller
@@ -86,10 +93,12 @@ class DiaryController: UIViewController {
 //MARK: Setup
 extension DiaryController {
     func setupDependencies (dateBar: DateBarType,
-                            dailyNutritionView: DailyNutritionViewType) {
+                            dailyNutritionView: DailyNutritionViewType,
+                            foodEntryNetworkHelper: FoodEntryNetworkHelperType) {
         
         self.dateBar = dateBar
         self.dailyNutritionView = dailyNutritionView
+        self.foodEntryNetworkHelper = foodEntryNetworkHelper
     }
     
     fileprivate func setupNotificationCenter() {
@@ -149,6 +158,7 @@ extension DiaryController: DateBarDelegate {
         dateBar.setDateValue(text: previousDateText)
         
         if let previousDateText = previousDateText, let previousDate = dateFormatter.date(from: previousDateText) {
+            currentDate = previousDate
             updateFoodEntriesUI(for: previousDate)
         }
     }
@@ -159,6 +169,7 @@ extension DiaryController: DateBarDelegate {
         dateBar.setDateValue(text: nextDateText)
         
         if let nextDateText = nextDateText, let nextDate = dateFormatter.date(from: nextDateText) {
+            currentDate = nextDate
             updateFoodEntriesUI(for: nextDate)
         }
     }
@@ -175,7 +186,7 @@ extension DiaryController: DiaryFoodEntriesDataControllerDelegate {
 extension DiaryController: BaseFoodEntriesDataControllerDelegate {
     func rowSelected(at row: Int) {
         let editFoodController = EditFoodController()
-        let foodEntryVM = getFoodEntryViewModelsByDate(foodEntryViewModels, Date())[row]
+        let foodEntryVM = getFoodEntryViewModelsByDate(foodEntryViewModels, currentDate)[row]
         editFoodController.foodEntryViewModel = foodEntryVM
         editFoodController.selectedServing = foodEntryVM.selectedServing
         navigationController?.pushViewController(editFoodController, animated: true)
@@ -190,18 +201,59 @@ extension DiaryController {
         guard let userInfo = notification.userInfo else { return }
         
         updateFoodEntryViewModelsFromCoreData()
-        updateFoodEntriesUI(for: Date())
+        updateFoodEntriesUI(for: currentDate)
         
         if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, !inserts.isEmpty {
             print("Diary controller - inserted objects")
         }
 
         if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, !updates.isEmpty {
-            print("Diary controller - updated objects")
+            for update in updates {
+                if let foodEntry = update as? FoodEntry {
+                    networkUpdateFoodEntry(foodEntry: foodEntry)
+                }
+            }
         }
 
         if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, !deletes.isEmpty {
-            print("Diary controller - deleted objects")
+            for delete in deletes {
+                if let foodEntry = delete as? FoodEntry {
+                    networkDeleteFoodEntry(foodEntry: foodEntry)
+                }
+            }
+        }
+    }
+    
+    //Notification helpers
+    
+    //TODO: Handle errors
+    fileprivate func networkUpdateFoodEntry(foodEntry: FoodEntry) {
+        let foodEntryId = Int(foodEntry.foodEntryId)
+        let parameters = foodEntry.generateUpdateParameters()
+        guard let header = JWTHeaderGenerator.generateHeader(jwtTokenKey: KeyChainKeys.jwtToken) else { return }
+        
+        foodEntryNetworkHelper.updateFoodEntry(foodEntryId: foodEntryId, bodyParameters: parameters, headers: header) { response in
+            switch response {
+            case .success:
+                print("Successfully updated food entry")
+            case .networkError:
+                print("Error updating food entry")
+            }
+        }
+    }
+    
+    //TODO: Handle errors
+    fileprivate func networkDeleteFoodEntry(foodEntry: FoodEntry) {
+        let foodEntryId = Int(foodEntry.foodEntryId)
+        guard let header = JWTHeaderGenerator.generateHeader(jwtTokenKey: KeyChainKeys.jwtToken) else { return }
+        
+        foodEntryNetworkHelper.deleteFoodEntry(foodEntryId: foodEntryId, headers: header) { response in
+            switch response {
+            case .success:
+                print("Successfully deleted food entry")
+            case .networkError:
+                print("Error deleting food entry")
+            }
         }
     }
 }

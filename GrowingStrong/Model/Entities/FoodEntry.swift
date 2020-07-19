@@ -60,3 +60,11 @@ class FoodEntry: NSManagedObject, Codable {
         try container.encode(selectedServing, forKey: .selectedServing)
     }
 }
+
+extension FoodEntry {
+    func generateUpdateParameters() -> Parameters {
+        let parameters: Parameters = ["ServingAmount" : self.servingAmount, "SelectedServingId" : self.selectedServing.servingId]
+        
+        return parameters
+    }
+}
