@@ -17,9 +17,7 @@ class DiaryControllerTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        controller.setupDateBar(mockDateBar)
-        controller.setupDailyNutritionView(mockDailyNutritionView)
-        controller.setupFoodEntryViewModels(testFoodEntries.map({return FoodEntryViewModel.init(foodEntry: $0)}))
+        controller.setupDependencies(dateBar: mockDateBar, dailyNutritionView: mockDailyNutritionView)
     }
 
     override func tearDownWithError() throws {

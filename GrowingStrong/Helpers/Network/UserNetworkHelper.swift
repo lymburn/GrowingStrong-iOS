@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftKeychainWrapper
 
 protocol UserNetworkHelperType {
     func getUserFoodEntries(userId: Int,

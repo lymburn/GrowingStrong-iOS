@@ -35,6 +35,7 @@
 		262408CD24B6969200B6EB3C /* LoginControllerMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262408CC24B6969200B6EB3C /* LoginControllerMocks.swift */; };
 		26246B1B24C48A98000963E8 /* FoodEntryEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26246B1A24C48A98000963E8 /* FoodEntryEndPoint.swift */; };
 		26246B1D24C48F65000963E8 /* FoodEntryNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26246B1C24C48F65000963E8 /* FoodEntryNetworkManager.swift */; };
+		26246B1F24C492C7000963E8 /* FoodEntryNetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26246B1E24C492C7000963E8 /* FoodEntryNetworkHelper.swift */; };
 		2624E8D924647E4E00AC40EA /* DiaryFoodEntriesDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8D824647E4E00AC40EA /* DiaryFoodEntriesDataController.swift */; };
 		2624E8DC24647FAD00AC40EA /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8DB24647FAD00AC40EA /* FoodCell.swift */; };
 		262F665A24623FBA00B24F51 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F665924623FBA00B24F51 /* MainTabBarController.swift */; };
@@ -140,6 +141,7 @@
 		262408CC24B6969200B6EB3C /* LoginControllerMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginControllerMocks.swift; sourceTree = "<group>"; };
 		26246B1A24C48A98000963E8 /* FoodEntryEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryEndPoint.swift; sourceTree = "<group>"; };
 		26246B1C24C48F65000963E8 /* FoodEntryNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryNetworkManager.swift; sourceTree = "<group>"; };
+		26246B1E24C492C7000963E8 /* FoodEntryNetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryNetworkHelper.swift; sourceTree = "<group>"; };
 		2624E8D824647E4E00AC40EA /* DiaryFoodEntriesDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryFoodEntriesDataController.swift; sourceTree = "<group>"; };
 		2624E8DB24647FAD00AC40EA /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
 		262F665924623FBA00B24F51 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				2634C40324B3C92F00A3FCAC /* AuthenticationNetworkHelper.swift */,
 				260F2C6624B6854900B9585E /* RegistrationNetworkHelper.swift */,
 				2634FFE124BD2C7000670995 /* UserNetworkHelper.swift */,
+				26246B1E24C492C7000963E8 /* FoodEntryNetworkHelper.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -876,6 +879,7 @@
 				26F783332471B51300B7F0C8 /* MacroNutrientsView.swift in Sources */,
 				263B96752473048700340ED3 /* ServingSizeSelectorCell.swift in Sources */,
 				264B211324BE53350008B55F /* DateFormatterHelper.swift in Sources */,
+				26246B1F24C492C7000963E8 /* FoodEntryNetworkHelper.swift in Sources */,
 				2651926B247EB71400483915 /* FoodSearchController.swift in Sources */,
 				2658890B246340F300199012 /* DateBar.swift in Sources */,
 				2624E8D924647E4E00AC40EA /* DiaryFoodEntriesDataController.swift in Sources */,
