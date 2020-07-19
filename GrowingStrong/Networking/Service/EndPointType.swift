@@ -14,3 +14,8 @@ protocol EndPointType {
     var httpMethod: HTTPMethod { get }
     var task: HTTPTask { get }
 }
+
+enum NetworkEnvironment {
+    case dev
+    case production
+}

@@ -8,11 +8,6 @@
 
 import Foundation
 
-enum NetworkEnvironment {
-    case dev
-    case production
-}
-
 public enum UserApi {
     case user (id: Int)
     case authenticate (bodyParameters: Parameters)

@@ -33,6 +33,8 @@
 		262408C924B691B800B6EB3C /* UserNetworkManagerMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262408C824B691B800B6EB3C /* UserNetworkManagerMocks.swift */; };
 		262408CB24B6964F00B6EB3C /* DiaryControllerMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262408CA24B6964F00B6EB3C /* DiaryControllerMocks.swift */; };
 		262408CD24B6969200B6EB3C /* LoginControllerMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262408CC24B6969200B6EB3C /* LoginControllerMocks.swift */; };
+		26246B1B24C48A98000963E8 /* FoodEntryEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26246B1A24C48A98000963E8 /* FoodEntryEndPoint.swift */; };
+		26246B1D24C48F65000963E8 /* FoodEntryNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26246B1C24C48F65000963E8 /* FoodEntryNetworkManager.swift */; };
 		2624E8D924647E4E00AC40EA /* DiaryFoodEntriesDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8D824647E4E00AC40EA /* DiaryFoodEntriesDataController.swift */; };
 		2624E8DC24647FAD00AC40EA /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8DB24647FAD00AC40EA /* FoodCell.swift */; };
 		262F665A24623FBA00B24F51 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F665924623FBA00B24F51 /* MainTabBarController.swift */; };
@@ -136,6 +138,8 @@
 		262408C824B691B800B6EB3C /* UserNetworkManagerMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkManagerMocks.swift; sourceTree = "<group>"; };
 		262408CA24B6964F00B6EB3C /* DiaryControllerMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryControllerMocks.swift; sourceTree = "<group>"; };
 		262408CC24B6969200B6EB3C /* LoginControllerMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginControllerMocks.swift; sourceTree = "<group>"; };
+		26246B1A24C48A98000963E8 /* FoodEntryEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryEndPoint.swift; sourceTree = "<group>"; };
+		26246B1C24C48F65000963E8 /* FoodEntryNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryNetworkManager.swift; sourceTree = "<group>"; };
 		2624E8D824647E4E00AC40EA /* DiaryFoodEntriesDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryFoodEntriesDataController.swift; sourceTree = "<group>"; };
 		2624E8DB24647FAD00AC40EA /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
 		262F665924623FBA00B24F51 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -276,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				26087D61248DE8AD009B4548 /* UserEndPoint.swift */,
+				26246B1A24C48A98000963E8 /* FoodEntryEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -285,6 +290,7 @@
 			children = (
 				26087D6A248DFAE2009B4548 /* UserNetworkManager.swift */,
 				26E020B0248ECD8700DBBC5C /* NetworkResponseHandler.swift */,
+				26246B1C24C48F65000963E8 /* FoodEntryNetworkManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -847,6 +853,7 @@
 				261C8BCA2448A9F3009A1B79 /* CreateAccountCell.swift in Sources */,
 				268A6CAD24B26E33007113B6 /* EntityNames.swift in Sources */,
 				26087D49248DD6E7009B4548 /* EndPointType.swift in Sources */,
+				26246B1D24C48F65000963E8 /* FoodEntryNetworkManager.swift in Sources */,
 				26E020B1248ECD8700DBBC5C /* NetworkResponseHandler.swift in Sources */,
 				262F665A24623FBA00B24F51 /* MainTabBarController.swift in Sources */,
 				260F2C6724B6854900B9585E /* RegistrationNetworkHelper.swift in Sources */,
@@ -856,6 +863,7 @@
 				26087D62248DE8AD009B4548 /* UserEndPoint.swift in Sources */,
 				260F2C6424B67E6000B9585E /* RegisterResponse.swift in Sources */,
 				26A0B06B24B3A226000874EC /* CredentialsFormatChecker.swift in Sources */,
+				26246B1B24C48A98000963E8 /* FoodEntryEndPoint.swift in Sources */,
 				26475C952442CB2E004A5C71 /* RegisterStatsCell.swift in Sources */,
 				268A6CAA24B26C56007113B6 /* FoodEntryDataManager.swift in Sources */,
 				2624E8DC24647FAD00AC40EA /* FoodCell.swift in Sources */,
