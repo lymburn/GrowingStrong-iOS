@@ -14,7 +14,6 @@ class Food: NSManagedObject, Codable {
     private enum CodingKeys: String, CodingKey {
         case foodId
         case foodName
-        case foodEntries
         case servings
     }
     

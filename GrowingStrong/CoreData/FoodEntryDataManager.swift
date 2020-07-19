@@ -86,4 +86,13 @@ struct FoodEntryDataManager {
             context.delete(foodEntry)
         }
     }
+    
+    static func generateNewFoodEntryManagedObject() -> FoodEntry {
+        let foodEntryEntity: NSEntityDescription = NSEntityDescription.entity(forEntityName: EntityNames.foodEntry.rawValue,
+                                                                              in: CoreDataManager.shared.context)!
+        
+        let foodEntry = NSManagedObject(entity: foodEntryEntity, insertInto: context) as! FoodEntry
+        
+        return foodEntry
+    }
 }

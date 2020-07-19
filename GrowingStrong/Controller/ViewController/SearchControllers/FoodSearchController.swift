@@ -19,6 +19,11 @@ class FoodSearchController: UIViewController {
         setupFoodEntryViewModels(foodEntryViewModels)
         foodEntriesTableView.register(FoodCell.self, forCellReuseIdentifier: foodEntryCellId)
         
+        let foodNetworkManager = FoodNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer)
+        let foodNetworkHelper = FoodNetworkHelper(foodNetworkManager: foodNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken)
+        
+        setupDependencies(foodNetworkHelper: foodNetworkHelper)
+        
         setupViews()
     }
     
@@ -28,6 +33,8 @@ class FoodSearchController: UIViewController {
     let foodEntryCellId = "foodEntryCellId"
     
     var filteredFoodEntryViewModels: [FoodEntryViewModel] = []
+    
+    var foodNetworkHelper: FoodNetworkHelperType!
     
     var isSearchBarEmpty: Bool {
       return searchController.searchBar.text?.isEmpty ?? true
@@ -64,11 +71,16 @@ extension FoodSearchController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Food"
+        searchController.searchBar.delegate = self
     }
     
     fileprivate func setupNavigationItems() {
         navigationItem.title = "Add Food"
         navigationItem.searchController = searchController
+    }
+    
+    fileprivate func setupDependencies(foodNetworkHelper: FoodNetworkHelperType) {
+        self.foodNetworkHelper = foodNetworkHelper
     }
     
     fileprivate func setupViews() {
@@ -102,6 +114,51 @@ extension FoodSearchController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         filterContentForSearchText(searchBar.text!)
+    }
+}
+
+extension FoodSearchController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        retrieveFoods(by: searchBar.text!)
+    }
+}
+
+//MARK: Network searching helpers
+extension FoodSearchController {
+    fileprivate func retrieveFoods(by searchText: String) {
+        let urlParameters = ["query" : searchText]
+        guard let header = JWTHeaderGenerator.generateHeader(jwtTokenKey: KeyChainKeys.jwtToken) else { return }
+        
+        foodNetworkHelper.getFoodsByFullTextSearch(urlParameters: urlParameters, headers: header) { response, foods in
+            self.handleSearchResponse(response: response, foods: foods)
+        }
+    }
+    
+    fileprivate func handleSearchResponse(response: FoodNetworkHelperResponse, foods: [Food]?) {
+        //TODO: Handle these
+        switch response {
+        case .invalidQueryText:
+            print ("Invalid search text")
+        case .networkError:
+            print ("Network error")
+        case .success:
+            if let foods = foods {
+                let foodEntryViewModels = foods.map { return FoodEntryViewModel(food: $0) }
+                updateFoodEntryViewModels(foodEntryViewModels: foodEntryViewModels)
+                updateUI()
+            }
+        }
+    }
+    
+    fileprivate func updateFoodEntryViewModels(foodEntryViewModels: [FoodEntryViewModel]) {
+        self.foodEntryViewModels = foodEntryViewModels
+        self.searchFoodEntriesDataController.updateFoodEntryViewModels(foodEntryViewModels)
+    }
+    
+    fileprivate func updateUI() {
+        DispatchQueue.main.async {
+            self.foodEntriesTableView.reloadData()
+        }
     }
 }
 

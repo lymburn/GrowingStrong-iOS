@@ -85,6 +85,9 @@
 		26BC18E724B2C9CB0027E1B3 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC18E624B2C9CB0027E1B3 /* Food.swift */; };
 		26BC18E924B2CBB00027E1B3 /* Serving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC18E824B2CBB00027E1B3 /* Serving.swift */; };
 		26C72D942473099000E86FE8 /* ServingSizeOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */; };
+		26D7487D24C4A7BC007CE6C1 /* FoodEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D7487C24C4A7BC007CE6C1 /* FoodEndPoint.swift */; };
+		26D7487F24C4A8CA007CE6C1 /* FoodNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D7487E24C4A8CA007CE6C1 /* FoodNetworkManager.swift */; };
+		26D7488124C4B2BD007CE6C1 /* FoodNetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D7488024C4B2BD007CE6C1 /* FoodNetworkHelper.swift */; };
 		26E020AF248EB76000DBBC5C /* AuthenticateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020AE248EB76000DBBC5C /* AuthenticateResponse.swift */; };
 		26E020B1248ECD8700DBBC5C /* NetworkResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020B0248ECD8700DBBC5C /* NetworkResponseHandler.swift */; };
 		26E020B5248EF23300DBBC5C /* URLParameterEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020B4248EF23300DBBC5C /* URLParameterEncoderTests.swift */; };
@@ -193,6 +196,9 @@
 		26BC18E624B2C9CB0027E1B3 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		26BC18E824B2CBB00027E1B3 /* Serving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serving.swift; sourceTree = "<group>"; };
 		26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeOptionsCell.swift; sourceTree = "<group>"; };
+		26D7487C24C4A7BC007CE6C1 /* FoodEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEndPoint.swift; sourceTree = "<group>"; };
+		26D7487E24C4A8CA007CE6C1 /* FoodNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNetworkManager.swift; sourceTree = "<group>"; };
+		26D7488024C4B2BD007CE6C1 /* FoodNetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNetworkHelper.swift; sourceTree = "<group>"; };
 		26E020AE248EB76000DBBC5C /* AuthenticateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateResponse.swift; sourceTree = "<group>"; };
 		26E020B0248ECD8700DBBC5C /* NetworkResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponseHandler.swift; sourceTree = "<group>"; };
 		26E020B4248EF23300DBBC5C /* URLParameterEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParameterEncoderTests.swift; sourceTree = "<group>"; };
@@ -283,6 +289,7 @@
 			children = (
 				26087D61248DE8AD009B4548 /* UserEndPoint.swift */,
 				26246B1A24C48A98000963E8 /* FoodEntryEndPoint.swift */,
+				26D7487C24C4A7BC007CE6C1 /* FoodEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -293,6 +300,7 @@
 				26087D6A248DFAE2009B4548 /* UserNetworkManager.swift */,
 				26E020B0248ECD8700DBBC5C /* NetworkResponseHandler.swift */,
 				26246B1C24C48F65000963E8 /* FoodEntryNetworkManager.swift */,
+				26D7487E24C4A8CA007CE6C1 /* FoodNetworkManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -335,6 +343,7 @@
 				260F2C6624B6854900B9585E /* RegistrationNetworkHelper.swift */,
 				2634FFE124BD2C7000670995 /* UserNetworkHelper.swift */,
 				26246B1E24C492C7000963E8 /* FoodEntryNetworkHelper.swift */,
+				26D7488024C4B2BD007CE6C1 /* FoodNetworkHelper.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -848,6 +857,7 @@
 				26087D4B248DD74E009B4548 /* HTTPMethod.swift in Sources */,
 				262F665F246241A500B24F51 /* TrendsController.swift in Sources */,
 				2640FF8C2443EC870051A2BF /* RegisterDataController.swift in Sources */,
+				26D7488124C4B2BD007CE6C1 /* FoodNetworkHelper.swift in Sources */,
 				263B9671247303A400340ED3 /* BaseFoodDataController.swift in Sources */,
 				26E22BB82475238500F466C3 /* ServingOptionsLauncher.swift in Sources */,
 				26C72D942473099000E86FE8 /* ServingSizeOptionsCell.swift in Sources */,
@@ -868,6 +878,7 @@
 				26A0B06B24B3A226000874EC /* CredentialsFormatChecker.swift in Sources */,
 				26246B1B24C48A98000963E8 /* FoodEntryEndPoint.swift in Sources */,
 				26475C952442CB2E004A5C71 /* RegisterStatsCell.swift in Sources */,
+				26D7487F24C4A8CA007CE6C1 /* FoodNetworkManager.swift in Sources */,
 				268A6CAA24B26C56007113B6 /* FoodEntryDataManager.swift in Sources */,
 				2624E8DC24647FAD00AC40EA /* FoodCell.swift in Sources */,
 				261E946124C1145F002DE202 /* JWTHeaderGenerator.swift in Sources */,
@@ -898,6 +909,7 @@
 				2634C40424B3C92F00A3FCAC /* AuthenticationNetworkHelper.swift in Sources */,
 				26EC645524C105650043BDF8 /* BaseFoodEntriesDataController.swift in Sources */,
 				266BFA0B2443DB0E006E588D /* Extensions.swift in Sources */,
+				26D7487D24C4A7BC007CE6C1 /* FoodEndPoint.swift in Sources */,
 				26E0B55124639872002D5A07 /* ViewTypealias.swift in Sources */,
 				26F2E6F4244769B9000294D3 /* MeasurementUnitHelper.swift in Sources */,
 				26087D50248DD7D5009B4548 /* HTTPTask.swift in Sources */,
