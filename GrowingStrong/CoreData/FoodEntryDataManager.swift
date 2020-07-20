@@ -83,7 +83,13 @@ struct FoodEntryDataManager {
         let foodEntry = fetchFoodEntryById(foodEntryId)
         
         if let foodEntry = foodEntry {
-            context.delete(foodEntry)
+            
+            do {
+                context.delete(foodEntry)
+                try context.save()
+            } catch let deleteError {
+                print("Failed to delete food entry: \(deleteError)")
+            }
         }
     }
     

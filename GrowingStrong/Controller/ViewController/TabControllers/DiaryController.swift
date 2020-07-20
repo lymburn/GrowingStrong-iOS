@@ -256,6 +256,7 @@ extension DiaryController {
             case .success:
                 if let response = createFoodEntryResponse {
                     //TODO: Update food entry ids of ones created in core data before server request
+                    print("Successfully created food entry")
                     let createdFoodEntryId = response.foodEntryId
                 }
 
