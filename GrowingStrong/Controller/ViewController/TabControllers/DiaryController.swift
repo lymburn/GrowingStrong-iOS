@@ -33,7 +33,7 @@ class DiaryController: UIViewController {
         let tabBarController = self.tabBarController as? MainTabBarController
         tabBarController?.showTabBar()
         
-        FoodDataManager.deleteFoodsWithoutFoodEntry()
+        FoodDataManager.shared.deleteFoodsWithoutFoodEntry()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -42,7 +42,7 @@ class DiaryController: UIViewController {
     }
     
     let foodEntryCellId = "foodEntryCellId"
-    var foodEntryViewModels: [FoodEntryViewModel]! = FoodEntryDataManager.fetchFoodEntries()?.map { return FoodEntryViewModel(foodEntry: $0)}
+    var foodEntryViewModels: [FoodEntryViewModel]! = FoodEntryDataManager.shared.fetchFoodEntries()?.map { return FoodEntryViewModel(foodEntry: $0)}
     var dateBar: DateBarType!
     var dailyNutritionView: DailyNutritionViewType!
     var foodEntryNetworkHelper: FoodEntryNetworkHelperType!
@@ -106,7 +106,7 @@ extension DiaryController {
     
     fileprivate func setupNotificationCenter() {
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: Notification.Name.NSManagedObjectContextObjectsDidChange, object: CoreDataManager.shared.context)
+        notificationCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: Notification.Name.NSManagedObjectContextObjectsDidChange, object: CoreDataManager.shared.mainContext)
     }
     
     fileprivate func setupViews() {
@@ -152,7 +152,7 @@ extension DiaryController {
     }
     
     fileprivate func updateFoodEntryViewModelsFromCoreData() {
-        foodEntryViewModels = FoodEntryDataManager.fetchFoodEntries()?.map { return FoodEntryViewModel(foodEntry: $0)}
+        foodEntryViewModels = FoodEntryDataManager.shared.fetchFoodEntries()?.map { return FoodEntryViewModel(foodEntry: $0)}
     }
 }
 
@@ -185,7 +185,7 @@ extension DiaryController: DateBarDelegate {
 extension DiaryController: DiaryFoodEntriesDataControllerDelegate {
     func rowDeleted(at row: Int) {
         let foodEntryViewModel = foodEntryViewModels[row]
-        FoodEntryDataManager.deleteFoodEntry(foodEntryId: foodEntryViewModel.foodEntryId)
+        FoodEntryDataManager.shared.deleteFoodEntry(foodEntryId: foodEntryViewModel.foodEntryId)
     }
 }
 
@@ -193,6 +193,7 @@ extension DiaryController: BaseFoodEntriesDataControllerDelegate {
     func rowSelected(at row: Int) {
         let editFoodController = EditFoodController()
         let foodEntryVM = getFoodEntryViewModelsByDate(foodEntryViewModels, CurrentDiaryDateTracker.shared.currentDate)[row]
+        print(foodEntryVM.foodEntryId)
         editFoodController.foodEntryViewModel = foodEntryVM
         editFoodController.selectedServing = foodEntryVM.selectedServing
         navigationController?.pushViewController(editFoodController, animated: true)
@@ -244,7 +245,7 @@ extension DiaryController {
     
     //TODO: Handle errors
     fileprivate func networkCreateFoodEntry(foodEntry: FoodEntry) {
-        guard let userId = UserDataManager.fetchCurrentUser()?.userId else { return }
+        guard let userId = UserDataManager.shared.fetchCurrentUser()?.userId else { return }
         guard let header = JWTHeaderGenerator.generateHeader(jwtTokenKey: KeyChainKeys.jwtToken) else { return }
         
         let parameters = foodEntry.generateCreateParametersForUser(userId: userId)

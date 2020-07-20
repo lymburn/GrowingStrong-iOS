@@ -14,7 +14,8 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let userNetworkManager = UserNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer)
+        let userNetworkManager = UserNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer,
+                                                    managedObjectContext: CoreDataManager.shared.backgroundContext)
         let authenticationNetworkHelper = AuthenticationNetworkHelper(userNetworkManager: userNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken)
         let userNetworkHelper = UserNetworkHelper(userNetworkManager: userNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken)
         
@@ -148,7 +149,7 @@ extension LoginController {
     }
     
     fileprivate func createUser(userId: Int, emailAddress: String) {
-        UserDataManager.createUser(userId: userId, emailAddress: emailAddress)
+        UserDataManager.shared.createUser(userId: userId, emailAddress: emailAddress)
     }
     
     fileprivate func navigateToMainPage(foodEntries: [FoodEntry]) {

@@ -58,7 +58,7 @@ extension EditFoodController {
         }
         
         if let selectedServing = selectedServing, let servingAmount = servingAmount {
-            FoodEntryDataManager.updateFoodEntryServingSize(foodEntryViewModel.foodEntryId,
+            FoodEntryDataManager.shared.updateFoodEntryServingSize(foodEntryViewModel.foodEntryId,
                                                  servingAmount: servingAmount,
                                                  selectedServing: selectedServing)
         }

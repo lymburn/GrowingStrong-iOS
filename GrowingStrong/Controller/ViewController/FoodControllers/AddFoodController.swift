@@ -69,7 +69,7 @@ extension AddFoodController {
             foodEntryViewModel.servingAmount = servingAmount
             foodEntryViewModel.selectedServing = selectedServing
             
-            FoodEntryDataManager.createFoodEntry(food: foodEntryViewModel.food,
+            FoodEntryDataManager.shared.createFoodEntry(food: foodEntryViewModel.food,
                                                  dateAdded: foodEntryViewModel.dateAdded,
                                                  servingAmount: servingAmount,
                                                  selectedServing: selectedServing)

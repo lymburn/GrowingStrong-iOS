@@ -22,7 +22,8 @@ class RegisterController: UIViewController {
         navigationItem.leftBarButtonItem = backButton
         
         
-        let userNetworkManager = UserNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer)
+        let userNetworkManager = UserNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer,
+                                                    managedObjectContext: CoreDataManager.shared.backgroundContext)
         let registrationNetworkHelper = RegistrationNetworkHelper(userNetworkManager: userNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken)
         
         setupDependencies(registrationNetworkHelper: registrationNetworkHelper)
@@ -190,7 +191,7 @@ extension RegisterController {
     }
     
     fileprivate func createUser(userId: Int, emailAddress: String) {
-        UserDataManager.createUser(userId: userId, emailAddress: emailAddress)
+        UserDataManager.shared.createUser(userId: userId, emailAddress: emailAddress)
     }
 }
 

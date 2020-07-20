@@ -30,10 +30,11 @@ class UserNetworkManager: UserNetworkManagerType {
     
     private let persistentContainer: NSPersistentContainer
     
-    private lazy var managedObjectContext = self.persistentContainer.viewContext
+    private var managedObjectContext: NSManagedObjectContext
     
-    init(persistentContainer: NSPersistentContainer) {
+    init(persistentContainer: NSPersistentContainer, managedObjectContext: NSManagedObjectContext) {
         self.persistentContainer = persistentContainer
+        self.managedObjectContext = managedObjectContext
     }
     
     func getUser(id: Int, completion: @escaping (_ user: User?, _ error: String?) ->()) {

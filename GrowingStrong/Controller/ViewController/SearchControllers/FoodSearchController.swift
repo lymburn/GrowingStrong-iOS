@@ -19,7 +19,8 @@ class FoodSearchController: UIViewController {
         setupFoodEntryViewModels(foodEntryViewModels)
         foodEntriesTableView.register(FoodCell.self, forCellReuseIdentifier: foodEntryCellId)
         
-        let foodNetworkManager = FoodNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer)
+        let foodNetworkManager = FoodNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer,
+                                                    managedObjectContext: CoreDataManager.shared.backgroundContext)
         let foodNetworkHelper = FoodNetworkHelper(foodNetworkManager: foodNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken)
         
         setupDependencies(foodNetworkHelper: foodNetworkHelper)

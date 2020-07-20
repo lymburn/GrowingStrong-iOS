@@ -8,17 +8,20 @@
 
 import CoreData
 
-struct FoodDataManager {
-    static let context: NSManagedObjectContext = CoreDataManager.shared.context
+class FoodDataManager {
+    let mainContext: NSManagedObjectContext = CoreDataManager.shared.mainContext
+    let backgroundContext = CoreDataManager.shared.backgroundContext
     
-    private static func fetchFoodsWithoutFoodEntry() -> [Food]? {
+    static let shared = FoodDataManager()
+    
+    private func fetchFoodsWithoutFoodEntry() -> [Food]? {
         let fetchRequest = NSFetchRequest<Food>(entityName: EntityNames.food.rawValue)
         
         let predicate = NSPredicate(format: "\(#keyPath(Food.foodEntry)) == nil")
         fetchRequest.predicate = predicate
         
         do {
-            let foods = try context.fetch(fetchRequest)
+            let foods = try mainContext.fetch(fetchRequest)
             return foods
         } catch let fetchError {
             print("Failed to fetch foods: \(fetchError)")
@@ -28,12 +31,20 @@ struct FoodDataManager {
     }
     
     //Delete foods without a corresponding food entry relation
-    static func deleteFoodsWithoutFoodEntry () {
+    func deleteFoodsWithoutFoodEntry () {
         let foods = fetchFoodsWithoutFoodEntry()
         
         if let foods = foods {
             for food in foods {
-                context.delete(food)
+                let foodObjId = food.objectID
+                if let foodInContext = try? backgroundContext.existingObject(with: foodObjId) {
+                    do {
+                        backgroundContext.delete(foodInContext)
+                        try backgroundContext.save()
+                    } catch let deleteError {
+                        print("Failed to delete food: \(deleteError)")
+                    }
+                }
             }
         }
     }

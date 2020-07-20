@@ -11,8 +11,17 @@ import CoreData
 class CoreDataManager {
     static let shared = CoreDataManager()
     
-    lazy var context: NSManagedObjectContext = {
+    lazy var backgroundContext: NSManagedObjectContext = {
+        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        context.parent = self.mainContext
+        return context
+    }()
+
+    lazy var mainContext: NSManagedObjectContext = {
         let context = self.persistentContainer.viewContext
+        context.automaticallyMergesChangesFromParent = true
+
         return context
     }()
     
@@ -32,7 +41,9 @@ class CoreDataManager {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
-        try context.execute(batchDeleteRequest)
+        backgroundContext.performAndWait {
+            try? backgroundContext.execute(batchDeleteRequest)
+        }
     }
     
     //Return true on success and false otherwise
