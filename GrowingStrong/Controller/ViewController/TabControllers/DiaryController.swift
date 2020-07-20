@@ -7,16 +7,23 @@
 //
 
 import UIKit
+import CoreData
 
 class DiaryController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupDependencies(dateBar: dBar,
-                          dailyNutritionView: dnView)
+        let foodEntryNetworkManager = FoodEntryNetworkManager()
+        let foodEntryNetworkHelper = FoodEntryNetworkHelper(foodEntryNetworkManager: foodEntryNetworkManager,
+                                                            jwtTokenKey: KeyChainKeys.jwtToken)
         
+        setupDependencies(dateBar: dBar,
+                          dailyNutritionView: dnView,
+                          foodEntryNetworkHelper: foodEntryNetworkHelper)
         setupViews()
+        setupNotificationCenter()
         
         foodEntriesTableView.register(FoodCell.self, forCellReuseIdentifier: foodEntryCellId)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,6 +32,8 @@ class DiaryController: UIViewController {
         
         let tabBarController = self.tabBarController as? MainTabBarController
         tabBarController?.showTabBar()
+        
+        FoodDataManager.shared.deleteFoodsWithoutFoodEntry()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -33,17 +42,19 @@ class DiaryController: UIViewController {
     }
     
     let foodEntryCellId = "foodEntryCellId"
-    
-    var foodEntryViewModels: [FoodEntryViewModel]! = FoodEntryDataManager.fetchFoodEntries()?.map { return FoodEntryViewModel(foodEntry: $0)}
+    var foodEntryViewModels: [FoodEntryViewModel]! = FoodEntryDataManager.shared.fetchFoodEntries()?.map { return FoodEntryViewModel(foodEntry: $0)}
     var dateBar: DateBarType!
     var dailyNutritionView: DailyNutritionViewType!
+    var foodEntryNetworkHelper: FoodEntryNetworkHelperType!
     
     lazy var navBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
     
-    lazy var foodEntriesDataController: FoodEntriesDataController = {
-        let controller = FoodEntriesDataController(cellIdentifier: foodEntryCellId,
-                                                   foodEntryViewModels: getFoodEntryViewModelsByDate(foodEntryViewModels, Date()))
-        controller.delegate = self
+    lazy var diaryFoodEntriesDataController: DiaryFoodEntriesDataController = {
+        let controller = DiaryFoodEntriesDataController(cellIdentifier: foodEntryCellId,
+                                                   foodEntryViewModels: getFoodEntryViewModelsByDate(foodEntryViewModels,
+                                                                                                     CurrentDiaryDateTracker.shared.currentDate))
+        controller.diaryFoodEntriesDataControllerDelegate = self
+        controller.baseFoodEntriesDataControllerDelegate = self
         return controller
     }()
     
@@ -74,8 +85,8 @@ class DiaryController: UIViewController {
         tv.rowHeight = SizeConstants.foodEntriesTableViewRowHeight
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.tableFooterView = UIView()
-        tv.delegate = foodEntriesDataController
-        tv.dataSource = foodEntriesDataController
+        tv.delegate = diaryFoodEntriesDataController
+        tv.dataSource = diaryFoodEntriesDataController
         return tv
     }()
     
@@ -85,10 +96,17 @@ class DiaryController: UIViewController {
 //MARK: Setup
 extension DiaryController {
     func setupDependencies (dateBar: DateBarType,
-                            dailyNutritionView: DailyNutritionViewType) {
+                            dailyNutritionView: DailyNutritionViewType,
+                            foodEntryNetworkHelper: FoodEntryNetworkHelperType) {
         
         self.dateBar = dateBar
         self.dailyNutritionView = dailyNutritionView
+        self.foodEntryNetworkHelper = foodEntryNetworkHelper
+    }
+    
+    fileprivate func setupNotificationCenter() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: Notification.Name.NSManagedObjectContextObjectsDidChange, object: CoreDataManager.shared.mainContext)
     }
     
     fileprivate func setupViews() {
@@ -126,8 +144,15 @@ extension DiaryController {
     }
     
     fileprivate func updateFoodEntriesUI(for date: Date) {
-        foodEntriesDataController.updateFoodEntryViewModels(getFoodEntryViewModelsByDate(foodEntryViewModels, date))
-        foodEntriesTableView.reloadData()
+        diaryFoodEntriesDataController.updateFoodEntryViewModels(getFoodEntryViewModelsByDate(foodEntryViewModels, date))
+        
+        DispatchQueue.main.async {
+            self.foodEntriesTableView.reloadData()
+        }
+    }
+    
+    fileprivate func updateFoodEntryViewModelsFromCoreData() {
+        foodEntryViewModels = FoodEntryDataManager.shared.fetchFoodEntries()?.map { return FoodEntryViewModel(foodEntry: $0)}
     }
 }
 
@@ -139,6 +164,7 @@ extension DiaryController: DateBarDelegate {
         dateBar.setDateValue(text: previousDateText)
         
         if let previousDateText = previousDateText, let previousDate = dateFormatter.date(from: previousDateText) {
+            CurrentDiaryDateTracker.shared.currentDate = previousDate
             updateFoodEntriesUI(for: previousDate)
         }
     }
@@ -149,18 +175,124 @@ extension DiaryController: DateBarDelegate {
         dateBar.setDateValue(text: nextDateText)
         
         if let nextDateText = nextDateText, let nextDate = dateFormatter.date(from: nextDateText) {
+            CurrentDiaryDateTracker.shared.currentDate = nextDate
             updateFoodEntriesUI(for: nextDate)
         }
     }
 }
 
 //MARK: Data controller delegate
-extension DiaryController: FoodEntriesDataControllerDelegate {
+extension DiaryController: DiaryFoodEntriesDataControllerDelegate {
+    func rowDeleted(at row: Int) {
+        let foodEntryViewModel = foodEntryViewModels[row]
+        FoodEntryDataManager.shared.deleteFoodEntry(foodEntryId: foodEntryViewModel.foodEntryId)
+    }
+}
+
+extension DiaryController: BaseFoodEntriesDataControllerDelegate {
     func rowSelected(at row: Int) {
         let editFoodController = EditFoodController()
-        let foodEntryVM = foodEntryViewModels[row]
+        let foodEntryVM = getFoodEntryViewModelsByDate(foodEntryViewModels, CurrentDiaryDateTracker.shared.currentDate)[row]
+        print(foodEntryVM.foodEntryId)
         editFoodController.foodEntryViewModel = foodEntryVM
         editFoodController.selectedServing = foodEntryVM.selectedServing
         navigationController?.pushViewController(editFoodController, animated: true)
+    }
+}
+
+//MARK: Notification center
+extension DiaryController {
+    @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
+        //TODO: Network request to insert/update/delete food entry item
+        
+        guard let userInfo = notification.userInfo else { return }
+    
+        if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, !inserts.isEmpty {
+            for insert in inserts {
+                if let foodEntry = insert as? FoodEntry {
+                    updateFoodEntryViewModelsFromCoreData()
+                    updateFoodEntriesUI(for: CurrentDiaryDateTracker.shared.currentDate)
+                    networkCreateFoodEntry(foodEntry: foodEntry)
+                }
+            }
+        }
+
+        if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, !updates.isEmpty {
+            for update in updates {
+                if let foodEntry = update as? FoodEntry {
+                    updateFoodEntryViewModelsFromCoreData()
+                    updateFoodEntriesUI(for: CurrentDiaryDateTracker.shared.currentDate)
+                    networkUpdateFoodEntry(foodEntry: foodEntry)
+                }
+            }
+        }
+
+        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, !deletes.isEmpty {
+            for delete in deletes {
+                if let foodEntry = delete as? FoodEntry {
+                    updateFoodEntryViewModelsFromCoreData()
+                    updateFoodEntriesUI(for: CurrentDiaryDateTracker.shared.currentDate)
+                    networkDeleteFoodEntry(foodEntry: foodEntry)
+                }
+            }
+        }
+    }
+}
+
+//Notification network helpers
+//TODO: Synchronize core data with server for create/update/delete while offline
+extension DiaryController {
+    
+    //TODO: Handle errors
+    fileprivate func networkCreateFoodEntry(foodEntry: FoodEntry) {
+        guard let userId = UserDataManager.shared.fetchCurrentUser()?.userId else { return }
+        guard let header = JWTHeaderGenerator.generateHeader(jwtTokenKey: KeyChainKeys.jwtToken) else { return }
+        
+        let parameters = foodEntry.generateCreateParametersForUser(userId: userId)
+
+        foodEntryNetworkHelper.createFoodEntry(bodyParameters: parameters, headers: header) { networkResponse, createFoodEntryResponse in
+            switch networkResponse {
+            case .networkError:
+                print("Error with network creating food entry")
+            case .success:
+                if let response = createFoodEntryResponse {
+                    //TODO: Update food entry ids of ones created in core data before server request
+                    print("Successfully created food entry")
+                    let createdFoodEntryId = response.foodEntryId
+                }
+
+            }
+        }
+    }
+    
+    //TODO: Handle errors
+    fileprivate func networkUpdateFoodEntry(foodEntry: FoodEntry) {
+        let foodEntryId = Int(foodEntry.foodEntryId)
+        let parameters = foodEntry.generateUpdateParameters()
+        guard let header = JWTHeaderGenerator.generateHeader(jwtTokenKey: KeyChainKeys.jwtToken) else { return }
+        
+        foodEntryNetworkHelper.updateFoodEntry(foodEntryId: foodEntryId, bodyParameters: parameters, headers: header) { response in
+            switch response {
+            case .success:
+                print("Successfully updated food entry")
+            case .networkError:
+                print("Error updating food entry")
+            }
+        }
+    }
+    
+    //TODO: Handle errors
+    fileprivate func networkDeleteFoodEntry(foodEntry: FoodEntry) {
+        let foodEntryId = Int(foodEntry.foodEntryId)
+        guard let header = JWTHeaderGenerator.generateHeader(jwtTokenKey: KeyChainKeys.jwtToken) else { return }
+        
+        foodEntryNetworkHelper.deleteFoodEntry(foodEntryId: foodEntryId, headers: header) { response in
+            switch response {
+            case .success:
+                print("Successfully deleted food entry")
+            case .networkError:
+                print("Error deleting food entry")
+            }
+        }
     }
 }

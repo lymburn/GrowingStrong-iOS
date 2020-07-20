@@ -14,7 +14,8 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let userNetworkManager = UserNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer)
+        let userNetworkManager = UserNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer,
+                                                    managedObjectContext: CoreDataManager.shared.backgroundContext)
         let authenticationNetworkHelper = AuthenticationNetworkHelper(userNetworkManager: userNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken)
         let userNetworkHelper = UserNetworkHelper(userNetworkManager: userNetworkManager, jwtTokenKey: KeyChainKeys.jwtToken)
         
@@ -104,7 +105,14 @@ extension LoginController {
     }
     
     fileprivate func getUserFoodEntries(userId: Int) {
-        userNetworkHelper.getUserFoodEntries(userId: 4) { response, foodEntries in
+        let authorizationHeader = JWTHeaderGenerator.generateHeader(jwtTokenKey: KeyChainKeys.jwtToken)
+        
+        guard let header = authorizationHeader else {
+            //TODO: Handle this
+            return
+        }
+
+        userNetworkHelper.getUserFoodEntries(userId: 4, headers: header) { response, foodEntries in
             switch response {
             case .success:
                 if let foodEntries = foodEntries {
@@ -141,7 +149,7 @@ extension LoginController {
     }
     
     fileprivate func createUser(userId: Int, emailAddress: String) {
-        UserDataManager.createUser(userId: userId, emailAddress: emailAddress)
+        UserDataManager.shared.createUser(userId: userId, emailAddress: emailAddress)
     }
     
     fileprivate func navigateToMainPage(foodEntries: [FoodEntry]) {

@@ -52,6 +52,8 @@ struct URLConstants {
     struct Routes {
         struct Api {
             static let user = "/api/user"
+            static let foodEntry = "/api/foodEntry"
+            static let food = "/api/food"
         }
     }
 }

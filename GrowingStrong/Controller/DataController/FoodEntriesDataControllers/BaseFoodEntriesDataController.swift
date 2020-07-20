@@ -1,33 +1,33 @@
 //
-//  FoodEntriesDataController.swift
+//  BaseFoodEntriesDataController.swift
 //  GrowingStrong
 //
-//  Created by Eugene Lu on 2020-05-07.
+//  Created by Eugene Lu on 2020-07-16.
 //  Copyright © 2020 Eugene Lu. All rights reserved.
 //
 
 import UIKit
 
-protocol FoodEntriesDataControllerDelegate: class {
+protocol BaseFoodEntriesDataControllerDelegate: class {
     func rowSelected(at row: Int)
 }
 
-class FoodEntriesDataController: NSObject, UITableViewDataSource, UITableViewDelegate {
+class BaseFoodEntriesDataController: NSObject, UITableViewDataSource, UITableViewDelegate {
     var cellIdentifier: String!
     var foodEntryViewModels: [FoodEntryViewModel]!
-    weak var delegate: FoodEntriesDataControllerDelegate?
+    weak var baseFoodEntriesDataControllerDelegate: BaseFoodEntriesDataControllerDelegate?
     
     init(cellIdentifier: String, foodEntryViewModels: [FoodEntryViewModel]) {
         self.cellIdentifier = cellIdentifier
         self.foodEntryViewModels = foodEntryViewModels
     }
     
-    func updateFoodEntryViewModels(_ foodEntryViewModels: [FoodEntryViewModel]) {
-        self.foodEntryViewModels = foodEntryViewModels
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return foodEntryViewModels.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        baseFoodEntriesDataControllerDelegate?.rowSelected(at: indexPath.item)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -39,7 +39,7 @@ class FoodEntriesDataController: NSObject, UITableViewDataSource, UITableViewDel
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.rowSelected(at: indexPath.item)
+    func updateFoodEntryViewModels(_ foodEntryViewModels: [FoodEntryViewModel]) {
+        self.foodEntryViewModels = foodEntryViewModels
     }
 }

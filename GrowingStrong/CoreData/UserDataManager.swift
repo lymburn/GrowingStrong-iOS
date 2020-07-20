@@ -9,39 +9,52 @@
 import Foundation
 import CoreData
 
-struct UserDataManager {
-    static let context: NSManagedObjectContext = CoreDataManager.shared.context
+class UserDataManager {
+    let mainContext: NSManagedObjectContext = CoreDataManager.shared.mainContext
+    let backgroundContext = CoreDataManager.shared.backgroundContext
     
-    @discardableResult
-    static func createUser (userId: Int,
-                     emailAddress: String) -> User? {
+    static let shared = UserDataManager()
+    
+    func createUser (userId: Int, emailAddress: String) {
         
-        let user = NSEntityDescription.insertNewObject(forEntityName: EntityNames.user.rawValue, into: context) as! User
-        
-        user.userId = Int32(userId)
-        user.emailAddress = emailAddress
-        
-        do {
-            try context.save()
-            return user
-        } catch let createError {
-            print("Failed to create: \(createError)")
+        backgroundContext.performAndWait {
+            let user = NSEntityDescription.insertNewObject(forEntityName: EntityNames.user.rawValue, into: backgroundContext) as! User
+            
+            user.userId = Int32(userId)
+            user.emailAddress = emailAddress
+            
+            do {
+                try backgroundContext.save()
+            } catch let createError {
+                print("Failed to create: \(createError)")
+            }
         }
-        
-        return nil
     }
     
-    static func fetchUser (byId userId: Int) -> User? {
+    func fetchUser (byId userId: Int) -> User? {
         let fetchRequest = NSFetchRequest<User>(entityName: EntityNames.user.rawValue)
         let predicate = NSPredicate(format: "userId == %d", userId)
         fetchRequest.predicate = predicate
         fetchRequest.fetchLimit = 1
         
         do {
-            let users = try context.fetch(fetchRequest)
+            let users = try mainContext.fetch(fetchRequest)
             return users.first
         } catch let fetchError {
             print("Failed to fetch user: \(fetchError)")
+        }
+        
+        return nil
+    }
+    
+    func fetchCurrentUser () -> User? {
+        let fetchRequest = NSFetchRequest<User>(entityName: EntityNames.user.rawValue)
+
+        do {
+            let users = try mainContext.fetch(fetchRequest)
+            return users.first
+        } catch let fetchError {
+            print("Failed to current user: \(fetchError)")
         }
         
         return nil

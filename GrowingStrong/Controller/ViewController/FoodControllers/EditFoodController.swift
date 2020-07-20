@@ -50,7 +50,6 @@ class EditFoodController: BaseFoodController {
 
 extension EditFoodController {
     fileprivate func saveFoodInfo() {
-        //TODO: notification manager for updating core data object
         let servingAmount = super.getServingAmount()
         
         if selectedServing == nil || servingAmount == nil {
@@ -59,11 +58,9 @@ extension EditFoodController {
         }
         
         if let selectedServing = selectedServing, let servingAmount = servingAmount {
-            FoodEntryDataManager.updateFoodEntry(foodEntryViewModel.foodEntryId,
+            FoodEntryDataManager.shared.updateFoodEntryServingSize(foodEntryViewModel.foodEntryId,
                                                  servingAmount: servingAmount,
                                                  selectedServing: selectedServing)
-            
-            let foodEntry = FoodEntryDataManager.fetchFoodEntryById(foodEntryViewModel.foodEntryId)
         }
     }
     
