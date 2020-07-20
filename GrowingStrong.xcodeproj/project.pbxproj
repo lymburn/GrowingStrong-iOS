@@ -91,6 +91,7 @@
 		26D7488724C4DD47007CE6C1 /* CreateFoodEntryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D7488624C4DD47007CE6C1 /* CreateFoodEntryResponse.swift */; };
 		26D7488924C4E434007CE6C1 /* FoodDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D7488824C4E434007CE6C1 /* FoodDataManager.swift */; };
 		26D7488D24C6097A007CE6C1 /* CurrentDiaryDateTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D7488C24C6097A007CE6C1 /* CurrentDiaryDateTracker.swift */; };
+		26D7488F24C66422007CE6C1 /* FoodEntryNetworkHelperMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D7488E24C66422007CE6C1 /* FoodEntryNetworkHelperMocks.swift */; };
 		26E020AF248EB76000DBBC5C /* AuthenticateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020AE248EB76000DBBC5C /* AuthenticateResponse.swift */; };
 		26E020B1248ECD8700DBBC5C /* NetworkResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020B0248ECD8700DBBC5C /* NetworkResponseHandler.swift */; };
 		26E020B5248EF23300DBBC5C /* URLParameterEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020B4248EF23300DBBC5C /* URLParameterEncoderTests.swift */; };
@@ -205,6 +206,7 @@
 		26D7488624C4DD47007CE6C1 /* CreateFoodEntryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFoodEntryResponse.swift; sourceTree = "<group>"; };
 		26D7488824C4E434007CE6C1 /* FoodDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDataManager.swift; sourceTree = "<group>"; };
 		26D7488C24C6097A007CE6C1 /* CurrentDiaryDateTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDiaryDateTracker.swift; sourceTree = "<group>"; };
+		26D7488E24C66422007CE6C1 /* FoodEntryNetworkHelperMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryNetworkHelperMocks.swift; sourceTree = "<group>"; };
 		26E020AE248EB76000DBBC5C /* AuthenticateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateResponse.swift; sourceTree = "<group>"; };
 		26E020B0248ECD8700DBBC5C /* NetworkResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponseHandler.swift; sourceTree = "<group>"; };
 		26E020B4248EF23300DBBC5C /* URLParameterEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParameterEncoderTests.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				262408C824B691B800B6EB3C /* UserNetworkManagerMocks.swift */,
 				262408CA24B6964F00B6EB3C /* DiaryControllerMocks.swift */,
 				262408CC24B6969200B6EB3C /* LoginControllerMocks.swift */,
+				26D7488E24C66422007CE6C1 /* FoodEntryNetworkHelperMocks.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -843,6 +846,7 @@
 				2634C40824B3CAFE00A3FCAC /* AuthenticateRequestTests.swift in Sources */,
 				26793172247D77C800413FAD /* DiaryControllerTests.swift in Sources */,
 				262408C924B691B800B6EB3C /* UserNetworkManagerMocks.swift in Sources */,
+				26D7488F24C66422007CE6C1 /* FoodEntryNetworkHelperMocks.swift in Sources */,
 				26E020B5248EF23300DBBC5C /* URLParameterEncoderTests.swift in Sources */,
 				261C8BD22448CD11009A1B79 /* MeasurementUnitHelperTests.swift in Sources */,
 				261A68A224B3D42400AE199C /* AuthenticationNetworkHelperTests.swift in Sources */,

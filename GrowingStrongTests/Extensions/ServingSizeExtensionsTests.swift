@@ -23,7 +23,7 @@ class ServingExtensionsTests: XCTestCase {
     func testGetServingSizeTextFunction() throws {
         let expectedText = "100.0 g"
         
-        let servingEntity: NSEntityDescription = NSEntityDescription.entity(forEntityName: EntityNames.serving.rawValue, in: CoreDataManager.shared.context)!
+        let servingEntity: NSEntityDescription = NSEntityDescription.entity(forEntityName: EntityNames.serving.rawValue, in: CoreDataManager.shared.mainContext)!
         
         let serving = NSManagedObject(entity: servingEntity, insertInto: nil) as! Serving
         serving.quantity = 100

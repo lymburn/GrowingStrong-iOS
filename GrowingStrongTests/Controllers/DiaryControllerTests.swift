@@ -14,10 +14,13 @@ class DiaryControllerTests: XCTestCase {
     let controller = DiaryController()
     let mockDateBar = MockDateBar()
     let mockDailyNutritionView = MockDailyNutritionView()
+    let mockFoodEntryNetworkHelper = MockFoodEntryNetworkHelperNoError()
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        controller.setupDependencies(dateBar: mockDateBar, dailyNutritionView: mockDailyNutritionView)
+        controller.setupDependencies(dateBar: mockDateBar,
+                                     dailyNutritionView: mockDailyNutritionView,
+                                     foodEntryNetworkHelper: mockFoodEntryNetworkHelper)
     }
 
     override func tearDownWithError() throws {
