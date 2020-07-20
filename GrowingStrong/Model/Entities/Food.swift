@@ -20,6 +20,7 @@ class Food: NSManagedObject, Codable {
     @NSManaged var foodId: Int32
     @NSManaged var foodName: String
     @NSManaged var servings: Set<Serving>
+    @NSManaged var foodEntry: FoodEntry?
 
     required convenience init(from decoder: Decoder) throws {
         guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext,

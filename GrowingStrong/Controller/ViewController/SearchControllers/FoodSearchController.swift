@@ -25,8 +25,10 @@ class FoodSearchController: UIViewController {
         setupDependencies(foodNetworkHelper: foodNetworkHelper)
         
         setupViews()
+        
+        navigationItem.leftBarButtonItem = backButton
     }
-    
+
     let searchController = UISearchController(searchResultsController: nil)
     
     var foodEntryViewModels: [FoodEntryViewModel]!
@@ -35,6 +37,8 @@ class FoodSearchController: UIViewController {
     var filteredFoodEntryViewModels: [FoodEntryViewModel] = []
     
     var foodNetworkHelper: FoodNetworkHelperType!
+    
+    lazy var backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
     
     var isSearchBarEmpty: Bool {
       return searchController.searchBar.text?.isEmpty ?? true
@@ -143,11 +147,20 @@ extension FoodSearchController {
             print ("Network error")
         case .success:
             if let foods = foods {
-                let foodEntryViewModels = foods.map { return FoodEntryViewModel(food: $0) }
+                self.foodEntryViewModels = getFoodEntryViewModelsFromFoods(foods: foods)
                 updateFoodEntryViewModels(foodEntryViewModels: foodEntryViewModels)
                 updateUI()
             }
         }
+    }
+    
+    fileprivate func getFoodEntryViewModelsFromFoods(foods: [Food]) -> [FoodEntryViewModel]{
+        let foodEntryViewModels = foods.map { return FoodEntryViewModel(food: $0,
+                                                                        dateAdded: CurrentDiaryDateTracker.shared.currentDate,
+                                                                        selectedServing: $0.servings.first!,
+                                                                        servingAmount: 1) }
+        
+        return foodEntryViewModels
     }
     
     fileprivate func updateFoodEntryViewModels(foodEntryViewModels: [FoodEntryViewModel]) {
@@ -159,6 +172,13 @@ extension FoodSearchController {
         DispatchQueue.main.async {
             self.foodEntriesTableView.reloadData()
         }
+    }
+}
+
+//MARK: Touch events
+extension FoodSearchController {
+    @objc func backTapped() {
+        navigationController?.dismiss(animated: true, completion: nil)
     }
 }
 

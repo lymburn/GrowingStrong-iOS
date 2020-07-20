@@ -56,13 +56,13 @@ struct FoodEntryViewModel{
         self.totalProteinText = "Protein - \(totalProtein) g"
     }
     
-    //Food entry VM created from food with default values
-    init (food: Food) {
+    //Food entry VM created from food with passed in arguments for dateAdded, selectedServing, and servingAmount
+    init (food: Food, dateAdded: Date, selectedServing: Serving, servingAmount: Float) {
         self.foodEntryId = 0
         self.food = food
-        self.dateAdded = Date()
-        self.selectedServing = food.servings.first!
-        self.servingAmount = 1
+        self.dateAdded = dateAdded
+        self.selectedServing = selectedServing
+        self.servingAmount = servingAmount
         
         self.totalQuantity = Int((selectedServing.quantity * self.servingAmount).rounded())
         self.totalQuantityText = "\(self.totalQuantity) \(selectedServing.unit)"

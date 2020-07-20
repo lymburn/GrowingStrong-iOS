@@ -12,7 +12,7 @@ import CoreData
 protocol FoodEntryNetworkManagerType {
     func createFoodEntry(bodyParameters: Parameters,
                          headers: HTTPHeaders,
-                         completion: @escaping (_ error: String?) -> ())
+                         completion: @escaping (_ createFoodEntryResponse: CreateFoodEntryResponse?, _ error: String?) -> ())
     func updateFoodEntry(foodEntryId: Int,
                          bodyParameters: Parameters,
                          headers: HTTPHeaders,
@@ -25,11 +25,11 @@ protocol FoodEntryNetworkManagerType {
 class FoodEntryNetworkManager: FoodEntryNetworkManagerType {
     private let router = Router<FoodEntryApi>()
     
-    func createFoodEntry(bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (String?) -> ()) {
+    func createFoodEntry(bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (CreateFoodEntryResponse?, String?) -> ()) {
         router.request(.create(bodyParameters: bodyParameters, headers: headers)) { data, response, error in
             
             if error != nil {
-                completion(NetworkResponse.generalError.rawValue)
+                completion(nil, NetworkResponse.generalError.rawValue)
             }
             
             if let response = response as? HTTPURLResponse {
@@ -37,9 +37,21 @@ class FoodEntryNetworkManager: FoodEntryNetworkManagerType {
 
                 switch result {
                 case .success:
-                    completion(nil)
+                    guard let responseData = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        let decoder = JSONDecoder()
+                        let createFoodEntryResponse = try decoder.decode(CreateFoodEntryResponse.self, from: responseData)
+                        
+                        completion(createFoodEntryResponse, nil)
+                    } catch {
+                        completion(nil, NetworkResponse.unableToDecode.rawValue)
+                    }
                 case.failure(let networkFailureError):
-                    completion(networkFailureError)
+                    completion(nil, networkFailureError)
                 }
             }
         }

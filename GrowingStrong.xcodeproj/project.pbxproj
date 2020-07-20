@@ -88,6 +88,9 @@
 		26D7487D24C4A7BC007CE6C1 /* FoodEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D7487C24C4A7BC007CE6C1 /* FoodEndPoint.swift */; };
 		26D7487F24C4A8CA007CE6C1 /* FoodNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D7487E24C4A8CA007CE6C1 /* FoodNetworkManager.swift */; };
 		26D7488124C4B2BD007CE6C1 /* FoodNetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D7488024C4B2BD007CE6C1 /* FoodNetworkHelper.swift */; };
+		26D7488724C4DD47007CE6C1 /* CreateFoodEntryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D7488624C4DD47007CE6C1 /* CreateFoodEntryResponse.swift */; };
+		26D7488924C4E434007CE6C1 /* FoodDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D7488824C4E434007CE6C1 /* FoodDataManager.swift */; };
+		26D7488D24C6097A007CE6C1 /* CurrentDiaryDateTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D7488C24C6097A007CE6C1 /* CurrentDiaryDateTracker.swift */; };
 		26E020AF248EB76000DBBC5C /* AuthenticateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020AE248EB76000DBBC5C /* AuthenticateResponse.swift */; };
 		26E020B1248ECD8700DBBC5C /* NetworkResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020B0248ECD8700DBBC5C /* NetworkResponseHandler.swift */; };
 		26E020B5248EF23300DBBC5C /* URLParameterEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020B4248EF23300DBBC5C /* URLParameterEncoderTests.swift */; };
@@ -199,6 +202,9 @@
 		26D7487C24C4A7BC007CE6C1 /* FoodEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEndPoint.swift; sourceTree = "<group>"; };
 		26D7487E24C4A8CA007CE6C1 /* FoodNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNetworkManager.swift; sourceTree = "<group>"; };
 		26D7488024C4B2BD007CE6C1 /* FoodNetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNetworkHelper.swift; sourceTree = "<group>"; };
+		26D7488624C4DD47007CE6C1 /* CreateFoodEntryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFoodEntryResponse.swift; sourceTree = "<group>"; };
+		26D7488824C4E434007CE6C1 /* FoodDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDataManager.swift; sourceTree = "<group>"; };
+		26D7488C24C6097A007CE6C1 /* CurrentDiaryDateTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDiaryDateTracker.swift; sourceTree = "<group>"; };
 		26E020AE248EB76000DBBC5C /* AuthenticateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateResponse.swift; sourceTree = "<group>"; };
 		26E020B0248ECD8700DBBC5C /* NetworkResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponseHandler.swift; sourceTree = "<group>"; };
 		26E020B4248EF23300DBBC5C /* URLParameterEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParameterEncoderTests.swift; sourceTree = "<group>"; };
@@ -479,6 +485,7 @@
 				26519271247EC1B500483915 /* BaseOptionsLauncher.swift */,
 				264B211224BE53350008B55F /* DateFormatterHelper.swift */,
 				261E946024C1145F002DE202 /* JWTHeaderGenerator.swift */,
+				26D7488C24C6097A007CE6C1 /* CurrentDiaryDateTracker.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -525,6 +532,7 @@
 				26A58E4324B3C71E009A3209 /* CoreDataModel */,
 				26A58E4224B3C6FE009A3209 /* Entities */,
 				260F2C5F24B67DBC00B9585E /* RequestModel.swift */,
+				26D7488624C4DD47007CE6C1 /* CreateFoodEntryResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -564,6 +572,7 @@
 				268A6CA924B26C56007113B6 /* FoodEntryDataManager.swift */,
 				268A6CAC24B26E33007113B6 /* EntityNames.swift */,
 				264B211424BE60500008B55F /* UserDataManager.swift */,
+				26D7488824C4E434007CE6C1 /* FoodDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -860,6 +869,7 @@
 				26D7488124C4B2BD007CE6C1 /* FoodNetworkHelper.swift in Sources */,
 				263B9671247303A400340ED3 /* BaseFoodDataController.swift in Sources */,
 				26E22BB82475238500F466C3 /* ServingOptionsLauncher.swift in Sources */,
+				26D7488924C4E434007CE6C1 /* FoodDataManager.swift in Sources */,
 				26C72D942473099000E86FE8 /* ServingSizeOptionsCell.swift in Sources */,
 				26087D56248DD9EC009B4548 /* URLParameterEncoder.swift in Sources */,
 				26519279247EEF1A00483915 /* AddFoodController.swift in Sources */,
@@ -902,6 +912,7 @@
 				26519272247EC1B500483915 /* BaseOptionsLauncher.swift in Sources */,
 				26F7832F2471A9B600B7F0C8 /* BaseFoodController.swift in Sources */,
 				26087D5C248DDD79009B4548 /* NetworkRouter.swift in Sources */,
+				26D7488724C4DD47007CE6C1 /* CreateFoodEntryResponse.swift in Sources */,
 				26BC18E524B2C76F0027E1B3 /* FoodEntry.swift in Sources */,
 				260F2C6024B67DBC00B9585E /* RequestModel.swift in Sources */,
 				269E3797242D05EB0070B110 /* AppDelegate.swift in Sources */,
@@ -923,6 +934,7 @@
 				26087D53248DD8C3009B4548 /* ParameterEncoding.swift in Sources */,
 				26E020AF248EB76000DBBC5C /* AuthenticateResponse.swift in Sources */,
 				26475C992442D00B004A5C71 /* Constants.swift in Sources */,
+				26D7488D24C6097A007CE6C1 /* CurrentDiaryDateTracker.swift in Sources */,
 				266BB5A624633A37009269B2 /* DailyNutritionView.swift in Sources */,
 				26087D59248DDC20009B4548 /* JSONParameterEncoder.swift in Sources */,
 				262F665D2462417800B24F51 /* DiaryController.swift in Sources */,

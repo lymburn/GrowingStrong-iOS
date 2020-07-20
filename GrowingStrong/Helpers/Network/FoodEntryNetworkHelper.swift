@@ -11,7 +11,8 @@ import Foundation
 protocol FoodEntryNetworkHelperType {
     func createFoodEntry(bodyParameters: Parameters,
                          headers: HTTPHeaders,
-                         completion: @escaping (_ response: FoodEntryNetworkHelperResponse) -> ())
+                         completion: @escaping (_ response: FoodEntryNetworkHelperResponse,
+                                                _ createFoodEntryResponse: CreateFoodEntryResponse?) -> ())
     
     func updateFoodEntry(foodEntryId: Int,
                          bodyParameters: Parameters,
@@ -29,7 +30,6 @@ enum FoodEntryNetworkHelperResponse {
 }
 
 struct FoodEntryNetworkHelper: FoodEntryNetworkHelperType {
-    
     let foodEntryNetworkManager: FoodEntryNetworkManagerType
     let jwtTokenKey: String
     
@@ -40,10 +40,17 @@ struct FoodEntryNetworkHelper: FoodEntryNetworkHelperType {
     
     func createFoodEntry(bodyParameters: Parameters,
                          headers: HTTPHeaders,
-                         completion: @escaping (FoodEntryNetworkHelperResponse) -> ()) {
+                         completion: @escaping (FoodEntryNetworkHelperResponse, CreateFoodEntryResponse?) -> ()) {
         
-        foodEntryNetworkManager.createFoodEntry(bodyParameters: bodyParameters, headers: headers) { error in
-            self.handleNoResponseCompletions(error: error, completion: completion)
+        foodEntryNetworkManager.createFoodEntry(bodyParameters: bodyParameters, headers: headers) { createFoodEntryResponse, error in
+            if let error = error {
+                print(error)
+                completion(.networkError, nil)
+            }
+            
+            if let response = createFoodEntryResponse {
+                completion(.success, response)
+            }
         }
     }
     

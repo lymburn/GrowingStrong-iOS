@@ -46,4 +46,17 @@ struct UserDataManager {
         
         return nil
     }
+    
+    static func fetchCurrentUser () -> User? {
+        let fetchRequest = NSFetchRequest<User>(entityName: EntityNames.user.rawValue)
+
+        do {
+            let users = try context.fetch(fetchRequest)
+            return users.first
+        } catch let fetchError {
+            print("Failed to current user: \(fetchError)")
+        }
+        
+        return nil
+    }
 }

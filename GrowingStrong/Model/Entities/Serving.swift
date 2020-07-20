@@ -28,6 +28,7 @@ class Serving: NSManagedObject, Codable {
     @NSManaged var carb: Float
     @NSManaged var fat: Float
     @NSManaged var protein: Float
+    @NSManaged var food: Food?
 
     required convenience init(from decoder: Decoder) throws {
         guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext,

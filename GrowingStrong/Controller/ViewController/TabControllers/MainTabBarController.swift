@@ -85,6 +85,7 @@ extension MainTabBarController {
 extension MainTabBarController: ActionOptionsLauncherDelegate {
     func addFoodButtonPressed() {
         let nav = UINavigationController(rootViewController: FoodSearchController())
+        nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
     }
 }

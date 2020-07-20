@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Food" representedClassName="Food" syncable="YES">
         <attribute name="foodId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="foodName" optional="YES" attributeType="String"/>
-        <relationship name="servings" toMany="YES" deletionRule="Nullify" destinationEntity="Serving"/>
+        <relationship name="foodEntry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FoodEntry" inverseName="food" inverseEntity="FoodEntry"/>
+        <relationship name="servings" toMany="YES" deletionRule="Cascade" destinationEntity="Serving" inverseName="food" inverseEntity="Serving"/>
     </entity>
     <entity name="FoodEntry" representedClassName="FoodEntry" syncable="YES">
         <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="foodEntryId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="servingAmount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="food" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Food"/>
+        <relationship name="food" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Food" inverseName="foodEntry" inverseEntity="Food"/>
         <relationship name="selectedServing" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Serving"/>
     </entity>
     <entity name="Serving" representedClassName="Serving" syncable="YES">
@@ -20,15 +21,16 @@
         <attribute name="quantity" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="servingId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="unit" optional="YES" attributeType="String"/>
+        <relationship name="food" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Food" inverseName="servings" inverseEntity="Food"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="emailAddress" optional="YES" attributeType="String"/>
         <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Food" positionX="-513" positionY="117" width="128" height="88"/>
-        <element name="FoodEntry" positionX="-713.51953125" positionY="103.58203125" width="128" height="118"/>
-        <element name="Serving" positionX="-588.40234375" positionY="300.1875" width="128" height="148"/>
+        <element name="Food" positionX="-513" positionY="117" width="128" height="103"/>
+        <element name="FoodEntry" positionX="-776.86328125" positionY="77.61328125" width="128" height="118"/>
+        <element name="Serving" positionX="-588.40234375" positionY="300.1875" width="128" height="163"/>
         <element name="User" positionX="-529.41015625" positionY="-12.9296875" width="128" height="73"/>
     </elements>
 </model>

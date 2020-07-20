@@ -13,9 +13,9 @@ struct FoodEntryDataManager {
     
     @discardableResult
     static func createFoodEntry (food: Food,
-                          dateAdded: Date,
-                          servingAmount: Float,
-                          selectedServing: Serving) -> FoodEntry? {
+                                 dateAdded: Date,
+                                 servingAmount: Float,
+                                 selectedServing: Serving) -> FoodEntry? {
         
         let foodEntry = NSEntityDescription.insertNewObject(forEntityName: EntityNames.foodEntry.rawValue, into: context) as! FoodEntry
         
@@ -64,7 +64,7 @@ struct FoodEntryDataManager {
         return nil
     }
     
-    static func updateFoodEntry (_ foodEntryId: Int32, servingAmount: Float, selectedServing: Serving) {
+    static func updateFoodEntryServingSize (_ foodEntryId: Int32, servingAmount: Float, selectedServing: Serving) {
         let foodEntry = fetchFoodEntryById(foodEntryId)
         
         if let foodEntry = foodEntry {
