@@ -23,15 +23,20 @@ class FoodEntryDataManager {
         backgroundContext.performAndWait {
             let foodEntry = NSEntityDescription.insertNewObject(forEntityName: EntityNames.foodEntry.rawValue, into: backgroundContext) as! FoodEntry
             
-            foodEntry.food = food
-            foodEntry.dateAdded = dateAdded
-            foodEntry.servingAmount = servingAmount
-            foodEntry.selectedServing = selectedServing
-            
-            do {
-                try backgroundContext.save()
-            } catch let createError {
-                print("Failed to create: \(createError)")
+            if let foodInContext = try? backgroundContext.existingObject(with: food.objectID) as? Food,
+                let selectedServingInContext = try? backgroundContext.existingObject(with: selectedServing.objectID) as? Serving {
+                
+                foodEntry.food = foodInContext
+                foodEntry.food.foodEntry = foodEntry
+                foodEntry.dateAdded = dateAdded
+                foodEntry.servingAmount = servingAmount
+                foodEntry.selectedServing = selectedServingInContext
+                
+                do {
+                    try backgroundContext.save()
+                } catch let createError {
+                    print("Failed to create: \(createError)")
+                }
             }
         }
     }
