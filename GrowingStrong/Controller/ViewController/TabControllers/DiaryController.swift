@@ -22,6 +22,8 @@ class DiaryController: UIViewController {
         setupViews()
         setupNotificationCenter()
         
+        RequestManager.shared.startNotifyingConnectivityChangeStatus()
+        
         foodEntriesTableView.register(FoodCell.self, forCellReuseIdentifier: foodEntryCellId)
 
     }

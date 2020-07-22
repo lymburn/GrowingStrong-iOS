@@ -85,6 +85,8 @@
 		26BC18E724B2C9CB0027E1B3 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC18E624B2C9CB0027E1B3 /* Food.swift */; };
 		26BC18E924B2CBB00027E1B3 /* Serving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC18E824B2CBB00027E1B3 /* Serving.swift */; };
 		26C72D942473099000E86FE8 /* ServingSizeOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */; };
+		26CD471624C8EDDB0079ABF6 /* ConnectivityNotifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CD471524C8EDDB0079ABF6 /* ConnectivityNotifiable.swift */; };
+		26CD471824C8F4940079ABF6 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CD471724C8F4940079ABF6 /* RequestManager.swift */; };
 		26D7487D24C4A7BC007CE6C1 /* FoodEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D7487C24C4A7BC007CE6C1 /* FoodEndPoint.swift */; };
 		26D7487F24C4A8CA007CE6C1 /* FoodNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D7487E24C4A8CA007CE6C1 /* FoodNetworkManager.swift */; };
 		26D7488124C4B2BD007CE6C1 /* FoodNetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D7488024C4B2BD007CE6C1 /* FoodNetworkHelper.swift */; };
@@ -199,6 +201,8 @@
 		26BC18E624B2C9CB0027E1B3 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		26BC18E824B2CBB00027E1B3 /* Serving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serving.swift; sourceTree = "<group>"; };
 		26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeOptionsCell.swift; sourceTree = "<group>"; };
+		26CD471524C8EDDB0079ABF6 /* ConnectivityNotifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityNotifiable.swift; sourceTree = "<group>"; };
+		26CD471724C8F4940079ABF6 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		26D7487C24C4A7BC007CE6C1 /* FoodEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEndPoint.swift; sourceTree = "<group>"; };
 		26D7487E24C4A8CA007CE6C1 /* FoodNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNetworkManager.swift; sourceTree = "<group>"; };
 		26D7488024C4B2BD007CE6C1 /* FoodNetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNetworkHelper.swift; sourceTree = "<group>"; };
@@ -350,6 +354,7 @@
 				2634FFE124BD2C7000670995 /* UserNetworkHelper.swift */,
 				26246B1E24C492C7000963E8 /* FoodEntryNetworkHelper.swift */,
 				26D7488024C4B2BD007CE6C1 /* FoodNetworkHelper.swift */,
+				26CD471524C8EDDB0079ABF6 /* ConnectivityNotifiable.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -487,6 +492,7 @@
 				264B211224BE53350008B55F /* DateFormatterHelper.swift */,
 				261E946024C1145F002DE202 /* JWTHeaderGenerator.swift */,
 				26D7488C24C6097A007CE6C1 /* CurrentDiaryDateTracker.swift */,
+				26CD471724C8F4940079ABF6 /* RequestManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -898,8 +904,10 @@
 				269E379B242D05EB0070B110 /* LoginController.swift in Sources */,
 				2634FFE224BD2C7000670995 /* UserNetworkHelper.swift in Sources */,
 				26BC18E724B2C9CB0027E1B3 /* Food.swift in Sources */,
+				26CD471824C8F4940079ABF6 /* RequestManager.swift in Sources */,
 				26F783332471B51300B7F0C8 /* MacroNutrientsView.swift in Sources */,
 				263B96752473048700340ED3 /* ServingSizeSelectorCell.swift in Sources */,
+				26CD471624C8EDDB0079ABF6 /* ConnectivityNotifiable.swift in Sources */,
 				264B211324BE53350008B55F /* DateFormatterHelper.swift in Sources */,
 				26246B1F24C492C7000963E8 /* FoodEntryNetworkHelper.swift in Sources */,
 				2651926B247EB71400483915 /* FoodSearchController.swift in Sources */,
