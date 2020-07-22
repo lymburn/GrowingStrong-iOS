@@ -184,8 +184,12 @@ extension DiaryController: DateBarDelegate {
 //MARK: Data controller delegate
 extension DiaryController: DiaryFoodEntriesDataControllerDelegate {
     func rowDeleted(at row: Int) {
-        let foodEntryViewModel = foodEntryViewModels[row]
-        FoodEntryDataManager.shared.deleteFoodEntry(foodEntryId: foodEntryViewModel.foodEntryId)
+        let currentDateFoodEntryViewModels = getFoodEntryViewModelsByDate(foodEntryViewModels, CurrentDiaryDateTracker.shared.currentDate)
+        let foodEntryViewModel = currentDateFoodEntryViewModels[row]
+        let foodEntryId = foodEntryViewModel.foodEntryId
+        
+        print("Deleting food entry id \(foodEntryId)")
+        FoodEntryDataManager.shared.deleteFoodEntry(foodEntryId: foodEntryId)
     }
 }
 

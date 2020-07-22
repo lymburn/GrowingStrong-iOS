@@ -58,9 +58,9 @@ extension AddFoodController {
             foodEntryViewModel.selectedServing = selectedServing
             
             FoodEntryDataManager.shared.createFoodEntry(food: foodEntryViewModel.food,
-                                                 dateAdded: foodEntryViewModel.dateAdded,
-                                                 servingAmount: servingAmount,
-                                                 selectedServing: selectedServing)
+                                                        dateAdded: foodEntryViewModel.dateAdded,
+                                                        servingAmount: servingAmount,
+                                                        selectedServing: selectedServing)
         }
     }
     

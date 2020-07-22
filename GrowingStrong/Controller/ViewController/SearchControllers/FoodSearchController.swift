@@ -13,10 +13,8 @@ class FoodSearchController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        foodEntryViewModels = []
         setupSearchController()
         setupNavigationItems()
-        setupFoodEntryViewModels(foodEntryViewModels)
         foodEntriesTableView.register(FoodCell.self, forCellReuseIdentifier: foodEntryCellId)
         
         let foodNetworkManager = FoodNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer,
@@ -32,10 +30,9 @@ class FoodSearchController: UIViewController {
 
     let searchController = UISearchController(searchResultsController: nil)
     
-    var foodEntryViewModels: [FoodEntryViewModel]!
+    var foodEntryViewModels: [FoodEntryViewModel] = []
     let foodEntryCellId = "foodEntryCellId"
     
-    var filteredFoodEntryViewModels: [FoodEntryViewModel] = []
     
     var foodNetworkHelper: FoodNetworkHelperType!
     
@@ -68,12 +65,7 @@ class FoodSearchController: UIViewController {
 
 //MARK: Setup
 extension FoodSearchController {
-    func setupFoodEntryViewModels(_ foodEntryViewModels: [FoodEntryViewModel]) {
-        self.foodEntryViewModels = foodEntryViewModels
-    }
-    
     fileprivate func setupSearchController() {
-        searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Food"
         searchController.searchBar.delegate = self
@@ -111,14 +103,6 @@ extension FoodSearchController: BaseFoodEntriesDataControllerDelegate {
         addFoodController.foodEntryViewModel = foodEntryVM
         addFoodController.selectedServing = foodEntryVM.selectedServing
         navigationController?.pushViewController(addFoodController, animated: true)
-    }
-}
-
-//MARK: Search results updating protocol
-extension FoodSearchController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        let searchBar = searchController.searchBar
-        filterContentForSearchText(searchBar.text!)
     }
 }
 
@@ -180,22 +164,5 @@ extension FoodSearchController {
 extension FoodSearchController {
     @objc func backTapped() {
         navigationController?.dismiss(animated: true, completion: nil)
-    }
-}
-
-//MARK: Searching & filtering functionality
-extension FoodSearchController {
-    func filterContentForSearchText(_ searchText: String) {
-        filteredFoodEntryViewModels = foodEntryViewModels.filter { (foodEntryViewModel: FoodEntryViewModel) -> Bool in
-            return foodEntryViewModel.food.foodName.lowercased().contains(searchText.lowercased())
-        }
-        
-        if isFiltering {
-            searchFoodEntriesDataController.updateFoodEntryViewModels(filteredFoodEntryViewModels)
-        } else {
-            searchFoodEntriesDataController.updateFoodEntryViewModels(foodEntryViewModels)
-        }
-        
-        foodEntriesTableView.reloadData()
     }
 }
