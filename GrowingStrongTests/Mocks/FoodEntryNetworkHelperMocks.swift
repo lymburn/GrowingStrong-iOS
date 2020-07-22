@@ -10,9 +10,8 @@ import Foundation
 @testable import GrowingStrong
 
 class MockFoodEntryNetworkHelperNoError : FoodEntryNetworkHelperType {
-    func createFoodEntry(bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (FoodEntryNetworkHelperResponse, CreateFoodEntryResponse?) -> ()) {
-        let response = CreateFoodEntryResponse(foodEntryId: 0)
-        completion(.success, response)
+    func createFoodEntry(bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (FoodEntryNetworkHelperResponse) -> ()) {
+        completion(.success)
     }
     
     func updateFoodEntry(foodEntryId: Int, bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (FoodEntryNetworkHelperResponse) -> ()) {

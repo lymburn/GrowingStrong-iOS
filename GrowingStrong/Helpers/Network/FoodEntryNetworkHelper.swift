@@ -11,15 +11,14 @@ import Foundation
 protocol FoodEntryNetworkHelperType {
     func createFoodEntry(bodyParameters: Parameters,
                          headers: HTTPHeaders,
-                         completion: @escaping (_ response: FoodEntryNetworkHelperResponse,
-                                                _ createFoodEntryResponse: CreateFoodEntryResponse?) -> ())
+                         completion: @escaping (_ response: FoodEntryNetworkHelperResponse) -> ())
     
-    func updateFoodEntry(foodEntryId: Int,
+    func updateFoodEntry(foodEntryId: UUID,
                          bodyParameters: Parameters,
                          headers: HTTPHeaders,
                          completion: @escaping (_ response: FoodEntryNetworkHelperResponse) -> ())
     
-    func deleteFoodEntry(foodEntryId: Int,
+    func deleteFoodEntry(foodEntryId: UUID,
                          headers: HTTPHeaders,
                          completion: @escaping (_ response: FoodEntryNetworkHelperResponse) -> ())
 }
@@ -40,21 +39,14 @@ struct FoodEntryNetworkHelper: FoodEntryNetworkHelperType {
     
     func createFoodEntry(bodyParameters: Parameters,
                          headers: HTTPHeaders,
-                         completion: @escaping (FoodEntryNetworkHelperResponse, CreateFoodEntryResponse?) -> ()) {
+                         completion: @escaping (FoodEntryNetworkHelperResponse) -> ()) {
         
-        foodEntryNetworkManager.createFoodEntry(bodyParameters: bodyParameters, headers: headers) { createFoodEntryResponse, error in
-            if let error = error {
-                print(error)
-                completion(.networkError, nil)
-            }
-            
-            if let response = createFoodEntryResponse {
-                completion(.success, response)
-            }
+        foodEntryNetworkManager.createFoodEntry(bodyParameters: bodyParameters, headers: headers) { error in
+            self.handleNoResponseCompletions(error: error, completion: completion)
         }
     }
     
-    func updateFoodEntry(foodEntryId: Int,
+    func updateFoodEntry(foodEntryId: UUID,
                          bodyParameters: Parameters,
                          headers: HTTPHeaders,
                          completion: @escaping (_ response: FoodEntryNetworkHelperResponse) -> ()) {
@@ -64,7 +56,7 @@ struct FoodEntryNetworkHelper: FoodEntryNetworkHelperType {
         }
     }
     
-    func deleteFoodEntry(foodEntryId: Int,
+    func deleteFoodEntry(foodEntryId: UUID,
                      headers: HTTPHeaders,
                      completion: @escaping (_ response: FoodEntryNetworkHelperResponse) -> ()) {
         

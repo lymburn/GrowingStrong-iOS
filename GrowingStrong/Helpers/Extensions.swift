@@ -78,3 +78,10 @@ extension UIViewController {
 public extension CodingUserInfoKey {
     static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")
 }
+
+extension Float {
+    //Clean string without decimal if format is .0
+    var clean: String {
+       return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+    }
+}

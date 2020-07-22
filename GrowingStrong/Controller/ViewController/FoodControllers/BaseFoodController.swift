@@ -26,7 +26,6 @@ class BaseFoodController: UIViewController {
     let servingAmountCellIdenfitier = "servingAmountCellIdentifier"
     let servingSizeSelectorCellIdentifier = "servingSizeSelectorCellIdentifier"
     var foodEntryViewModel: FoodEntryViewModel!
-    var selectedServing: Serving!
     
     lazy var servingSizeOptionsLauncher: ServingSizeOptionsLauncher = {
         let launcher = ServingSizeOptionsLauncher()
@@ -46,7 +45,10 @@ class BaseFoodController: UIViewController {
     }()
     
     lazy var baseFoodDataController: BaseFoodDataController = {
-        let controller = BaseFoodDataController(servingAmountCellId: servingAmountCellIdenfitier, servingSizeOptionsCellId: servingSizeSelectorCellIdentifier, selectedServing: selectedServing)
+        let controller = BaseFoodDataController(servingAmountCellId: servingAmountCellIdenfitier,
+                                                                     servingSizeOptionsCellId: servingSizeSelectorCellIdentifier,
+                                                                     servingAmount: self.foodEntryViewModel.servingAmount,
+                                                                     selectedServing: self.foodEntryViewModel.selectedServing)
         controller.delegate = self
         return controller
     }()
@@ -126,8 +128,7 @@ extension BaseFoodController: BaseFoodDataControllerDelegate {
 extension BaseFoodController: ServingSizeOptionsLauncherDelegate {
     func didSelectOption(option: Serving) {
         setServingSizeValueLabel(servingSizeText: option.getServingSizeText())
-        selectedServing = option
-        foodEntryViewModel.selectedServing = selectedServing
+        foodEntryViewModel.selectedServing = option
         updateMacroNutrientsView()
     }
 }

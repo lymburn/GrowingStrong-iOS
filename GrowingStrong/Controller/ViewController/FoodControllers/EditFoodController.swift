@@ -51,13 +51,9 @@ class EditFoodController: BaseFoodController {
 extension EditFoodController {
     fileprivate func saveFoodInfo() {
         let servingAmount = super.getServingAmount()
+        let selectedServing = super.foodEntryViewModel.selectedServing
         
-        if selectedServing == nil || servingAmount == nil {
-            print("Selected serving option or serving amount is nil")
-            return
-        }
-        
-        if let selectedServing = selectedServing, let servingAmount = servingAmount {
+        if let servingAmount = servingAmount {
             FoodEntryDataManager.shared.updateFoodEntryServingSize(foodEntryViewModel.foodEntryId,
                                                  servingAmount: servingAmount,
                                                  selectedServing: selectedServing)

@@ -100,8 +100,8 @@ extension FoodSearchController: BaseFoodEntriesDataControllerDelegate {
     func rowSelected(at row: Int) {
         let addFoodController = AddFoodController()
         let foodEntryVM = foodEntryViewModels[row]
+        print(foodEntryVM.foodEntryId)
         addFoodController.foodEntryViewModel = foodEntryVM
-        addFoodController.selectedServing = foodEntryVM.selectedServing
         navigationController?.pushViewController(addFoodController, animated: true)
     }
 }

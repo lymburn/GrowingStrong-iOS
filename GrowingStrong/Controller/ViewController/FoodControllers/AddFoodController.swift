@@ -47,17 +47,14 @@ extension AddFoodController {
     fileprivate func saveFoodToDiary() {
         //TODO: implement persistence for food view model
         let servingAmount = super.getServingAmount()
+        let selectedServing = super.foodEntryViewModel.selectedServing
         
-        if selectedServing == nil || servingAmount == nil {
-            print("Selected serving option or serving amount is nil")
-            return
-        }
-        
-        if let selectedServing = selectedServing, let servingAmount = servingAmount {
+        if let servingAmount = servingAmount {
             foodEntryViewModel.servingAmount = servingAmount
             foodEntryViewModel.selectedServing = selectedServing
             
-            FoodEntryDataManager.shared.createFoodEntry(food: foodEntryViewModel.food,
+            FoodEntryDataManager.shared.createFoodEntry(foodEntryId: foodEntryViewModel.foodEntryId,
+                                                        food: foodEntryViewModel.food,
                                                         dateAdded: foodEntryViewModel.dateAdded,
                                                         servingAmount: servingAmount,
                                                         selectedServing: selectedServing)

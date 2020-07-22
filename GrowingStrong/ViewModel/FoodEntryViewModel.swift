@@ -9,7 +9,7 @@
 import Foundation
 
 struct FoodEntryViewModel{
-    var foodEntryId: Int32
+    var foodEntryId: UUID
     var food: Food
     var dateAdded: Date
     var selectedServing: Serving {
@@ -58,7 +58,7 @@ struct FoodEntryViewModel{
     
     //Food entry VM created from food with passed in arguments for dateAdded, selectedServing, and servingAmount
     init (food: Food, dateAdded: Date, selectedServing: Serving, servingAmount: Float) {
-        self.foodEntryId = 0
+        self.foodEntryId = UUID()
         self.food = food
         self.dateAdded = dateAdded
         self.selectedServing = selectedServing
