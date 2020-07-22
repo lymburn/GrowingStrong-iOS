@@ -15,16 +15,8 @@ class AddFoodController: BaseFoodController {
         
         setupViews()
         setupConstraints()
-        
-        let foodEntryNetworkManager = FoodEntryNetworkManager()
-        let foodEntryNetworkHelper = FoodEntryNetworkHelper(foodEntryNetworkManager: foodEntryNetworkManager,
-                                                            jwtTokenKey: KeyChainKeys.jwtToken)
-        
-        setupDependencies(foodEntryNetworkHelper: foodEntryNetworkHelper)
     }
-    
-    var foodEntryNetworkHelper: FoodEntryNetworkHelperType!
-    
+
     override func setupViews() {
         super.setupViews()
         
@@ -38,10 +30,6 @@ class AddFoodController: BaseFoodController {
         addToDiaryButton.heightAnchor.constraint(equalToConstant: SizeConstants.screenSize.height * 0.05).isActive = true
         addToDiaryButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: SizeConstants.screenSize.width * 0.2).isActive = true
         addToDiaryButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -SizeConstants.screenSize.width * 0.2).isActive = true
-    }
-    
-    fileprivate func setupDependencies(foodEntryNetworkHelper: FoodEntryNetworkHelperType) {
-        self.foodEntryNetworkHelper = foodEntryNetworkHelper
     }
     
     lazy var addToDiaryButton: UIButton = {
@@ -79,28 +67,5 @@ extension AddFoodController {
     @objc func addToDiaryButtonPressed() {
         saveFoodToDiary()
         dismiss(animated: true, completion: nil)
-    }
-}
-
-//MARK: Networking
-extension AddFoodController {
-    
-
-    fileprivate func networkCreateFoodEntry() {
-//        guard let header = JWTHeaderGenerator.generateHeader(jwtTokenKey: KeyChainKeys.jwtToken) else { return }
-//        var parameters = foodEntryViewModel.generateCreateParameters()
-//        parameters["UserId"] = UserDataManager.fetchCurrentUser()?.userId
-//        foodEntryNetworkHelper.createFoodEntry(bodyParameters: parameters, headers: header) { networkResponse, createFoodEntryResponse in
-//            switch networkResponse {
-//            case .networkError:
-//                print("Error with network creating food entry")
-//            case .success:
-//                if let response = createFoodEntryResponse {
-//                    let createdFoodEntryId = response.foodEntryId
-//
-//                }
-//
-//            }
-//        }
     }
 }
