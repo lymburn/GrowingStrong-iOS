@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct AuthenticateRequest: RequestModel {
+struct AuthenticateRequest: CanGenerateParameters {
     let email: String
     let password: String
     

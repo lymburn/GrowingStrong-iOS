@@ -8,6 +8,10 @@
 
 import Foundation
 
-protocol RequestModel {
+protocol CanGenerateParameters {
     func generateParameters() -> Parameters
+}
+
+protocol RequestModel {
+    var requestId: UUID { get set }
 }

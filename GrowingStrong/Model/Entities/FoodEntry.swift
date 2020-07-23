@@ -61,24 +61,3 @@ class FoodEntry: NSManagedObject, Codable {
         try container.encode(selectedServing, forKey: .selectedServing)
     }
 }
-
-extension FoodEntry {
-    func generateUpdateParameters() -> Parameters {
-        let parameters: Parameters = ["ServingAmount" : self.servingAmount, "SelectedServingId" : self.selectedServing.servingId]
-        
-        return parameters
-    }
-    
-    func generateCreateParametersForUser(userId: Int32) -> Parameters {
-        let dateFormatter = DateFormatterHelper.generateDateFormatter(withFormat: DateFormatConstants.ISO8601)
-        let dateAdded = dateFormatter.string(from: self.dateAdded)
-        let parameters: Parameters = ["UserId" : userId,
-                                      "FoodEntryId" : foodEntryId.uuidString,
-                                      "FoodId" : food.foodId,
-                                      "DateAdded" : dateAdded,
-                                      "ServingAmount" : servingAmount,
-                                      "SelectedServingId" : selectedServing.servingId]
-        
-        return parameters
-    }
-}

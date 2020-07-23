@@ -75,3 +75,7 @@ struct KeyChainKeys {
     static let jwtToken = "jwtToken"
     static let unitTestJwtToken = "unitTestJwtToken"
 }
+
+struct UserDefaultsKeys {
+    static let currentUserIdKey = "currentUserIdKey"
+}
