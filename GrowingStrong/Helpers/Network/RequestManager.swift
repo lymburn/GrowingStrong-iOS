@@ -14,6 +14,8 @@ class RequestManager: ConnectivityNotifiable {
     
     //Queue with pending requests
     private var requestsQueue : [RequestModel] = []
+    private let semaphoreWaitTimeout = 10.0
+    private let semaphore = DispatchSemaphore(value: 0)
     
     static let shared = RequestManager()
     
@@ -65,8 +67,7 @@ class RequestManager: ConnectivityNotifiable {
         requestsQueue.append(request)
     }
     
-    //TODO: Make requests synchronous
-    func executePendingRequests() {
+    private func executePendingRequests() {
         print("Executing pending requests")
         
         for requestModel in requestsQueue {
@@ -108,7 +109,11 @@ extension RequestManager {
                 print("Successfully created food entry")
                 self.removeRequestFromQueue(requestId: createFoodEntryRequest.requestId)
             }
+            
+            self.semaphore.signal()
         }
+        
+        semaphore.wait(timeout: .now() + semaphoreWaitTimeout)
     }
     
     private func updateFoodEntry(updateFoodEntryRequest: UpdateFoodEntryRequest) {
@@ -124,7 +129,11 @@ extension RequestManager {
                 print("Successfully updated food entry")
                 self.removeRequestFromQueue(requestId: updateFoodEntryRequest.requestId)
             }
+            
+            self.semaphore.signal()
         }
+        
+        semaphore.wait(timeout: .now() + semaphoreWaitTimeout)
     }
     
     private func deleteFoodEntry(deleteFoodEntryRequest: DeleteFoodEntryRequest) {
@@ -139,6 +148,10 @@ extension RequestManager {
                 print("Successfully deleted food entry")
                 self.removeRequestFromQueue(requestId: deleteFoodEntryRequest.requestId)
             }
+            
+            self.semaphore.signal()
         }
+        
+        semaphore.wait(timeout: .now() + semaphoreWaitTimeout)
     }
 }
