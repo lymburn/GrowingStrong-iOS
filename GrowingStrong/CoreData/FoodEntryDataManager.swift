@@ -15,7 +15,8 @@ class FoodEntryDataManager {
     let mainContext: NSManagedObjectContext = CoreDataManager.shared.mainContext
     let backgroundContext = CoreDataManager.shared.backgroundContext
     
-    func createFoodEntry (food: Food,
+    func createFoodEntry (foodEntryId: UUID,
+                          food: Food,
                           dateAdded: Date,
                           servingAmount: Float,
                           selectedServing: Serving) {
@@ -23,15 +24,21 @@ class FoodEntryDataManager {
         backgroundContext.performAndWait {
             let foodEntry = NSEntityDescription.insertNewObject(forEntityName: EntityNames.foodEntry.rawValue, into: backgroundContext) as! FoodEntry
             
-            foodEntry.food = food
-            foodEntry.dateAdded = dateAdded
-            foodEntry.servingAmount = servingAmount
-            foodEntry.selectedServing = selectedServing
-            
-            do {
-                try backgroundContext.save()
-            } catch let createError {
-                print("Failed to create: \(createError)")
+            if let foodInContext = try? backgroundContext.existingObject(with: food.objectID) as? Food,
+                let selectedServingInContext = try? backgroundContext.existingObject(with: selectedServing.objectID) as? Serving {
+                
+                foodEntry.foodEntryId = foodEntryId
+                foodEntry.food = foodInContext
+                foodEntry.food.foodEntry = foodEntry
+                foodEntry.dateAdded = dateAdded
+                foodEntry.servingAmount = servingAmount
+                foodEntry.selectedServing = selectedServingInContext
+                
+                do {
+                    try backgroundContext.save()
+                } catch let createError {
+                    print("Failed to create: \(createError)")
+                }
             }
         }
     }
@@ -49,10 +56,10 @@ class FoodEntryDataManager {
         return nil
     }
     
-    func fetchFoodEntryById (_ foodEntryId: Int32) -> FoodEntry? {
+    func fetchFoodEntryById (_ foodEntryId: UUID) -> FoodEntry? {
         let fetchRequest = NSFetchRequest<FoodEntry>(entityName: EntityNames.foodEntry.rawValue)
         
-        let predicate = NSPredicate(format: "foodEntryId == %d", foodEntryId)
+        let predicate = NSPredicate(format: "foodEntryId == %@", foodEntryId as CVarArg)
         fetchRequest.predicate = predicate
         fetchRequest.fetchLimit = 1
         
@@ -66,7 +73,7 @@ class FoodEntryDataManager {
         return nil
     }
     
-    func updateFoodEntryServingSize (_ foodEntryId: Int32, servingAmount: Float, selectedServing: Serving) {
+    func updateFoodEntryServingSize (_ foodEntryId: UUID, servingAmount: Float, selectedServing: Serving) {
         let foodEntry = fetchFoodEntryById(foodEntryId)
         let foodEntryObjId = foodEntry?.objectID
         
@@ -87,7 +94,7 @@ class FoodEntryDataManager {
         }
     }
     
-    func deleteFoodEntry (foodEntryId: Int32) {
+    func deleteFoodEntry (foodEntryId: UUID) {
         let foodEntry = fetchFoodEntryById(foodEntryId)
         let foodEntryObjId = foodEntry?.objectID
         

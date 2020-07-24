@@ -12,12 +12,12 @@ import CoreData
 protocol FoodEntryNetworkManagerType {
     func createFoodEntry(bodyParameters: Parameters,
                          headers: HTTPHeaders,
-                         completion: @escaping (_ createFoodEntryResponse: CreateFoodEntryResponse?, _ error: String?) -> ())
-    func updateFoodEntry(foodEntryId: Int,
+                         completion: @escaping ( _ error: String?) -> ())
+    func updateFoodEntry(foodEntryId: UUID,
                          bodyParameters: Parameters,
                          headers: HTTPHeaders,
                          completion: @escaping (_ error: String?) -> ())
-    func deleteFoodEntry(foodEntryId: Int,
+    func deleteFoodEntry(foodEntryId: UUID,
                          headers: HTTPHeaders,
                          completion: @escaping (_ error: String?) -> ())
 }
@@ -25,72 +25,37 @@ protocol FoodEntryNetworkManagerType {
 class FoodEntryNetworkManager: FoodEntryNetworkManagerType {
     private let router = Router<FoodEntryApi>()
     
-    func createFoodEntry(bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (CreateFoodEntryResponse?, String?) -> ()) {
+    func createFoodEntry(bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (String?) -> ()) {
         router.request(.create(bodyParameters: bodyParameters, headers: headers)) { data, response, error in
-            
-            if error != nil {
-                completion(nil, NetworkResponse.generalError.rawValue)
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = NetworkResponseHandler.handleResponse(response)
-
-                switch result {
-                case .success:
-                    guard let responseData = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        let decoder = JSONDecoder()
-                        let createFoodEntryResponse = try decoder.decode(CreateFoodEntryResponse.self, from: responseData)
-                        
-                        completion(createFoodEntryResponse, nil)
-                    } catch {
-                        completion(nil, NetworkResponse.unableToDecode.rawValue)
-                    }
-                case.failure(let networkFailureError):
-                    completion(nil, networkFailureError)
-                }
-            }
+            self.handleNoDecodingResponse(response: response, error: error, completion: completion)
         }
     }
     
-    func updateFoodEntry(foodEntryId: Int, bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (String?) -> ()) {
+    func updateFoodEntry(foodEntryId: UUID, bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (String?) -> ()) {
         router.request(.update(foodEntryId: foodEntryId, bodyParameters: bodyParameters, headers: headers)) { data, response, error in
-            if error != nil {
-                completion(NetworkResponse.generalError.rawValue)
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = NetworkResponseHandler.handleResponse(response)
-
-                switch result {
-                case .success:
-                    completion(nil)
-                case.failure(let networkFailureError):
-                    completion(networkFailureError)
-                }
-            }
+            self.handleNoDecodingResponse(response: response, error: error, completion: completion)
         }
     }
     
-    func deleteFoodEntry(foodEntryId: Int, headers: HTTPHeaders, completion: @escaping (String?) -> ()) {
+    func deleteFoodEntry(foodEntryId: UUID, headers: HTTPHeaders, completion: @escaping (String?) -> ()) {
         router.request(.delete(foodEntryId: foodEntryId, headers: headers)) { data, response, error in
-            if error != nil {
-                completion(NetworkResponse.generalError.rawValue)
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = NetworkResponseHandler.handleResponse(response)
+            self.handleNoDecodingResponse(response: response, error: error, completion: completion)
+        }
+    }
+    
+    private func handleNoDecodingResponse(response: URLResponse?, error: Error?, completion: @escaping (String?) -> ()) {
+        if error != nil {
+            completion(NetworkResponse.generalError.rawValue)
+        }
+        
+        if let response = response as? HTTPURLResponse {
+            let result = NetworkResponseHandler.handleResponse(response)
 
-                switch result {
-                case .success:
-                    completion(nil)
-                case.failure(let networkFailureError):
-                    completion(networkFailureError)
-                }
+            switch result {
+            case .success:
+                completion(nil)
+            case.failure(let networkFailureError):
+                completion(networkFailureError)
             }
         }
     }

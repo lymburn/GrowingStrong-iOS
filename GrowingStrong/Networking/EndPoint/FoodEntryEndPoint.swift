@@ -9,8 +9,8 @@
 import Foundation
 
 public enum FoodEntryApi {
-    case update (foodEntryId: Int, bodyParameters: Parameters, headers: HTTPHeaders)
-    case delete (foodEntryId: Int, headers: HTTPHeaders)
+    case update (foodEntryId: UUID, bodyParameters: Parameters, headers: HTTPHeaders)
+    case delete (foodEntryId: UUID, headers: HTTPHeaders)
     case create (bodyParameters: Parameters, headers: HTTPHeaders)
 }
 

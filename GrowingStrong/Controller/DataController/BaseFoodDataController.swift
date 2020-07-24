@@ -15,15 +15,17 @@ protocol BaseFoodDataControllerDelegate: class {
 }
 
 class BaseFoodDataController: NSObject, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
-    var servingAmountCellId: String
-    var servingSizeSelectorCellId: String
-    var selectedServing: Serving
+    private var servingAmountCellId: String
+    private var servingSizeSelectorCellId: String
+    private var selectedServing: Serving
+    private var servingAmount: Float
     
     weak var delegate: BaseFoodDataControllerDelegate?
     
-    init(servingAmountCellId: String, servingSizeOptionsCellId: String, selectedServing: Serving) {
+    init(servingAmountCellId: String, servingSizeOptionsCellId: String, servingAmount: Float, selectedServing: Serving) {
         self.servingAmountCellId = servingAmountCellId
         self.servingSizeSelectorCellId = servingSizeOptionsCellId
+        self.servingAmount = servingAmount
         self.selectedServing = selectedServing
     }
     
@@ -38,6 +40,7 @@ class BaseFoodDataController: NSObject, UITableViewDataSource, UITableViewDelega
             return servingSizeSelectorCell
         } else {
             let servingAmountCell = tableView.dequeueReusableCell(withIdentifier: servingAmountCellId, for: indexPath) as! ServingAmountCell
+            servingAmountCell.servingAmountValueTextField.text = servingAmount.clean
             servingAmountCell.servingAmountValueTextField.delegate = self
             return servingAmountCell
         }

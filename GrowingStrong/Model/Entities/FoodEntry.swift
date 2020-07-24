@@ -21,7 +21,7 @@ class FoodEntry: NSManagedObject, Codable {
     }
     
     @NSManaged var dateAdded: Date
-    @NSManaged var foodEntryId: Int32
+    @NSManaged var foodEntryId: UUID
     @NSManaged var servingAmount: Float
     @NSManaged var food: Food
     @NSManaged var selectedServing: Serving
@@ -44,7 +44,7 @@ class FoodEntry: NSManagedObject, Codable {
             self.dateAdded = date
         }
         
-        self.foodEntryId = try container.decode(Int32.self, forKey: .foodEntryId)
+        self.foodEntryId = try container.decode(UUID.self, forKey: .foodEntryId)
         self.servingAmount = try container.decode(Float.self, forKey: .servingAmount)
         self.food = try container.decode(Food.self, forKey: .food)
         self.food.foodEntry = self
@@ -59,25 +59,5 @@ class FoodEntry: NSManagedObject, Codable {
         try container.encode(servingAmount, forKey: .servingAmount)
         try container.encode(food, forKey: .food)
         try container.encode(selectedServing, forKey: .selectedServing)
-    }
-}
-
-extension FoodEntry {
-    func generateUpdateParameters() -> Parameters {
-        let parameters: Parameters = ["ServingAmount" : self.servingAmount, "SelectedServingId" : self.selectedServing.servingId]
-        
-        return parameters
-    }
-    
-    func generateCreateParametersForUser(userId: Int32) -> Parameters {
-        let dateFormatter = DateFormatterHelper.generateDateFormatter(withFormat: DateFormatConstants.ISO8601)
-        let dateAdded = dateFormatter.string(from: self.dateAdded)
-        let parameters: Parameters = ["UserId" : userId,
-                                      "FoodId" : food.foodId,
-                                      "DateAdded" : dateAdded,
-                                      "ServingAmount" : servingAmount,
-                                      "SelectedServingId" : selectedServing.servingId]
-        
-        return parameters
     }
 }

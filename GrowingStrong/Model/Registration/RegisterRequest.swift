@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct RegisterRequest: RequestModel {
+struct RegisterRequest: CanGenerateParameters {
     let email: String
     let password: String
     

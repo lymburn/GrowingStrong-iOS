@@ -1,16 +1,20 @@
 PODS:
+  - Connectivity (4.1.0)
   - SwiftKeychainWrapper (3.4.0)
 
 DEPENDENCIES:
+  - Connectivity
   - SwiftKeychainWrapper
 
 SPEC REPOS:
   trunk:
+    - Connectivity
     - SwiftKeychainWrapper
 
 SPEC CHECKSUMS:
+  Connectivity: d16562ccfec020b9bffdffbe1886f5fa83f298b6
   SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
 
-PODFILE CHECKSUM: a124a35f32eb2cd91135fd829aef85a595e40d36
+PODFILE CHECKSUM: beabab61f0004782821bb49fcd27573732e65665
 
 COCOAPODS: 1.9.3

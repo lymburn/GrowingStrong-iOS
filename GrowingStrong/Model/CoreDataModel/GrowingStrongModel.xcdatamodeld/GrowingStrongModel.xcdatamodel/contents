@@ -8,7 +8,7 @@
     </entity>
     <entity name="FoodEntry" representedClassName="FoodEntry" syncable="YES">
         <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="foodEntryId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="foodEntryId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="servingAmount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="food" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Food" inverseName="foodEntry" inverseEntity="Food"/>
         <relationship name="selectedServing" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Serving"/>
