@@ -17,11 +17,17 @@ class MainTabBarController: UITabBarController {
         setupViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupDiaryControllerFoodEntries()
+    }
+    
     lazy var diaryController = UINavigationController(rootViewController: DiaryController())
     lazy var learnController = LearnController()
     lazy var dummyController = UIViewController()
     lazy var trendsController = TrendsController()
     lazy var settingsController = SettingsController()
+    var foodEntryViewModels: [FoodEntryViewModel] = []
     
     let actionButton: UIButton = {
         let button = UIButton()
@@ -66,6 +72,12 @@ extension MainTabBarController {
         settingsController.tabBarItem.title = "Settings"
         
         viewControllers = [diaryController, learnController, dummyController, trendsController, settingsController]
+    }
+    
+    fileprivate func setupDiaryControllerFoodEntries() {
+        if let rootDiaryController = diaryController.rootViewController as? DiaryController {
+            rootDiaryController.foodEntryViewModels = self.foodEntryViewModels
+        }
     }
     
     fileprivate func setupViews() {

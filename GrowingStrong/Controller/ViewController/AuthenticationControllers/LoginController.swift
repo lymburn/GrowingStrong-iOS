@@ -160,6 +160,7 @@ extension LoginController {
     fileprivate func navigateToMainPage(foodEntries: [FoodEntry]) {
         DispatchQueue.main.async {
             let mainController = MainTabBarController()
+            mainController.foodEntryViewModels = foodEntries.map { return FoodEntryViewModel(foodEntry: $0)}
             mainController.modalPresentationStyle = .fullScreen
             self.present(mainController, animated: true)
         }

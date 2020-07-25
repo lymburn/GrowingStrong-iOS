@@ -47,7 +47,7 @@ class DiaryController: UIViewController {
     }
     
     let foodEntryCellId = "foodEntryCellId"
-    var foodEntryViewModels: [FoodEntryViewModel]! = FoodEntryDataManager.shared.fetchFoodEntries()?.map { return FoodEntryViewModel(foodEntry: $0)}
+    var foodEntryViewModels: [FoodEntryViewModel]!
     var dateBar: DateBarType!
     var dailyNutritionView: DailyNutritionViewType!
     var foodEntryNetworkHelper: FoodEntryNetworkHelperType!

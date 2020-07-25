@@ -13,6 +13,10 @@ protocol DailyNutritionViewProtocol {
     func getCarbsValueLabel() -> String
     func getFatValueLabel() -> String
     func getProteinValueLabel() -> String
+    func setCaloriesValueLabel(_ text: String)
+    func setCarbsValueLabel(_ text: String)
+    func setFatValueLabel(_ text: String)
+    func setProteinValueLabel(_ text: String)
 }
 
 class DailyNutritionView: UIView {
@@ -159,6 +163,22 @@ extension DailyNutritionView: DailyNutritionViewProtocol {
     
     func getProteinValueLabel() -> String {
         return proteinValueLabel.text ?? ""
+    }
+    
+    func setCaloriesValueLabel(_ text: String) {
+        caloriesValueLabel.text = text
+    }
+    
+    func setCarbsValueLabel(_ text: String) {
+        carbsValueLabel.text = text
+    }
+    
+    func setFatValueLabel(_ text: String) {
+        fatValueLabel.text = text
+    }
+    
+    func setProteinValueLabel(_ text: String) {
+        proteinValueLabel.text = text
     }
 }
 
