@@ -28,7 +28,8 @@ class DiaryController: UIViewController {
         RequestManager.shared.startNotifyingConnectivityChangeStatus()
         
         foodEntriesTableView.register(FoodCell.self, forCellReuseIdentifier: foodEntryCellId)
-
+        
+        updateDailyNutritionView(for: CurrentDiaryDateTracker.shared.currentDate)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -164,9 +165,24 @@ extension DiaryController {
         foodEntryViewModels = FoodEntryDataManager.shared.fetchFoodEntries()?.map { return FoodEntryViewModel(foodEntry: $0)}
     }
     
-    fileprivate func updateFoodEntriesTable() {
+    fileprivate func updateDailyNutritionView(for date: Date) {
+        let foodEntryViewModels = getFoodEntryViewModels(by: date)
+        let totalDailyCalories = foodEntryViewModels.map({return $0.totalCalories}).reduce(0, +)
+        let totalDailyCarbs = foodEntryViewModels.map({return $0.totalCarbohydrates}).reduce(0, +)
+        let totalDailyFat = foodEntryViewModels.map({return $0.totalFat}).reduce(0, +)
+        let totalDailyProtein = foodEntryViewModels.map({return $0.totalProtein}).reduce(0, +)
+        
+        dailyNutritionView.setCaloriesValueLabel("\(totalDailyCalories)")
+        dailyNutritionView.setCarbsValueLabel("\(totalDailyCarbs)")
+        dailyNutritionView.setFatValueLabel("\(totalDailyFat)")
+        dailyNutritionView.setProteinValueLabel("\(totalDailyProtein)")
+    }
+    
+    //Update food entries in table & daily nutrition view
+    fileprivate func updateDiaryUI() {
         updateFoodEntryViewModelsFromCoreData()
         updateFoodEntriesUI(for: CurrentDiaryDateTracker.shared.currentDate)
+        updateDailyNutritionView(for: CurrentDiaryDateTracker.shared.currentDate)
     }
 }
 
@@ -180,6 +196,7 @@ extension DiaryController: DateBarDelegate {
         if let previousDateText = previousDateText, let previousDate = dateFormatter.date(from: previousDateText) {
             CurrentDiaryDateTracker.shared.currentDate = previousDate
             updateFoodEntriesUI(for: previousDate)
+            updateDailyNutritionView(for: previousDate)
         }
     }
     
@@ -191,6 +208,7 @@ extension DiaryController: DateBarDelegate {
         if let nextDateText = nextDateText, let nextDate = dateFormatter.date(from: nextDateText) {
             CurrentDiaryDateTracker.shared.currentDate = nextDate
             updateFoodEntriesUI(for: nextDate)
+            updateDailyNutritionView(for: nextDate)
         }
     }
 }
@@ -226,7 +244,7 @@ extension DiaryController {
         if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, !inserts.isEmpty {
             for insert in inserts {
                 if let foodEntry = insert as? FoodEntry {
-                    updateFoodEntriesTable()
+                    updateDiaryUI()
                     
                     let userId = Int32(UserDefaults.standard.value(forKey: UserDefaultsKeys.currentUserIdKey) as! Int)
                     let request = CreateFoodEntryRequest(userId: userId, foodEntry: foodEntry)
@@ -238,7 +256,7 @@ extension DiaryController {
         if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, !updates.isEmpty {
             for update in updates {
                 if let foodEntry = update as? FoodEntry {
-                    updateFoodEntriesTable()
+                    updateDiaryUI()
                     
                     let request = UpdateFoodEntryRequest(foodEntry: foodEntry)
                     RequestManager.shared.insertRequest(request)
@@ -249,7 +267,7 @@ extension DiaryController {
         if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, !deletes.isEmpty {
             for delete in deletes {
                 if let foodEntry = delete as? FoodEntry {
-                    updateFoodEntriesTable()
+                    updateDiaryUI()
                     
                     let request = DeleteFoodEntryRequest(foodEntry: foodEntry)
                     RequestManager.shared.insertRequest(request)
