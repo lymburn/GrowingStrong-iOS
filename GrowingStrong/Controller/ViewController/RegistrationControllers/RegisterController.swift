@@ -184,15 +184,10 @@ extension RegisterController {
             if let user = user {
                 let userId = Int(user.userId)
                 saveUserIdToUserDefaults(userId: userId)
-                self.createUser(userId: userId, emailAddress: user.emailAddress)
                 self.navigateToMainPage()
             }
             
         }
-    }
-    
-    fileprivate func createUser(userId: Int, emailAddress: String) {
-        UserDataManager.shared.createUser(userId: userId, emailAddress: emailAddress)
     }
     
     fileprivate func saveUserIdToUserDefaults(userId: Int) {

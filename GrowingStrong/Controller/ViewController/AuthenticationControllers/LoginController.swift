@@ -143,14 +143,9 @@ extension LoginController {
             if let user = user {
                 let userId = Int(user.userId)
                 saveUserIdToUserDefaults(userId: userId)
-                createUser(userId: userId, emailAddress: user.emailAddress)
                 getUserFoodEntries(userId: userId)
             }
         }
-    }
-    
-    fileprivate func createUser(userId: Int, emailAddress: String) {
-        UserDataManager.shared.createUser(userId: userId, emailAddress: emailAddress)
     }
     
     fileprivate func saveUserIdToUserDefaults(userId: Int) {

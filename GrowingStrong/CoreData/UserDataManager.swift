@@ -15,22 +15,6 @@ class UserDataManager {
     
     static let shared = UserDataManager()
     
-    func createUser (userId: Int, emailAddress: String) {
-        
-        backgroundContext.performAndWait {
-            let user = NSEntityDescription.insertNewObject(forEntityName: EntityNames.user.rawValue, into: backgroundContext) as! User
-            
-            user.userId = Int32(userId)
-            user.emailAddress = emailAddress
-            
-            do {
-                try backgroundContext.save()
-            } catch let createError {
-                print("Failed to create: \(createError)")
-            }
-        }
-    }
-    
     func fetchUser (byId userId: Int) -> User? {
         let fetchRequest = NSFetchRequest<User>(entityName: EntityNames.user.rawValue)
         let predicate = NSPredicate(format: "userId == %d", userId)
