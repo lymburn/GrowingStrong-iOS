@@ -81,6 +81,8 @@
 		26A58E4124B3C6E4009A3209 /* AuthenticateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A58E4024B3C6E4009A3209 /* AuthenticateRequest.swift */; };
 		26A8D4C5247530F8000BC5C6 /* ServingSizeExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A8D4C4247530F8000BC5C6 /* ServingSizeExtensionsTests.swift */; };
 		26B2537E247C6DB9000CE403 /* FoodEntryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B2537D247C6DB9000CE403 /* FoodEntryViewModelTests.swift */; };
+		26B6BAD324CF9DBB00BF3CE9 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B6BAD224CF9DBB00BF3CE9 /* UserProfile.swift */; };
+		26B6BAD524CF9DC600BF3CE9 /* UserTargets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B6BAD424CF9DC600BF3CE9 /* UserTargets.swift */; };
 		26BC18E524B2C76F0027E1B3 /* FoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC18E424B2C76F0027E1B3 /* FoodEntry.swift */; };
 		26BC18E724B2C9CB0027E1B3 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC18E624B2C9CB0027E1B3 /* Food.swift */; };
 		26BC18E924B2CBB00027E1B3 /* Serving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC18E824B2CBB00027E1B3 /* Serving.swift */; };
@@ -201,6 +203,8 @@
 		26A58E4024B3C6E4009A3209 /* AuthenticateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateRequest.swift; sourceTree = "<group>"; };
 		26A8D4C4247530F8000BC5C6 /* ServingSizeExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeExtensionsTests.swift; sourceTree = "<group>"; };
 		26B2537D247C6DB9000CE403 /* FoodEntryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryViewModelTests.swift; sourceTree = "<group>"; };
+		26B6BAD224CF9DBB00BF3CE9 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		26B6BAD424CF9DC600BF3CE9 /* UserTargets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTargets.swift; sourceTree = "<group>"; };
 		26BC18E424B2C76F0027E1B3 /* FoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntry.swift; sourceTree = "<group>"; };
 		26BC18E624B2C9CB0027E1B3 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		26BC18E824B2CBB00027E1B3 /* Serving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serving.swift; sourceTree = "<group>"; };
@@ -637,6 +641,8 @@
 				26BC18E424B2C76F0027E1B3 /* FoodEntry.swift */,
 				26BC18E624B2C9CB0027E1B3 /* Food.swift */,
 				26BC18E824B2CBB00027E1B3 /* Serving.swift */,
+				26B6BAD224CF9DBB00BF3CE9 /* UserProfile.swift */,
+				26B6BAD424CF9DC600BF3CE9 /* UserTargets.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -906,6 +912,7 @@
 				26246B1D24C48F65000963E8 /* FoodEntryNetworkManager.swift in Sources */,
 				26E020B1248ECD8700DBBC5C /* NetworkResponseHandler.swift in Sources */,
 				262F665A24623FBA00B24F51 /* MainTabBarController.swift in Sources */,
+				26B6BAD524CF9DC600BF3CE9 /* UserTargets.swift in Sources */,
 				260F2C6724B6854900B9585E /* RegistrationNetworkHelper.swift in Sources */,
 				26BC18E924B2CBB00027E1B3 /* Serving.swift in Sources */,
 				2651926E247EC0E700483915 /* ActionOptionsLauncher.swift in Sources */,
@@ -933,6 +940,7 @@
 				26246B1F24C492C7000963E8 /* FoodEntryNetworkHelper.swift in Sources */,
 				2651926B247EB71400483915 /* FoodSearchController.swift in Sources */,
 				2658890B246340F300199012 /* DateBar.swift in Sources */,
+				26B6BAD324CF9DBB00BF3CE9 /* UserProfile.swift in Sources */,
 				2624E8D924647E4E00AC40EA /* DiaryFoodEntriesDataController.swift in Sources */,
 				266BB5A224632156009269B2 /* LearnController.swift in Sources */,
 				26119AF3247C5860009FDD79 /* FoodEntryViewModel.swift in Sources */,

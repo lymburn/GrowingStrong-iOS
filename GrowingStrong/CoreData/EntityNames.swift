@@ -13,4 +13,6 @@ enum EntityNames: String, CaseIterable {
     case food = "Food"
     case serving = "Serving"
     case user = "User"
+    case userProfile = "UserProfile"
+    case userTargets = "UserTargets"
 }
