@@ -89,6 +89,8 @@
 		26BC18E724B2C9CB0027E1B3 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC18E624B2C9CB0027E1B3 /* Food.swift */; };
 		26BC18E924B2CBB00027E1B3 /* Serving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC18E824B2CBB00027E1B3 /* Serving.swift */; };
 		26C72D942473099000E86FE8 /* ServingSizeOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */; };
+		26CCF76924D612FC00BAE6B9 /* SettingsDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CCF76824D612FC00BAE6B9 /* SettingsDataController.swift */; };
+		26CCF76C24D615A900BAE6B9 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CCF76B24D615A900BAE6B9 /* SettingCell.swift */; };
 		26CD471624C8EDDB0079ABF6 /* ConnectivityNotifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CD471524C8EDDB0079ABF6 /* ConnectivityNotifiable.swift */; };
 		26CD471824C8F4940079ABF6 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CD471724C8F4940079ABF6 /* RequestManager.swift */; };
 		26CF26C224C91ADD0053AB93 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CF26C124C91ADD0053AB93 /* RepeatingTimer.swift */; };
@@ -213,6 +215,8 @@
 		26BC18E624B2C9CB0027E1B3 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		26BC18E824B2CBB00027E1B3 /* Serving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serving.swift; sourceTree = "<group>"; };
 		26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeOptionsCell.swift; sourceTree = "<group>"; };
+		26CCF76824D612FC00BAE6B9 /* SettingsDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataController.swift; sourceTree = "<group>"; };
+		26CCF76B24D615A900BAE6B9 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		26CD471524C8EDDB0079ABF6 /* ConnectivityNotifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityNotifiable.swift; sourceTree = "<group>"; };
 		26CD471724C8F4940079ABF6 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		26CF26C124C91ADD0053AB93 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
@@ -282,6 +286,7 @@
 		2605A8AA24429B4A001CF085 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				26CCF76A24D6159200BAE6B9 /* SettingsViews */,
 				26519274247EC5BC00483915 /* ActionOptionsView */,
 				263B96732473044E00340ED3 /* BaseFoodViews */,
 				266BB5A724633A42009269B2 /* DiaryViews */,
@@ -472,6 +477,7 @@
 				26EC645824C107EB0043BDF8 /* FoodEntriesDataControllers */,
 				2640FF8B2443EC870051A2BF /* RegisterDataController.swift */,
 				263B9670247303A400340ED3 /* BaseFoodDataController.swift */,
+				26CCF76824D612FC00BAE6B9 /* SettingsDataController.swift */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -668,6 +674,14 @@
 				26E020AE248EB76000DBBC5C /* AuthenticateResponse.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		26CCF76A24D6159200BAE6B9 /* SettingsViews */ = {
+			isa = PBXGroup;
+			children = (
+				26CCF76B24D615A900BAE6B9 /* SettingCell.swift */,
+			);
+			path = SettingsViews;
 			sourceTree = "<group>";
 		};
 		26CD471924C8FB670079ABF6 /* RequestModels */ = {
@@ -963,8 +977,10 @@
 				269E3797242D05EB0070B110 /* AppDelegate.swift in Sources */,
 				260F2C6224B67E1A00B9585E /* RegisterRequest.swift in Sources */,
 				2634C40424B3C92F00A3FCAC /* AuthenticationNetworkHelper.swift in Sources */,
+				26CCF76924D612FC00BAE6B9 /* SettingsDataController.swift in Sources */,
 				26EC645524C105650043BDF8 /* BaseFoodEntriesDataController.swift in Sources */,
 				266BFA0B2443DB0E006E588D /* Extensions.swift in Sources */,
+				26CCF76C24D615A900BAE6B9 /* SettingCell.swift in Sources */,
 				26D7487D24C4A7BC007CE6C1 /* FoodEndPoint.swift in Sources */,
 				26E0B55124639872002D5A07 /* ViewTypealias.swift in Sources */,
 				26F2E6F4244769B9000294D3 /* UnitConversionHelper.swift in Sources */,

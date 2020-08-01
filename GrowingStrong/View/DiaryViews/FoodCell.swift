@@ -18,7 +18,6 @@ class FoodCell: UITableViewCell {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Food name"
         label.textAlignment = .left
         return label
     }()
@@ -26,7 +25,6 @@ class FoodCell: UITableViewCell {
     let quantityLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "5 x 100g"
         label.textAlignment = .left
         return label
     }()
@@ -34,7 +32,6 @@ class FoodCell: UITableViewCell {
     let caloriesLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "100 kcal"
         label.textAlignment = .right
         return label
     }()
