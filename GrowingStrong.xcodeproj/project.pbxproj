@@ -110,7 +110,7 @@
 		26F1B4ED24C8FC55009C79C0 /* UpdateFoodEntryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1B4EC24C8FC55009C79C0 /* UpdateFoodEntryRequest.swift */; };
 		26F1B4EF24C8FC61009C79C0 /* DeleteFoodEntryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1B4EE24C8FC61009C79C0 /* DeleteFoodEntryRequest.swift */; };
 		26F2E6F2244757A0000294D3 /* RegistrationEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2E6F1244757A0000294D3 /* RegistrationEnums.swift */; };
-		26F2E6F4244769B9000294D3 /* MeasurementUnitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */; };
+		26F2E6F4244769B9000294D3 /* UnitConversionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2E6F3244769B9000294D3 /* UnitConversionHelper.swift */; };
 		26F7832F2471A9B600B7F0C8 /* BaseFoodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F7832E2471A9B600B7F0C8 /* BaseFoodController.swift */; };
 		26F783332471B51300B7F0C8 /* MacroNutrientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F783322471B51300B7F0C8 /* MacroNutrientsView.swift */; };
 		F5848F5233B7B07340E20630 /* Pods_GrowingStrong.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E3540E5C3DAD7E7C1EFE88 /* Pods_GrowingStrong.framework */; };
@@ -234,7 +234,7 @@
 		26F1B4EC24C8FC55009C79C0 /* UpdateFoodEntryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFoodEntryRequest.swift; sourceTree = "<group>"; };
 		26F1B4EE24C8FC61009C79C0 /* DeleteFoodEntryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteFoodEntryRequest.swift; sourceTree = "<group>"; };
 		26F2E6F1244757A0000294D3 /* RegistrationEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationEnums.swift; sourceTree = "<group>"; };
-		26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementUnitHelper.swift; sourceTree = "<group>"; };
+		26F2E6F3244769B9000294D3 /* UnitConversionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConversionHelper.swift; sourceTree = "<group>"; };
 		26F7832E2471A9B600B7F0C8 /* BaseFoodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFoodController.swift; sourceTree = "<group>"; };
 		26F783322471B51300B7F0C8 /* MacroNutrientsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroNutrientsView.swift; sourceTree = "<group>"; };
 		2F859D1E12E99D6BA5CA8186 /* Pods-GrowingStrong.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GrowingStrong.debug.xcconfig"; path = "Target Support Files/Pods-GrowingStrong/Pods-GrowingStrong.debug.xcconfig"; sourceTree = "<group>"; };
@@ -505,7 +505,7 @@
 				26F2E6F1244757A0000294D3 /* RegistrationEnums.swift */,
 				26475C982442D00B004A5C71 /* Constants.swift */,
 				266BFA0A2443DB0E006E588D /* Extensions.swift */,
-				26F2E6F3244769B9000294D3 /* MeasurementUnitHelper.swift */,
+				26F2E6F3244769B9000294D3 /* UnitConversionHelper.swift */,
 				26E0B55024639872002D5A07 /* ViewTypealias.swift */,
 				26519271247EC1B500483915 /* BaseOptionsLauncher.swift */,
 				264B211224BE53350008B55F /* DateFormatterHelper.swift */,
@@ -967,7 +967,7 @@
 				266BFA0B2443DB0E006E588D /* Extensions.swift in Sources */,
 				26D7487D24C4A7BC007CE6C1 /* FoodEndPoint.swift in Sources */,
 				26E0B55124639872002D5A07 /* ViewTypealias.swift in Sources */,
-				26F2E6F4244769B9000294D3 /* MeasurementUnitHelper.swift in Sources */,
+				26F2E6F4244769B9000294D3 /* UnitConversionHelper.swift in Sources */,
 				26087D50248DD7D5009B4548 /* HTTPTask.swift in Sources */,
 				263B966E2473014000340ED3 /* EditFoodController.swift in Sources */,
 				26EC645724C107A30043BDF8 /* SearchFoodEntriesDataController.swift in Sources */,

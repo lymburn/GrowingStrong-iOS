@@ -24,9 +24,9 @@ struct FoodEntryViewModel{
         }
     }
     
-    var totalQuantity: Int
+    var totalQuantity: Float
     var totalQuantityText: String
-    var totalCalories: Int
+    var totalCalories: Float
     var totalCaloriesText: String
     var totalCarbohydrates: Float
     var totalFat: Float
@@ -43,17 +43,17 @@ struct FoodEntryViewModel{
         self.servingAmount = foodEntry.servingAmount
         
         selectedServing = foodEntry.selectedServing
-        self.totalQuantity = Int((selectedServing.quantity * self.servingAmount).rounded())
-        self.totalQuantityText = "\(self.totalQuantity) \(selectedServing.unit)"
-        self.totalCalories = Int((selectedServing.kcal * self.servingAmount).rounded())
-        self.totalCaloriesText = "\(self.totalCalories) kcal"
+        self.totalQuantity = selectedServing.quantity * self.servingAmount
+        self.totalQuantityText = "\(self.totalQuantity.toOneDecimalString) \(selectedServing.unit)"
+        self.totalCalories = selectedServing.kcal * self.servingAmount
+        self.totalCaloriesText = "\(self.totalCalories.toOneDecimalString) kcal"
 
         self.totalCarbohydrates = servingAmount * selectedServing.carb
         self.totalFat = self.servingAmount * self.selectedServing.fat
         self.totalProtein = self.servingAmount * self.selectedServing.protein
-        self.totalCarbohydratesText = "Carbohydrates - \(totalCarbohydrates) g"
-        self.totalFatText = "Fat - \(totalFat) g"
-        self.totalProteinText = "Protein - \(totalProtein) g"
+        self.totalCarbohydratesText = "Carbohydrates - \(totalCarbohydrates.toOneDecimalString) g"
+        self.totalFatText = "Fat - \(totalFat.toOneDecimalString) g"
+        self.totalProteinText = "Protein - \(totalProtein.toOneDecimalString) g"
     }
     
     //Food entry VM created from food with passed in arguments for dateAdded, selectedServing, and servingAmount
@@ -64,30 +64,30 @@ struct FoodEntryViewModel{
         self.selectedServing = selectedServing
         self.servingAmount = servingAmount
         
-        self.totalQuantity = Int((selectedServing.quantity * self.servingAmount).rounded())
-        self.totalQuantityText = "\(self.totalQuantity) \(selectedServing.unit)"
-        self.totalCalories = Int((selectedServing.kcal * self.servingAmount).rounded())
-        self.totalCaloriesText = "\(self.totalCalories) kcal"
+        self.totalQuantity = selectedServing.quantity * self.servingAmount
+        self.totalQuantityText = "\(self.totalQuantity.toOneDecimalString) \(selectedServing.unit)"
+        self.totalCalories = selectedServing.kcal * self.servingAmount
+        self.totalCaloriesText = "\(self.totalCalories.toOneDecimalString) kcal"
 
         self.totalCarbohydrates = servingAmount * selectedServing.carb
         self.totalFat = self.servingAmount * self.selectedServing.fat
         self.totalProtein = self.servingAmount * self.selectedServing.protein
-        self.totalCarbohydratesText = "Carbohydrates - \(totalCarbohydrates) g"
-        self.totalFatText = "Fat - \(totalFat) g"
-        self.totalProteinText = "Protein - \(totalProtein) g"
+        self.totalCarbohydratesText = "Carbohydrates - \(totalCarbohydrates.toOneDecimalString) g"
+        self.totalFatText = "Fat - \(totalFat.toOneDecimalString) g"
+        self.totalProteinText = "Protein - \(totalProtein.toOneDecimalString) g"
     }
     
     private mutating func calculateNutritionInfo() {
-        self.totalQuantity = Int((self.selectedServing.quantity * self.servingAmount).rounded())
-        self.totalQuantityText = "\(self.totalQuantity) \(self.selectedServing.unit)"
-        self.totalCalories = Int((self.selectedServing.kcal * self.servingAmount).rounded())
-        self.totalCaloriesText = "\(self.totalCalories) kcal"
+        self.totalQuantity = selectedServing.quantity * self.servingAmount
+        self.totalQuantityText = "\(self.totalQuantity.toOneDecimalString) \(selectedServing.unit)"
+        self.totalCalories = selectedServing.kcal * self.servingAmount
+        self.totalCaloriesText = "\(self.totalCalories.toOneDecimalString) kcal"
 
-        self.totalCarbohydrates = self.servingAmount * self.selectedServing.carb
+        self.totalCarbohydrates = servingAmount * selectedServing.carb
         self.totalFat = self.servingAmount * self.selectedServing.fat
         self.totalProtein = self.servingAmount * self.selectedServing.protein
-        self.totalCarbohydratesText = "Carbohydrates - \(totalCarbohydrates) g"
-        self.totalFatText = "Fat - \(totalFat) g"
-        self.totalProteinText = "Protein - \(totalProtein) g"
+        self.totalCarbohydratesText = "Carbohydrates - \(totalCarbohydrates.toOneDecimalString) g"
+        self.totalFatText = "Fat - \(totalFat.toOneDecimalString) g"
+        self.totalProteinText = "Protein - \(totalProtein.toOneDecimalString) g"
     }
 }

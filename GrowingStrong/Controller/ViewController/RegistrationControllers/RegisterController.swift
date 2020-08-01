@@ -113,7 +113,7 @@ extension RegisterController {
         let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
         
         if unit == .imperial {
-            let feetInches: String = MeasurementUnitHelper.centimetersToFeetInches(heightInCm)
+            let feetInches: String = UnitConversionHelper.centimetersToFeetInches(heightInCm)
             let imperialHeightString = "Height: \(feetInches)"
             cell.heightLabel.colorString(text: imperialHeightString, coloredText: feetInches, color: .green)
         } else {
@@ -128,7 +128,7 @@ extension RegisterController {
         let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
         
         if unit == .imperial {
-            let imperialWeight: Double = MeasurementUnitHelper.kilogramsToPounds(weightInKg)
+            let imperialWeight: Double = UnitConversionHelper.kilogramsToPounds(weightInKg)
             let weightRounded = Int(imperialWeight.rounded())
             let imperialWeightString = "Weight: \(weightRounded) lbs"
             cell.weightLabel.colorString(text: imperialWeightString, coloredText: "\(weightRounded) lbs", color: .green)

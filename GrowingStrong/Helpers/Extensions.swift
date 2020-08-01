@@ -84,6 +84,10 @@ extension Float {
     var clean: String {
        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
     }
+    
+    var toOneDecimalString: String {
+        return String (format: "%.1f", self)
+    }
 }
 
 extension UINavigationController {

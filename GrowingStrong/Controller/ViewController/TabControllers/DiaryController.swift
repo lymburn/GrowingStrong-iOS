@@ -166,16 +166,23 @@ extension DiaryController {
     }
     
     fileprivate func updateDailyNutritionView(for date: Date) {
-        let foodEntryViewModels = getFoodEntryViewModels(by: date)
-        let totalDailyCalories = foodEntryViewModels.map({return $0.totalCalories}).reduce(0, +)
-        let totalDailyCarbs = foodEntryViewModels.map({return $0.totalCarbohydrates}).reduce(0, +)
-        let totalDailyFat = foodEntryViewModels.map({return $0.totalFat}).reduce(0, +)
-        let totalDailyProtein = foodEntryViewModels.map({return $0.totalProtein}).reduce(0, +)
-        
-        dailyNutritionView.setCaloriesValueLabel("\(totalDailyCalories)")
-        dailyNutritionView.setCarbsValueLabel("\(totalDailyCarbs)")
-        dailyNutritionView.setFatValueLabel("\(totalDailyFat)")
-        dailyNutritionView.setProteinValueLabel("\(totalDailyProtein)")
+        if let tdee = getUserTdee() {
+            let foodEntryViewModels = getFoodEntryViewModels(by: date)
+            let totalDailyCalories = foodEntryViewModels.map({return $0.totalCalories}).reduce(0, +)
+            let totalDailyCarbs = foodEntryViewModels.map({return $0.totalCarbohydrates}).reduce(0, +).toOneDecimalString
+            let totalDailyFat = foodEntryViewModels.map({return $0.totalFat}).reduce(0, +).toOneDecimalString
+            let totalDailyProtein = foodEntryViewModels.map({return $0.totalProtein}).reduce(0, +).toOneDecimalString
+            
+            let goalDailyCalories = tdee.toOneDecimalString
+            let goalDailyCarbs = UnitConversionHelper.kcalToGrams(kcal: tdee * 0.4, kcalPerGram: 4).toOneDecimalString
+            let goalDailyFat = UnitConversionHelper.kcalToGrams(kcal: tdee * 0.35, kcalPerGram: 9).toOneDecimalString
+            let goalDailyProtein = UnitConversionHelper.kcalToGrams(kcal: tdee * 0.25, kcalPerGram: 4).toOneDecimalString
+            
+            dailyNutritionView.setCaloriesValueLabel("\(totalDailyCalories) / \(goalDailyCalories) kcal")
+            dailyNutritionView.setCarbsValueLabel("\(totalDailyCarbs) / \(goalDailyCarbs) g")
+            dailyNutritionView.setFatValueLabel("\(totalDailyFat) / \(goalDailyFat) g")
+            dailyNutritionView.setProteinValueLabel("\(totalDailyProtein) / \(goalDailyProtein) g")
+        }
     }
     
     //Update food entries in table & daily nutrition view
@@ -183,6 +190,12 @@ extension DiaryController {
         updateFoodEntryViewModelsFromCoreData()
         updateFoodEntriesUI(for: CurrentDiaryDateTracker.shared.currentDate)
         updateDailyNutritionView(for: CurrentDiaryDateTracker.shared.currentDate)
+    }
+    
+    fileprivate func getUserTdee() -> Float? {
+        let userId = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentUserIdKey)
+        let user = UserDataManager.shared.fetchUser(byId: userId)
+        return user?.profile.tdee
     }
 }
 
