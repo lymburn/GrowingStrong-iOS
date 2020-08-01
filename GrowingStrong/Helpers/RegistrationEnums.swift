@@ -8,11 +8,6 @@
 
 import Foundation
 
-enum MeasurementUnit: String {
-    case imperial = "Imperial"
-    case metric = "Metric"
-}
-
 enum Gender: String {
     case male = "Male"
     case female = "Female"

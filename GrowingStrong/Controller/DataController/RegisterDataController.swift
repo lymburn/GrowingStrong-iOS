@@ -9,9 +9,8 @@
 import UIKit
 
 protocol RegisterDataControllerDelegate: class {
-    func heightValueDidChange(to heightInCm: Double, unit: MeasurementUnit)
-    func weightValueDidChange(to weightInKg: Double, unit: MeasurementUnit)
-    func measurementUnitDidChange(to unit: MeasurementUnit)
+    func heightValueDidChange(to height: Double)
+    func weightValueDidChange(to weight: Double)
     func weightGoalDidChange(to goal: WeightGoal)
     func birthdayFieldSelected()
     func activityLevelDidChange(to level: ActivityLevel)
@@ -53,16 +52,12 @@ class RegisterDataController: NSObject, UICollectionViewDataSource, UICollection
 }
 
 extension RegisterDataController: RegisterStatsCellDelegate {
-    func measurementUnitDidChange(to unit: MeasurementUnit) {
-        delegate?.measurementUnitDidChange(to: unit)
+    func heightValueDidChange(to height: Double) {
+        delegate?.heightValueDidChange(to: height)
     }
     
-    func heightValueDidChange(to heightInCm: Double, unit: MeasurementUnit) {
-        delegate?.heightValueDidChange(to: heightInCm, unit: unit)
-    }
-    
-    func weightValueDidChange(to weightInKg: Double, unit: MeasurementUnit) {
-        delegate?.weightValueDidChange(to: weightInKg, unit: unit)
+    func weightValueDidChange(to weight: Double) {
+        delegate?.weightValueDidChange(to: weight)
     }
     
     func weightGoalDidChange(to goal: WeightGoal) {

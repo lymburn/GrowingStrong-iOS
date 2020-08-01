@@ -98,45 +98,23 @@ extension RegisterController {
 
 //MARK: Helpers
 extension RegisterController {
-    fileprivate func changeMeasurementUnit(to unit: MeasurementUnit) {
+    
+    fileprivate func setRegisterStatsHeightLabel(height: Double) {
         let indexPath = IndexPath(item: 0, section: 0)
         let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
-        let heightInCm: Double = Double(cell.heightSlider.value)
-        let weightInKg: Double = Double(cell.weightSlider.value)
         
-        setRegisterStatsHeightLabel(heightInCm: heightInCm, unit: unit)
-        setRegisterStatsWeightLabel(weightInKg: weightInKg, unit: unit)
+        let heightRounded = Int(height.rounded())
+        let heightString = "Height: \(heightRounded) cm"
+        cell.heightLabel.colorString(text: heightString, coloredText: "\(heightRounded) cm", color: .green)
     }
     
-    fileprivate func setRegisterStatsHeightLabel(heightInCm: Double, unit: MeasurementUnit) {
+    fileprivate func setRegisterStatsWeightLabel(weight: Double) {
         let indexPath = IndexPath(item: 0, section: 0)
         let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
         
-        if unit == .imperial {
-            let feetInches: String = UnitConversionHelper.centimetersToFeetInches(heightInCm)
-            let imperialHeightString = "Height: \(feetInches)"
-            cell.heightLabel.colorString(text: imperialHeightString, coloredText: feetInches, color: .green)
-        } else {
-            let heightRounded = Int(heightInCm.rounded())
-            let metricHeightString = "Height: \(heightRounded) cm"
-            cell.heightLabel.colorString(text: metricHeightString, coloredText: "\(heightRounded) cm", color: .green)
-        }
-    }
-    
-    fileprivate func setRegisterStatsWeightLabel(weightInKg: Double, unit: MeasurementUnit) {
-        let indexPath = IndexPath(item: 0, section: 0)
-        let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
-        
-        if unit == .imperial {
-            let imperialWeight: Double = UnitConversionHelper.kilogramsToPounds(weightInKg)
-            let weightRounded = Int(imperialWeight.rounded())
-            let imperialWeightString = "Weight: \(weightRounded) lbs"
-            cell.weightLabel.colorString(text: imperialWeightString, coloredText: "\(weightRounded) lbs", color: .green)
-        } else {
-            let metricWeight = Int(weightInKg.rounded())
-            let metricWeightString = "Weight: \(metricWeight) kg"
-            cell.weightLabel.colorString(text: metricWeightString, coloredText: "\(metricWeight) kg", color: .green)
-        }
+        let weightRounded = Int(weight.rounded())
+        let weightString = "Weight: \(weightRounded) kg"
+        cell.weightLabel.colorString(text: weightString, coloredText: "\(weightRounded) kg", color: .green)
     }
     
     fileprivate func setRegisterStatsWeightGoalLabel(for goal: WeightGoal) {
@@ -304,16 +282,12 @@ extension RegisterController {
 
 //MARK: Register data controller delegate
 extension RegisterController : RegisterDataControllerDelegate {
-    func measurementUnitDidChange(to unit: MeasurementUnit) {
-        changeMeasurementUnit(to: unit)
+    func heightValueDidChange(to height: Double) {
+        setRegisterStatsHeightLabel(height: height)
     }
     
-    func heightValueDidChange(to heightInCm: Double, unit: MeasurementUnit) {
-        setRegisterStatsHeightLabel(heightInCm: heightInCm, unit: unit)
-    }
-    
-    func weightValueDidChange(to weightInKg: Double, unit: MeasurementUnit) {
-        setRegisterStatsWeightLabel(weightInKg: weightInKg, unit: unit)
+    func weightValueDidChange(to weight: Double) {
+        setRegisterStatsWeightLabel(weight: weight)
     }
     
     func weightGoalDidChange(to goal: WeightGoal) {

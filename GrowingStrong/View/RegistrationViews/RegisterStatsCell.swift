@@ -9,9 +9,8 @@
 import UIKit
 
 protocol RegisterStatsCellDelegate : class {
-    func heightValueDidChange(to heightInCm: Double, unit: MeasurementUnit)
-    func weightValueDidChange(to weightInKg: Double, unit: MeasurementUnit)
-    func measurementUnitDidChange(to unit: MeasurementUnit)
+    func heightValueDidChange(to height: Double)
+    func weightValueDidChange(to weight: Double)
     func weightGoalDidChange(to goal: WeightGoal)
     func birthdayFieldSelected()
     func activityLevelDidChange(to level: ActivityLevel)
@@ -24,7 +23,6 @@ class RegisterStatsCell: UICollectionViewCell {
         
         setupViews()
         
-        measurementUnitSelector.addTarget(self, action: #selector(measurementUnitChanged), for: .valueChanged)
         heightSlider.addTarget(self, action: #selector(heightSliderValueChanged), for: .valueChanged)
         weightSlider.addTarget(self, action: #selector(weightSliderValueChanged), for: .valueChanged)
         goalSelector.addTarget(self, action: #selector(goalSelectorValueChanged), for: .valueChanged)
@@ -33,23 +31,6 @@ class RegisterStatsCell: UICollectionViewCell {
     }
     
     weak var delegate: RegisterStatsCellDelegate?
-    
-    let measurementUnitLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "I use"
-        label.textAlignment = .center
-        return label
-    }()
-    
-    let measurementUnitSelector: UISegmentedControl = {
-        let items = [MeasurementUnit.metric.rawValue, MeasurementUnit.imperial.rawValue]
-        let sc = UISegmentedControl(items: items)
-        sc.translatesAutoresizingMaskIntoConstraints = false
-        sc.selectedSegmentIndex = 0
-        sc.layer.cornerRadius = 5
-        return sc
-    }()
     
     let genderLabel: UILabel = {
         let label = UILabel()
@@ -160,8 +141,6 @@ class RegisterStatsCell: UICollectionViewCell {
 //MARK: Setup
 extension RegisterStatsCell {
     fileprivate func setupViews() {
-        addSubview(measurementUnitLabel)
-        addSubview(measurementUnitSelector)
         addSubview(genderLabel)
         addSubview(genderSelector)
         addSubview(birthdayLabel)
@@ -179,16 +158,7 @@ extension RegisterStatsCell {
     }
     
     fileprivate func setupConstraints() {
-        measurementUnitLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-        measurementUnitLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
-        measurementUnitLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
-        measurementUnitLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
-
-        measurementUnitSelector.topAnchor.constraint(equalTo: measurementUnitLabel.bottomAnchor, constant: 4).isActive = true
-        measurementUnitSelector.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        measurementUnitSelector.widthAnchor.constraint(equalToConstant: SizeConstants.screenSize.width * 0.4).isActive = true
-
-        genderLabel.topAnchor.constraint(equalTo: measurementUnitSelector.bottomAnchor, constant: 24).isActive = true
+        genderLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
         genderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
         genderLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
         genderLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
@@ -249,21 +219,15 @@ extension RegisterStatsCell {
 //MARK: Events
 extension RegisterStatsCell {
     @objc func heightSliderValueChanged() {
-        let heightInCm: Double = Double(heightSlider.value)
-        let unit: MeasurementUnit = measurementUnitSelector.selectedSegmentIndex == 0 ? .metric : .imperial
-        delegate?.heightValueDidChange(to: heightInCm, unit: unit)
+        let height: Double = Double(heightSlider.value)
+        delegate?.heightValueDidChange(to: height)
     }
     
     @objc func weightSliderValueChanged() {
-        let weightInKg: Double = Double(weightSlider.value)
-        let unit: MeasurementUnit = measurementUnitSelector.selectedSegmentIndex == 0 ? .metric : .imperial
-        delegate?.weightValueDidChange(to: weightInKg, unit: unit)
+        let weight: Double = Double(weightSlider.value)
+        delegate?.weightValueDidChange(to: weight)
     }
     
-    @objc func measurementUnitChanged() {
-        let unit: MeasurementUnit = measurementUnitSelector.selectedSegmentIndex == 0 ? .metric : .imperial
-        delegate?.measurementUnitDidChange(to: unit)
-    }
     
     @objc func goalSelectorValueChanged() {
         var selectedGoal: WeightGoal
