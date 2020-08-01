@@ -42,6 +42,8 @@
 		262F665D2462417800B24F51 /* DiaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F665C2462417800B24F51 /* DiaryController.swift */; };
 		262F665F246241A500B24F51 /* TrendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F665E246241A500B24F51 /* TrendsController.swift */; };
 		262F6661246241C500B24F51 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F6660246241C500B24F51 /* SettingsController.swift */; };
+		2630750C24D5FE930052A83C /* UserProfileAndTargetsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2630750B24D5FE930052A83C /* UserProfileAndTargetsInfo.swift */; };
+		2630750E24D5FF040052A83C /* UserAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2630750D24D5FF040052A83C /* UserAccountInfo.swift */; };
 		2634C40424B3C92F00A3FCAC /* AuthenticationNetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2634C40324B3C92F00A3FCAC /* AuthenticationNetworkHelper.swift */; };
 		2634C40824B3CAFE00A3FCAC /* AuthenticateRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2634C40724B3CAFE00A3FCAC /* AuthenticateRequestTests.swift */; };
 		2634FFE224BD2C7000670995 /* UserNetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2634FFE124BD2C7000670995 /* UserNetworkHelper.swift */; };
@@ -162,6 +164,8 @@
 		262F665C2462417800B24F51 /* DiaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryController.swift; sourceTree = "<group>"; };
 		262F665E246241A500B24F51 /* TrendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsController.swift; sourceTree = "<group>"; };
 		262F6660246241C500B24F51 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		2630750B24D5FE930052A83C /* UserProfileAndTargetsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileAndTargetsInfo.swift; sourceTree = "<group>"; };
+		2630750D24D5FF040052A83C /* UserAccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountInfo.swift; sourceTree = "<group>"; };
 		2634C40324B3C92F00A3FCAC /* AuthenticationNetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationNetworkHelper.swift; sourceTree = "<group>"; };
 		2634C40724B3CAFE00A3FCAC /* AuthenticateRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateRequestTests.swift; sourceTree = "<group>"; };
 		2634FFE124BD2C7000670995 /* UserNetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkHelper.swift; sourceTree = "<group>"; };
@@ -354,6 +358,8 @@
 			children = (
 				260F2C6124B67E1A00B9585E /* RegisterRequest.swift */,
 				260F2C6324B67E6000B9585E /* RegisterResponse.swift */,
+				2630750B24D5FE930052A83C /* UserProfileAndTargetsInfo.swift */,
+				2630750D24D5FF040052A83C /* UserAccountInfo.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -935,6 +941,8 @@
 				26CD471824C8F4940079ABF6 /* RequestManager.swift in Sources */,
 				26F783332471B51300B7F0C8 /* MacroNutrientsView.swift in Sources */,
 				263B96752473048700340ED3 /* ServingSizeSelectorCell.swift in Sources */,
+				2630750E24D5FF040052A83C /* UserAccountInfo.swift in Sources */,
+				2630750C24D5FE930052A83C /* UserProfileAndTargetsInfo.swift in Sources */,
 				26CD471624C8EDDB0079ABF6 /* ConnectivityNotifiable.swift in Sources */,
 				264B211324BE53350008B55F /* DateFormatterHelper.swift in Sources */,
 				26246B1F24C492C7000963E8 /* FoodEntryNetworkHelper.swift in Sources */,

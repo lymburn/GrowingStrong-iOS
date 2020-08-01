@@ -31,11 +31,15 @@ class RegisterController: UIViewController {
     
     let registerStatsCellId = "registerStatsCell"
     let createAccountCellId = "createAccountCell"
+    
     lazy var nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextPageTapped))
     lazy var backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
     lazy var submitButton = UIBarButtonItem(title: "Submit", style: .plain, target: self, action: #selector(submitTapped))
     
     var registrationNetworkHelper: RegistrationNetworkHelperType!
+    
+    var userAccountInfo: UserAccountInfo?
+    var userProfileAndTargetsInfo: UserProfileAndTargetsInfo?
     
     lazy var dataController: RegisterDataController = {
         let dataController = RegisterDataController(registerStatsCellId: registerStatsCellId,
@@ -157,13 +161,69 @@ extension RegisterController {
         }
     }
     
+    fileprivate func setUserProfileAndTargetsInfo() {
+        let indexPath = IndexPath(item: 0, section: 0)
+        let registerStatsCell = collectionView.cellForItem(at: indexPath) as? RegisterStatsCell
+        
+        if let registerStatsCell = registerStatsCell {
+            let birthDate = datePicker.date
+            let sex = registerStatsCell.genderSelector.selectedSegmentIndex == 0 ? Gender.male.rawValue : Gender.female.rawValue
+            let height = registerStatsCell.heightSlider.value
+            let weight = registerStatsCell.weightSlider.value
+            
+            let activityLevelSelector = registerStatsCell.activityLevelSelector
+            var activityLevel: String
+            if activityLevelSelector.selectedSegmentIndex == 0 {
+                activityLevel = ActivityLevel.sedentary.rawValue
+            } else if activityLevelSelector.selectedSegmentIndex == 1 {
+                activityLevel = ActivityLevel.light.rawValue
+            } else if activityLevelSelector.selectedSegmentIndex == 2 {
+                activityLevel = ActivityLevel.moderate.rawValue
+            } else {
+                activityLevel = ActivityLevel.extreme.rawValue
+            }
+            
+            let goalSelector = registerStatsCell.goalSelector
+            var weightGoalTimeline: String
+            if goalSelector.selectedSegmentIndex == 0 {
+                weightGoalTimeline = WeightGoal.gain.rawValue
+            } else if goalSelector.selectedSegmentIndex == 1 {
+                weightGoalTimeline = WeightGoal.maintain.rawValue
+            } else {
+                weightGoalTimeline = WeightGoal.lose.rawValue
+            }
+            
+            userProfileAndTargetsInfo = UserProfileAndTargetsInfo(birthDate: birthDate, sex: sex, height: height, weight: weight, activityLevel: activityLevel, weightGoalTimeline: weightGoalTimeline)
+        }
+    }
+    
+    fileprivate func setUserAccountInfo() {
+        let indexPath = IndexPath(item: 1, section: 0)
+        let createAccountCell = collectionView.cellForItem(at: indexPath) as? CreateAccountCell
+        
+        if let createAccountCell = createAccountCell {
+            let email = createAccountCell.emailTextField.text!
+            let password = createAccountCell.passwordTextField.text!
+            
+            userAccountInfo = UserAccountInfo(email: email, password: password)
+        }
+    }
+    
     fileprivate func passwordsMatch() -> Bool {
         let indexPath = IndexPath(item: 1, section: 0)
         let cell = collectionView.cellForItem(at: indexPath) as! CreateAccountCell
         let password = cell.passwordTextField.text!
         let confirmPassword = cell.confirmPasswordTextField.text!
-        
         return password == confirmPassword
+    }
+    
+    fileprivate func createRegisterRequest() -> RegisterRequest? {
+        if let userAccountInfo = userAccountInfo, let userProfileAndTargetsInfo = userProfileAndTargetsInfo {
+            let request = RegisterRequest(userAccountInfo: userAccountInfo, userProfileAndTargetsInfo: userProfileAndTargetsInfo)
+            return request
+        }
+
+        return nil
     }
     
     fileprivate func handleRegisterResponse(_ response: RegistrationNetworkHelperResponse,
@@ -205,6 +265,7 @@ extension RegisterController {
     }
     
     @objc func nextPageTapped() {
+        setUserProfileAndTargetsInfo()
         let indexPath = IndexPath(item: 1, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .right, animated: true)
         navigationItem.rightBarButtonItem = submitButton
@@ -227,17 +288,15 @@ extension RegisterController {
     }
     
     @objc func submitTapped() {
-        //TODO:
-        let indexPath = IndexPath(item: 1, section: 0)
-        let cell = collectionView.cellForItem(at: indexPath) as! CreateAccountCell
-        let email = cell.emailTextField.text!
-        let password = cell.passwordTextField.text!
-        
+        //TODO: Handle unmatched password
         if !passwordsMatch() {
             print ("Passwords do not match")
         } else {
-            registrationNetworkHelper.register(email: email, password: password) { response, userId in
-                self.handleRegisterResponse(response, userId)
+            setUserAccountInfo()
+            if let request = createRegisterRequest() {
+                registrationNetworkHelper.register(registerRequest: request) { response, userId in
+                    self.handleRegisterResponse(response, userId)
+                }
             }
         }
     }

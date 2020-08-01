@@ -10,8 +10,7 @@ import Foundation
 import SwiftKeychainWrapper
 
 protocol RegistrationNetworkHelperType {
-    func register(email: String,
-                  password: String,
+    func register(registerRequest: RegisterRequest,
                   completion: @escaping (_ response: RegistrationNetworkHelperResponse, _ user: User?) -> ())
 }
 
@@ -33,12 +32,11 @@ struct RegistrationNetworkHelper: RegistrationNetworkHelperType {
         self.jwtTokenKey = jwtTokenKey
     }
     
-    func register(email: String,
-                      password: String,
-                      completion: @escaping (_ response: RegistrationNetworkHelperResponse, _ user: User?) -> ()) {
+    func register(registerRequest: RegisterRequest,
+                  completion: @escaping (_ response: RegistrationNetworkHelperResponse, _ user: User?) -> ()) {
         
-        let isValidEmail = CredentialsFormatChecker.isValidEmail(email)
-        let isValidPassword = CredentialsFormatChecker.isValidPassword(password)
+        let isValidEmail = CredentialsFormatChecker.isValidEmail(registerRequest.email)
+        let isValidPassword = CredentialsFormatChecker.isValidPassword(registerRequest.password)
 
         if !isValidEmail {
             return completion(.invalidEmailFormat, nil)
@@ -47,8 +45,6 @@ struct RegistrationNetworkHelper: RegistrationNetworkHelperType {
         if !isValidPassword {
             return completion(.invalidPasswordFormat, nil)
         }
-        
-        let registerRequest = RegisterRequest(email: email, password: password)
         let params = registerRequest.generateParameters()
         
         userNetworkManager.registerUser(registrationParameters: params) {registerResponse, error in
