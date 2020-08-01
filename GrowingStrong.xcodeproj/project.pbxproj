@@ -91,6 +91,7 @@
 		26C72D942473099000E86FE8 /* ServingSizeOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */; };
 		26CCF76924D612FC00BAE6B9 /* SettingsDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CCF76824D612FC00BAE6B9 /* SettingsDataController.swift */; };
 		26CCF76C24D615A900BAE6B9 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CCF76B24D615A900BAE6B9 /* SettingCell.swift */; };
+		26CCF76E24D624BC00BAE6B9 /* SettingSectionsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CCF76D24D624BC00BAE6B9 /* SettingSectionsGenerator.swift */; };
 		26CD471624C8EDDB0079ABF6 /* ConnectivityNotifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CD471524C8EDDB0079ABF6 /* ConnectivityNotifiable.swift */; };
 		26CD471824C8F4940079ABF6 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CD471724C8F4940079ABF6 /* RequestManager.swift */; };
 		26CF26C224C91ADD0053AB93 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CF26C124C91ADD0053AB93 /* RepeatingTimer.swift */; };
@@ -217,6 +218,7 @@
 		26C72D932473099000E86FE8 /* ServingSizeOptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeOptionsCell.swift; sourceTree = "<group>"; };
 		26CCF76824D612FC00BAE6B9 /* SettingsDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataController.swift; sourceTree = "<group>"; };
 		26CCF76B24D615A900BAE6B9 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		26CCF76D24D624BC00BAE6B9 /* SettingSectionsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSectionsGenerator.swift; sourceTree = "<group>"; };
 		26CD471524C8EDDB0079ABF6 /* ConnectivityNotifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityNotifiable.swift; sourceTree = "<group>"; };
 		26CD471724C8F4940079ABF6 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		26CF26C124C91ADD0053AB93 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 				261E946024C1145F002DE202 /* JWTHeaderGenerator.swift */,
 				26D7488C24C6097A007CE6C1 /* CurrentDiaryDateTracker.swift */,
 				26CF26C124C91ADD0053AB93 /* RepeatingTimer.swift */,
+				26CCF76D24D624BC00BAE6B9 /* SettingSectionsGenerator.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -973,6 +976,7 @@
 				26F7832F2471A9B600B7F0C8 /* BaseFoodController.swift in Sources */,
 				26087D5C248DDD79009B4548 /* NetworkRouter.swift in Sources */,
 				26BC18E524B2C76F0027E1B3 /* FoodEntry.swift in Sources */,
+				26CCF76E24D624BC00BAE6B9 /* SettingSectionsGenerator.swift in Sources */,
 				260F2C6024B67DBC00B9585E /* RequestModel.swift in Sources */,
 				269E3797242D05EB0070B110 /* AppDelegate.swift in Sources */,
 				260F2C6224B67E1A00B9585E /* RegisterRequest.swift in Sources */,

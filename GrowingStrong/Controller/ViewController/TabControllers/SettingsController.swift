@@ -44,24 +44,7 @@ class SettingsController: UIViewController {
         let userId = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentUserIdKey)
         let user = UserDataManager.shared.fetchUser(byId: userId)!
 
-        let accountSectionCellInfos = [SettingCellInfo(name: "Email", value: user.emailAddress)]
-        let accountSection = SettingSection(sectionName: "Account", settingCellInfos: accountSectionCellInfos)
-
-        let birthDateString = self.dateFormatter.string(from: user.profile.birthDate)
-        let profileSectionCellInfos = [SettingCellInfo(name: "Birth Date", value: birthDateString),
-                                       SettingCellInfo(name: "Sex", value: user.profile.sex),
-                                       SettingCellInfo(name: "Weight", value: "\(user.profile.weight) kg"),
-                                       SettingCellInfo(name: "Height", value: "\(user.profile.height) cm"),
-                                       SettingCellInfo(name: "BMR", value: "\(user.profile.bmr.rounded()) kcal"),
-                                       SettingCellInfo(name: "TDEE", value: "\(user.profile.tdee.rounded()) kcal"),
-                                       SettingCellInfo(name: "Activity Level", value: "\(user.profile.activityLevel)")]
-        let profileSection = SettingSection(sectionName: "Profile", settingCellInfos: profileSectionCellInfos)
-        
-        let targetsSectionCellInfos = [SettingCellInfo(name: "Goal Weight", value: "\(user.targets.goalWeight.toOneDecimalString) kg"),
-                                       SettingCellInfo(name: "Weight Goal Timeline", value: nil)]
-        let targetsSection = SettingSection(sectionName: "Targets", settingCellInfos: targetsSectionCellInfos)
-        
-        let sections: [SettingSection] = [accountSection, profileSection, targetsSection]
+        let sections = SettingSectionsGenerator.generateSections(for: user)
         let controller = SettingsDataController(settingCellId: settingCellId, sections: sections)
         return controller
     }()
