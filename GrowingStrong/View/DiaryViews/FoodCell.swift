@@ -15,12 +15,6 @@ class FoodCell: UITableViewCell {
         setupViews()
     }
     
-    let foodIcon: UIImageView = {
-        let icon = UIImageView(image: UIImage(named: ImageNameConstants.ActionOption.foodIcon))
-        icon.translatesAutoresizingMaskIntoConstraints = false
-        return icon
-    }()
-    
     let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -54,7 +48,6 @@ class FoodCell: UITableViewCell {
 
 extension FoodCell {
     fileprivate func setupViews() {
-        addSubview(foodIcon)
         addSubview(nameLabel)
         addSubview(quantityLabel)
         addSubview(caloriesLabel)
@@ -64,17 +57,12 @@ extension FoodCell {
     
     fileprivate func setupConstraints() {
         let height = SizeConstants.foodEntriesTableViewRowHeight
-        
-        foodIcon.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        foodIcon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
-        foodIcon.widthAnchor.constraint(equalToConstant: height * 0.8).isActive = true
-        foodIcon.heightAnchor.constraint(equalToConstant: height * 0.8).isActive = true
-        
+    
         nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: height * 0.2).isActive = true
-        nameLabel.leadingAnchor.constraint(equalTo: foodIcon.trailingAnchor, constant: 8).isActive = true
+        nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
         
         quantityLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8).isActive = true
-        quantityLabel.leadingAnchor.constraint(equalTo: foodIcon.trailingAnchor, constant: 8).isActive = true
+        quantityLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
         
         caloriesLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 8).isActive = true
         caloriesLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
