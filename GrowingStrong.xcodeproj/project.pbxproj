@@ -107,6 +107,7 @@
 		26E020B7248EF24200DBBC5C /* JSONParameterEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E020B6248EF24200DBBC5C /* JSONParameterEncoderTests.swift */; };
 		26E0B55124639872002D5A07 /* ViewTypealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E0B55024639872002D5A07 /* ViewTypealias.swift */; };
 		26E22BB82475238500F466C3 /* ServingOptionsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E22BB72475238500F466C3 /* ServingOptionsLauncher.swift */; };
+		26E2936A24D6295400413E53 /* SettingNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E2936924D6295400413E53 /* SettingNames.swift */; };
 		26EC645524C105650043BDF8 /* BaseFoodEntriesDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EC645424C105650043BDF8 /* BaseFoodEntriesDataController.swift */; };
 		26EC645724C107A30043BDF8 /* SearchFoodEntriesDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EC645624C107A30043BDF8 /* SearchFoodEntriesDataController.swift */; };
 		26F1B4EB24C8FC46009C79C0 /* CreateFoodEntryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1B4EA24C8FC46009C79C0 /* CreateFoodEntryRequest.swift */; };
@@ -234,6 +235,7 @@
 		26E020B6248EF24200DBBC5C /* JSONParameterEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoderTests.swift; sourceTree = "<group>"; };
 		26E0B55024639872002D5A07 /* ViewTypealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTypealias.swift; sourceTree = "<group>"; };
 		26E22BB72475238500F466C3 /* ServingOptionsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingOptionsLauncher.swift; sourceTree = "<group>"; };
+		26E2936924D6295400413E53 /* SettingNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingNames.swift; sourceTree = "<group>"; };
 		26EC645424C105650043BDF8 /* BaseFoodEntriesDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFoodEntriesDataController.swift; sourceTree = "<group>"; };
 		26EC645624C107A30043BDF8 /* SearchFoodEntriesDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFoodEntriesDataController.swift; sourceTree = "<group>"; };
 		26F1B4EA24C8FC46009C79C0 /* CreateFoodEntryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFoodEntryRequest.swift; sourceTree = "<group>"; };
@@ -508,9 +510,9 @@
 		26475C972442CFF2004A5C71 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				26E2936824D6294200413E53 /* Enums */,
 				260F2C6824B6878C00B9585E /* Network */,
 				26A0B06A24B3A226000874EC /* CredentialsFormatChecker.swift */,
-				26F2E6F1244757A0000294D3 /* RegistrationEnums.swift */,
 				26475C982442D00B004A5C71 /* Constants.swift */,
 				266BFA0A2443DB0E006E588D /* Extensions.swift */,
 				26F2E6F3244769B9000294D3 /* UnitConversionHelper.swift */,
@@ -713,6 +715,15 @@
 				26E020B6248EF24200DBBC5C /* JSONParameterEncoderTests.swift */,
 			);
 			path = Encoding;
+			sourceTree = "<group>";
+		};
+		26E2936824D6294200413E53 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				26F2E6F1244757A0000294D3 /* RegistrationEnums.swift */,
+				26E2936924D6295400413E53 /* SettingNames.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		26EC645824C107EB0043BDF8 /* FoodEntriesDataControllers */ = {
@@ -952,6 +963,7 @@
 				26A58E4124B3C6E4009A3209 /* AuthenticateRequest.swift in Sources */,
 				26519276247EC5D300483915 /* ActionOptionsView.swift in Sources */,
 				26F1B4ED24C8FC55009C79C0 /* UpdateFoodEntryRequest.swift in Sources */,
+				26E2936A24D6295400413E53 /* SettingNames.swift in Sources */,
 				269E379B242D05EB0070B110 /* LoginController.swift in Sources */,
 				2634FFE224BD2C7000670995 /* UserNetworkHelper.swift in Sources */,
 				26BC18E724B2C9CB0027E1B3 /* Food.swift in Sources */,
