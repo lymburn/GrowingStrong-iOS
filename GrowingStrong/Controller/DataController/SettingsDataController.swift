@@ -8,9 +8,22 @@
 
 import UIKit
 
+protocol SettingsDataControllerDelegate: class {
+    func emailSettingTapped()
+    func birthDateSettingTapped()
+    func sexSettingTapped()
+    func weightSettingTapped()
+    func heightSettingTapped()
+    func activityLevelSettingTapped()
+    func goalWeightSettingTapped()
+    func weeklyGoalSettingTapped()
+}
+
 class SettingsDataController: NSObject, UITableViewDataSource, UITableViewDelegate {
     private var settingCellId: String
     private var sections: [SettingSection]
+    
+    weak var delegate: SettingsDataControllerDelegate?
     
     init(settingCellId: String, sections: [SettingSection]) {
         self.settingCellId = settingCellId
@@ -38,5 +51,30 @@ class SettingsDataController: NSObject, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section].sectionName
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let settingName = sections[indexPath.section].settingCellInfos[indexPath.row].name
+        
+        switch settingName {
+        case SettingNames.email.rawValue:
+            delegate?.emailSettingTapped()
+        case SettingNames.birthDate.rawValue:
+            delegate?.birthDateSettingTapped()
+        case SettingNames.sex.rawValue:
+            delegate?.sexSettingTapped()
+        case SettingNames.weight.rawValue:
+            delegate?.weightSettingTapped()
+        case SettingNames.height.rawValue:
+            delegate?.heightSettingTapped()
+        case SettingNames.activityLevel.rawValue:
+            delegate?.activityLevelSettingTapped()
+        case SettingNames.goalWeight.rawValue:
+            delegate?.goalWeightSettingTapped()
+        case SettingNames.weeklyGoal.rawValue:
+            delegate?.weeklyGoalSettingTapped()
+        default:
+            print("Setting \(settingName) tapped")
+        }
     }
 }

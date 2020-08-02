@@ -1,5 +1,5 @@
 //
-//  ServingSizeOptionsLauncher.swift
+//  SettingOptionsLauncher.swift
 //  GrowingStrong
 //
 //  Created by Eugene Lu on 2020-05-20.
@@ -8,25 +8,26 @@
 
 import UIKit
 
-protocol ServingSizeOptionsLauncherDelegate: class {
-    func didSelectOption(option: Serving)
+protocol StandardOptionsLauncherDelegate: class {
+    func didSelectOptionAtIndex(index: Int)
 }
 
-class ServingSizeOptionsLauncher: BaseOptionsLauncher {
+//Standard launcher for options with just a name in the cell
+class StandardOptionsLauncher: BaseOptionsLauncher {
     override init() {
         super.init()
         
-        servingSizeOptionsTableView.register(ServingSizeOptionsCell.self, forCellReuseIdentifier: servingSizeOptionsCellIdentifier)
+        standardOptionsTableView.register(StandardOptionCell.self, forCellReuseIdentifier: standardOptionCellIdentifier)
     }
     
-    let servingSizeOptionsCellIdentifier = "servingSizeOptionsCellIdentifier"
-    var servingOptions: [Serving]!
+    let standardOptionCellIdentifier = "standardOptionCellIdentifier"
+    var options: [String]!
     
-    weak var delegate: ServingSizeOptionsLauncherDelegate?
+    weak var delegate: StandardOptionsLauncherDelegate?
     
-    lazy var servingSizeOptionsTableView: UITableView = {
+    lazy var standardOptionsTableView: UITableView = {
         let tv = UITableView()
-        tv.rowHeight = SizeConstants.servingSizeOptionsTableViewRowHeight
+        tv.rowHeight = SizeConstants.optionsTableViewRowHeight
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.tableFooterView = UIView()
         tv.delegate = self
@@ -44,12 +45,12 @@ class ServingSizeOptionsLauncher: BaseOptionsLauncher {
             let height: CGFloat = SizeConstants.screenSize.height * 0.3
             let y = window.frame.height - height
             
-            window.addSubview(servingSizeOptionsTableView)
+            window.addSubview(standardOptionsTableView)
             
-            servingSizeOptionsTableView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
+            standardOptionsTableView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
             
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.servingSizeOptionsTableView.frame = CGRect(x: 0, y: y, width: self.servingSizeOptionsTableView.frame.width, height: self.servingSizeOptionsTableView.frame.height)
+                self.standardOptionsTableView.frame = CGRect(x: 0, y: y, width: self.standardOptionsTableView.frame.width, height: self.standardOptionsTableView.frame.height)
                 
             }, completion: nil)
         }
@@ -58,7 +59,7 @@ class ServingSizeOptionsLauncher: BaseOptionsLauncher {
     private func dismissServingSizeOptionsTableView() {
         UIView.animate(withDuration: 0.5, animations: {
              if let window = self.window {
-                 self.servingSizeOptionsTableView.frame = CGRect(x: 0, y: window.frame.height, width: self.servingSizeOptionsTableView.frame.width, height: self.servingSizeOptionsTableView.frame.height)
+                 self.standardOptionsTableView.frame = CGRect(x: 0, y: window.frame.height, width: self.standardOptionsTableView.frame.width, height: self.standardOptionsTableView.frame.height)
              }
          })
     }
@@ -70,19 +71,19 @@ class ServingSizeOptionsLauncher: BaseOptionsLauncher {
 }
 
 //MARK: Data source & delegate
-extension ServingSizeOptionsLauncher: UITableViewDelegate, UITableViewDataSource {
+extension StandardOptionsLauncher: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return servingOptions.count
+        return options.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: servingSizeOptionsCellIdentifier, for: indexPath) as! ServingSizeOptionsCell
-        cell.optionLabel.text = servingOptions[indexPath.row].getServingSizeText()
+        let cell = tableView.dequeueReusableCell(withIdentifier: standardOptionCellIdentifier, for: indexPath) as! StandardOptionCell
+        cell.optionLabel.text = options[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismissOptions()
-        delegate?.didSelectOption(option: servingOptions[indexPath.row])
+        delegate?.didSelectOptionAtIndex(index: indexPath.row)
     }
 }

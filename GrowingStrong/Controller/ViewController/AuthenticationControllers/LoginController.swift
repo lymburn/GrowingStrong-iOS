@@ -112,7 +112,7 @@ extension LoginController {
             return
         }
 
-        userNetworkHelper.getUserFoodEntries(userId: 4, headers: header) { response, foodEntries in
+        userNetworkHelper.getUserFoodEntries(userId: userId, headers: header) { response, foodEntries in
             switch response {
             case .success:
                 if let foodEntries = foodEntries {

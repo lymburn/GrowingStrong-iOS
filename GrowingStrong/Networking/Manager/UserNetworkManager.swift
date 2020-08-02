@@ -124,7 +124,6 @@ class UserNetworkManager: UserNetworkManagerType {
     func getUserFoodEntries(userId: Int, headers: HTTPHeaders, completion: @escaping (_ foodEntries: [FoodEntry]?, _ error: String?) -> ()) {
         
         router.request(.userFoodEntries(userId: userId, headers: headers)) { data, response, error in
-            
             if error != nil {
                 completion(nil, NetworkResponse.generalError.rawValue)
             }

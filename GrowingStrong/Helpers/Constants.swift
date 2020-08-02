@@ -12,7 +12,7 @@ struct SizeConstants {
     static let screenSize: CGRect = UIScreen.main.bounds
     static let foodEntriesTableViewRowHeight: CGFloat = SizeConstants.screenSize.height * 0.08
     static let servingInfoTableViewRowHeight: CGFloat = SizeConstants.screenSize.height * 0.06
-    static let servingSizeOptionsTableViewRowHeight: CGFloat = SizeConstants.screenSize.height * 0.05
+    static let optionsTableViewRowHeight: CGFloat = SizeConstants.screenSize.height * 0.05
     static let settingsTableViewRowHeight: CGFloat = SizeConstants.screenSize.height * 0.07
     static let actionButtonSize = CGSize(width: 64, height: 64)
     static let actionOptionSize = CGSize(width: 50, height: 50)

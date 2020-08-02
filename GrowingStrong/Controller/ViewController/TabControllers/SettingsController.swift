@@ -46,6 +46,7 @@ class SettingsController: UIViewController {
 
         let sections = SettingSectionsGenerator.generateSections(for: user)
         let controller = SettingsDataController(settingCellId: settingCellId, sections: sections)
+        controller.delegate = self
         return controller
     }()
     
@@ -66,5 +67,40 @@ extension SettingsController {
         settingsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         settingsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         settingsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+}
+
+//MARK: Settings table view delegate functions
+extension SettingsController: SettingsDataControllerDelegate {
+    func emailSettingTapped() {
+        
+    }
+    
+    func birthDateSettingTapped() {
+        
+    }
+    
+    func sexSettingTapped() {
+        
+    }
+    
+    func weightSettingTapped() {
+        
+    }
+    
+    func heightSettingTapped() {
+        
+    }
+    
+    func activityLevelSettingTapped() {
+        
+    }
+    
+    func goalWeightSettingTapped() {
+        
+    }
+    
+    func weeklyGoalSettingTapped() {
+        
     }
 }
