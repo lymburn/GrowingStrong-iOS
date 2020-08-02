@@ -166,19 +166,18 @@ extension DiaryController {
     }
     
     fileprivate func updateDailyNutritionView(for date: Date) {
-        if let tdee = getUserTdee() {
+        if let goalDailyCalories = getUserGoalCalories() {
             let foodEntryViewModels = getFoodEntryViewModels(by: date)
             let totalDailyCalories = foodEntryViewModels.map({return $0.totalCalories}).reduce(0, +)
             let totalDailyCarbs = foodEntryViewModels.map({return $0.totalCarbohydrates}).reduce(0, +).toOneDecimalString
             let totalDailyFat = foodEntryViewModels.map({return $0.totalFat}).reduce(0, +).toOneDecimalString
             let totalDailyProtein = foodEntryViewModels.map({return $0.totalProtein}).reduce(0, +).toOneDecimalString
             
-            let goalDailyCalories = tdee.toOneDecimalString
-            let goalDailyCarbs = UnitConversionHelper.kcalToGrams(kcal: tdee * 0.4, kcalPerGram: 4).toOneDecimalString
-            let goalDailyFat = UnitConversionHelper.kcalToGrams(kcal: tdee * 0.35, kcalPerGram: 9).toOneDecimalString
-            let goalDailyProtein = UnitConversionHelper.kcalToGrams(kcal: tdee * 0.25, kcalPerGram: 4).toOneDecimalString
+            let goalDailyCarbs = UnitConversionHelper.kcalToGrams(kcal: goalDailyCalories * 0.4, kcalPerGram: 4).toOneDecimalString
+            let goalDailyFat = UnitConversionHelper.kcalToGrams(kcal: goalDailyCalories * 0.35, kcalPerGram: 9).toOneDecimalString
+            let goalDailyProtein = UnitConversionHelper.kcalToGrams(kcal: goalDailyCalories * 0.25, kcalPerGram: 4).toOneDecimalString
             
-            dailyNutritionView.setCaloriesValueLabel("\(totalDailyCalories) / \(goalDailyCalories) kcal")
+            dailyNutritionView.setCaloriesValueLabel("\(totalDailyCalories) / \(goalDailyCalories.toOneDecimalString) kcal")
             dailyNutritionView.setCarbsValueLabel("\(totalDailyCarbs) / \(goalDailyCarbs) g")
             dailyNutritionView.setFatValueLabel("\(totalDailyFat) / \(goalDailyFat) g")
             dailyNutritionView.setProteinValueLabel("\(totalDailyProtein) / \(goalDailyProtein) g")
@@ -192,10 +191,35 @@ extension DiaryController {
         updateDailyNutritionView(for: CurrentDiaryDateTracker.shared.currentDate)
     }
     
-    fileprivate func getUserTdee() -> Float? {
+    fileprivate func getUserGoalCalories() -> Float? {
         let userId = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentUserIdKey)
         let user = UserDataManager.shared.fetchUser(byId: userId)
-        return user?.profile.tdee
+        
+        if let tdee = user?.profile.tdee, let weightGoalTimeline = user?.targets.weightGoalTimeline {
+            if weightGoalTimeline == WeightGoalTimeline.gainWeightWithLargeSurplus.rawValue {
+                return tdee + 1000
+            } else if weightGoalTimeline == WeightGoalTimeline.gainWeightWithSmallSurplus.rawValue {
+                return tdee + 500
+            } else if weightGoalTimeline == WeightGoalTimeline.maintainWeight.rawValue {
+                return tdee
+            } else if weightGoalTimeline == WeightGoalTimeline.loseWeightWithSmallDeficit.rawValue {
+                if (tdee - 500) < 1000 {
+                    //Minimum 1000 kcal
+                    return 1000
+                } else {
+                    return tdee - 500
+                }
+            } else if weightGoalTimeline == WeightGoalTimeline.loseWeightWithLargeDeficit.rawValue {
+                if (tdee - 1000) < 1000 {
+                    //Minimum 1000 kcal
+                    return 1000
+                } else {
+                    return tdee - 1000
+                }
+            }
+        }
+        
+        return nil
     }
 }
 

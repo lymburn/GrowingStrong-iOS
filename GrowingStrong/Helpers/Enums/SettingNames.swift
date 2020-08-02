@@ -16,9 +16,9 @@ enum SettingNames: String {
     case height = "Height"
     case bmr = "BMR"
     case tdee = "TDEE"
-    case activityLevel = "ActivityLevel"
-    case goalWeight = "GoalWeight"
-    case weightGoalTimeline = "Weight Goal Timeline"
+    case activityLevel = "Activity Level"
+    case goalWeight = "Goal Weight"
+    case weeklyGoal = "Weekly Goal"
 }
 
 enum SettingSections: String {

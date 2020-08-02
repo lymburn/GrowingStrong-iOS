@@ -164,11 +164,11 @@ extension RegisterController {
             let goalSelector = registerStatsCell.goalSelector
             var weightGoalTimeline: String
             if goalSelector.selectedSegmentIndex == 0 {
-                weightGoalTimeline = WeightGoal.gain.rawValue
+                weightGoalTimeline = getWeightGoalTimeline(from: .gain).rawValue
             } else if goalSelector.selectedSegmentIndex == 1 {
-                weightGoalTimeline = WeightGoal.maintain.rawValue
+                weightGoalTimeline = getWeightGoalTimeline(from: .maintain).rawValue
             } else {
-                weightGoalTimeline = WeightGoal.lose.rawValue
+                weightGoalTimeline = getWeightGoalTimeline(from: .lose).rawValue
             }
             
             userProfileAndTargetsInfo = UserProfileAndTargetsInfo(birthDate: birthDate, sex: sex, height: height, weight: weight, activityLevel: activityLevel, weightGoalTimeline: weightGoalTimeline)
@@ -193,6 +193,16 @@ extension RegisterController {
         let password = cell.passwordTextField.text!
         let confirmPassword = cell.confirmPasswordTextField.text!
         return password == confirmPassword
+    }
+    
+    fileprivate func getWeightGoalTimeline(from weightGoal: WeightGoal) -> WeightGoalTimeline {
+        if weightGoal == .gain {
+            return .gainWeightWithSmallSurplus
+        } else if weightGoal == .maintain {
+            return .maintainWeight
+        } else {
+            return .loseWeightWithSmallDeficit
+        }
     }
     
     fileprivate func createRegisterRequest() -> RegisterRequest? {

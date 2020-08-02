@@ -19,6 +19,14 @@ enum WeightGoal: String {
     case lose = "Lose"
 }
 
+enum WeightGoalTimeline: String {
+    case gainWeightWithLargeSurplus = "Gain weight (1000 kcal surplus)"
+    case gainWeightWithSmallSurplus = "Gain weight (500 kcal surplus)"
+    case maintainWeight = "Maintain weight"
+    case loseWeightWithSmallDeficit = "Lose weight (500 kcal deficit)"
+    case loseWeightWithLargeDeficit = "Lose weight (1000 kcal deficit)"
+}
+
 enum ActivityLevel: String {
     case sedentary = "Sedentary"
     case light = "Light"

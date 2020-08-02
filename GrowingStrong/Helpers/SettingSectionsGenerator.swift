@@ -27,7 +27,8 @@ class SettingSectionsGenerator {
         
         let targetsSectionCellInfos = [SettingCellInfo(name: SettingNames.goalWeight.rawValue,
                                                        value: "\(user.targets.goalWeight.toOneDecimalString) kg"),
-                                       SettingCellInfo(name: SettingNames.weightGoalTimeline.rawValue, value: nil)]
+                                       SettingCellInfo(name: SettingNames.weeklyGoal.rawValue,
+                                                       value: "\(user.targets.weightGoalTimeline)")]
         let targetsSection = SettingSection(sectionName: SettingSections.targets.rawValue, settingCellInfos: targetsSectionCellInfos)
         
         let sections: [SettingSection] = [accountSection, profileSection, targetsSection]
