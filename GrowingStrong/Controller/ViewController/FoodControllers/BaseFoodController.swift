@@ -126,9 +126,9 @@ extension BaseFoodController: BaseFoodDataControllerDelegate {
 
 //MARK: ServingSizeOptionsLauncher delegate
 extension BaseFoodController: StandardOptionsLauncherDelegate {
-    func didSelectOptionAtIndex(index: Int) {
+    func didSelectOptionAtIndex(index: Int, option: String) {
         let selectedServing = Array(foodEntryViewModel.food.servings)[index]
-        setServingSizeValueLabel(servingSizeText: selectedServing.getServingSizeText())
+        setServingSizeValueLabel(servingSizeText: option)
         foodEntryViewModel.selectedServing = selectedServing
         updateMacroNutrientsView()
     }

@@ -38,6 +38,7 @@
 		26246B1F24C492C7000963E8 /* FoodEntryNetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26246B1E24C492C7000963E8 /* FoodEntryNetworkHelper.swift */; };
 		2624E8D924647E4E00AC40EA /* DiaryFoodEntriesDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8D824647E4E00AC40EA /* DiaryFoodEntriesDataController.swift */; };
 		2624E8DC24647FAD00AC40EA /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624E8DB24647FAD00AC40EA /* FoodCell.swift */; };
+		262D3BAE24D7622400DA34A0 /* UserProfileCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262D3BAD24D7622400DA34A0 /* UserProfileCalculator.swift */; };
 		262F665A24623FBA00B24F51 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F665924623FBA00B24F51 /* MainTabBarController.swift */; };
 		262F665D2462417800B24F51 /* DiaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F665C2462417800B24F51 /* DiaryController.swift */; };
 		262F665F246241A500B24F51 /* TrendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F665E246241A500B24F51 /* TrendsController.swift */; };
@@ -164,6 +165,7 @@
 		26246B1E24C492C7000963E8 /* FoodEntryNetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryNetworkHelper.swift; sourceTree = "<group>"; };
 		2624E8D824647E4E00AC40EA /* DiaryFoodEntriesDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryFoodEntriesDataController.swift; sourceTree = "<group>"; };
 		2624E8DB24647FAD00AC40EA /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
+		262D3BAD24D7622400DA34A0 /* UserProfileCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileCalculator.swift; sourceTree = "<group>"; };
 		262F665924623FBA00B24F51 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		262F665C2462417800B24F51 /* DiaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryController.swift; sourceTree = "<group>"; };
 		262F665E246241A500B24F51 /* TrendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsController.swift; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 				26D7488C24C6097A007CE6C1 /* CurrentDiaryDateTracker.swift */,
 				26CF26C124C91ADD0053AB93 /* RepeatingTimer.swift */,
 				26CCF76D24D624BC00BAE6B9 /* SettingSectionsGenerator.swift */,
+				262D3BAD24D7622400DA34A0 /* UserProfileCalculator.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -953,6 +956,7 @@
 				26246B1D24C48F65000963E8 /* FoodEntryNetworkManager.swift in Sources */,
 				26E020B1248ECD8700DBBC5C /* NetworkResponseHandler.swift in Sources */,
 				262F665A24623FBA00B24F51 /* MainTabBarController.swift in Sources */,
+				262D3BAE24D7622400DA34A0 /* UserProfileCalculator.swift in Sources */,
 				26B6BAD524CF9DC600BF3CE9 /* UserTargets.swift in Sources */,
 				260F2C6724B6854900B9585E /* RegistrationNetworkHelper.swift in Sources */,
 				26BC18E924B2CBB00027E1B3 /* Serving.swift in Sources */,

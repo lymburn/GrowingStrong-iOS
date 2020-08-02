@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Gender: String {
+enum Gender: String, CaseIterable {
     case male = "Male"
     case female = "Female"
 }
@@ -19,7 +19,7 @@ enum WeightGoal: String {
     case lose = "Lose"
 }
 
-enum WeightGoalTimeline: String {
+enum WeightGoalTimeline: String, CaseIterable {
     case gainWeightWithLargeSurplus = "Gain weight (1000 kcal surplus)"
     case gainWeightWithSmallSurplus = "Gain weight (500 kcal surplus)"
     case maintainWeight = "Maintain weight"
@@ -27,9 +27,9 @@ enum WeightGoalTimeline: String {
     case loseWeightWithLargeDeficit = "Lose weight (1000 kcal deficit)"
 }
 
-enum ActivityLevel: String {
+enum ActivityLevel: String, CaseIterable {
     case sedentary = "Sedentary"
     case light = "Light"
     case moderate = "Moderate"
     case extreme = "Extreme"
-}
+} 

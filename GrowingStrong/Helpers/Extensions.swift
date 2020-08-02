@@ -55,6 +55,8 @@ extension Date {
         let isSameDay = result == .orderedSame
         return isSameDay
     }
+    
+    var age: Int { Calendar.current.dateComponents([.year], from: self, to: Date()).year! }
 }
 
 extension Serving {

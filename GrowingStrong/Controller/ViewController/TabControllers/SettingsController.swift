@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 struct SettingCellInfo {
     var name: String
@@ -26,9 +27,15 @@ class SettingsController: UIViewController {
         setupViews()
         
         settingsTableView.register(SettingCell.self, forCellReuseIdentifier: settingCellId)
+        
+        setupNotificationCenter()
     }
     
     let settingCellId = "settingsCellId"
+    
+    lazy var activityLevelOptions = ActivityLevel.allCases.map({return $0.rawValue})
+    lazy var weeklyGoalOptions = WeightGoalTimeline.allCases.map({return $0.rawValue})
+    lazy var sexOptions = Gender.allCases.map({return $0.rawValue})
     
     lazy var settingsTableView: UITableView = {
         let tv = UITableView()
@@ -50,6 +57,12 @@ class SettingsController: UIViewController {
         return controller
     }()
     
+    lazy var standardOptionsLauncher: StandardOptionsLauncher = {
+        let launcher = StandardOptionsLauncher()
+        launcher.delegate = self
+        return launcher
+    }()
+    
     lazy var dateFormatter: DateFormatter = DateFormatterHelper.generateDateFormatter(withFormat: DateFormatConstants.longMonthDefault)
 }
 
@@ -68,6 +81,37 @@ extension SettingsController {
         settingsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         settingsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
+    
+    fileprivate func setupNotificationCenter() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: Notification.Name.NSManagedObjectContextObjectsDidChange, object: CoreDataManager.shared.mainContext)
+    }
+}
+
+//MARK: Helpers
+extension SettingsController {
+    fileprivate func handleStandardOptionsLauncherSelection(option: String) {
+        let userId = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentUserIdKey)
+        
+        if sexOptions.contains(option) {
+            print("Sex option selected")
+            UserDataManager.shared.updateUserProfile(userId, birthDate: nil, sex: option, weight: nil, height: nil, activityLevel: nil)
+        } else if activityLevelOptions.contains(option) {
+            print("Activity level option selected")
+            UserDataManager.shared.updateUserProfile(userId, birthDate: nil, sex: nil, weight: nil, height: nil, activityLevel: option)
+        } else if weeklyGoalOptions.contains(option) {
+            UserDataManager.shared.updateUserTargets(userId, goalWeight: nil, weightGoalTimeline: option)
+        }
+    }
+    
+    fileprivate func updateSettingsTableUI() {
+        let userId = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentUserIdKey)
+        let user = UserDataManager.shared.fetchUser(byId: userId)!
+        let sections = SettingSectionsGenerator.generateSections(for: user)
+        
+        settingsDataController.updateSections(sections: sections)
+        settingsTableView.reloadData()
+    }
 }
 
 //MARK: Settings table view delegate functions
@@ -81,7 +125,9 @@ extension SettingsController: SettingsDataControllerDelegate {
     }
     
     func sexSettingTapped() {
-        
+        standardOptionsLauncher.options = sexOptions
+        print(standardOptionsLauncher.options )
+        standardOptionsLauncher.launchOptions(withDim: true)
     }
     
     func weightSettingTapped() {
@@ -93,7 +139,9 @@ extension SettingsController: SettingsDataControllerDelegate {
     }
     
     func activityLevelSettingTapped() {
-        
+        standardOptionsLauncher.options = activityLevelOptions
+        print(standardOptionsLauncher.options )
+        standardOptionsLauncher.launchOptions(withDim: true)
     }
     
     func goalWeightSettingTapped() {
@@ -101,6 +149,37 @@ extension SettingsController: SettingsDataControllerDelegate {
     }
     
     func weeklyGoalSettingTapped() {
-        
+        standardOptionsLauncher.options = weeklyGoalOptions
+        print(standardOptionsLauncher.options)
+        standardOptionsLauncher.launchOptions(withDim: true)
+    }
+}
+
+//Options launcher delegate
+extension SettingsController: StandardOptionsLauncherDelegate {
+    func didSelectOptionAtIndex(index: Int, option: String) {
+        handleStandardOptionsLauncherSelection(option: option)
+        standardOptionsLauncher.dismissOptions()
+    }
+}
+
+extension SettingsController {
+    @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+
+        //Only monitor setting updates
+        if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, !updates.isEmpty {
+            for update in updates {
+                if let profile = update as? UserProfile {
+                    
+                }
+                
+                if let targets = update as? UserTargets {
+                    
+                }
+                
+                updateSettingsTableUI()
+            }
+        }
     }
 }

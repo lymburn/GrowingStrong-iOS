@@ -9,7 +9,7 @@
 import UIKit
 
 protocol StandardOptionsLauncherDelegate: class {
-    func didSelectOptionAtIndex(index: Int)
+    func didSelectOptionAtIndex(index: Int, option: String)
 }
 
 //Standard launcher for options with just a name in the cell
@@ -21,7 +21,11 @@ class StandardOptionsLauncher: BaseOptionsLauncher {
     }
     
     let standardOptionCellIdentifier = "standardOptionCellIdentifier"
-    var options: [String]!
+    var options: [String] = [] {
+        didSet {
+            standardOptionsTableView.reloadData()
+        }
+    }
     
     weak var delegate: StandardOptionsLauncherDelegate?
     
@@ -42,7 +46,7 @@ class StandardOptionsLauncher: BaseOptionsLauncher {
     
     private func displayServingSizeOptionsTableView() {
         if let window = window {
-            let height: CGFloat = SizeConstants.screenSize.height * 0.3
+            let height: CGFloat = standardOptionsTableView.rowHeight * CGFloat(options.count) + window.safeAreaInsets.bottom 
             let y = window.frame.height - height
             
             window.addSubview(standardOptionsTableView)
@@ -84,6 +88,6 @@ extension StandardOptionsLauncher: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismissOptions()
-        delegate?.didSelectOptionAtIndex(index: indexPath.row)
+        delegate?.didSelectOptionAtIndex(index: indexPath.row, option: options[indexPath.row])
     }
 }

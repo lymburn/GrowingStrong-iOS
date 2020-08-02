@@ -77,4 +77,8 @@ class SettingsDataController: NSObject, UITableViewDataSource, UITableViewDelega
             print("Setting \(settingName) tapped")
         }
     }
+    
+    func updateSections(sections: [SettingSection]) {
+        self.sections = sections
+    }
 }
