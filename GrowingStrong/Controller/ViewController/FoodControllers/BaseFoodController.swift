@@ -12,7 +12,7 @@ class BaseFoodController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = foodEntryViewModel.food.foodName
+        setupNavigationBarTitle()
         
         self.hideKeyboardWhenTappedAround()
         
@@ -79,6 +79,15 @@ class BaseFoodController: UIViewController {
         servingInfoTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         servingInfoTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         servingInfoTableView.heightAnchor.constraint(equalToConstant: SizeConstants.screenSize.height * 0.2).isActive = true
+    }
+    
+    func setupNavigationBarTitle() {
+        let titleLabel = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: SizeConstants.screenSize.width, height: 44.0))
+        titleLabel.backgroundColor = UIColor.clear
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = NSTextAlignment.center
+        titleLabel.text = foodEntryViewModel.food.foodName
+        self.navigationItem.titleView = titleLabel
     }
     
     func getServingAmount() -> Float? {

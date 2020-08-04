@@ -28,6 +28,7 @@ struct FoodEntryViewModel{
     var totalQuantityText: String
     var totalCalories: Float
     var totalCaloriesText: String
+    var shortTotalCaloriesText: String
     var totalCarbohydrates: Float
     var totalFat: Float
     var totalProtein: Float
@@ -46,7 +47,8 @@ struct FoodEntryViewModel{
         self.totalQuantity = selectedServing.quantity * self.servingAmount
         self.totalQuantityText = "\(self.totalQuantity.toOneDecimalString) \(selectedServing.unit)"
         self.totalCalories = selectedServing.kcal * self.servingAmount
-        self.totalCaloriesText = "\(self.totalCalories.toOneDecimalString) kcal"
+        self.totalCaloriesText = "\(self.totalCalories.clean) kcal"
+        self.shortTotalCaloriesText = "\(self.totalCalories.clean)"
 
         self.totalCarbohydrates = servingAmount * selectedServing.carb
         self.totalFat = self.servingAmount * self.selectedServing.fat
@@ -67,8 +69,9 @@ struct FoodEntryViewModel{
         self.totalQuantity = selectedServing.quantity * self.servingAmount
         self.totalQuantityText = "\(self.totalQuantity.toOneDecimalString) \(selectedServing.unit)"
         self.totalCalories = selectedServing.kcal * self.servingAmount
-        self.totalCaloriesText = "\(self.totalCalories.toOneDecimalString) kcal"
-
+        self.totalCaloriesText = "\(self.totalCalories.clean) kcal"
+        self.shortTotalCaloriesText = "\(self.totalCalories.clean)"
+        
         self.totalCarbohydrates = servingAmount * selectedServing.carb
         self.totalFat = self.servingAmount * self.selectedServing.fat
         self.totalProtein = self.servingAmount * self.selectedServing.protein
@@ -81,8 +84,9 @@ struct FoodEntryViewModel{
         self.totalQuantity = selectedServing.quantity * self.servingAmount
         self.totalQuantityText = "\(self.totalQuantity.toOneDecimalString) \(selectedServing.unit)"
         self.totalCalories = selectedServing.kcal * self.servingAmount
-        self.totalCaloriesText = "\(self.totalCalories.toOneDecimalString) kcal"
-
+        self.totalCaloriesText = "\(self.totalCalories.clean) kcal"
+        self.shortTotalCaloriesText = "\(self.totalCalories.clean)"
+        
         self.totalCarbohydrates = servingAmount * selectedServing.carb
         self.totalFat = self.servingAmount * self.selectedServing.fat
         self.totalProtein = self.servingAmount * self.selectedServing.protein

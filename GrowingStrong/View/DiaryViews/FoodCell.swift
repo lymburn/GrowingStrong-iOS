@@ -26,6 +26,7 @@ class FoodCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
+        label.textColor = .lightGray
         return label
     }()
     
@@ -57,12 +58,14 @@ extension FoodCell {
     
         nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: height * 0.2).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
+        nameLabel.widthAnchor.constraint(equalToConstant: SizeConstants.screenSize.width * 0.7).isActive = true
         
         quantityLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8).isActive = true
         quantityLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
+        quantityLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
         
         caloriesLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 8).isActive = true
-        caloriesLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
+        caloriesLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
         caloriesLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
 }
