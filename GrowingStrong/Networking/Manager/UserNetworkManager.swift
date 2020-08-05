@@ -11,9 +11,10 @@ import CoreData
 
 enum UserNetworkResponseError: String {
     case userAlreadyExists = "User with this email already exists"
+    case unauthorized = "User unauthorized"
 }
 
-protocol UserNetworkManagerType {
+protocol UserNetworkManagerType : CanReceiveNoDecodingResponses {
     func authenticateUser(userAuthenticationParameters: Parameters,
                           completion: @escaping (_ response: AuthenticateResponse?, _ error: String?) -> ())
     func registerUser(registrationParameters: Parameters,
@@ -21,6 +22,15 @@ protocol UserNetworkManagerType {
     func getUserFoodEntries(userId: Int,
                             headers: HTTPHeaders,
                             completion: @escaping (_ foodEntries: [FoodEntry]?, _ error: String?) -> ())
+    func updateUserProfile(userId: Int,
+                           bodyParameters: Parameters,
+                           headers: HTTPHeaders,
+                           completion: @escaping (_ error: String?) -> ())
+    
+    func updateUserTargets(userId: Int,
+                           bodyParameters: Parameters,
+                           headers: HTTPHeaders,
+                           completion: @escaping (_ error: String?) -> ())
 }
 
 class UserNetworkManager: UserNetworkManagerType {
@@ -70,7 +80,11 @@ class UserNetworkManager: UserNetworkManagerType {
                     }
                     
                 case.failure(let networkFailureError):
-                    completion(nil, networkFailureError)
+                    if response.statusCode == 401 {
+                        completion(nil, UserNetworkResponseError.unauthorized.rawValue)
+                    } else {
+                        completion(nil, networkFailureError)
+                    }
                 }
             }
         }
@@ -157,6 +171,18 @@ class UserNetworkManager: UserNetworkManagerType {
                     completion(nil, networkFailureError)
                 }
             }
+        }
+    }
+    
+    func updateUserProfile(userId: Int, bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (String?) -> ()) {
+        router.request(.updateUserProfile(userId: userId, bodyParameters: bodyParameters, headers: headers)) { data, response, error in
+            self.handleNoDecodingResponse(response: response, error: error, completion: completion)
+        }
+    }
+    
+    func updateUserTargets(userId: Int, bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (String?) -> ()) {
+        router.request(.updateUserTargets(userId: userId, bodyParameters: bodyParameters, headers: headers)) { data, response, error in
+            self.handleNoDecodingResponse(response: response, error: error, completion: completion)
         }
     }
 }

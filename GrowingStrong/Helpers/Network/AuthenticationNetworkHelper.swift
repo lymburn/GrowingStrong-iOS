@@ -54,7 +54,7 @@ struct AuthenticationNetworkHelper: AuthenticationNetworkHelperType {
         userNetworkManager.authenticateUser(userAuthenticationParameters: params) {authenticateResponse, error in
             if let error = error {
                 print(error)
-                if (error == NetworkResponse.authenticationError.rawValue) {
+                if (error == UserNetworkResponseError.unauthorized.rawValue) {
                     completion(.authenticationError, nil)
                 } else {
                     completion(.networkError, nil)

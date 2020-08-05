@@ -29,6 +29,17 @@ class SettingsController: UIViewController {
         settingsTableView.register(SettingCell.self, forCellReuseIdentifier: settingCellId)
         
         setupNotificationCenter()
+        
+        let userNetworkManager = UserNetworkManager(persistentContainer: CoreDataManager.shared.persistentContainer,
+                                                    managedObjectContext: CoreDataManager.shared.backgroundContext)
+        
+        let userNetworkHelper = UserNetworkHelper(userNetworkManager: userNetworkManager,
+                                                            jwtTokenKey: KeyChainKeys.jwtToken)
+        
+        RequestManager.shared.setupTimer()
+        RequestManager.shared.userNetworkHelper = userNetworkHelper
+        RequestManager.shared.startPollingForPendingRequests()
+        RequestManager.shared.startNotifyingConnectivityChangeStatus()
     }
     
     let settingCellId = "settingsCellId"
@@ -94,10 +105,8 @@ extension SettingsController {
         let userId = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentUserIdKey)
         
         if sexOptions.contains(option) {
-            print("Sex option selected")
             UserDataManager.shared.updateUserProfile(userId, birthDate: nil, sex: option, weight: nil, height: nil, activityLevel: nil)
         } else if activityLevelOptions.contains(option) {
-            print("Activity level option selected")
             UserDataManager.shared.updateUserProfile(userId, birthDate: nil, sex: nil, weight: nil, height: nil, activityLevel: option)
         } else if weeklyGoalOptions.contains(option) {
             UserDataManager.shared.updateUserTargets(userId, goalWeight: nil, weightGoalTimeline: option)
@@ -126,7 +135,6 @@ extension SettingsController: SettingsDataControllerDelegate {
     
     func sexSettingTapped() {
         standardOptionsLauncher.options = sexOptions
-        print(standardOptionsLauncher.options )
         standardOptionsLauncher.launchOptions(withDim: true)
     }
     
@@ -140,7 +148,6 @@ extension SettingsController: SettingsDataControllerDelegate {
     
     func activityLevelSettingTapped() {
         standardOptionsLauncher.options = activityLevelOptions
-        print(standardOptionsLauncher.options )
         standardOptionsLauncher.launchOptions(withDim: true)
     }
     
@@ -150,7 +157,6 @@ extension SettingsController: SettingsDataControllerDelegate {
     
     func weeklyGoalSettingTapped() {
         standardOptionsLauncher.options = weeklyGoalOptions
-        print(standardOptionsLauncher.options)
         standardOptionsLauncher.launchOptions(withDim: true)
     }
 }
@@ -166,16 +172,20 @@ extension SettingsController: StandardOptionsLauncherDelegate {
 extension SettingsController {
     @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
-
+        
+        let userId = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentUserIdKey)
+        
         //Only monitor setting updates
         if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, !updates.isEmpty {
             for update in updates {
                 if let profile = update as? UserProfile {
-                    
+                    let request = UpdateUserProfileRequest(userId: userId, profile: profile)
+                    RequestManager.shared.insertRequest(request)
                 }
                 
                 if let targets = update as? UserTargets {
-                    
+                    let request = UpdateUserTargetsRequest(userId: userId, targets: targets)
+                    RequestManager.shared.insertRequest(request)
                 }
                 
                 updateSettingsTableUI()

@@ -22,6 +22,7 @@ class RequestManager: ConnectivityNotifiable {
     var timer: RepeatingTimer?
     
     var foodEntryNetworkHelper: FoodEntryNetworkHelper?
+    var userNetworkHelper: UserNetworkHelper?
     
     func connectivityChanged(toStatus: ConnectivityStatus) {
         switch toStatus {
@@ -85,6 +86,16 @@ class RequestManager: ConnectivityNotifiable {
                 print("Delete food entry request pending")
                 deleteFoodEntry(deleteFoodEntryRequest: deleteFoodEntryRequest)
             }
+            
+            if let updateUserProfileRequest = requestModel as? UpdateUserProfileRequest {
+                print("Update user details request pending")
+                updateUserProfile(updateUserProfileRequest: updateUserProfileRequest)
+            }
+            
+            if let updateUserTargetsRequest = requestModel as? UpdateUserTargetsRequest {
+                print("Update user targets request pending")
+                updateUserTargets(updateUserTargetsRequest: updateUserTargetsRequest)
+            }
         }
     }
     
@@ -147,6 +158,48 @@ extension RequestManager {
             case .success:
                 print("Successfully deleted food entry")
                 self.removeRequestFromQueue(requestId: deleteFoodEntryRequest.requestId)
+            }
+            
+            self.semaphore.signal()
+        }
+        
+        semaphore.wait(timeout: .now() + semaphoreWaitTimeout)
+    }
+    
+    private func updateUserProfile(updateUserProfileRequest: UpdateUserProfileRequest) {
+        guard let header = JWTHeaderGenerator.generateHeader(jwtTokenKey: KeyChainKeys.jwtToken) else { return }
+        let userId = updateUserProfileRequest.userId
+        
+        let parameters = updateUserProfileRequest.generateParameters()
+        
+        userNetworkHelper?.updateUserProfile(userId: userId, bodyParameters: parameters, headers: header) { response in
+            switch response {
+            case .networkError:
+                print("Error with updating user profile")
+            case .success:
+                print("Successfully updated user profile")
+                self.removeRequestFromQueue(requestId: updateUserProfileRequest.requestId)
+            }
+            
+            self.semaphore.signal()
+        }
+        
+        semaphore.wait(timeout: .now() + semaphoreWaitTimeout)
+    }
+    
+    private func updateUserTargets(updateUserTargetsRequest: UpdateUserTargetsRequest) {
+        guard let header = JWTHeaderGenerator.generateHeader(jwtTokenKey: KeyChainKeys.jwtToken) else { return }
+        let userId = updateUserTargetsRequest.userId
+        
+        let parameters = updateUserTargetsRequest.generateParameters()
+        
+        userNetworkHelper?.updateUserTargets(userId: userId, bodyParameters: parameters, headers: header) { response in
+            switch response {
+            case .networkError:
+                print("Error with updating user targets")
+            case .success:
+                print("Successfully updated user targets")
+                self.removeRequestFromQueue(requestId: updateUserTargetsRequest.requestId)
             }
             
             self.semaphore.signal()

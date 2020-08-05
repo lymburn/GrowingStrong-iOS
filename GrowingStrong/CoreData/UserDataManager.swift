@@ -31,7 +31,7 @@ class UserDataManager {
         return nil
     }
     
-    private func fetchUserProfile(_ userId: Int) -> UserProfile? {
+    func fetchUserProfile(_ userId: Int) -> UserProfile? {
         let predicate = NSPredicate(format: "user.userId == %d", userId)
         let profileFetch = NSFetchRequest<UserProfile>(entityName: EntityNames.userProfile.rawValue)
         profileFetch.predicate = predicate
@@ -47,7 +47,7 @@ class UserDataManager {
         return nil
     }
     
-    private func fetchUserTargets(_ userId: Int) -> UserTargets? {
+    func fetchUserTargets(_ userId: Int) -> UserTargets? {
         let predicate = NSPredicate(format: "user.userId == %d", userId)
         let targetsFetch = NSFetchRequest<UserTargets>(entityName: EntityNames.userTargets.rawValue)
         targetsFetch.predicate = predicate
