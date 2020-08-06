@@ -87,6 +87,7 @@
 		26A0B06D24B3A49B000874EC /* CredentialsFormatCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0B06C24B3A49B000874EC /* CredentialsFormatCheckerTests.swift */; };
 		26A58E4124B3C6E4009A3209 /* AuthenticateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A58E4024B3C6E4009A3209 /* AuthenticateRequest.swift */; };
 		26A8D4C5247530F8000BC5C6 /* ServingSizeExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A8D4C4247530F8000BC5C6 /* ServingSizeExtensionsTests.swift */; };
+		26ACF10124DC8782003931D9 /* InputSettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ACF10024DC8782003931D9 /* InputSettingsLauncher.swift */; };
 		26B2537E247C6DB9000CE403 /* FoodEntryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B2537D247C6DB9000CE403 /* FoodEntryViewModelTests.swift */; };
 		26B6BAD324CF9DBB00BF3CE9 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B6BAD224CF9DBB00BF3CE9 /* UserProfile.swift */; };
 		26B6BAD524CF9DC600BF3CE9 /* UserTargets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B6BAD424CF9DC600BF3CE9 /* UserTargets.swift */; };
@@ -220,6 +221,7 @@
 		26A0B06C24B3A49B000874EC /* CredentialsFormatCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsFormatCheckerTests.swift; sourceTree = "<group>"; };
 		26A58E4024B3C6E4009A3209 /* AuthenticateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateRequest.swift; sourceTree = "<group>"; };
 		26A8D4C4247530F8000BC5C6 /* ServingSizeExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSizeExtensionsTests.swift; sourceTree = "<group>"; };
+		26ACF10024DC8782003931D9 /* InputSettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputSettingsLauncher.swift; sourceTree = "<group>"; };
 		26B2537D247C6DB9000CE403 /* FoodEntryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryViewModelTests.swift; sourceTree = "<group>"; };
 		26B6BAD224CF9DBB00BF3CE9 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		26B6BAD424CF9DC600BF3CE9 /* UserTargets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTargets.swift; sourceTree = "<group>"; };
@@ -499,8 +501,7 @@
 		2640FF8D2443F2830051A2BF /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				26C04CA924D643250093DCE2 /* StandardOptionsLauncher.swift */,
-				26C04CA824D640B40093DCE2 /* EditSettingsControllers */,
+				26ACF10224DC87A1003931D9 /* OptionLaunchers */,
 				267D2AA624B67C390076776A /* RegistrationControllers */,
 				26519269247EB6C300483915 /* SearchControllers */,
 				263B967D2473066900340ED3 /* FoodControllers */,
@@ -694,11 +695,13 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		26C04CA824D640B40093DCE2 /* EditSettingsControllers */ = {
+		26ACF10224DC87A1003931D9 /* OptionLaunchers */ = {
 			isa = PBXGroup;
 			children = (
+				26C04CA924D643250093DCE2 /* StandardOptionsLauncher.swift */,
+				26ACF10024DC8782003931D9 /* InputSettingsLauncher.swift */,
 			);
-			path = EditSettingsControllers;
+			path = OptionLaunchers;
 			sourceTree = "<group>";
 		};
 		26CCF76A24D6159200BAE6B9 /* SettingsViews */ = {
@@ -966,6 +969,7 @@
 				268A6CAD24B26E33007113B6 /* EntityNames.swift in Sources */,
 				26087D49248DD6E7009B4548 /* EndPointType.swift in Sources */,
 				26246B1D24C48F65000963E8 /* FoodEntryNetworkManager.swift in Sources */,
+				26ACF10124DC8782003931D9 /* InputSettingsLauncher.swift in Sources */,
 				26E020B1248ECD8700DBBC5C /* NetworkResponseHandler.swift in Sources */,
 				262F665A24623FBA00B24F51 /* MainTabBarController.swift in Sources */,
 				262D3BAE24D7622400DA34A0 /* UserProfileCalculator.swift in Sources */,

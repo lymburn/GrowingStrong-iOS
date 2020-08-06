@@ -74,6 +74,11 @@ class SettingsController: UIViewController {
         return launcher
     }()
     
+    lazy var inputSettingsLauncher: InputSettingsLauncher = {
+        let launcher = InputSettingsLauncher()
+        return launcher
+    }()
+    
     lazy var dateFormatter: DateFormatter = DateFormatterHelper.generateDateFormatter(withFormat: DateFormatConstants.longMonthDefault)
 }
 
@@ -152,7 +157,7 @@ extension SettingsController: SettingsDataControllerDelegate {
     }
     
     func goalWeightSettingTapped() {
-        
+        inputSettingsLauncher.launchOptions(withDim: true)
     }
     
     func weeklyGoalSettingTapped() {
