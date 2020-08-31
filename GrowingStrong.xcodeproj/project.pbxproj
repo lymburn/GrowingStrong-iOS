@@ -61,6 +61,8 @@
 		26519272247EC1B500483915 /* BaseOptionsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26519271247EC1B500483915 /* BaseOptionsLauncher.swift */; };
 		26519276247EC5D300483915 /* ActionOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26519275247EC5D300483915 /* ActionOptionsView.swift */; };
 		26519279247EEF1A00483915 /* AddFoodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26519278247EEF1A00483915 /* AddFoodController.swift */; };
+		2651C97424FDBCAD00B07449 /* UserProfileCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2651C97324FDBCAD00B07449 /* UserProfileCalculatorTests.swift */; };
+		2651C97624FDBF7000B07449 /* FloatExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2651C97524FDBF7000B07449 /* FloatExtensionsTests.swift */; };
 		2658890B246340F300199012 /* DateBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2658890A246340F200199012 /* DateBar.swift */; };
 		265889102463678B00199012 /* DateFormatterExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2658890F2463678B00199012 /* DateFormatterExtensionsTests.swift */; };
 		266563F224E37C8A00EBB298 /* InputNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266563F124E37C8A00EBB298 /* InputNumberView.swift */; };
@@ -193,6 +195,8 @@
 		26519271247EC1B500483915 /* BaseOptionsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseOptionsLauncher.swift; sourceTree = "<group>"; };
 		26519275247EC5D300483915 /* ActionOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionOptionsView.swift; sourceTree = "<group>"; };
 		26519278247EEF1A00483915 /* AddFoodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodController.swift; sourceTree = "<group>"; };
+		2651C97324FDBCAD00B07449 /* UserProfileCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileCalculatorTests.swift; sourceTree = "<group>"; };
+		2651C97524FDBF7000B07449 /* FloatExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatExtensionsTests.swift; sourceTree = "<group>"; };
 		2658890A246340F200199012 /* DateBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBar.swift; sourceTree = "<group>"; };
 		2658890F2463678B00199012 /* DateFormatterExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtensionsTests.swift; sourceTree = "<group>"; };
 		266563F124E37C8A00EBB298 /* InputNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputNumberView.swift; sourceTree = "<group>"; };
@@ -422,6 +426,7 @@
 				26A0B06C24B3A49B000874EC /* CredentialsFormatCheckerTests.swift */,
 				261A68A124B3D42400AE199C /* AuthenticationNetworkHelperTests.swift */,
 				262408C524B6915700B6EB3C /* RegistrationNetworkHelperTests.swift */,
+				2651C97324FDBCAD00B07449 /* UserProfileCalculatorTests.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -563,6 +568,7 @@
 				2658890F2463678B00199012 /* DateFormatterExtensionsTests.swift */,
 				26A8D4C4247530F8000BC5C6 /* ServingSizeExtensionsTests.swift */,
 				2679316C247D72DE00413FAD /* DateExtensionsTests.swift */,
+				2651C97524FDBF7000B07449 /* FloatExtensionsTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -943,6 +949,7 @@
 				2634C40824B3CAFE00A3FCAC /* AuthenticateRequestTests.swift in Sources */,
 				26793172247D77C800413FAD /* DiaryControllerTests.swift in Sources */,
 				262408C924B691B800B6EB3C /* UserNetworkManagerMocks.swift in Sources */,
+				2651C97624FDBF7000B07449 /* FloatExtensionsTests.swift in Sources */,
 				26D7488F24C66422007CE6C1 /* FoodEntryNetworkHelperMocks.swift in Sources */,
 				26E020B5248EF23300DBBC5C /* URLParameterEncoderTests.swift in Sources */,
 				261A68A224B3D42400AE199C /* AuthenticationNetworkHelperTests.swift in Sources */,
@@ -952,6 +959,7 @@
 				265889102463678B00199012 /* DateFormatterExtensionsTests.swift in Sources */,
 				26B2537E247C6DB9000CE403 /* FoodEntryViewModelTests.swift in Sources */,
 				262408CB24B6964F00B6EB3C /* DiaryControllerMocks.swift in Sources */,
+				2651C97424FDBCAD00B07449 /* UserProfileCalculatorTests.swift in Sources */,
 				26A0B06D24B3A49B000874EC /* CredentialsFormatCheckerTests.swift in Sources */,
 				26793171247D77C800413FAD /* LoginControllerTests.swift in Sources */,
 				262408CD24B6969200B6EB3C /* LoginControllerMocks.swift in Sources */,
