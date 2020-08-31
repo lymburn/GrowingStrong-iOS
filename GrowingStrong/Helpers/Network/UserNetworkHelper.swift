@@ -12,6 +12,16 @@ protocol UserNetworkHelperType {
     func getUserFoodEntries(userId: Int,
                             headers: HTTPHeaders,
                             completion: @escaping (_ response: UserNetworkHelperResponse,_ foodEntries: [FoodEntry]?) -> ())
+    
+    func updateUserProfile(userId: Int,
+                           bodyParameters: Parameters,
+                           headers: HTTPHeaders,
+                           completion: @escaping (_ response: UserNetworkHelperResponse) -> ())
+    
+    func updateUserTargets(userId: Int,
+                           bodyParameters: Parameters,
+                           headers: HTTPHeaders,
+                           completion: @escaping (_ response: UserNetworkHelperResponse) -> ())
 }
 
 enum UserNetworkHelperResponse {
@@ -42,5 +52,33 @@ struct UserNetworkHelper: UserNetworkHelperType {
                 completion(.success, foodEntries)
             }
         }
+    }
+    
+    func updateUserProfile(userId: Int,
+                           bodyParameters: Parameters,
+                           headers: HTTPHeaders,
+                           completion: @escaping (UserNetworkHelperResponse) -> ()) {
+        
+        self.userNetworkManager.updateUserProfile(userId: userId, bodyParameters: bodyParameters, headers: headers) { error in
+            self.handleNoResponseCompletions(error: error, completion: completion)
+        }
+    }
+    
+    func updateUserTargets(userId: Int,
+                           bodyParameters: Parameters,
+                           headers: HTTPHeaders,
+                           completion: @escaping (UserNetworkHelperResponse) -> ()) {
+        self.userNetworkManager.updateUserTargets(userId: userId, bodyParameters: bodyParameters, headers: headers) { error in
+            self.handleNoResponseCompletions(error: error, completion: completion)
+        }
+    }
+    
+    private func handleNoResponseCompletions(error: String?, completion: @escaping (_ response: UserNetworkHelperResponse) ->()) {
+        if let error = error {
+            print(error)
+            completion(.networkError)
+        }
+        
+        completion(.success)
     }
 }

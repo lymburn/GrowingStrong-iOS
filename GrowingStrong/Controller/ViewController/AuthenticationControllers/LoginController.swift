@@ -112,7 +112,7 @@ extension LoginController {
             return
         }
 
-        userNetworkHelper.getUserFoodEntries(userId: 4, headers: header) { response, foodEntries in
+        userNetworkHelper.getUserFoodEntries(userId: userId, headers: header) { response, foodEntries in
             switch response {
             case .success:
                 if let foodEntries = foodEntries {
@@ -143,14 +143,9 @@ extension LoginController {
             if let user = user {
                 let userId = Int(user.userId)
                 saveUserIdToUserDefaults(userId: userId)
-                createUser(userId: userId, emailAddress: user.emailAddress)
                 getUserFoodEntries(userId: userId)
             }
         }
-    }
-    
-    fileprivate func createUser(userId: Int, emailAddress: String) {
-        UserDataManager.shared.createUser(userId: userId, emailAddress: emailAddress)
     }
     
     fileprivate func saveUserIdToUserDefaults(userId: Int) {
@@ -160,6 +155,7 @@ extension LoginController {
     fileprivate func navigateToMainPage(foodEntries: [FoodEntry]) {
         DispatchQueue.main.async {
             let mainController = MainTabBarController()
+            mainController.foodEntryViewModels = foodEntries.map { return FoodEntryViewModel(foodEntry: $0)}
             mainController.modalPresentationStyle = .fullScreen
             self.present(mainController, animated: true)
         }

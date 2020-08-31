@@ -13,6 +13,8 @@ public enum UserApi {
     case authenticate (bodyParameters: Parameters)
     case register (bodyParameters: Parameters)
     case userFoodEntries (userId: Int, headers: HTTPHeaders)
+    case updateUserProfile (userId: Int, bodyParameters: Parameters, headers: HTTPHeaders)
+    case updateUserTargets (userId: Int, bodyParameters: Parameters, headers: HTTPHeaders)
 }
 
 extension UserApi : EndPointType {
@@ -38,6 +40,10 @@ extension UserApi : EndPointType {
             return "register"
         case .userFoodEntries(userId: let userId, headers: _):
             return "\(userId)/foodEntries"
+        case .updateUserProfile(userId: let userId, bodyParameters: _, headers: _):
+            return "\(userId)/profile"
+        case .updateUserTargets(userId: let userId, bodyParameters: _, headers: _):
+            return "\(userId)/targets"
         }
     }
     
@@ -51,6 +57,10 @@ extension UserApi : EndPointType {
             return .post
         case .register( _):
             return .post
+        case .updateUserTargets(userId: _, bodyParameters: _, headers: _ ):
+            return .put
+        case .updateUserProfile(userId: _, bodyParameters: _, headers: _):
+            return .put
         }
     }
     
@@ -64,6 +74,10 @@ extension UserApi : EndPointType {
             return .requestParameters(bodyParameters: bodyParameters, urlParameters: nil)
         case .register (let bodyParameters):
             return .requestParameters(bodyParameters: bodyParameters, urlParameters: nil)
+        case .updateUserProfile(userId: _, bodyParameters: let bodyParameters, headers: let headers):
+            return .requestParametersAndHeaders(bodyParameters: bodyParameters, urlParameters: nil, headers: headers)
+        case .updateUserTargets(userId: _, bodyParameters: let bodyParameters, headers: let headers):
+            return .requestParametersAndHeaders(bodyParameters: bodyParameters, urlParameters: nil, headers: headers)
         }
     }
 }

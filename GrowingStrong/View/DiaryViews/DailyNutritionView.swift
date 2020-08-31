@@ -13,6 +13,10 @@ protocol DailyNutritionViewProtocol {
     func getCarbsValueLabel() -> String
     func getFatValueLabel() -> String
     func getProteinValueLabel() -> String
+    func setCaloriesValueLabel(_ text: String)
+    func setCarbsValueLabel(_ text: String)
+    func setFatValueLabel(_ text: String)
+    func setProteinValueLabel(_ text: String)
 }
 
 class DailyNutritionView: UIView {
@@ -57,7 +61,6 @@ class DailyNutritionView: UIView {
     let caloriesValueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "0.0 / 2000 kcal"
         label.textAlignment = .left
         return label
     }()
@@ -65,7 +68,6 @@ class DailyNutritionView: UIView {
     let carbsValueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "0.0 / 100.0 g"
         label.textAlignment = .left
         return label
     }()
@@ -73,7 +75,6 @@ class DailyNutritionView: UIView {
     let fatValueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "0.0 / 60.0 g"
         label.textAlignment = .left
         return label
     }()
@@ -81,7 +82,6 @@ class DailyNutritionView: UIView {
     let proteinValueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "0.0 / 89.8 g"
         label.textAlignment = .left
         return label
     }()
@@ -159,6 +159,22 @@ extension DailyNutritionView: DailyNutritionViewProtocol {
     
     func getProteinValueLabel() -> String {
         return proteinValueLabel.text ?? ""
+    }
+    
+    func setCaloriesValueLabel(_ text: String) {
+        caloriesValueLabel.text = text
+    }
+    
+    func setCarbsValueLabel(_ text: String) {
+        carbsValueLabel.text = text
+    }
+    
+    func setFatValueLabel(_ text: String) {
+        fatValueLabel.text = text
+    }
+    
+    func setProteinValueLabel(_ text: String) {
+        proteinValueLabel.text = text
     }
 }
 

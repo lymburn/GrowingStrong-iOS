@@ -31,11 +31,15 @@ class RegisterController: UIViewController {
     
     let registerStatsCellId = "registerStatsCell"
     let createAccountCellId = "createAccountCell"
+    
     lazy var nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextPageTapped))
     lazy var backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
     lazy var submitButton = UIBarButtonItem(title: "Submit", style: .plain, target: self, action: #selector(submitTapped))
     
     var registrationNetworkHelper: RegistrationNetworkHelperType!
+    
+    var userAccountInfo: UserAccountInfo?
+    var userProfileAndTargetsInfo: UserProfileAndTargetsInfo?
     
     lazy var dataController: RegisterDataController = {
         let dataController = RegisterDataController(registerStatsCellId: registerStatsCellId,
@@ -94,45 +98,23 @@ extension RegisterController {
 
 //MARK: Helpers
 extension RegisterController {
-    fileprivate func changeMeasurementUnit(to unit: MeasurementUnit) {
+    
+    fileprivate func setRegisterStatsHeightLabel(height: Double) {
         let indexPath = IndexPath(item: 0, section: 0)
         let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
-        let heightInCm: Double = Double(cell.heightSlider.value)
-        let weightInKg: Double = Double(cell.weightSlider.value)
         
-        setRegisterStatsHeightLabel(heightInCm: heightInCm, unit: unit)
-        setRegisterStatsWeightLabel(weightInKg: weightInKg, unit: unit)
+        let heightRounded = Int(height.rounded())
+        let heightString = "Height: \(heightRounded) cm"
+        cell.heightLabel.colorString(text: heightString, coloredText: "\(heightRounded) cm", color: .green)
     }
     
-    fileprivate func setRegisterStatsHeightLabel(heightInCm: Double, unit: MeasurementUnit) {
+    fileprivate func setRegisterStatsWeightLabel(weight: Double) {
         let indexPath = IndexPath(item: 0, section: 0)
         let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
         
-        if unit == .imperial {
-            let feetInches: String = MeasurementUnitHelper.centimetersToFeetInches(heightInCm)
-            let imperialHeightString = "Height: \(feetInches)"
-            cell.heightLabel.colorString(text: imperialHeightString, coloredText: feetInches, color: .green)
-        } else {
-            let heightRounded = Int(heightInCm.rounded())
-            let metricHeightString = "Height: \(heightRounded) cm"
-            cell.heightLabel.colorString(text: metricHeightString, coloredText: "\(heightRounded) cm", color: .green)
-        }
-    }
-    
-    fileprivate func setRegisterStatsWeightLabel(weightInKg: Double, unit: MeasurementUnit) {
-        let indexPath = IndexPath(item: 0, section: 0)
-        let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
-        
-        if unit == .imperial {
-            let imperialWeight: Double = MeasurementUnitHelper.kilogramsToPounds(weightInKg)
-            let weightRounded = Int(imperialWeight.rounded())
-            let imperialWeightString = "Weight: \(weightRounded) lbs"
-            cell.weightLabel.colorString(text: imperialWeightString, coloredText: "\(weightRounded) lbs", color: .green)
-        } else {
-            let metricWeight = Int(weightInKg.rounded())
-            let metricWeightString = "Weight: \(metricWeight) kg"
-            cell.weightLabel.colorString(text: metricWeightString, coloredText: "\(metricWeight) kg", color: .green)
-        }
+        let weightRounded = Int(weight.rounded())
+        let weightString = "Weight: \(weightRounded) kg"
+        cell.weightLabel.colorString(text: weightString, coloredText: "\(weightRounded) kg", color: .green)
     }
     
     fileprivate func setRegisterStatsWeightGoalLabel(for goal: WeightGoal) {
@@ -157,13 +139,79 @@ extension RegisterController {
         }
     }
     
+    fileprivate func setUserProfileAndTargetsInfo() {
+        let indexPath = IndexPath(item: 0, section: 0)
+        let registerStatsCell = collectionView.cellForItem(at: indexPath) as? RegisterStatsCell
+        
+        if let registerStatsCell = registerStatsCell {
+            let birthDate = datePicker.date
+            let sex = registerStatsCell.genderSelector.selectedSegmentIndex == 0 ? Gender.male.rawValue : Gender.female.rawValue
+            let height = registerStatsCell.heightSlider.value
+            let weight = registerStatsCell.weightSlider.value
+            
+            let activityLevelSelector = registerStatsCell.activityLevelSelector
+            var activityLevel: String
+            if activityLevelSelector.selectedSegmentIndex == 0 {
+                activityLevel = ActivityLevel.sedentary.rawValue
+            } else if activityLevelSelector.selectedSegmentIndex == 1 {
+                activityLevel = ActivityLevel.light.rawValue
+            } else if activityLevelSelector.selectedSegmentIndex == 2 {
+                activityLevel = ActivityLevel.moderate.rawValue
+            } else {
+                activityLevel = ActivityLevel.extreme.rawValue
+            }
+            
+            let goalSelector = registerStatsCell.goalSelector
+            var weightGoalTimeline: String
+            if goalSelector.selectedSegmentIndex == 0 {
+                weightGoalTimeline = getWeightGoalTimeline(from: .gain).rawValue
+            } else if goalSelector.selectedSegmentIndex == 1 {
+                weightGoalTimeline = getWeightGoalTimeline(from: .maintain).rawValue
+            } else {
+                weightGoalTimeline = getWeightGoalTimeline(from: .lose).rawValue
+            }
+            
+            userProfileAndTargetsInfo = UserProfileAndTargetsInfo(birthDate: birthDate, sex: sex, height: height, weight: weight, activityLevel: activityLevel, weightGoalTimeline: weightGoalTimeline)
+        }
+    }
+    
+    fileprivate func setUserAccountInfo() {
+        let indexPath = IndexPath(item: 1, section: 0)
+        let createAccountCell = collectionView.cellForItem(at: indexPath) as? CreateAccountCell
+        
+        if let createAccountCell = createAccountCell {
+            let email = createAccountCell.emailTextField.text!
+            let password = createAccountCell.passwordTextField.text!
+            
+            userAccountInfo = UserAccountInfo(email: email, password: password)
+        }
+    }
+    
     fileprivate func passwordsMatch() -> Bool {
         let indexPath = IndexPath(item: 1, section: 0)
         let cell = collectionView.cellForItem(at: indexPath) as! CreateAccountCell
         let password = cell.passwordTextField.text!
         let confirmPassword = cell.confirmPasswordTextField.text!
-        
         return password == confirmPassword
+    }
+    
+    fileprivate func getWeightGoalTimeline(from weightGoal: WeightGoal) -> WeightGoalTimeline {
+        if weightGoal == .gain {
+            return .gainWeightWithSmallSurplus
+        } else if weightGoal == .maintain {
+            return .maintainWeight
+        } else {
+            return .loseWeightWithSmallDeficit
+        }
+    }
+    
+    fileprivate func createRegisterRequest() -> RegisterRequest? {
+        if let userAccountInfo = userAccountInfo, let userProfileAndTargetsInfo = userProfileAndTargetsInfo {
+            let request = RegisterRequest(userAccountInfo: userAccountInfo, userProfileAndTargetsInfo: userProfileAndTargetsInfo)
+            return request
+        }
+
+        return nil
     }
     
     fileprivate func handleRegisterResponse(_ response: RegistrationNetworkHelperResponse,
@@ -184,15 +232,10 @@ extension RegisterController {
             if let user = user {
                 let userId = Int(user.userId)
                 saveUserIdToUserDefaults(userId: userId)
-                self.createUser(userId: userId, emailAddress: user.emailAddress)
                 self.navigateToMainPage()
             }
             
         }
-    }
-    
-    fileprivate func createUser(userId: Int, emailAddress: String) {
-        UserDataManager.shared.createUser(userId: userId, emailAddress: emailAddress)
     }
     
     fileprivate func saveUserIdToUserDefaults(userId: Int) {
@@ -210,6 +253,7 @@ extension RegisterController {
     }
     
     @objc func nextPageTapped() {
+        setUserProfileAndTargetsInfo()
         let indexPath = IndexPath(item: 1, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .right, animated: true)
         navigationItem.rightBarButtonItem = submitButton
@@ -232,17 +276,15 @@ extension RegisterController {
     }
     
     @objc func submitTapped() {
-        //TODO:
-        let indexPath = IndexPath(item: 1, section: 0)
-        let cell = collectionView.cellForItem(at: indexPath) as! CreateAccountCell
-        let email = cell.emailTextField.text!
-        let password = cell.passwordTextField.text!
-        
+        //TODO: Handle unmatched password
         if !passwordsMatch() {
             print ("Passwords do not match")
         } else {
-            registrationNetworkHelper.register(email: email, password: password) { response, userId in
-                self.handleRegisterResponse(response, userId)
+            setUserAccountInfo()
+            if let request = createRegisterRequest() {
+                registrationNetworkHelper.register(registerRequest: request) { response, userId in
+                    self.handleRegisterResponse(response, userId)
+                }
             }
         }
     }
@@ -250,16 +292,12 @@ extension RegisterController {
 
 //MARK: Register data controller delegate
 extension RegisterController : RegisterDataControllerDelegate {
-    func measurementUnitDidChange(to unit: MeasurementUnit) {
-        changeMeasurementUnit(to: unit)
+    func heightValueDidChange(to height: Double) {
+        setRegisterStatsHeightLabel(height: height)
     }
     
-    func heightValueDidChange(to heightInCm: Double, unit: MeasurementUnit) {
-        setRegisterStatsHeightLabel(heightInCm: heightInCm, unit: unit)
-    }
-    
-    func weightValueDidChange(to weightInKg: Double, unit: MeasurementUnit) {
-        setRegisterStatsWeightLabel(weightInKg: weightInKg, unit: unit)
+    func weightValueDidChange(to weight: Double) {
+        setRegisterStatsWeightLabel(weight: weight)
     }
     
     func weightGoalDidChange(to goal: WeightGoal) {

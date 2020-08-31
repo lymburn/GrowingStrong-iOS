@@ -28,7 +28,8 @@ class DiaryController: UIViewController {
         RequestManager.shared.startNotifyingConnectivityChangeStatus()
         
         foodEntriesTableView.register(FoodCell.self, forCellReuseIdentifier: foodEntryCellId)
-
+        
+        updateDailyNutritionView(for: CurrentDiaryDateTracker.shared.currentDate)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,10 +48,11 @@ class DiaryController: UIViewController {
     }
     
     let foodEntryCellId = "foodEntryCellId"
-    var foodEntryViewModels: [FoodEntryViewModel]! = FoodEntryDataManager.shared.fetchFoodEntries()?.map { return FoodEntryViewModel(foodEntry: $0)}
+    var foodEntryViewModels: [FoodEntryViewModel]!
     var dateBar: DateBarType!
     var dailyNutritionView: DailyNutritionViewType!
     var foodEntryNetworkHelper: FoodEntryNetworkHelperType!
+    var currentUser: User!
     
     lazy var navBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
     
@@ -164,9 +166,58 @@ extension DiaryController {
         foodEntryViewModels = FoodEntryDataManager.shared.fetchFoodEntries()?.map { return FoodEntryViewModel(foodEntry: $0)}
     }
     
-    fileprivate func updateFoodEntriesTable() {
+    fileprivate func updateDailyNutritionView(for date: Date) {
+        if let goalDailyCalories = getUserGoalCalories() {
+            let foodEntryViewModels = getFoodEntryViewModels(by: date)
+            let totalDailyCalories = foodEntryViewModels.map({return $0.totalCalories}).reduce(0, +)
+            let totalDailyCarbs = foodEntryViewModels.map({return $0.totalCarbohydrates}).reduce(0, +).toOneDecimalString
+            let totalDailyFat = foodEntryViewModels.map({return $0.totalFat}).reduce(0, +).toOneDecimalString
+            let totalDailyProtein = foodEntryViewModels.map({return $0.totalProtein}).reduce(0, +).toOneDecimalString
+            
+            let goalDailyCarbs = UnitConversionHelper.kcalToGrams(kcal: goalDailyCalories * 0.4, kcalPerGram: 4).toOneDecimalString
+            let goalDailyFat = UnitConversionHelper.kcalToGrams(kcal: goalDailyCalories * 0.35, kcalPerGram: 9).toOneDecimalString
+            let goalDailyProtein = UnitConversionHelper.kcalToGrams(kcal: goalDailyCalories * 0.25, kcalPerGram: 4).toOneDecimalString
+            
+            dailyNutritionView.setCaloriesValueLabel("\(totalDailyCalories) / \(goalDailyCalories.toOneDecimalString) kcal")
+            dailyNutritionView.setCarbsValueLabel("\(totalDailyCarbs) / \(goalDailyCarbs) g")
+            dailyNutritionView.setFatValueLabel("\(totalDailyFat) / \(goalDailyFat) g")
+            dailyNutritionView.setProteinValueLabel("\(totalDailyProtein) / \(goalDailyProtein) g")
+        }
+    }
+    
+    //Update food entries in table & daily nutrition view
+    fileprivate func updateDiaryUI() {
         updateFoodEntryViewModelsFromCoreData()
         updateFoodEntriesUI(for: CurrentDiaryDateTracker.shared.currentDate)
+        updateDailyNutritionView(for: CurrentDiaryDateTracker.shared.currentDate)
+    }
+    
+    fileprivate func getUserGoalCalories() -> Float? {
+        let tdee = currentUser.profile.tdee
+        let weightGoalTimeline = currentUser.targets.weightGoalTimeline
+        let minimumKcal: Float = 1000
+    
+        if weightGoalTimeline == WeightGoalTimeline.gainWeightWithLargeSurplus.rawValue {
+            return tdee + 1000
+        } else if weightGoalTimeline == WeightGoalTimeline.gainWeightWithSmallSurplus.rawValue {
+            return tdee + 500
+        } else if weightGoalTimeline == WeightGoalTimeline.maintainWeight.rawValue {
+            return tdee
+        } else if weightGoalTimeline == WeightGoalTimeline.loseWeightWithSmallDeficit.rawValue {
+            if (tdee - 500) < minimumKcal {
+                return minimumKcal
+            } else {
+                return tdee - 500
+            }
+        } else if weightGoalTimeline == WeightGoalTimeline.loseWeightWithLargeDeficit.rawValue {
+            if (tdee - 1000) < minimumKcal {
+                return minimumKcal
+            } else {
+                return tdee - 1000
+            }
+        }
+        
+        return nil
     }
 }
 
@@ -180,6 +231,7 @@ extension DiaryController: DateBarDelegate {
         if let previousDateText = previousDateText, let previousDate = dateFormatter.date(from: previousDateText) {
             CurrentDiaryDateTracker.shared.currentDate = previousDate
             updateFoodEntriesUI(for: previousDate)
+            updateDailyNutritionView(for: previousDate)
         }
     }
     
@@ -191,6 +243,7 @@ extension DiaryController: DateBarDelegate {
         if let nextDateText = nextDateText, let nextDate = dateFormatter.date(from: nextDateText) {
             CurrentDiaryDateTracker.shared.currentDate = nextDate
             updateFoodEntriesUI(for: nextDate)
+            updateDailyNutritionView(for: nextDate)
         }
     }
 }
@@ -226,7 +279,7 @@ extension DiaryController {
         if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, !inserts.isEmpty {
             for insert in inserts {
                 if let foodEntry = insert as? FoodEntry {
-                    updateFoodEntriesTable()
+                    updateDiaryUI()
                     
                     let userId = Int32(UserDefaults.standard.value(forKey: UserDefaultsKeys.currentUserIdKey) as! Int)
                     let request = CreateFoodEntryRequest(userId: userId, foodEntry: foodEntry)
@@ -238,7 +291,7 @@ extension DiaryController {
         if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, !updates.isEmpty {
             for update in updates {
                 if let foodEntry = update as? FoodEntry {
-                    updateFoodEntriesTable()
+                    updateDiaryUI()
                     
                     let request = UpdateFoodEntryRequest(foodEntry: foodEntry)
                     RequestManager.shared.insertRequest(request)
@@ -249,7 +302,7 @@ extension DiaryController {
         if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, !deletes.isEmpty {
             for delete in deletes {
                 if let foodEntry = delete as? FoodEntry {
-                    updateFoodEntriesTable()
+                    updateDiaryUI()
                     
                     let request = DeleteFoodEntryRequest(foodEntry: foodEntry)
                     RequestManager.shared.insertRequest(request)

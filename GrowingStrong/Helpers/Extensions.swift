@@ -55,6 +55,8 @@ extension Date {
         let isSameDay = result == .orderedSame
         return isSameDay
     }
+    
+    var age: Int { Calendar.current.dateComponents([.year], from: self, to: Date()).year! }
 }
 
 extension Serving {
@@ -83,5 +85,15 @@ extension Float {
     //Clean string without decimal if format is .0
     var clean: String {
        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+    }
+    
+    var toOneDecimalString: String {
+        return String (format: "%.1f", self)
+    }
+}
+
+extension UINavigationController {
+    var rootViewController : UIViewController? {
+        return viewControllers.first
     }
 }

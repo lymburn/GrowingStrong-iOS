@@ -1,5 +1,5 @@
 //
-//  MeasurementUnitHelper.swift
+//  UnitConversionHelper.swift
 //  GrowingStrong
 //
 //  Created by Eugene Lu on 2020-04-15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MeasurementUnitHelper {
+class UnitConversionHelper {
     static func centimetersToFeetInches(_ value: Double) -> String {
         if value < 0 {
             return ""
@@ -35,6 +35,10 @@ class MeasurementUnitHelper {
     static func kilogramsToPounds(_ value: Double) -> Double {
         let pounds = Measurement(value: value, unit: UnitMass.kilograms).converted(to: .pounds)
         return pounds.value
+    }
+    
+    static func kcalToGrams(kcal: Float, kcalPerGram: Float) -> Float {
+        return kcal/kcalPerGram
     }
 }
 

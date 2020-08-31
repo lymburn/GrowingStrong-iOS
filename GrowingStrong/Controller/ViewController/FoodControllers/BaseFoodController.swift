@@ -12,7 +12,7 @@ class BaseFoodController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = foodEntryViewModel.food.foodName
+        setupNavigationBarTitle()
         
         self.hideKeyboardWhenTappedAround()
         
@@ -27,9 +27,9 @@ class BaseFoodController: UIViewController {
     let servingSizeSelectorCellIdentifier = "servingSizeSelectorCellIdentifier"
     var foodEntryViewModel: FoodEntryViewModel!
     
-    lazy var servingSizeOptionsLauncher: ServingSizeOptionsLauncher = {
-        let launcher = ServingSizeOptionsLauncher()
-        launcher.servingOptions = Array(foodEntryViewModel.food.servings)
+    lazy var servingSizeOptionsLauncher: StandardOptionsLauncher = {
+        let launcher = StandardOptionsLauncher()
+        launcher.options = Array(foodEntryViewModel.food.servings).map({return $0.getServingSizeText()})
         launcher.delegate = self
         return launcher
     }()
@@ -81,6 +81,15 @@ class BaseFoodController: UIViewController {
         servingInfoTableView.heightAnchor.constraint(equalToConstant: SizeConstants.screenSize.height * 0.2).isActive = true
     }
     
+    func setupNavigationBarTitle() {
+        let titleLabel = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: SizeConstants.screenSize.width, height: 44.0))
+        titleLabel.backgroundColor = UIColor.clear
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = NSTextAlignment.center
+        titleLabel.text = foodEntryViewModel.food.foodName
+        self.navigationItem.titleView = titleLabel
+    }
+    
     func getServingAmount() -> Float? {
         var servingAmount: Float? = nil
         let cell = servingInfoTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! ServingAmountCell
@@ -125,10 +134,11 @@ extension BaseFoodController: BaseFoodDataControllerDelegate {
 }
 
 //MARK: ServingSizeOptionsLauncher delegate
-extension BaseFoodController: ServingSizeOptionsLauncherDelegate {
-    func didSelectOption(option: Serving) {
-        setServingSizeValueLabel(servingSizeText: option.getServingSizeText())
-        foodEntryViewModel.selectedServing = option
+extension BaseFoodController: StandardOptionsLauncherDelegate {
+    func didSelectOptionAtIndex(index: Int, option: String) {
+        let selectedServing = Array(foodEntryViewModel.food.servings)[index]
+        setServingSizeValueLabel(servingSizeText: option)
+        foodEntryViewModel.selectedServing = selectedServing
         updateMacroNutrientsView()
     }
 }
