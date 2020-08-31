@@ -64,6 +64,7 @@
 		26519279247EEF1A00483915 /* AddFoodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26519278247EEF1A00483915 /* AddFoodController.swift */; };
 		2658890B246340F300199012 /* DateBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2658890A246340F200199012 /* DateBar.swift */; };
 		265889102463678B00199012 /* DateFormatterExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2658890F2463678B00199012 /* DateFormatterExtensionsTests.swift */; };
+		266563F224E37C8A00EBB298 /* InputNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266563F124E37C8A00EBB298 /* InputNumberView.swift */; };
 		266BB5A224632156009269B2 /* LearnController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A124632156009269B2 /* LearnController.swift */; };
 		266BB5A624633A37009269B2 /* DailyNutritionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BB5A524633A37009269B2 /* DailyNutritionView.swift */; };
 		266BFA0B2443DB0E006E588D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BFA0A2443DB0E006E588D /* Extensions.swift */; };
@@ -196,6 +197,7 @@
 		26519278247EEF1A00483915 /* AddFoodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodController.swift; sourceTree = "<group>"; };
 		2658890A246340F200199012 /* DateBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBar.swift; sourceTree = "<group>"; };
 		2658890F2463678B00199012 /* DateFormatterExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtensionsTests.swift; sourceTree = "<group>"; };
+		266563F124E37C8A00EBB298 /* InputNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputNumberView.swift; sourceTree = "<group>"; };
 		266BB5A124632156009269B2 /* LearnController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnController.swift; sourceTree = "<group>"; };
 		266BB5A524633A37009269B2 /* DailyNutritionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNutritionView.swift; sourceTree = "<group>"; };
 		266BFA0A2443DB0E006E588D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 		2605A8AA24429B4A001CF085 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				266563F024E37C5E00EBB298 /* InputSettingsViews */,
 				26CCF76A24D6159200BAE6B9 /* SettingsViews */,
 				26519274247EC5BC00483915 /* ActionOptionsView */,
 				263B96732473044E00340ED3 /* BaseFoodViews */,
@@ -585,6 +588,14 @@
 				26A58E4224B3C6FE009A3209 /* Entities */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		266563F024E37C5E00EBB298 /* InputSettingsViews */ = {
+			isa = PBXGroup;
+			children = (
+				266563F124E37C8A00EBB298 /* InputNumberView.swift */,
+			);
+			path = InputSettingsViews;
 			sourceTree = "<group>";
 		};
 		266BB5A724633A42009269B2 /* DiaryViews */ = {
@@ -1003,6 +1014,7 @@
 				26CD471624C8EDDB0079ABF6 /* ConnectivityNotifiable.swift in Sources */,
 				264B211324BE53350008B55F /* DateFormatterHelper.swift in Sources */,
 				26246B1F24C492C7000963E8 /* FoodEntryNetworkHelper.swift in Sources */,
+				266563F224E37C8A00EBB298 /* InputNumberView.swift in Sources */,
 				2651926B247EB71400483915 /* FoodSearchController.swift in Sources */,
 				2658890B246340F300199012 /* DateBar.swift in Sources */,
 				26B6BAD324CF9DBB00BF3CE9 /* UserProfile.swift in Sources */,

@@ -9,27 +9,33 @@
 import Foundation
 import UIKit
 
+protocol InputSettingsLauncherDelegate: class {
+    func savePressed(with input: Float, for settingName: String)
+}
+
 class InputSettingsLauncher: BaseOptionsLauncher {
     override init() {
         super.init()
     }
+    
+    weak var delegate: InputSettingsLauncherDelegate?
 
-    lazy var inputView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
+    private lazy var inputView: InputNumberView = {
+        let view = InputNumberView()
         view.layer.cornerRadius = 5
+        view.delegate = self
         return view
     }()
     
     override func launchOptions(withDim: Bool) {
         super.launchOptions(withDim: withDim)
-        displayServingSizeOptionsTableView()
+        displayInputView()
     }
     
-    private func displayServingSizeOptionsTableView() {
+    private func displayInputView() {
         if let window = window {
             let width: CGFloat = SizeConstants.screenSize.width * 0.8
-            let height: CGFloat = SizeConstants.screenSize.height * 0.3
+            let height: CGFloat = SizeConstants.screenSize.height * 0.2
             let x: CGFloat = (window.frame.width - width)/2
             let y: CGFloat = (window.frame.height - height)/2
             
@@ -44,7 +50,7 @@ class InputSettingsLauncher: BaseOptionsLauncher {
         }
     }
     
-    private func dismissServingSizeOptionsTableView() {
+    private func dismissInputView() {
         UIView.animate(withDuration: 0.5, animations: {
              if let window = self.window {
                 let width: CGFloat = SizeConstants.screenSize.width * 0.8
@@ -56,6 +62,19 @@ class InputSettingsLauncher: BaseOptionsLauncher {
 
     @objc override func dismissOptions() {
         super.dismissOptions()
-        dismissServingSizeOptionsTableView()
+        dismissInputView()
+    }
+    
+    func setInputView(title: String, placeholder: String) {
+        inputView.titleLabel.text = title
+        inputView.inputTextField.placeholder = placeholder
+    }
+}
+
+extension InputSettingsLauncher: InputNumberViewDelegate {
+    func savePressed(with input: Float) {
+        let settingName = inputView.titleLabel.text!
+        dismissOptions()
+        delegate?.savePressed(with: input, for: settingName)
     }
 }

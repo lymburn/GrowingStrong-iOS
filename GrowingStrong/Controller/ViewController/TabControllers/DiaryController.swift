@@ -52,6 +52,7 @@ class DiaryController: UIViewController {
     var dateBar: DateBarType!
     var dailyNutritionView: DailyNutritionViewType!
     var foodEntryNetworkHelper: FoodEntryNetworkHelperType!
+    var currentUser: User!
     
     lazy var navBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
     
@@ -192,30 +193,27 @@ extension DiaryController {
     }
     
     fileprivate func getUserGoalCalories() -> Float? {
-        let userId = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentUserIdKey)
-        let user = UserDataManager.shared.fetchUser(byId: userId)
-        
-        if let tdee = user?.profile.tdee, let weightGoalTimeline = user?.targets.weightGoalTimeline {
-            if weightGoalTimeline == WeightGoalTimeline.gainWeightWithLargeSurplus.rawValue {
-                return tdee + 1000
-            } else if weightGoalTimeline == WeightGoalTimeline.gainWeightWithSmallSurplus.rawValue {
-                return tdee + 500
-            } else if weightGoalTimeline == WeightGoalTimeline.maintainWeight.rawValue {
-                return tdee
-            } else if weightGoalTimeline == WeightGoalTimeline.loseWeightWithSmallDeficit.rawValue {
-                if (tdee - 500) < 1000 {
-                    //Minimum 1000 kcal
-                    return 1000
-                } else {
-                    return tdee - 500
-                }
-            } else if weightGoalTimeline == WeightGoalTimeline.loseWeightWithLargeDeficit.rawValue {
-                if (tdee - 1000) < 1000 {
-                    //Minimum 1000 kcal
-                    return 1000
-                } else {
-                    return tdee - 1000
-                }
+        let tdee = currentUser.profile.tdee
+        let weightGoalTimeline = currentUser.targets.weightGoalTimeline
+        let minimumKcal: Float = 1000
+    
+        if weightGoalTimeline == WeightGoalTimeline.gainWeightWithLargeSurplus.rawValue {
+            return tdee + 1000
+        } else if weightGoalTimeline == WeightGoalTimeline.gainWeightWithSmallSurplus.rawValue {
+            return tdee + 500
+        } else if weightGoalTimeline == WeightGoalTimeline.maintainWeight.rawValue {
+            return tdee
+        } else if weightGoalTimeline == WeightGoalTimeline.loseWeightWithSmallDeficit.rawValue {
+            if (tdee - 500) < minimumKcal {
+                return minimumKcal
+            } else {
+                return tdee - 500
+            }
+        } else if weightGoalTimeline == WeightGoalTimeline.loseWeightWithLargeDeficit.rawValue {
+            if (tdee - 1000) < minimumKcal {
+                return minimumKcal
+            } else {
+                return tdee - 1000
             }
         }
         

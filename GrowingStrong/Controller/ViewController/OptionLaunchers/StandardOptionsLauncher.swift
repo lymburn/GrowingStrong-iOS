@@ -41,10 +41,10 @@ class StandardOptionsLauncher: BaseOptionsLauncher {
     
     override func launchOptions(withDim: Bool) {
         super.launchOptions(withDim: withDim)
-        displayServingSizeOptionsTableView()
+        displayOptionsTableView()
     }
     
-    private func displayServingSizeOptionsTableView() {
+    private func displayOptionsTableView() {
         if let window = window {
             let height: CGFloat = standardOptionsTableView.rowHeight * CGFloat(options.count) + window.safeAreaInsets.bottom 
             let y = window.frame.height - height
@@ -60,7 +60,7 @@ class StandardOptionsLauncher: BaseOptionsLauncher {
         }
     }
     
-    private func dismissServingSizeOptionsTableView() {
+    private func dismissOptionsTableView() {
         UIView.animate(withDuration: 0.5, animations: {
              if let window = self.window {
                  self.standardOptionsTableView.frame = CGRect(x: 0, y: window.frame.height, width: self.standardOptionsTableView.frame.width, height: self.standardOptionsTableView.frame.height)
@@ -70,7 +70,7 @@ class StandardOptionsLauncher: BaseOptionsLauncher {
 
     @objc override func dismissOptions() {
         super.dismissOptions()
-        dismissServingSizeOptionsTableView()
+        dismissOptionsTableView()
     }
 }
 

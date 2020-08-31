@@ -19,7 +19,7 @@ class MainTabBarController: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupDiaryControllerFoodEntries()
+        setupControllerDependencies()
     }
     
     lazy var diaryController = UINavigationController(rootViewController: DiaryController())
@@ -74,10 +74,17 @@ extension MainTabBarController {
         viewControllers = [diaryController, learnController, dummyController, trendsController, settingsController]
     }
     
-    fileprivate func setupDiaryControllerFoodEntries() {
+    fileprivate func setupControllerDependencies() {
+        let userId = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentUserIdKey)
+        
+        guard let currentUser = UserDataManager.shared.fetchUser(byId: userId) else { return }
+        
         if let rootDiaryController = diaryController.rootViewController as? DiaryController {
+            rootDiaryController.currentUser = currentUser
             rootDiaryController.foodEntryViewModels = self.foodEntryViewModels
         }
+        
+        settingsController.currentUser = currentUser
     }
     
     fileprivate func setupViews() {

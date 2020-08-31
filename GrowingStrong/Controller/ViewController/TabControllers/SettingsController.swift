@@ -43,6 +43,7 @@ class SettingsController: UIViewController {
     }
     
     let settingCellId = "settingsCellId"
+    var currentUser: User!
     
     lazy var activityLevelOptions = ActivityLevel.allCases.map({return $0.rawValue})
     lazy var weeklyGoalOptions = WeightGoalTimeline.allCases.map({return $0.rawValue})
@@ -59,10 +60,7 @@ class SettingsController: UIViewController {
     }()
     
     lazy var settingsDataController: SettingsDataController = {
-        let userId = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentUserIdKey)
-        let user = UserDataManager.shared.fetchUser(byId: userId)!
-
-        let sections = SettingSectionsGenerator.generateSections(for: user)
+        let sections = SettingSectionsGenerator.generateSections(for: currentUser)
         let controller = SettingsDataController(settingCellId: settingCellId, sections: sections)
         controller.delegate = self
         return controller
@@ -76,6 +74,7 @@ class SettingsController: UIViewController {
     
     lazy var inputSettingsLauncher: InputSettingsLauncher = {
         let launcher = InputSettingsLauncher()
+        launcher.delegate = self
         return launcher
     }()
     
@@ -118,6 +117,18 @@ extension SettingsController {
         }
     }
     
+    fileprivate func handleInputSettingsLauncherSave(input: Float, settingName: String) {
+        let userId = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentUserIdKey)
+        
+        if settingName == SettingNames.height.rawValue {
+            UserDataManager.shared.updateUserProfile(userId, birthDate: nil, sex: nil, weight: nil, height: input, activityLevel: nil)
+        } else if settingName == SettingNames.weight.rawValue {
+            UserDataManager.shared.updateUserProfile(userId, birthDate: nil, sex: nil, weight: input, height: nil, activityLevel: nil)
+        } else if settingName == SettingNames.goalWeight.rawValue {
+            UserDataManager.shared.updateUserTargets(userId, goalWeight: input, weightGoalTimeline: nil)
+        }
+    }
+    
     fileprivate func updateSettingsTableUI() {
         let userId = UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentUserIdKey)
         let user = UserDataManager.shared.fetchUser(byId: userId)!
@@ -144,11 +155,17 @@ extension SettingsController: SettingsDataControllerDelegate {
     }
     
     func weightSettingTapped() {
-        
+        let title = SettingNames.weight.rawValue
+        let placeholder = String(currentUser.profile.weight)
+        inputSettingsLauncher.setInputView(title: title, placeholder: placeholder)
+        inputSettingsLauncher.launchOptions(withDim: true)
     }
     
     func heightSettingTapped() {
-        
+        let title = SettingNames.height.rawValue
+        let placeholder = String(currentUser.profile.height)
+        inputSettingsLauncher.setInputView(title: title, placeholder: placeholder)
+        inputSettingsLauncher.launchOptions(withDim: true)
     }
     
     func activityLevelSettingTapped() {
@@ -157,6 +174,9 @@ extension SettingsController: SettingsDataControllerDelegate {
     }
     
     func goalWeightSettingTapped() {
+        let title = SettingNames.goalWeight.rawValue
+        let placeholder = String(currentUser.targets.goalWeight)
+        inputSettingsLauncher.setInputView(title: title, placeholder: placeholder)
         inputSettingsLauncher.launchOptions(withDim: true)
     }
     
@@ -166,11 +186,18 @@ extension SettingsController: SettingsDataControllerDelegate {
     }
 }
 
-//Options launcher delegate
+//MARK: Options launcher delegate
 extension SettingsController: StandardOptionsLauncherDelegate {
     func didSelectOptionAtIndex(index: Int, option: String) {
         handleStandardOptionsLauncherSelection(option: option)
         standardOptionsLauncher.dismissOptions()
+    }
+}
+
+//MARK: Input settings launcher delegate
+extension SettingsController: InputSettingsLauncherDelegate {
+    func savePressed(with input: Float, for settingName: String) {
+        handleInputSettingsLauncherSave(input: input, settingName: settingName)
     }
 }
 
