@@ -11,6 +11,14 @@ import Foundation
 
 //Mock successfully authenticated user network manager
 class MockNoErrorUserNetworkManager: UserNetworkManagerType {
+    func updateUserProfile(userId: Int, bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (String?) -> ()) {
+        
+    }
+    
+    func updateUserTargets(userId: Int, bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (String?) -> ()) {
+        
+    }
+    
     func getUserFoodEntries(userId: Int, headers: HTTPHeaders, completion: @escaping ([FoodEntry]?, String?) -> ()) {
         
     }
@@ -31,6 +39,14 @@ class MockNoErrorUserNetworkManager: UserNetworkManagerType {
 
 //Mock user network manager returning general network error
 class MockNetworkErrorUserNetworkManager: UserNetworkManagerType {
+    func updateUserProfile(userId: Int, bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (String?) -> ()) {
+        
+    }
+    
+    func updateUserTargets(userId: Int, bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (String?) -> ()) {
+        
+    }
+    
     func getUserFoodEntries(userId: Int, headers: HTTPHeaders, completion: @escaping ([FoodEntry]?, String?) -> ()) {
         
     }
@@ -49,6 +65,14 @@ class MockNetworkErrorUserNetworkManager: UserNetworkManagerType {
 
 //Mock user network manager returning authentication network error
 class MockAuthenticationErrorUserNetworkManager: UserNetworkManagerType {
+    func updateUserProfile(userId: Int, bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (String?) -> ()) {
+        
+    }
+    
+    func updateUserTargets(userId: Int, bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (String?) -> ()) {
+        
+    }
+    
     func getUserFoodEntries(userId: Int, headers: HTTPHeaders, completion: @escaping ([FoodEntry]?, String?) -> ()) {
         
     }
@@ -60,12 +84,20 @@ class MockAuthenticationErrorUserNetworkManager: UserNetworkManagerType {
     }
     
     func authenticateUser(userAuthenticationParameters: Parameters, completion: @escaping (AuthenticateResponse?, String?) -> ()) {
-        completion(nil, NetworkResponse.authenticationError.rawValue)
+        completion(nil, UserNetworkResponseError.unauthorized.rawValue)
     }
 }
 
 //Mock user network manager returning user already exists network error
 class MockUserExistsUserNetworkManager: UserNetworkManagerType {
+    func updateUserProfile(userId: Int, bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (String?) -> ()) {
+        
+    }
+    
+    func updateUserTargets(userId: Int, bodyParameters: Parameters, headers: HTTPHeaders, completion: @escaping (String?) -> ()) {
+        
+    }
+    
     func getUserFoodEntries(userId: Int, headers: HTTPHeaders, completion: @escaping ([FoodEntry]?, String?) -> ()) {
         
     }

@@ -36,15 +36,23 @@ class RegistrationNetworkHelperTests: XCTestCase {
     func testRegisterWithInvalidEmail() throws {
         let invalidEmail = "test123gmail.com"
         let password = "Password@1"
-        registrationNetworkHelperNoError.register(email: invalidEmail, password: password) { response, userId in
+        let userAccountInfo = UserAccountInfo(email: invalidEmail, password: password)
+        let userProfileAndTargetsInfo = UserProfileAndTargetsInfo(birthDate: Date(), sex: "Male", height: 180, weight: 140, activityLevel: ActivityLevel.moderate.rawValue, weightGoalTimeline: WeightGoalTimeline.maintainWeight.rawValue)
+        
+        let registerRequest = RegisterRequest(userAccountInfo: userAccountInfo, userProfileAndTargetsInfo: userProfileAndTargetsInfo)
+        registrationNetworkHelperNoError.register(registerRequest: registerRequest) { response, userId in
             XCTAssertEqual(response, RegistrationNetworkHelperResponse.invalidEmailFormat)
         }
     }
     
     func testRegisterWithInvalidPassword() throws {
-        let email = "test123@gmail.com"
-        let invalidPassword = "Password1"
-        registrationNetworkHelperNoError.register(email: email, password: invalidPassword) { response, userId in
+        let invalidEmail = "test123@gmail.com"
+        let password = "Password1"
+        let userAccountInfo = UserAccountInfo(email: invalidEmail, password: password)
+        let userProfileAndTargetsInfo = UserProfileAndTargetsInfo(birthDate: Date(), sex: "Male", height: 180, weight: 140, activityLevel: ActivityLevel.moderate.rawValue, weightGoalTimeline: WeightGoalTimeline.maintainWeight.rawValue)
+        
+        let registerRequest = RegisterRequest(userAccountInfo: userAccountInfo, userProfileAndTargetsInfo: userProfileAndTargetsInfo)
+        registrationNetworkHelperNoError.register(registerRequest: registerRequest) { response, userId in
             XCTAssertEqual(response, RegistrationNetworkHelperResponse.invalidPasswordFormat)
         }
     }
@@ -52,7 +60,13 @@ class RegistrationNetworkHelperTests: XCTestCase {
     func testRegisterWithNetworkError() throws {
         let email = "test123@gmail.com"
         let password = "Password@123"
-        registrationNetworkHelperNetworkError.register(email: email, password: password) { response, userId in
+        
+        let userAccountInfo = UserAccountInfo(email: email, password: password)
+        let userProfileAndTargetsInfo = UserProfileAndTargetsInfo(birthDate: Date(), sex: "Male", height: 180, weight: 140, activityLevel: ActivityLevel.moderate.rawValue, weightGoalTimeline: WeightGoalTimeline.maintainWeight.rawValue)
+        
+        let registerRequest = RegisterRequest(userAccountInfo: userAccountInfo, userProfileAndTargetsInfo: userProfileAndTargetsInfo)
+        
+        registrationNetworkHelperNetworkError.register(registerRequest: registerRequest) { response, userId in
             XCTAssertEqual(response, RegistrationNetworkHelperResponse.networkError)
         }
     }
@@ -60,7 +74,13 @@ class RegistrationNetworkHelperTests: XCTestCase {
     func testRegisterWithExistingUserError() throws {
         let email = "test123@gmail.com"
         let password = "Password@123"
-        registrationNetworkHelperUserExistsError.register(email: email, password: password) { response, userId in
+        
+        let userAccountInfo = UserAccountInfo(email: email, password: password)
+        let userProfileAndTargetsInfo = UserProfileAndTargetsInfo(birthDate: Date(), sex: "Male", height: 180, weight: 140, activityLevel: ActivityLevel.moderate.rawValue, weightGoalTimeline: WeightGoalTimeline.maintainWeight.rawValue)
+        
+        let registerRequest = RegisterRequest(userAccountInfo: userAccountInfo, userProfileAndTargetsInfo: userProfileAndTargetsInfo)
+        
+        registrationNetworkHelperUserExistsError.register(registerRequest: registerRequest) { response, userId in
             XCTAssertEqual(response, RegistrationNetworkHelperResponse.userAlreadyExists)
         }
     }
@@ -68,7 +88,13 @@ class RegistrationNetworkHelperTests: XCTestCase {
     func testRegisterSuccess() throws {
         let email = "test123@gmail.com"
         let password = "Password@123"
-        registrationNetworkHelperNoError.register(email: email, password: password) { response, userId in
+        
+        let userAccountInfo = UserAccountInfo(email: email, password: password)
+        let userProfileAndTargetsInfo = UserProfileAndTargetsInfo(birthDate: Date(), sex: "Male", height: 180, weight: 140, activityLevel: ActivityLevel.moderate.rawValue, weightGoalTimeline: WeightGoalTimeline.maintainWeight.rawValue)
+        
+        let registerRequest = RegisterRequest(userAccountInfo: userAccountInfo, userProfileAndTargetsInfo: userProfileAndTargetsInfo)
+        
+        registrationNetworkHelperNoError.register(registerRequest: registerRequest) { response, userId in
             XCTAssertEqual(response, RegistrationNetworkHelperResponse.success)
         }
     }

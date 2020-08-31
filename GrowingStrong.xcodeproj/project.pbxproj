@@ -27,7 +27,6 @@
 		26119AF3247C5860009FDD79 /* FoodEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26119AF2247C5860009FDD79 /* FoodEntryViewModel.swift */; };
 		261A68A224B3D42400AE199C /* AuthenticationNetworkHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261A68A124B3D42400AE199C /* AuthenticationNetworkHelperTests.swift */; };
 		261C8BCA2448A9F3009A1B79 /* CreateAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C8BC92448A9F3009A1B79 /* CreateAccountCell.swift */; };
-		261C8BD22448CD11009A1B79 /* MeasurementUnitHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C8BD12448CD11009A1B79 /* MeasurementUnitHelperTests.swift */; };
 		261E946124C1145F002DE202 /* JWTHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261E946024C1145F002DE202 /* JWTHeaderGenerator.swift */; };
 		262408C624B6915700B6EB3C /* RegistrationNetworkHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262408C524B6915700B6EB3C /* RegistrationNetworkHelperTests.swift */; };
 		262408C924B691B800B6EB3C /* UserNetworkManagerMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262408C824B691B800B6EB3C /* UserNetworkManagerMocks.swift */; };
@@ -159,7 +158,6 @@
 		261A68A124B3D42400AE199C /* AuthenticationNetworkHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationNetworkHelperTests.swift; sourceTree = "<group>"; };
 		261C8BC92448A9F3009A1B79 /* CreateAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountCell.swift; sourceTree = "<group>"; };
 		261C8BCF2448CD11009A1B79 /* GrowingStrongTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrowingStrongTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		261C8BD12448CD11009A1B79 /* MeasurementUnitHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementUnitHelperTests.swift; sourceTree = "<group>"; };
 		261C8BD32448CD11009A1B79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		261E946024C1145F002DE202 /* JWTHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTHeaderGenerator.swift; sourceTree = "<group>"; };
 		262408C524B6915700B6EB3C /* RegistrationNetworkHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationNetworkHelperTests.swift; sourceTree = "<group>"; };
@@ -421,7 +419,6 @@
 		261C8BD92448D2B8009A1B79 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				261C8BD12448CD11009A1B79 /* MeasurementUnitHelperTests.swift */,
 				26A0B06C24B3A49B000874EC /* CredentialsFormatCheckerTests.swift */,
 				261A68A124B3D42400AE199C /* AuthenticationNetworkHelperTests.swift */,
 				262408C524B6915700B6EB3C /* RegistrationNetworkHelperTests.swift */,
@@ -948,7 +945,6 @@
 				262408C924B691B800B6EB3C /* UserNetworkManagerMocks.swift in Sources */,
 				26D7488F24C66422007CE6C1 /* FoodEntryNetworkHelperMocks.swift in Sources */,
 				26E020B5248EF23300DBBC5C /* URLParameterEncoderTests.swift in Sources */,
-				261C8BD22448CD11009A1B79 /* MeasurementUnitHelperTests.swift in Sources */,
 				261A68A224B3D42400AE199C /* AuthenticationNetworkHelperTests.swift in Sources */,
 				26E020B7248EF24200DBBC5C /* JSONParameterEncoderTests.swift in Sources */,
 				262408C624B6915700B6EB3C /* RegistrationNetworkHelperTests.swift in Sources */,

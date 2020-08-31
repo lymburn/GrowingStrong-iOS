@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 @testable import GrowingStrong
 
 class MockDateBar: DateBarType {
@@ -22,6 +23,22 @@ class MockDateBar: DateBarType {
 }
 
 class MockDailyNutritionView: DailyNutritionViewType {
+    func setCaloriesValueLabel(_ text: String) {
+        
+    }
+    
+    func setCarbsValueLabel(_ text: String) {
+        
+    }
+    
+    func setFatValueLabel(_ text: String) {
+        
+    }
+    
+    func setProteinValueLabel(_ text: String) {
+        
+    }
+    
     func getCaloriesValueLabel() -> String {
         return ""
     }
