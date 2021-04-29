@@ -26,7 +26,7 @@ class ServingSizeSelectorCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .right
-        label.textColor = .green
+        label.textColor = .systemBlue
         return label
     }()
     

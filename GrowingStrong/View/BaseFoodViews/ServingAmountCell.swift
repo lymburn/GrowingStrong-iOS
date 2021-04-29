@@ -26,7 +26,7 @@ class ServingAmountCell: UITableViewCell {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.textAlignment = .right
-        tf.textColor = .green
+        tf.textColor = .systemBlue
         tf.keyboardType = .decimalPad
         tf.text = "1"
         return tf

@@ -42,6 +42,8 @@ class SettingsDataController: NSObject, UITableViewDataSource, UITableViewDelega
         settingCell.settingNameLabel.text = cellInfo.name
         settingCell.settingValueLabel.text = cellInfo.value
         
+        settingCell.selectionStyle = .none
+        
         return settingCell
     }
     

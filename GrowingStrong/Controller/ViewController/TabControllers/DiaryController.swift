@@ -21,6 +21,7 @@ class DiaryController: UIViewController {
                           foodEntryNetworkHelper: foodEntryNetworkHelper)
         setupViews()
         setupNotificationCenter()
+        setupNavigationBar(title: "Diary", barColor: .systemBlue, titleColor: .white)
         
         RequestManager.shared.setupTimer()
         RequestManager.shared.foodEntryNetworkHelper = foodEntryNetworkHelper
@@ -34,7 +35,7 @@ class DiaryController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
         
         let tabBarController = self.tabBarController as? MainTabBarController
         tabBarController?.showTabBar()
@@ -53,9 +54,7 @@ class DiaryController: UIViewController {
     var dailyNutritionView: DailyNutritionViewType!
     var foodEntryNetworkHelper: FoodEntryNetworkHelperType!
     var currentUser: User!
-    
-    lazy var navBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
-    
+
     lazy var diaryFoodEntriesDataController: DiaryFoodEntriesDataController = {
         let controller = DiaryFoodEntriesDataController(cellIdentifier: foodEntryCellId,
                                                         foodEntryViewModels: getFoodEntryViewModelsForCurrentDate())
@@ -65,19 +64,12 @@ class DiaryController: UIViewController {
         return controller
     }()
     
-    lazy var navBar: UINavigationBar = {
-        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: navBarHeight))
-        navBar.isTranslucent = true
-        navBar.setBackgroundImage(UIImage(), for: .default)
-        navBar.backgroundColor = .green
-        return navBar
-    }()
-    
     lazy var dBar: DateBar = {
         let bar = DateBar()
         bar.translatesAutoresizingMaskIntoConstraints = false
         bar.setDateValue(text: dateFormatter.getCurrentDateString())
         bar.delegate = self
+        bar.backgroundColor = .systemBlue
         return bar
     }()
     
@@ -118,7 +110,6 @@ extension DiaryController {
     
     fileprivate func setupViews() {
         view.backgroundColor = .white
-        view.addSubview(navBar)
         view.addSubview(dateBar)
         view.addSubview(dailyNutritionView)
         view.addSubview(foodEntriesTableView)
@@ -130,7 +121,7 @@ extension DiaryController {
         dateBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         dateBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         dateBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        dateBar.heightAnchor.constraint(equalToConstant: navBarHeight).isActive = true
+        dateBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         dailyNutritionView.topAnchor.constraint(equalTo: dateBar.bottomAnchor).isActive = true
         dailyNutritionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -163,7 +154,7 @@ extension DiaryController {
     }
     
     fileprivate func updateFoodEntryViewModelsFromCoreData() {
-        foodEntryViewModels = FoodEntryDataManager.shared.fetchFoodEntries()?.map { return FoodEntryViewModel(foodEntry: $0)}
+        self.foodEntryViewModels = FoodEntryDataManager.shared.fetchFoodEntries()?.map { return FoodEntryViewModel(foodEntry: $0)}
     }
     
     fileprivate func updateDailyNutritionView(for date: Date) {
@@ -230,8 +221,7 @@ extension DiaryController: DateBarDelegate {
         
         if let previousDateText = previousDateText, let previousDate = dateFormatter.date(from: previousDateText) {
             CurrentDiaryDateTracker.shared.currentDate = previousDate
-            updateFoodEntriesUI(for: previousDate)
-            updateDailyNutritionView(for: previousDate)
+            updateDiaryUI()
         }
     }
     
@@ -242,8 +232,7 @@ extension DiaryController: DateBarDelegate {
         
         if let nextDateText = nextDateText, let nextDate = dateFormatter.date(from: nextDateText) {
             CurrentDiaryDateTracker.shared.currentDate = nextDate
-            updateFoodEntriesUI(for: nextDate)
-            updateDailyNutritionView(for: nextDate)
+            updateDiaryUI()
         }
     }
 }
@@ -272,8 +261,6 @@ extension DiaryController: BaseFoodEntriesDataControllerDelegate {
 //MARK: Notification center
 extension DiaryController {
     @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
-        //TODO: Network request to insert/update/delete food entry item
-        
         guard let userInfo = notification.userInfo else { return }
     
         if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, !inserts.isEmpty {

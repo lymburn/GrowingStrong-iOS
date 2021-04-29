@@ -27,13 +27,6 @@ class LoginView: UIView {
     
     weak var delegate: LoginViewDelegate?
     
-    let logo: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.backgroundColor = .black
-        return image
-    }()
-    
     let emailTextField: UITextField = {
         var textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -47,6 +40,7 @@ class LoginView: UIView {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
         textField.placeholder = "Password"
+        textField.isSecureTextEntry = true
         return textField
     }()
     
@@ -62,7 +56,7 @@ class LoginView: UIView {
     lazy var loginButton: UIButton = {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .green
+        button.backgroundColor = .systemBlue
         button.setTitle("Log In", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 5
@@ -74,7 +68,7 @@ class LoginView: UIView {
     lazy var registerButton: UIButton = {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .red
+        button.backgroundColor = .systemBlue
         button.setTitle("Sign Up", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 5
@@ -92,7 +86,6 @@ class LoginView: UIView {
 extension LoginView {
     fileprivate func setupViews() {
         backgroundColor = .white
-        addSubview(logo)
         addSubview(emailTextField)
         addSubview(passwordTextField)
         addSubview(forgetPasswordButton)
@@ -103,12 +96,7 @@ extension LoginView {
     }
     
     fileprivate func setupConstraints() {
-        logo.topAnchor.constraint(equalTo: topAnchor, constant: SizeConstants.screenSize.height * 0.1).isActive = true
-        logo.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        logo.heightAnchor.constraint(equalToConstant: SizeConstants.screenSize.height * 0.15).isActive = true
-        logo.widthAnchor.constraint(equalToConstant: SizeConstants.screenSize.height * 0.15).isActive = true
-        
-        emailTextField.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: SizeConstants.screenSize.height * 0.2).isActive = true
+        emailTextField.topAnchor.constraint(equalTo: topAnchor, constant: SizeConstants.screenSize.height * 0.3).isActive = true
         emailTextField.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
         emailTextField.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
         emailTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
@@ -124,11 +112,11 @@ extension LoginView {
         
         loginButton.topAnchor.constraint(equalTo: forgetPasswordButton.bottomAnchor, constant: 50).isActive = true
         loginButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        loginButton.widthAnchor.constraint(equalToConstant: SizeConstants.screenSize.width * 0.5).isActive = true
+        loginButton.widthAnchor.constraint(equalToConstant: SizeConstants.screenSize.width * 0.8).isActive = true
         
         registerButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 30).isActive = true
         registerButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        registerButton.widthAnchor.constraint(equalToConstant: SizeConstants.screenSize.width * 0.5).isActive = true
+        registerButton.widthAnchor.constraint(equalToConstant: SizeConstants.screenSize.width * 0.8).isActive = true
     }
 }
 

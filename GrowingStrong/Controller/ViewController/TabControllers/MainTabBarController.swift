@@ -26,7 +26,7 @@ class MainTabBarController: UITabBarController {
     lazy var learnController = LearnController()
     lazy var dummyController = UIViewController()
     lazy var trendsController = TrendsController()
-    lazy var settingsController = SettingsController()
+    lazy var settingsController = UINavigationController(rootViewController: SettingsController())
     var foodEntryViewModels: [FoodEntryViewModel] = []
     
     let actionButton: UIButton = {
@@ -83,8 +83,9 @@ extension MainTabBarController {
             rootDiaryController.currentUser = currentUser
             rootDiaryController.foodEntryViewModels = self.foodEntryViewModels
         }
+        let rootSettingsController = settingsController.rootViewController as! SettingsController
         
-        settingsController.currentUser = currentUser
+        rootSettingsController.currentUser = currentUser
     }
     
     fileprivate func setupViews() {

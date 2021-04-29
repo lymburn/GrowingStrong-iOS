@@ -43,7 +43,7 @@ class InputNumberView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Save", for: .normal)
-        button.setTitleColor(.green, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
         button.setTitleColor(.gray, for: .selected)
         button.addTarget(self, action: #selector(saveButtonPressed), for: .touchDown)
         return button

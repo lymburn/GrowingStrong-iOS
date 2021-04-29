@@ -25,6 +25,7 @@ class SettingsController: UIViewController {
         super.viewDidLoad()
 
         setupViews()
+        setupNavigationBar(title: "Settings", barColor: .systemBlue, titleColor: .white)
         
         settingsTableView.register(SettingCell.self, forCellReuseIdentifier: settingCellId)
         

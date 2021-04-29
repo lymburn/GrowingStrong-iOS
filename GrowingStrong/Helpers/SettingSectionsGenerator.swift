@@ -18,8 +18,8 @@ class SettingSectionsGenerator {
         let birthDateString = self.dateFormatter.string(from: user.profile.birthDate)
         let profileSectionCellInfos = [SettingCellInfo(name: SettingNames.birthDate.rawValue, value: birthDateString),
                                        SettingCellInfo(name: SettingNames.sex.rawValue, value: user.profile.sex),
-                                       SettingCellInfo(name: SettingNames.weight.rawValue, value: "\(user.profile.weight) kg"),
-                                       SettingCellInfo(name: SettingNames.height.rawValue, value: "\(user.profile.height) cm"),
+                                       SettingCellInfo(name: SettingNames.weight.rawValue, value: "\(user.profile.weight.rounded()) kg"),
+                                       SettingCellInfo(name: SettingNames.height.rawValue, value: "\(user.profile.height.rounded()) cm"),
                                        SettingCellInfo(name: SettingNames.bmr.rawValue, value: "\(user.profile.bmr.rounded()) kcal"),
                                        SettingCellInfo(name: SettingNames.tdee.rawValue, value: "\(user.profile.tdee.rounded()) kcal"),
                                        SettingCellInfo(name: SettingNames.activityLevel.rawValue, value: "\(user.profile.activityLevel)")]
