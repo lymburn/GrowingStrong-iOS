@@ -75,6 +75,15 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    func setupNavigationBar(title: String?, barColor: UIColor, titleColor: UIColor) {
+        self.navigationItem.title = title
+        navigationController?.navigationBar.barTintColor = barColor
+        
+        let textAttributes = [NSAttributedString.Key.foregroundColor: titleColor]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        navigationController?.navigationBar.tintColor = titleColor
+    }
 }
 
 public extension CodingUserInfoKey {

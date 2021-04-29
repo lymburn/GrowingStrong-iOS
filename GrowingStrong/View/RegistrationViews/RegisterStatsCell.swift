@@ -60,14 +60,14 @@ class RegisterStatsCell: UICollectionViewCell {
     let birthdayTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.textColor = .green
+        textField.textColor = .systemBlue
         textField.textAlignment = .center
         return textField
     }()
     
     let heightLabel: UILabel = {
         let label = UILabel()
-        label.colorString(text: "Height: 165 cm", coloredText: "165 cm", color: .green)
+        label.colorString(text: "Height: 165 cm", coloredText: "165 cm", color: .systemBlue)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
@@ -84,7 +84,7 @@ class RegisterStatsCell: UICollectionViewCell {
     
     let weightLabel: UILabel = {
         let label = UILabel()
-        label.colorString(text: "Weight: 105 kg", coloredText: "105 kg", color: .green)
+        label.colorString(text: "Weight: 105 kg", coloredText: "105 kg", color: .systemBlue)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
@@ -102,7 +102,7 @@ class RegisterStatsCell: UICollectionViewCell {
     let goalLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.colorString(text: "I want to maintain weight", coloredText: "maintain", color: .green)
+        label.colorString(text: "I want to maintain weight", coloredText: "maintain", color: .systemBlue)
         label.textAlignment = .center
         return label
     }()
@@ -119,7 +119,7 @@ class RegisterStatsCell: UICollectionViewCell {
     let activityLevelLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.colorString(text: "My activity level is sedentary", coloredText: "sedentary", color: .green)
+        label.colorString(text: "My activity level is sedentary", coloredText: "sedentary", color: .systemBlue)
         label.textAlignment = .center
         return label
     }()

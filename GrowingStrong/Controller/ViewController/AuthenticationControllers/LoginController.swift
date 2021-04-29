@@ -62,6 +62,11 @@ extension LoginController {
         self.userNetworkHelper = userNetworkHelper
     }
     
+    fileprivate func setupGestureRecognizer() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
     fileprivate func setupViews() {
         view.backgroundColor = .white
         view.addSubview(loginView)
@@ -70,8 +75,8 @@ extension LoginController {
     
     fileprivate func setupConstraints() {
         loginView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        loginView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         loginView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        loginView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         loginView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 }

@@ -60,7 +60,7 @@ class DateBar: UIView {
 //MARK: Setup
 extension DateBar {
     fileprivate func setupViews() {
-        backgroundColor = .green
+        backgroundColor = .systemBlue
         addSubview(dateLabel)
         addSubview(previousMonth)
         addSubview(nextMonth)

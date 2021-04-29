@@ -28,6 +28,7 @@ class CreateAccountCell: UICollectionViewCell {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
         textField.placeholder = "Password"
+        textField.isSecureTextEntry = true
         return textField
     }()
     
@@ -36,6 +37,7 @@ class CreateAccountCell: UICollectionViewCell {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
         textField.placeholder = "Confirm Password"
+        textField.isSecureTextEntry = true
         return textField
     }()
     

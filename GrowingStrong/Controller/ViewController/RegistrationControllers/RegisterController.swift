@@ -14,6 +14,7 @@ class RegisterController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        hideKeyboardWhenTappedAround()
         
         collectionView.register(RegisterStatsCell.self, forCellWithReuseIdentifier: registerStatsCellId)
         collectionView.register(CreateAccountCell.self, forCellWithReuseIdentifier: createAccountCellId)
@@ -67,6 +68,7 @@ class RegisterController: UIViewController {
         picker.translatesAutoresizingMaskIntoConstraints = false
         picker.date = Date()
         picker.datePickerMode = .date
+        picker.preferredDatePickerStyle = .wheels
         picker.addTarget(self, action: #selector(dateValueChanged), for: .valueChanged)
         return picker
     }()
@@ -105,7 +107,7 @@ extension RegisterController {
         
         let heightRounded = Int(height.rounded())
         let heightString = "Height: \(heightRounded) cm"
-        cell.heightLabel.colorString(text: heightString, coloredText: "\(heightRounded) cm", color: .green)
+        cell.heightLabel.colorString(text: heightString, coloredText: "\(heightRounded) cm", color: .systemBlue)
     }
     
     fileprivate func setRegisterStatsWeightLabel(weight: Double) {
@@ -114,21 +116,21 @@ extension RegisterController {
         
         let weightRounded = Int(weight.rounded())
         let weightString = "Weight: \(weightRounded) kg"
-        cell.weightLabel.colorString(text: weightString, coloredText: "\(weightRounded) kg", color: .green)
+        cell.weightLabel.colorString(text: weightString, coloredText: "\(weightRounded) kg", color: .systemBlue)
     }
     
     fileprivate func setRegisterStatsWeightGoalLabel(for goal: WeightGoal) {
         let indexPath = IndexPath(item: 0, section: 0)
         let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
         
-        cell.goalLabel.colorString(text: "I want to \(goal.rawValue.lowercased()) weight", coloredText: goal.rawValue.lowercased(), color: .green)
+        cell.goalLabel.colorString(text: "I want to \(goal.rawValue.lowercased()) weight", coloredText: goal.rawValue.lowercased(), color: .systemBlue)
     }
     
     fileprivate func setRegisterStatsActivityLevelLabel(for level: ActivityLevel) {
         let indexPath = IndexPath(item: 0, section: 0)
         let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
         
-        cell.activityLevelLabel.colorString(text: "My activity level is \(level.rawValue.lowercased())", coloredText: level.rawValue.lowercased(), color: .green)
+        cell.activityLevelLabel.colorString(text: "My activity level is \(level.rawValue.lowercased())", coloredText: level.rawValue.lowercased(), color: .systemBlue)
     }
     
     fileprivate func navigateToMainPage() {
@@ -308,8 +310,7 @@ extension RegisterController : RegisterDataControllerDelegate {
         let indexPath = IndexPath(item: 0, section: 0)
         let cell = collectionView.cellForItem(at: indexPath) as! RegisterStatsCell
         
-        cell.birthdayTextField.inputView = UIView()
-        cell.birthdayTextField.inputAccessoryView = datePicker
+        cell.birthdayTextField.inputView = datePicker
         cell.birthdayTextField.text = dateFormatter.string(from: datePicker.date)
     }
     

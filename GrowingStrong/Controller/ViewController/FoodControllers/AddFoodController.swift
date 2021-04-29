@@ -34,9 +34,9 @@ class AddFoodController: BaseFoodController {
     
     lazy var addToDiaryButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .green
+        button.backgroundColor = .systemBlue
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.setTitle("Add to Diary", for: .normal)
         button.addTarget(self, action: #selector(addToDiaryButtonPressed), for: .touchDown)
         return button

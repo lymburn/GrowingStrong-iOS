@@ -39,9 +39,9 @@ class EditFoodController: BaseFoodController {
     
     lazy var saveButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .green
+        button.backgroundColor = .systemBlue
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.setTitle("Save", for: .normal)
         button.addTarget(self, action: #selector(saveEditingFoodButtonPressed), for: .touchDown)
         return button
